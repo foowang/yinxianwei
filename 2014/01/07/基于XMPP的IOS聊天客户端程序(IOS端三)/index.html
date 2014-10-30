@@ -1,0 +1,615 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>基于XMPP的IOS聊天客户端程序(IOS端三) | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="本文转自：http://blog.csdn.net/kangx6/article/details/7750765
+前两篇介绍了如何通过XMPP来发送消息和接收消息，这一篇我们主要介绍如何来美化我们的聊天程序，看一下最终效果呢，当然源程序也会在最后放出
+好了，我们来看一下我们写的程序这里我们自定义了T">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端三)/" title="基于XMPP的IOS聊天客户端程序(IOS端三)" itemprop="url">基于XMPP的IOS聊天客户端程序(IOS端三)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-01-07T07:36:00.000Z" itemprop="datePublished">1月 7 2014</time>
+    Updated:<time datetime="2014-10-30T10:46:28.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p><a href="http://blog.csdn.net/kangx6/article/details/7750765" target="_blank" rel="external"> 本文转自：http://blog.csdn.net/kangx6/article/details/7750765</a></p>
+<p>前两篇介绍了如何通过XMPP来发送消息和接收消息，这一篇我们主要介绍如何来美化我们的聊天程序，看一下最终效果呢，当然源程序也会在最后放出<br><img src="http://my.csdn.net/uploads/201207/16/1342409417_2820.png" alt=""></p>
+<p>好了，我们来看一下我们写的程序<br>这里我们自定义了TableViewCell<br><img src="http://my.csdn.net/uploads/201207/16/1342411906_4192.png" alt=""></p>
+<p>一行是显示发布日期，一行是显示发送的消息，还有一个是背景</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{  </p>
+<ol>
+<li></li>
+<li>self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];  </li>
+<li>if (self) {  </li>
+<li>//日期标签  </li>
+<li>senderAndTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 20)];  </li>
+<li>//居中显示  </li>
+<li>senderAndTimeLabel.textAlignment = UITextAlignmentCenter;  </li>
+<li>senderAndTimeLabel.font = [UIFont systemFontOfSize:11.0];  </li>
+<li>//文字颜色  </li>
+<li>senderAndTimeLabel.textColor = [UIColor lightGrayColor];  </li>
+<li>[self.contentView addSubview:senderAndTimeLabel];  </li>
+<li></li>
+<li>//背景图  </li>
+<li>bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];  </li>
+<li>[self.contentView addSubview:bgImageView];  </li>
+<li></li>
+<li>//聊天信息  </li>
+<li>messageContentView = [[UITextView alloc] init];  </li>
+<li>messageContentView.backgroundColor = [UIColor clearColor];  </li>
+<li>//不可编辑  </li>
+<li>messageContentView.editable = NO;  </li>
+<li>messageContentView.scrollEnabled = NO;  </li>
+<li>[messageContentView sizeToFit];  </li>
+<li>[self.contentView addSubview:messageContentView];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>return self;  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>定义好，在UITableViewCell中将Cell改成我们自己定义的Cell</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. -(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{  </p>
+<ol>
+<li></li>
+<li>static NSString *identifier = @”msgCell”;  </li>
+<li></li>
+<li>KKMessageCell <em>cell =(KKMessageCell </em>)[tableView dequeueReusableCellWithIdentifier:identifier];  </li>
+<li></li>
+<li>if (cell == nil) {  </li>
+<li>cell = [[KKMessageCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];  </li>
+<li>}  </li>
+<li></li>
+<li>NSMutableDictionary *dict = [messages objectAtIndex:indexPath.row];  </li>
+<li></li>
+<li>//发送者  </li>
+<li>NSString *sender = [dict objectForKey:@”sender”];  </li>
+<li>//消息  </li>
+<li>NSString *message = [dict objectForKey:@”msg”];  </li>
+<li>//时间  </li>
+<li>NSString *time = [dict objectForKey:@”time”];  </li>
+<li></li>
+<li>CGSize textSize = {260.0 ,10000.0};  </li>
+<li>CGSize size = [message sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];  </li>
+<li></li>
+<li>size.width +=(padding/2);  </li>
+<li></li>
+<li>cell.messageContentView.text = message;  </li>
+<li>cell.accessoryType = UITableViewCellAccessoryNone;  </li>
+<li>cell.userInteractionEnabled = NO;  </li>
+<li></li>
+<li>UIImage *bgImage = nil;  </li>
+<li></li>
+<li>//发送消息  </li>
+<li>if ([sender isEqualToString:@”you”]) {  </li>
+<li>//背景图  </li>
+<li>bgImage = [[UIImage imageNamed:@”BlueBubble2.png”] stretchableImageWithLeftCapWidth:20 topCapHeight:15];  </li>
+<li>[cell.messageContentView setFrame:CGRectMake(padding, padding*2, size.width, size.height)];  </li>
+<li></li>
+<li>[cell.bgImageView setFrame:CGRectMake(cell.messageContentView.frame.origin.x - padding/2, cell.messageContentView.frame.origin.y - padding/2, size.width + padding, size.height + padding)];  </li>
+<li>}else {  </li>
+<li></li>
+<li>bgImage = [[UIImage imageNamed:@”GreenBubble2.png”] stretchableImageWithLeftCapWidth:14 topCapHeight:15];  </li>
+<li></li>
+<li>[cell.messageContentView setFrame:CGRectMake(320-size.width - padding, padding*2, size.width, size.height)];  </li>
+<li>[cell.bgImageView setFrame:CGRectMake(cell.messageContentView.frame.origin.x - padding/2, cell.messageContentView.frame.origin.y - padding/2, size.width + padding, size.height + padding)];  </li>
+<li>}  </li>
+<li></li>
+<li>cell.bgImageView.image = bgImage;  </li>
+<li>cell.senderAndTimeLabel.text = [NSString stringWithFormat:@”%@ %@”, sender, time];  </li>
+<li></li>
+<li>return cell;  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>在这个Cell里设置了发送的消息的背景图和接收消息的背景图<br>这里在字典里有一个”time”<br>这是我们接收和发送消息的时间</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. +(NSString *)getCurrentTime{  </p>
+<ol>
+<li></li>
+<li>NSDate *nowUTC = [NSDate date];  </li>
+<li></li>
+<li>NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];  </li>
+<li>[dateFormatter setTimeZone:[NSTimeZone localTimeZone]];  </li>
+<li>[dateFormatter setDateStyle:NSDateFormatterMediumStyle];  </li>
+<li>[dateFormatter setTimeStyle:NSDateFormatterMediumStyle];  </li>
+<li></li>
+<li>return [dateFormatter stringFromDate:nowUTC];  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>在AppDelegate.m中<br>将我们收到消息的内容也做一下调整</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. - (void)xmppStream:(XMPPStream <em>)sender didReceiveMessage:(XMPPMessage </em>)message{  </p>
+<ol>
+<li></li>
+<li>//   ……  </li>
+<li></li>
+<li>NSMutableDictionary *dict = [NSMutableDictionary dictionary];  </li>
+<li>[dict setObject:msg forKey:@”msg”];  </li>
+<li>[dict setObject:from forKey:@”sender”];  </li>
+<li>//消息接收到的时间  </li>
+<li>[dict setObject:[Statics getCurrentTime] forKey:@”time”];  </li>
+<li></li>
+<li>……  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>最后我们再设置一下每一行显示的高度</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. //每一行的高度  </p>
+<ol>
+<li>-(CGFloat)tableView:(UITableView <em>)tableView heightForRowAtIndexPath:(NSIndexPath </em>)indexPath{  </li>
+<li></li>
+<li>NSMutableDictionary *dict  = [messages objectAtIndex:indexPath.row];  </li>
+<li>NSString *msg = [dict objectForKey:@”msg”];  </li>
+<li></li>
+<li>CGSize textSize = {260.0 , 10000.0};  </li>
+<li>CGSize size = [msg sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];  </li>
+<li></li>
+<li>size.height += padding*2;  </li>
+<li></li>
+<li>CGFloat height = size.height &lt; 65 ? 65 : size.height;  </li>
+<li></li>
+<li>return height;  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>，对了，在发送消息的时候，别忘了也加上</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7750765#" title="copy" target="_blank" rel="external">copy</a>1. - (IBAction)sendButton:(id)sender {  </p>
+<ol>
+<li></li>
+<li>//本地输入框中的信息  </li>
+<li>……  </li>
+<li></li>
+<li>if (message.length &gt; 0) {  </li>
+<li></li>
+<li>…..  </li>
+<li></li>
+<li>NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];  </li>
+<li></li>
+<li>[dictionary setObject:message forKey:@”msg”];  </li>
+<li>[dictionary setObject:@”you” forKey:@”sender”];  </li>
+<li>[dictionary setObject:[Statics getCurrentTime] forKey:@”time”];  </li>
+<li></li>
+<li>[messages addObject:dictionary];  </li>
+<li></li>
+<li>//重新刷新tableView  </li>
+<li>[self.tView reloadData];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>好了，这里关于XMPP发送消息的教程就结束了，以后我们会详细介绍其他关于XMPP的内容<br><a href="http://download.csdn.net/detail/kangkangz4/4431399" target="_blank" rel="external">源码下载</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios开发/">ios开发</a><a href="/tags/iphone开发/">iphone开发</a><a href="/tags/XMPP/">XMPP</a><a href="/tags/ios/">ios</a><a href="/tags/聊天/">聊天</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之社交软件/">iOS应用开发之社交软件</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端三)/" data-title="基于XMPP的IOS聊天客户端程序(IOS端三) | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/01/08/IOS应用如何配置iTunes文件共享/" title="IOS应用如何配置iTunes文件共享">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  IOS应用如何配置iTunes文件共享</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端二)/"  title="基于XMPP的IOS聊天客户端程序(IOS端二)">
+ <strong>NEXT:</strong><br/> 
+ <span>基于XMPP的IOS聊天客户端程序(IOS端二)
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

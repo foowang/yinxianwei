@@ -1,0 +1,514 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS 7, 导航栏和状态栏自定义 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="本文转自:http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6
+注：本文译自Customizing
+ Navigation Bar and Status Bar in iOS 7近期">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/15/iOS 7, 导航栏和状态栏自定义/" title="iOS 7, 导航栏和状态栏自定义" itemprop="url">iOS 7, 导航栏和状态栏自定义</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-01-15T09:06:00.000Z" itemprop="datePublished">1月 15 2014</time>
+    Updated:<time datetime="2014-10-30T10:46:26.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#本文转自:http://beyondvincent-com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6"><span class="toc-number">1.</span> <span class="toc-text">本文转自:http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS_7中默认的导航栏"><span class="toc-number">1.0.1.</span> <span class="toc-text">iOS 7中默认的导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置导航栏的背景颜色"><span class="toc-number">1.0.2.</span> <span class="toc-text">设置导航栏的背景颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在导航栏中使用背景图片"><span class="toc-number">1.0.3.</span> <span class="toc-text">在导航栏中使用背景图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制返回按钮的颜"><span class="toc-number">1.0.4.</span> <span class="toc-text">定制返回按钮的颜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改导航栏标题的字体"><span class="toc-number">1.0.5.</span> <span class="toc-text">修改导航栏标题的字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改导航栏标题为图片"><span class="toc-number">1.0.6.</span> <span class="toc-text">修改导航栏标题为图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加多个按钮"><span class="toc-number">1.0.7.</span> <span class="toc-text">添加多个按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改状态栏的风格"><span class="toc-number">1.0.8.</span> <span class="toc-text">修改状态栏的风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏状态栏"><span class="toc-number">1.0.9.</span> <span class="toc-text">隐藏状态栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.10.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="本文转自:http://beyondvincent-com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6">本文转自:<a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6" target="_blank" rel="external">http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6</a></h1>
+<p><a href="http://beyondvincent.com/images/2013/11/7.png" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/7.png" alt=""></a><br>注：本文译自<a href="http://www.appcoda.com/customize-navigation-status-bar-ios-7/" target="_blank" rel="external"><code>Customizing
+ Navigation Bar and Status Bar in iOS 7</code></a><br>近期，跟大多数开发者一样，我也正忙于对程序进行升级以适配iOS 7。最新的iOS 7外观上有大量的改动。从开发者的角度来看，导航栏和状态栏就发生了明显的变化。状态栏现在是半透明的了，这也就意味着导航栏会显示在状态栏后面。有些情况下，导航栏的背景图片可以延伸显示到状态栏后面。<br>之前我曾经写过一篇关于<a href="http://www.appcoda.com/customize-navigation-bar-back-butto/" target="_blank" rel="external">如何定制导航栏</a>的文章。不过现在是时候对其进行更新了。下面就是本文将要介绍的内容：</p>
+<ul>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#0" target="_blank" rel="external">iOS 7中默认的导航栏</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#1" target="_blank" rel="external">设置导航栏的背景颜色</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#2" target="_blank" rel="external">在导航栏中使用背景图片</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#3" target="_blank" rel="external">定制返回按钮的颜色</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#4" target="_blank" rel="external">修改导航栏标题的字体</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#44" target="_blank" rel="external">修改导航栏标题为图片</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#5" target="_blank" rel="external">添加多个按钮</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6" target="_blank" rel="external">修改状态栏的风格</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#7" target="_blank" rel="external">隐藏状态栏</a></li>
+<li><a href="http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#8" target="_blank" rel="external">总结</a></li>
+</ul>
+<p><a href="http://beyondvincent.com/images/2013/11/9.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/9.jpg" alt=""></a><br>本文提供的代码需要用Xcode 5来执行。如果你还在使用老版本的Xcode，那么在运行示例之前请将Xcode升级到Xcode 5。</p>
+<h3 id="iOS_7中默认的导航栏"><a href=""></a>iOS 7中默认的导航栏</h3>
+<p>在开始定制之前，我们先来看看iOS 7中默认导航栏的外观。通过Xcode用<code>Single
+ View Controller</code>模板创建一个工程。然后将view controller嵌入到一个navigation controller中。如果你不想从头开始，那么也可以在这里下载到这个<a href="https://dl.dropboxusercontent.com/u/2857188/NavigationBarDemo.zip" target="_blank" rel="external">示例工程</a>。<br>Xcode 5包含有iOS 6和iOS 7模拟器，我们可以在这两个不同的模拟器版本中运行示例程序，进行对比，如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/10.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/10.jpg" alt=""></a><br>如上图所示，在iOS 7中的导航栏默认情况下跟状态栏是交织在一起的，并且它的颜色也被修改为亮灰色。</p>
+<h3 id="设置导航栏的背景颜色"><a href=""></a>设置导航栏的背景颜色</h3>
+<p>在iOS 7中，不再使用tintColor属性来设置导航栏的颜色，而是使用barTintColor属性来修改背景色。我们可以在<code>AppDelegate.m</code>文件中的方法<code>didFinishLaunchingWithOptions:</code>里面添加如下代码来修改颜色：<br>    1</p>
+<pre><code><span class="string">[[UINavigationBar appearance] setBarTintColor:[UIColor yellowColor]]</span>;
+</code></pre><p>效果如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/11.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/11.jpg" alt=""></a><br>一般情况，我们都会使用自己的颜色，下面这个宏用来设置RGB颜色非常方便：<br>    1</p>
+<pre><code>#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((<span class="built_in">float</span>)((rgbValue &amp; <span class="number">0xFF0000</span>) &gt;&gt; <span class="number">16</span>))/<span class="number">255.0</span> green:((<span class="built_in">float</span>)((rgbValue &amp; <span class="number">0xFF00</span>) &gt;&gt; <span class="number">8</span>))/<span class="number">255.0</span> blue:((<span class="built_in">float</span>)(rgbValue &amp; <span class="number">0xFF</span>))/<span class="number">255.0</span> alpha:<span class="number">1.0</span>]
+</code></pre><p>将上面这个宏放到<code>AppDelegate.m</code>文件中，然后通过这个宏来创建一个UIColor对象(根据指定的RGB)。如下示例：<br>    1</p>
+<pre><code><span class="attr_selector">[[UINavigationBar appearance]</span> setBarTintColor<span class="value">:<span class="function">UIColorFromRGB</span>(<span class="number">0</span>x067AB5)];</span>
+</code></pre><p>默认情况下，导航栏的translucent属性为YES。另外，系统还会对所有的导航栏做模糊处理，这样可以让iOS 7中导航栏的颜色更加饱和。如下图，是translucent值为NO和YES的对比效果：<br><a href="http://beyondvincent.com/images/2013/11/12.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/12.jpg" alt=""></a><br>要想禁用translucent属性，可以在Storyboard中选中导航栏，然后在Attribute Inspectors中，取消translucent的勾选。</p>
+<h3 id="在导航栏中使用背景图片"><a href=""></a>在导航栏中使用背景图片</h3>
+<p>如果希望在导航栏中使用一个图片当做背景，那么你需要提供一个稍微高一点的图片(这样可以延伸到导航栏背后)。导航栏的高度从44 points(88 pixels)变为了64 points(128 pixels)。<br>我们依然可以使用<code>setBackgroundImage:</code>方法为导航栏设置自定义图片。如下代码所示：<br>    1</p>
+<pre><code>[[UINavigationBar appearance] <span class="keyword">set</span>BackgroundImage:[UIImage imageNamed:@<span class="string">"nav_bg.png"</span>] <span class="keyword">for</span>BarMetrics:UIBarMetricsDefault];
+</code></pre><p>示例工程中提供了两个背景图片：nav_bg.png 和 nav_bg_ios7.png。运行一下试试看吧，如下效果：<br><a href="http://beyondvincent.com/images/2013/11/13.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/13.jpg" alt=""></a></p>
+<h3 id="定制返回按钮的颜"><a href=""></a>定制返回按钮的颜</h3>
+<p>在iOS 7中，所有的按钮都是无边框的。其中返回按钮会有一个V型箭头，以及上一个屏幕中的标题(如果上一屏幕的标题是空，那么就显示”返回”)。要想给返回按钮着色，可以使用tintColor属性。如下代码所示：<br>    1</p>
+<pre><code><span class="string">[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]]</span>;
+</code></pre><p>除了返回按钮，tintColor属性会影响到所有按钮标题和图片。<br><a href="http://beyondvincent.com/images/2013/11/14.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/14.jpg" alt=""></a><br>如果想要用自己的图片替换V型，可以设置图片的<code>backIndicatorImage</code>和<code>backIndicatorTransitionMaskImage</code>。如下代码所示：<br>    1<br>    2</p>
+<pre><code><span class="string">[[UINavigationBarappearance]setBackIndicatorImage:[UIImageimageNamed:@"back_btn.png"]]</span>;<span class="string">[[UINavigationBarappearance]setBackIndicatorTransitionMaskImage:[UIImageimageNamed:@"back_btn.png"]]</span>;
+</code></pre><p>图片的颜色是由tintColor属性控制的。<br><a href="http://beyondvincent.com/images/2013/11/15.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/15.jpg" alt=""></a></p>
+<h3 id="修改导航栏标题的字体"><a href=""></a>修改导航栏标题的字体</h3>
+<p>跟iOS 6一样，我们可以使用导航栏的<code>titleTextAttributes</code>属性来定制导航栏的文字风格。在text<br> attributes字典中使用如下一些key，可以指定字体、文字颜色、文字阴影色以及文字阴影偏移量：</p>
+<ul>
+<li>UITextAttributeFont – 字体key</li>
+<li>UITextAttributeTextColor – 文字颜色key</li>
+<li>UITextAttributeTextShadowColor – 文字阴影色key</li>
+<li>UITextAttributeTextShadowOffset – 文字阴影偏移量key</li>
+</ul>
+<p>如下代码所示，对导航栏的标题风格做了修改：<br>    1<br>    2<br>    3<br>    4<br>    5<br>    6<br>    7</p>
+<pre><code>NSShadow*<span class="built_in">shadow</span>=[[NSShadowalloc]init];<span class="built_in">shadow</span>.shadowColor=[UIColorcolorWithRed:<span class="number">0.0</span>green:<span class="number">0.0</span>blue:<span class="number">0.0</span>alpha:<span class="number">0.8</span>];<span class="built_in">shadow</span>.shadowOffset=CGSizeMake(<span class="number">0</span>,<span class="number">1</span>);[[UINavigationBarappearance]setTitleTextAttributes:[NSDictionarydictionaryWithObjectsAndKeys:[UIColorcolorWithRed:<span class="number">245.0</span>/<span class="number">255.0</span>green:<span class="number">245.0</span>/<span class="number">255.0</span>blue:<span class="number">245.0</span>/<span class="number">255.0</span>alpha:<span class="number">1.0</span>],NSForegroundColorAttributeName,<span class="built_in">shadow</span>,NSShadowAttributeName,[UIFontfontWithName:@<span class="string">"HelveticaNeue-CondensedBlack"</span>size:<span class="number">21.0</span>],NSFontAttributeName,nil]];
+</code></pre><p>运行效果如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/16.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/16.jpg" alt=""></a></p>
+<h3 id="修改导航栏标题为图片"><a href=""></a>修改导航栏标题为图片</h3>
+<p>如果要想将导航栏标题修改为一个图片或者logo，那么只需要使用下面这行代码即可：<br>    1</p>
+<pre><code>self.navigationItem.titleView = <span class="string">[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"appcoda-logo.png"]]</span>;
+</code></pre><p>上面的代码简单的修改了titleView属性，将一个图片赋值给它。 注意：这不是iOS 7中的新功能，之前的iOS版本就可以已经有了。<br>具体效果如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/17.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/17.jpg" alt=""></a></p>
+<h3 id="添加多个按钮"><a href=""></a>添加多个按钮</h3>
+<p>同样，这个技巧也不是iOS 7的，开发者经常会在导航栏中添加多个按钮，所以我决定在这里进行介绍。我们可以在导航栏左边或者右边添加多个按钮。例如，我们希望在导航栏右边添加一个照相机和分享按钮，那只需要使用下面的代码即可：<br>    1<br>    2<br>    3<br>    4<br>    5</p>
+<pre><code><span class="built_in">UIBarButtonItem</span>*shareItem=[[UIBarButtonItemalloc]initWithBarButtonSystemItem:UIBarButtonSystemItemActiontarget:selfaction:<span class="literal">nil</span>];<span class="built_in">UIBarButtonItem</span>*cameraItem=[[UIBarButtonItemalloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCameratarget:selfaction:<span class="literal">nil</span>];<span class="built_in">NSArray</span>*actionButtonItems=@[shareItem,cameraItem];<span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.rightBarButtonItems</span>=actionButtonItems;
+</code></pre><p>如下效果：<br><a href="http://beyondvincent.com/images/2013/11/18.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/18.jpg" alt=""></a></p>
+<h3 id="修改状态栏的风格"><a href=""></a>修改状态栏的风格</h3>
+<p>在老版本的iOS中，状态栏永远都是白色风格。而在iOS 7中，我们可以修改每个view controller中状态栏的外观。通过UIStatusBarStyle常量可以指定状态栏的内容是暗色或亮色。默认情况下，状态栏的显示是暗色。也就是说，状态栏上的时间、电池指示器和Wi-Fi信号显示为暗色。如果导航栏中使用暗色为背景，那么看起来的效果如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/19.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/19.jpg" alt=""></a><br>如上图这种情况下，我们可能希望将导航栏的风格修改为亮色。这里有两个方法可以实现。在iOS 7中，我们可以在每个view controller中overriding<code>preferredStatusBarStyle:</code>方法，如下所示：<br>    1<br>    2<br>    3<br>    4</p>
+<pre><code>-(UIStatusBarStyle)preferredStatusBarStyle{<span class="keyword">return</span>UIStatusBarStyleLightContent;}
+</code></pre><p>上面代码的效果如下图所示：<br><a href="http://beyondvincent.com/images/2013/11/20.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/20.jpg" alt=""></a><br>在iOS 7中，通过上面的方法来修改状态栏风格非常的棒。另外，我们也可以使用UIApplication的statusBarStyle方法来设置状态栏，不过，首先需要停止使用<code>View
+ controller-based status bar appearance</code>。在project target的Info tab中，插入一个新的key，名字为<code>View
+ controller-based status bar appearance</code>，并将其值设置为NO。<br><a href="http://beyondvincent.com/images/2013/11/21.jpg" target="_blank" rel="external"><img src="http://beyondvincent.com/images/2013/11/21.jpg" alt=""></a><br>然后就可以使用下面的代码来设置状态栏风格了：<br>    1</p>
+<pre><code><span class="attr_selector">[[UIApplication sharedApplication]</span> <span class="tag">setStatusBarStyle</span><span class="pseudo">:UIStatusBarStyleLightContent</span>];
+</code></pre><h3 id="隐藏状态栏"><a href=""></a>隐藏状态栏</h3>
+<p>有时候我们需要隐藏状态栏，那么此时我们在view controller中override方法prefersStatusBarHidden:即可，如下代码所示：<br>    1<br>    2<br>    3<br>    4</p>
+<pre><code>-(BOOL)prefersStatusBarHidden{<span class="keyword">return</span>YES;}
+</code></pre><h3 id="总结"><a href=""></a>总结</h3>
+<p>iOS 7给开发者提供了一些新的自由度来定制导航栏和状态栏的外观。希望上面的这些技巧能对你有用。<br>这里可以下载到<a href="https://dl.dropboxusercontent.com/u/2857188/NavigationBarDemo.zip" target="_blank" rel="external">示例工程源码</a>。只需要取消相关代码注释即可进行测试。<br><a href="&quot;分享到新浪微博&quot;"></a><a href="&quot;分享到腾讯微博&quot;"></a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/ios开发/">ios开发</a><a href="/tags/iphone开发/">iphone开发</a><a href="/tags/ios7适配/">ios7适配</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/01/15/iOS 7, 导航栏和状态栏自定义/" data-title="iOS 7, 导航栏和状态栏自定义 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/" title="关于UIView 的autoresizingMask属性，即UIViewAutoresizing">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  关于UIView 的autoresizingMask属性，即UIViewAutoresizing</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/08/IOS开发之Block 编程（翻译官方文档）/"  title="IOS开发之Block 编程（翻译官方文档）">
+ <strong>NEXT:</strong><br/> 
+ <span>IOS开发之Block 编程（翻译官方文档）
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#本文转自:http://beyondvincent-com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6"><span class="toc-number">1.</span> <span class="toc-text">本文转自:http://beyondvincent.com/blog/2013/11/03/120-customize-navigation-status-bar-ios-7/#6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS_7中默认的导航栏"><span class="toc-number">1.0.1.</span> <span class="toc-text">iOS 7中默认的导航栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置导航栏的背景颜色"><span class="toc-number">1.0.2.</span> <span class="toc-text">设置导航栏的背景颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在导航栏中使用背景图片"><span class="toc-number">1.0.3.</span> <span class="toc-text">在导航栏中使用背景图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定制返回按钮的颜"><span class="toc-number">1.0.4.</span> <span class="toc-text">定制返回按钮的颜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改导航栏标题的字体"><span class="toc-number">1.0.5.</span> <span class="toc-text">修改导航栏标题的字体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改导航栏标题为图片"><span class="toc-number">1.0.6.</span> <span class="toc-text">修改导航栏标题为图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加多个按钮"><span class="toc-number">1.0.7.</span> <span class="toc-text">添加多个按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改状态栏的风格"><span class="toc-number">1.0.8.</span> <span class="toc-text">修改状态栏的风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐藏状态栏"><span class="toc-number">1.0.9.</span> <span class="toc-text">隐藏状态栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.10.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

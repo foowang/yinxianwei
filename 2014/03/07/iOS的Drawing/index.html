@@ -1,0 +1,577 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS的Drawing | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="14.1 Quartz概述14.2 绘制基本几何图形14.3 绘制图像和文本14.4 坐标14.5 变换14.6 图像拾取器
+
+14.1 Quartz概述
+Quartz是Mac OS X的Darwin核心之上的绘图层，有时候也认为是CoreGraphics。共有两种部分组成Quartz：Quartz">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/03/07/iOS的Drawing/" title="iOS的Drawing" itemprop="url">iOS的Drawing</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-03-07T02:17:00.000Z" itemprop="datePublished">3月 7 2014</time>
+    Updated:<time datetime="2014-10-30T10:47:16.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1_Quartz概述"><span class="toc-number">1.</span> <span class="toc-text">14.1 Quartz概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2_绘制基本几何图形"><span class="toc-number">2.</span> <span class="toc-text">14.2 绘制基本几何图形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-4_坐标"><span class="toc-number">3.</span> <span class="toc-text">14.4 坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-5_变换"><span class="toc-number">4.</span> <span class="toc-text">14.5 变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-6_图像拾取器"><span class="toc-number">5.</span> <span class="toc-text">14.6 图像拾取器</span></a></li></ol>
+		</div>
+		
+		<blockquote>
+<p>14.1 Quartz概述<br>14.2 绘制基本几何图形<br>14.3 绘制图像和文本<br>14.4 坐标<br>14.5 变换<br>14.6 图像拾取器</p>
+</blockquote>
+<h2 id="14-1_Quartz概述"><a href=""></a>14.1 Quartz概述</h2>
+<p>Quartz是Mac OS X的Darwin核心之上的绘图层，有时候也认为是CoreGraphics。共有两种部分组成Quartz：<br>Quartz Compositor，合成视窗系统，管理和合成幕后视窗影像来建立Mac OS X使用者接口。<br>Quartz 2D，是iOS和Mac OS X环境下的二维绘图引擎。<br>涉及内容包括：基于路径的绘图，透明度绘图，遮盖，阴影，透明层，颜色管理，防锯齿渲染，生成PDF，以及PDF元数据相关处理。</p>
+<h2 id="14-2_绘制基本几何图形"><a href=""></a>14.2 绘制基本几何图形</h2>
+<p>视图绘制<br>    在iOS上，所有的绘制，无论是否采用OpenGL、Quartz、UIKit、或者 Core Animation—都发生在UIView对象的区域内。<br>视图定义绘制发生的屏幕区域。如果您使用系统提供的视图，绘制工作会自动得到处理。然而，如果您定义自己的定制视图，则必须自行提供绘制代码。<br>对于使用OpenGL进行绘制的应用程序，一旦建立了渲染表面，就必须使用OpenGL指定的绘制模型。<br>视图绘制周期<br>    描绘系统会调用UIView对象的drawRect:方法，并向它传入一个包含需要重画的视图区域的矩形。触发视图更新的动作有如下几种:<br>对遮挡您的视图的其它视图进行移动或删除操作。<br>将视图的hidden属性声明设置为NO，使其从隐藏状态变为可见。<br>将视图滚出屏幕，然后再重新回到屏幕上。<br>显式调用视图的setNeedsDisplay或者setNeedsDisplayInRect:方法。<br>setNeedsDisplay是更新整个视图，<br>setNeedsDisplayInRect是更新视图的部分区域。<br>视图绘制实例FirstQuartz2D<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321439686.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321433797.png" alt="wps_clip_image-14312"></a><br>自定义视图的h文件<br>    @interface MyView : UIView {</p>
+<pre><code>}@<span class="function"><span class="keyword">end</span></span>
+</code></pre><p>自定义视图的m文件<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    @implementation MyView- (void)drawRect:(CGRect)rect {</p>
+<pre><code>    CGContextRef <span class="keyword">context</span> = UIGraphicsGetCurrentContext();
+
+    CGContextMoveToPoint (<span class="keyword">context</span>, <span class="number">75</span>, <span class="number">10</span>); 
+    CGContextAddLineToPoint (<span class="keyword">context</span>, <span class="number">10</span>, <span class="number">150</span>); 
+    CGContextAddLineToPoint (<span class="keyword">context</span>, <span class="number">160</span>, <span class="number">150</span>); 
+
+    // Closing the path connects the current point <span class="keyword">to</span> the start <span class="keyword">of</span> the current path.    CGContextClosePath(<span class="keyword">context</span>);
+    // <span class="keyword">And</span> stroke the path    [[UIColor blackColor] setStroke]; 
+    //CGContextStrokePath(<span class="keyword">context</span>);    [[UIColor redColor] setFill]; 
+    CGContextDrawPath(<span class="keyword">context</span>, kCGPathFillStroke);
+    //kCGPathFillStroke,kCGPathFill,kCGPathStroke    
+
+}@<span class="keyword">end</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>CGContextRef context = UIGraphicsGetCurrentContext();可以获得图形上下文。<br>CGContextMoveToPoint、CGContextAddLineToPoint两个函数是构建描绘路径。<br>CGContextClosePath(context);函数是闭合描绘路径。<br>CGContextStrokePath函数是为闭合路径描边。<br>[[UIColor blackColor] setStroke]设置描边的颜色。<br>[[UIColor redColor] setFill]设置要填充颜色。<br>CGContextDrawPath(context, kCGPathFillStroke);设置描绘路径方式。常用的还有：<br>kCGPathFill和kCGPathStroke<br>图形上下文<br>  在调用您提供的drawRect:方法之前，视图对象会自动配置其绘制环境，使您的代码可以立即进行绘制。作为这些<br>配置的一部分，UIView对象会为当前绘制环境创建一个图形上下文（对应于CGContextRef封装类型）。<br>  该图形上下文包含绘制系统执行后续绘制命令所需要的信息，定义了各种基本的绘制属性，比如绘制使用的颜色、<br>裁剪区域、线的宽度及风格信息、字体信息、合成选项、以及几个其它信息。<br>绘制路径<br>  路径用于描述由一序列线和Bézier曲线构成的2D几何形状。Core Graphics中也有一些用于创建简单路径（比如矩形和椭圆形）的便利函数。对于更为复杂的路径，必须用Core Graphics框架提供的函数自行创建。<br>  Bézier曲线是法国数学家“贝塞尔”在工作中发现，任何一条曲线都可以通过与它相切的控制线两端的点的位置来定义。<br>Bézier曲线<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321447536.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321457503.png" alt="wps_clip_image-26605"></a><br>Bézier曲线实例BezierCurve<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321467338.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321483269.png" alt="wps_clip_image-32456"></a><br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (void)drawRect:(CGRect)rect {</p>
+<pre><code><span class="constant">    CGContextRef cgContext</span> = UIGraphicsGetCurrentContext();
+
+    <span class="comment">//CGContextBeginPath(cgContext);    CGContextMoveToPoint(cgContext, 333, 0);</span>
+<span class="constant">    CGContextAddCurveToPoint(cgContext, 333, 0, 332, 26, 330, 26);
+    CGContextAddCurveToPoint(cgContext, 330, 26, 299, 20, 299, 17);
+    CGContextAddLineToPoint(cgContext, 296, 17);
+    CGContextAddCurveToPoint(cgContext, 296, 17, 296, 19, 291, 19);
+    CGContextAddLineToPoint(cgContext, 250, 19);
+    CGContextAddCurveToPoint(cgContext, 250, 19, 241, 24, 238, 19);
+    CGContextAddCurveToPoint(cgContext, 236, 20, 234, 24, 227, 24);
+    CGContextAddCurveToPoint(cgContext, 220, 24, 217, 19, 216, 19);
+    CGContextAddCurveToPoint(cgContext, 214, 20, 211, 22, 207, 20);
+    CGContextAddCurveToPoint(cgContext, 207, 20, 187, 20, 182, 21);
+    CGContextAddLineToPoint(cgContext, 100, 45);
+    CGContextAddLineToPoint(cgContext, 97, 46);
+    CGContextAddCurveToPoint(cgContext, 97, 46, 86, 71, 64, 72);
+    CGContextAddCurveToPoint(cgContext, 42, 74, 26, 56, 23, 48);
+    CGContextAddLineToPoint(cgContext, 9, 47);
+    CGContextAddCurveToPoint(cgContext, 9, 47, 0, 31, 0, 0);
+
+    CGContextStrokePath(cgContext);
+}</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>##<a href=""></a>14.3 绘制图像和文本<br>UIImages的-drawRect:方法绘制图像:</p>
+<ul>
+<li>[UIImage drawAtPoint:(CGPoint)point] </li>
+<li>[UIImage drawInRect:(CGRect)rect]</li>
+<li>[UIImage drawAsPatternInRect:(CGRect)rect]<br>NSString的-drawRect:方法绘制文本:  </li>
+<li><p>[NSString drawAtPoint:(CGPoint)point withFont:(UIFont *)font]<br>实例DrawImage<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321552825.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321554985.png" alt="wps_clip_image-11683"></a><br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”MyView.h”@implementation MyView- (void)drawRect:(CGRect)rect {</p>
+<pre><code>  <span class="built_in">NSString</span>* imagePath = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"dog"</span> ofType:<span class="string">@"png"</span>];
+  <span class="built_in">UIImage</span>* myImageObj = [[<span class="built_in">UIImage</span> alloc] initWithContentsOfFile:imagePath];
+  <span class="comment">//[myImageObj drawAtPoint:CGPointMake(0, 0)];    [myImageObj drawInRect:CGRectMake(0, 0, 320, 480)];</span>
+
+  <span class="built_in">NSString</span> *s = <span class="string">@"我的小狗"</span>;
+
+  [s drawAtPoint:CGPointMake(<span class="number">100</span>, <span class="number">0</span>) withFont:[<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">34.0</span>]];
+</code></pre><p>  }@end<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>写字实例Draw<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321594622.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142321599921.png" alt="wps_clip_image-23850"></a><br>Dot对象<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    //—h@interface Dot : NSObject {</p>
+<pre><code><span class="built_in">CGFloat</span> x;
+<span class="built_in">CGFloat</span> y;
+</code></pre><p>  }</p>
+<p>  @property(assign) CGFloat x;<br>  @property(assign) CGFloat y;@end//—m#import”Dot.h”@implementation Dot@synthesize x;@synthesize y;@end<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>DrawView.h<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import <uikit uikit.h="">@interface DrawView : UIView {</uikit></p>
+<pre><code>NSMutableArray <span class="keyword">*</span>dots;
+</code></pre><p>  }</p>
+<p>  @property(nonatomic, retain) NSMutableArray *dots;@end<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>DrawView.m</p>
+</li>
+</ul>
+<p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”DrawView.h”#import”Dot.h”@implementation DrawView@synthesize dots;- (NSMutableArray <em>)dots {<br>        if(nil == dots) {<br>            self.dots = [NSMutableArray array];<br>        }<br>        return dots;<br>    }//START:code.DrawView.drawRect- (void)drawRect:(CGRect)rect {<br>        CGContextRef ctx = UIGraphicsGetCurrentContext();<br>        CGContextSetFillColorWithColor(ctx, [[UIColor blueColor] CGColor]);<br>        for(Dot </em>dot in self.dots) {<br>            CGContextAddArc(ctx, dot.x, dot.y, 5.0f, 0.0f, 2.0f * M_PI, YES);<br>            CGContextFillPath(ctx);<br>        }</p>
+<pre><code>}<span class="comment">//END:code.DrawView.drawRect- (void)dealloc {</span>
+    <span class="keyword">self</span>.dots = <span class="built_in">nil</span>;
+    [<span class="keyword">super</span> dealloc];
+}
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>drawRect方法中将dots集合中的Dot对象取出，一个一个在屏幕上面画出来。<br>CGContextAddArc(ctx, dot.x, dot.y, 5.0f, 0.0f, 2.0f <em> M_PI, YES);函数是绘制弧形。<br>CGContextFillPath(ctx);填充路径。<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    //START:code.DrawView.touchesBegan- (void)touchesBegan:(NSSet </em>)touches withEvent:(UIEvent <em>)event {<br>        UITouch </em>touch = [touches anyObject];<br>        CGPoint location = [touch locationInView:self];<br>        Dot <em>dot = [[[Dot alloc] init] autorelease];<br>        dot.x = location.x;<br>        dot.y = location.y;<br>        //[self.dots removeAllObjects];    [self.dots addObject:dot];<br>        [self setNeedsDisplay];<br>    }//END:code.DrawView.touchesBegan//START:code.DrawView.touchesMoved- (void)touchesMoved:(NSSet </em>)touches withEvent:(UIEvent <em>)event {<br>        UITouch </em>touch = [touches anyObject];<br>        CGPoint location = [touch locationInView:self];<br>        Dot *dot = [[[Dot alloc] init] autorelease];<br>        dot.x = location.x;<br>        dot.y = location.y;<br>        [self.dots addObject:dot];<br>        [self setNeedsDisplay];<br>    }//END:code.DrawView.touchesMoved<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a> </p>
+<h2 id="14-4_坐标"><a href=""></a>14.4 坐标</h2>
+<p>Quartz坐标<br>Quartz技术最开始为Mac OS X系统设计的图形技术，它的坐标原点位于左下角。<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322087535.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322094437.png" alt="wps_clip_image-1616"></a><br>UIKit坐标<br>UIKit坐标与Quartz不同，原点位于右上角。在iOS中的UIView等控件都是基于此坐标，由于在UIView使用了Quartz坐标有时候需要转换。<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322098548.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322099944.png" alt="wps_clip_image-5807"></a><br>坐标变换实例<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322094055.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/20121014232209434.png" alt="wps_clip_image-29340"></a><br>MyView.m文件<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”MyView.h”@implementation MyView- (void)drawRect:(CGRect)rect {</p>
+<pre><code>    <span class="built_in">NSString</span> *path = [[<span class="built_in">NSBundle</span> mainBundle] pathForResource:<span class="string">@"cat"</span> ofType:<span class="string">@"jpg"</span>];
+    <span class="built_in">UIImage</span> *img = [<span class="built_in">UIImage</span> imageWithContentsOfFile:path];
+    CGImageRef image = img<span class="variable">.CGImage</span>;
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+
+    <span class="built_in">CGRect</span> touchRect = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img<span class="variable">.size</span><span class="variable">.width</span>, img<span class="variable">.size</span><span class="variable">.height</span>);
+    CGContextDrawImage(context, touchRect, image);  
+    CGContextRestoreGState(context);
+}<span class="keyword">@end</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a><br>CGContextSaveGState是将当前图形状态要入到图形堆栈。<br>CGContextDrawImage(context, touchRect, image)在上下文中绘制图形。 CGContextRestoreGState回复当前图形状态。</p>
+<h2 id="14-5_变换"><a href=""></a>14.5 变换</h2>
+<p>运用变换<br>变换（transformation）修改了图形上下文中绘制图形的方式。可以通过移动、旋转或缩放实现变换。<br>Quartz提供了多种形式的变换，其中主要：CTM（当前变换矩阵）变换和仿射（affine）变换。<br>CTM（current transformation matrix）变换，这种变换比较简单，函数有：<br>CGContextRotateCTM，旋转坐标<br>CGContextScaleCTM，缩放坐标<br>CGContextTranslateCTM，移动原点<br>移动变换<br>CGContextTranslateCTM (myContext, 100, 50)<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322126233.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/20121014232213627.png" alt="wps_clip_image-23595"></a><br>从对象角度沿着x轴正向移动100单位，沿着y轴正向移动50单位。<br>旋转变换<br>static inline double radians (double degrees) {return degrees * M_PI/180;}<br>CGContextRotateCTM (myContext, radians(–45.));<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322142480.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322172117.png" alt="wps_clip_image-9368"></a><br>从对象角度：<br>在Quartz坐标下正数为逆时针旋转，负数为顺时针旋转。<br>在UIKit坐标下正数为顺时针旋转，负数为逆时针旋转。<br>缩放变换<br>CGContextScaleCTM (myContext, .5, .75);<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322199477.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322195790.png" alt="wps_clip_image-14003"></a><br>从对象角度：所有x坐标缩小0.5，所有y坐标缩小0.75。<br>修改MyView.m文件<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”MyView.h”@implementation MyView- (void)drawRect:(CGRect)rect {</p>
+<pre><code>    NSString *path = [[NSBundle mainBundle] pathForResource:@<span class="string">"cat"</span> ofType:@<span class="string">"jpg"</span>];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    CGImageRef image = img.CGImage;
+    CGContextRef <span class="keyword">context</span> = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(<span class="keyword">context</span>);
+
+    CGContextRotateCTM(<span class="keyword">context</span>, M_PI);
+    CGContextTranslateCTM(<span class="keyword">context</span>, -img.size.width, -img.size.height);
+
+    CGRect touchRect = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img.size.width, img.size.height);
+    CGContextDrawImage(<span class="keyword">context</span>, touchRect, image);  
+    CGContextRestoreGState(<span class="keyword">context</span>);
+}@<span class="keyword">end</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a><br>仿射（affine）变换<br>仿射（affine）变换也是一种直角坐标变换，重<br>用变换，经过多次变换（多次的矩阵相乘），<br>每一种变换都可以用矩阵表示，通过多次矩阵<br>相乘得到最后结果。仿射变换函数：<br>    CGAffineMakeRotation，创建旋转矩阵仿射对象<br>    CGAffineMakeScale，创建缩放矩阵仿射对象<br>    CGAffineMakeTranslation，创建移动矩阵仿射对象<br>    CGAffineTransformRotate，旋转矩阵仿射对象<br>    CGAffineTransformScale，缩放矩阵仿射对象<br>    CGAffineTransformTranslate，移动矩阵仿射对象<br>    CGContextConcatCTM，连接到CTM变换<br>使用仿射变换MyView.m<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”MyView.h”@implementation MyView- (void)drawRect:(CGRect)rect {</p>
+<pre><code>    NSString *path = [[NSBundle mainBundle] pathForResource:@<span class="string">"cat"</span> ofType:@<span class="string">"jpg"</span>];
+    UIImage *img = [UIImage imageWithContentsOfFile:path];
+    CGImageRef image = img.CGImage;
+    CGContextRef <span class="keyword">context</span> = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(<span class="keyword">context</span>);
+
+    CGAffineTransform myAffine = CGAffineTransformMakeRotation(M_PI); 
+    myAffine = CGAffineTransformTranslate(myAffine, -img.size.width, -img.size.height); 
+    CGContextConcatCTM(<span class="keyword">context</span>, myAffine);
+
+    CGContextRotateCTM(<span class="keyword">context</span>, M_PI);
+    CGContextTranslateCTM(<span class="keyword">context</span>, -img.size.width, -img.size.height);
+
+    CGRect touchRect = CGRectMake(<span class="number">0</span>, <span class="number">0</span>, img.size.width, img.size.height);
+    CGContextDrawImage(<span class="keyword">context</span>, touchRect, image);  
+    CGContextRestoreGState(<span class="keyword">context</span>);
+}@<span class="keyword">end</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a> </p>
+<h2 id="14-6_图像拾取器"><a href=""></a>14.6 图像拾取器</h2>
+<p>图像拾取器（Image Picker）是可以帮助你从图片库中选取图片，也可以捕获照相机图片。<br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322279981.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322286534.png" alt="wps_clip_image-22106"></a><br><a href="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322288976.png" target="_blank" rel="external"><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201210/201210142322296402.png" alt="wps_clip_image-8654"></a><br>PhotoViewViewController.h<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    //START:code.PhotoViewController.h@interface PhotoViewViewController : UIViewController<uiimagepickercontrollerdelegate> {<br>        UIImageView <em>imageView;<br>        UIImagePickerController </em>imagePicker;<br>    }</uiimagepickercontrollerdelegate></p>
+<pre><code><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, retain) <span class="keyword">IBOutlet</span> <span class="built_in">UIImageView</span> *imageView;
+<span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, retain) <span class="keyword">IBOutlet</span> UIImagePickerController *imagePicker;<span class="keyword">@end</span><span class="comment">//END:code.PhotoViewController.h</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a><br>需要实现UIImagePickerControllerDelegate协议。<br>需要定义UIImagePickerController控制器成员变量。<br>PhotoViewViewController.m<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #import”PhotoViewViewController.h”@implementation PhotoViewViewController@synthesize imageView;@synthesize imagePicker;//START:code.PhotoViewController.touchesEnded:withEvent:- (void)touchesEnded:(NSSet <em>)touches withEvent:(UIEvent </em>)event {<br>        if([[touches anyObject] tapCount] &gt; 1) {<br>            // bring up image grabberif([UIImagePickerController isSourceTypeAvailable:<br>                UIImagePickerControllerSourceTypeCamera]) {<br>                self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;<br>            } else {<br>                self.imagePicker.sourceType =            UIImagePickerControllerSourceTypePhotoLibrary;<br>            }<br>            //self.imagePicker.allowsImageEditing = YES; //iOS 3之前        self.imagePicker.allowsEditing = YES; </p>
+<pre><code>        [<span class="keyword">self</span> presentModalViewController:<span class="keyword">self</span><span class="variable">.imagePicker</span> animated:<span class="literal">YES</span>]; 
+    }
+}<span class="comment">//END:code.PhotoViewController.touchesEnded:withEvent:</span>
+</code></pre><p><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a><br>图像选取器的sourceType属性有：<br>UIImagePickerControllerSourceTypePhotoLibrary，图片来源于“相簿”<br>UIImagePickerControllerSourceTypeCamera，来源于相机<br>UIImagePickerControllerSourceTypeSavedPhotosAlbum，来源于“相机胶卷”。<br>PhotoViewViewController.m<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    //START:code.PhotoViewController.didFinish- (void)imagePickerController:(UIImagePickerController <em>)picker<br>    didFinishPickingMediaWithInfo:(NSDictionary </em>)info {<br>        imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];<br>        [self dismissModalViewControllerAnimated:YES];<br>    }//END:code.PhotoViewController.didFinish//START:code.PhotoViewController.didCancel- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {<br>        [self.imagePicker dismissModalViewControllerAnimated:YES];<br>    }//END:code.PhotoViewController.didCancel- (void)dealloc {<br>        self.imageView = nil;<br>        self.imagePicker = nil;<br>        [super dealloc];<br>    }<br><a href="http://www.cnblogs.com/syxchina/archive/2012/10/14/2723630.html" title="复制代码" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a><br>imagePickerController:didFinishPickingMediaWithInfo:委托实现方法，当选择完成时候调用。<br>imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];语句可以从图片拾取器中获得一个Image对象。<br>imagePickerControllerDidCancel:是委托实现方法当点击取消时候调用。<br>本文转自：<a href="http://blog.163.com/wkyuyang_001/blog/static/10802122820133190545227/" target="_blank" rel="external">http://blog.163.com/wkyuyang_001/blog/static/10802122820133190545227/</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS开发/">iOS开发</a><a href="/tags/Drawing/">Drawing</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之Drawing/">iOS应用开发之Drawing</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/03/07/iOS的Drawing/" data-title="iOS的Drawing | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/03/19/iOS – Xcode升级到5.1& iOS升级到iOS7.1问题/" title="iOS – Xcode升级到5.1&amp; iOS升级到iOS7.1问题">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  iOS – Xcode升级到5.1&amp; iOS升级到iOS7.1问题</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/03/06/iOS的CoreData用法/"  title="iOS的CoreData用法">
+ <strong>NEXT:</strong><br/> 
+ <span>iOS的CoreData用法
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1_Quartz概述"><span class="toc-number">1.</span> <span class="toc-text">14.1 Quartz概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2_绘制基本几何图形"><span class="toc-number">2.</span> <span class="toc-text">14.2 绘制基本几何图形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-4_坐标"><span class="toc-number">3.</span> <span class="toc-text">14.4 坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-5_变换"><span class="toc-number">4.</span> <span class="toc-text">14.5 变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-6_图像拾取器"><span class="toc-number">5.</span> <span class="toc-text">14.6 图像拾取器</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

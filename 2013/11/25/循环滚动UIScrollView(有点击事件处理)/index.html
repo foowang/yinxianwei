@@ -1,0 +1,446 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>循环滚动UIScrollView(有点击事件处理) | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/11/25/循环滚动UIScrollView(有点击事件处理)/" title="循环滚动UIScrollView(有点击事件处理)" itemprop="url">循环滚动UIScrollView(有点击事件处理)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-11-25T14:47:00.000Z" itemprop="datePublished">11月 25 2013</time>
+    Updated:<time datetime="2014-10-30T10:46:32.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>创建一个继承<span class="built_in">UIView</span>的名为CycleScrollView的类(<span class="variable">.h</span>和<span class="variable">.m</span>文件)</div><div class="line"><span class="number">2.</span>将下面代码替换原默认代码</div><div class="line"><span class="number">3.</span>在你的类里面实例化一个CycleScrollView类的对象并用</div><div class="line">   - (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame cycleDirection:(CycleDirection)direction pictures: (<span class="built_in">NSArray</span>*)pictureArray</div><div class="line">进行初始化</div><div class="line">参数介绍：</div><div class="line">         frame 页面的位置和大小</div><div class="line">         direction 滚动的方向，<span class="number">0</span>垂直滚动，<span class="number">1</span>水平滚动</div><div class="line">         pictureArray 滚动的图片数组</div><div class="line">比如：</div><div class="line">        - (<span class="keyword">void</span>)viewDidLoad</div><div class="line">        {</div><div class="line">           </div><div class="line">            [<span class="keyword">super</span> viewDidLoad];</div><div class="line">           </div><div class="line">            <span class="built_in">NSArray</span> *imagesArray=[[<span class="built_in">NSArray</span> alloc] initWithObjects: [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"test1.jpg"</span>],[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"test2.jpg"</span>],[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"test3.jpg"</span>],<span class="literal">nil</span>];</div><div class="line">           </div><div class="line">            CycleScrollView *cycle=[[CycleScrollView alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">480</span>) cycleDirection:<span class="number">0</span> pictures:imagesArray];</div><div class="line">            cycle<span class="variable">.delegate</span>=<span class="keyword">self</span>;</div><div class="line">            [<span class="keyword">self</span><span class="variable">.view</span> addSubview:cycle];</div><div class="line">            [imagesArray release];</div><div class="line">            [cycle release];</div><div class="line">        }</div><div class="line"></div><div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="variable">.h</span>文件</div><div class="line"></div><div class="line"><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">//枚举,用来判断滚动方向</span></div><div class="line"><span class="keyword">typedef</span>  <span class="keyword">enum</span> _CycleDirection</div><div class="line">{</div><div class="line">    PortaitDirection,<span class="comment">//纵向滚动</span></div><div class="line">    LandscapeDirection<span class="comment">//横向滚动</span></div><div class="line">} CycleDirection;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">CycleScrollViewDelegate</span></span></div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)pageViewClicked:(<span class="built_in">NSInteger</span>)pageIndex;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">CycleScrollView</span> : <span class="title">UIView</span> &lt;<span class="title">UIScrollViewDelegate</span>&gt;</span>{</div><div class="line">   </div><div class="line">    CycleDirection scrollDirection;    <span class="comment">// scrollView滚动的方向</span></div><div class="line">    <span class="built_in">UIScrollView</span> *scrollView;</div><div class="line">   </div><div class="line">    <span class="built_in">NSArray</span> *imagesArray;   <span class="comment">// 存放所有需要滚动的图片</span></div><div class="line">   </div><div class="line">    <span class="built_in">NSMutableArray</span> *curImages; <span class="comment">//存放当前滚动的三张图片</span></div><div class="line">   </div><div class="line">    <span class="keyword">int</span> totalPageCount;<span class="comment">//图片的总张数</span></div><div class="line">   </div><div class="line">    <span class="keyword">int</span> curPageIndex;<span class="comment">//当前图片的索引</span></div><div class="line">   </div><div class="line">    <span class="built_in">CGRect</span> scrollFrame;</div><div class="line">   </div><div class="line">    <span class="keyword">id</span> &lt;CycleScrollViewDelegate&gt; delegate;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>)<span class="keyword">id</span> &lt;CycleScrollViewDelegate&gt; delegate;</div><div class="line"></div><div class="line">- (<span class="built_in">NSArray</span>*) getDisplayImagesWithPageindex;</div><div class="line"></div><div class="line">- (<span class="keyword">int</span>) validPageValue:(<span class="built_in">NSInteger</span>)value;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) refreshScrollView;</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame cycleDirection:(CycleDirection)direction pictures:(<span class="built_in">NSArray</span>*)pictureArray;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)ButtonClicked;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div><div class="line"></div><div class="line"><span class="comment">//////////////////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="variable">.m</span>文件</div><div class="line"></div><div class="line"></div><div class="line"><span class="preprocessor">#import <span class="title">"CycleScrollView.h"</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">CycleScrollView</span></span></div><div class="line"></div><div class="line"><span class="keyword">@synthesize</span> delegate;</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame cycleDirection:(CycleDirection)direction pictures:(<span class="built_in">NSArray</span>*)pictureArray</div><div class="line">{</div><div class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) {</div><div class="line">       </div><div class="line">        scrollFrame=frame;</div><div class="line">       </div><div class="line">        scrollDirection=direction;</div><div class="line">       </div><div class="line">        curImages=[[<span class="built_in">NSMutableArray</span> alloc] init];</div><div class="line">        imagesArray=[[<span class="built_in">NSArray</span>  alloc]initWithArray:pictureArray]; </div><div class="line">       </div><div class="line">        totalPageCount=[imagesArray count];</div><div class="line">       </div><div class="line">        curPageIndex=<span class="number">1</span>;<span class="comment">//当前显示的是图片数组里的第一张图片</span></div><div class="line">       </div><div class="line">        scrollView=[[<span class="built_in">UIScrollView</span> alloc] initWithFrame:frame];</div><div class="line">        scrollView<span class="variable">.backgroundColor</span>=[<span class="built_in">UIColor</span> blueColor];</div><div class="line">        scrollView<span class="variable">.showsVerticalScrollIndicator</span>=<span class="literal">NO</span>;</div><div class="line">        scrollView<span class="variable">.showsHorizontalScrollIndicator</span>=<span class="literal">NO</span>;</div><div class="line">        scrollView<span class="variable">.pagingEnabled</span>=<span class="literal">YES</span>;</div><div class="line">        scrollView<span class="variable">.delegate</span>=<span class="keyword">self</span>;     </div><div class="line">       </div><div class="line">        <span class="keyword">if</span> (scrollDirection == PortaitDirection)</div><div class="line">        {<span class="comment">//在竖直方向滚动</span></div><div class="line">            scrollView<span class="variable">.contentSize</span>=CGSizeMake(scrollView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, scrollView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>*<span class="number">3</span>);</div><div class="line">        }</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(scrollDirection==LandscapeDirection)           </div><div class="line">        {<span class="comment">//在水平方向滚动</span></div><div class="line">           </div><div class="line">            scrollView<span class="variable">.contentSize</span>=CGSizeMake(scrollView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>*<span class="number">3</span>, scrollView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>);</div><div class="line">           </div><div class="line">        }</div><div class="line">       </div><div class="line">        [<span class="keyword">self</span>  addSubview:scrollView];</div><div class="line">       </div><div class="line">        [<span class="keyword">self</span> refreshScrollView];</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) refreshScrollView</div><div class="line">{</div><div class="line">    <span class="built_in">NSArray</span> *subViews=[scrollView subviews];</div><div class="line">   </div><div class="line">    <span class="keyword">if</span> ([subViews count]&gt;<span class="number">0</span>) {</div><div class="line">        [subViews makeObjectsPerformSelector:<span class="keyword">@selector</span>(removeFromSuperview)];</div><div class="line">    }</div><div class="line">   </div><div class="line">    [<span class="keyword">self</span> getDisplayImagesWithPageindex];</div><div class="line">   </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">3</span>;  i++) {</div><div class="line">        <span class="built_in">UIButton</span>  *imageButton=[[<span class="built_in">UIButton</span> alloc] init];</div><div class="line">       </div><div class="line">        <span class="comment">//        UIButton  *imageButton=[UIButton buttonWithType:UIButtonTypeRoundedRect];</span></div><div class="line">        [imageButton setImage:[curImages objectAtIndex:i] forState:UIControlStateNormal];  </div><div class="line">        [imageButton addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(ButtonClicked) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(scrollDirection==PortaitDirection){</div><div class="line">            imageButton<span class="variable">.frame</span>=CGRectOffset(CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">480</span>), <span class="number">0</span>, scrollFrame<span class="variable">.size</span><span class="variable">.height</span>*i);</div><div class="line">            [scrollView setContentOffset:CGPointMake(<span class="number">0</span>, scrollFrame<span class="variable">.size</span><span class="variable">.height</span>)];</div><div class="line">        }</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(scrollDirection==LandscapeDirection) { <span class="comment">//水平滚动</span></div><div class="line">            imageButton<span class="variable">.frame</span>=CGRectOffset(CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">480</span>), scrollFrame<span class="variable">.size</span><span class="variable">.width</span>*i, <span class="number">0</span>);          </div><div class="line">            [scrollView setContentOffset:CGPointMake(scrollFrame<span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>)];</div><div class="line">        }</div><div class="line">       </div><div class="line">        [scrollView addSubview:imageButton];</div><div class="line">        [imageButton release];</div><div class="line">    }</div><div class="line">   </div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="built_in">NSArray</span>*) getDisplayImagesWithPageindex</div><div class="line">{</div><div class="line">    <span class="keyword">int</span> pre=[<span class="keyword">self</span> validPageValue:curPageIndex-<span class="number">1</span>];</div><div class="line">   </div><div class="line">    <span class="keyword">int</span> last=[<span class="keyword">self</span> validPageValue:curPageIndex+<span class="number">1</span>];</div><div class="line">   </div><div class="line">    <span class="keyword">if</span>([curImages count]!=<span class="number">0</span>)</div><div class="line">        [curImages removeAllObjects];</div><div class="line">   </div><div class="line">    [curImages addObject:[imagesArray objectAtIndex:pre-<span class="number">1</span>]];</div><div class="line">   </div><div class="line">    [curImages addObject:[imagesArray objectAtIndex:curPageIndex-<span class="number">1</span>]];</div><div class="line">   </div><div class="line">    [curImages addObject:[imagesArray objectAtIndex:last-<span class="number">1</span>]];</div><div class="line">   </div><div class="line">    <span class="keyword">return</span> curImages;</div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">int</span>) validPageValue:(<span class="built_in">NSInteger</span>)value</div><div class="line">{</div><div class="line">   </div><div class="line">    <span class="keyword">if</span>(value==<span class="number">0</span>)</div><div class="line">    {</div><div class="line">        value=totalPageCount;    <span class="comment">//value＝1为第一张，value=0为前面一张</span></div><div class="line">    }</div><div class="line">   </div><div class="line">    <span class="keyword">if</span> (value==totalPageCount+<span class="number">1</span>) {</div><div class="line">        value=<span class="number">1</span>;</div><div class="line">    }</div><div class="line">   </div><div class="line">    <span class="keyword">return</span> value;</div><div class="line">}</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)crollView</div><div class="line">{</div><div class="line">    <span class="keyword">int</span> x=crollView<span class="variable">.contentOffset</span><span class="variable">.x</span>;</div><div class="line">   </div><div class="line">    <span class="keyword">int</span> y=crollView<span class="variable">.contentOffset</span><span class="variable">.y</span>;</div><div class="line">   </div><div class="line">    <span class="keyword">if</span>(scrollDirection==LandscapeDirection) <span class="comment">//水平滚动</span></div><div class="line">       </div><div class="line">    {</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(x&gt;=<span class="number">2</span>*scrollFrame<span class="variable">.size</span><span class="variable">.width</span>) <span class="comment">//往下翻一张</span></div><div class="line">           </div><div class="line">        {</div><div class="line">           </div><div class="line">            curPageIndex=[<span class="keyword">self</span> validPageValue:curPageIndex+<span class="number">1</span>];</div><div class="line">           </div><div class="line">            [<span class="keyword">self</span> refreshScrollView];</div><div class="line">           </div><div class="line">        }</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(x&lt;=<span class="number">0</span>)</div><div class="line">           </div><div class="line">        {</div><div class="line">           </div><div class="line">            curPageIndex=[<span class="keyword">self</span> validPageValue:curPageIndex-<span class="number">1</span>];</div><div class="line">           </div><div class="line">            [<span class="keyword">self</span> refreshScrollView];</div><div class="line">           </div><div class="line">        }</div><div class="line">       </div><div class="line">    }</div><div class="line">   </div><div class="line">   </div><div class="line">   </div><div class="line">    <span class="comment">//竖直滚动</span></div><div class="line">   </div><div class="line">    <span class="keyword">if</span>(scrollDirection==PortaitDirection){</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(y&gt;=<span class="number">2</span>*scrollFrame<span class="variable">.size</span><span class="variable">.height</span>)           </div><div class="line">        {           </div><div class="line">            curPageIndex=[<span class="keyword">self</span> validPageValue:curPageIndex+<span class="number">1</span>];</div><div class="line">           </div><div class="line">            [<span class="keyword">self</span> refreshScrollView];</div><div class="line">           </div><div class="line">        }</div><div class="line">       </div><div class="line">        <span class="keyword">if</span> (y&lt;=<span class="number">0</span>) {</div><div class="line">            curPageIndex=[<span class="keyword">self</span> validPageValue:curPageIndex-<span class="number">1</span>];           </div><div class="line">            [<span class="keyword">self</span> refreshScrollView];</div><div class="line">        }</div><div class="line">       </div><div class="line">    }</div><div class="line">}</div><div class="line">-(<span class="keyword">void</span>)ButtonClicked</div><div class="line">{</div><div class="line">    [delegate pageViewClicked:curPageIndex];</div><div class="line">}</div><div class="line">- (<span class="keyword">void</span>)dealloc</div><div class="line">{</div><div class="line">    [imagesArray release]</div><div class="line">    [curImages release]  </div><div class="line">    [<span class="keyword">super</span> dealloc];</div><div class="line">}</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/api/">api</a><a href="/tags/ios/">ios</a><a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之第三方框架/">iOS应用开发之第三方框架</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/11/25/循环滚动UIScrollView(有点击事件处理)/" data-title="循环滚动UIScrollView(有点击事件处理) | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/25/学习系列、代码教程/" title="学习系列、代码教程">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  学习系列、代码教程</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/11/25/CLLocationManager_ MKMapView/"  title="CLLocationManager_ MKMapView">
+ <strong>NEXT:</strong><br/> 
+ <span>CLLocationManager_ MKMapView
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

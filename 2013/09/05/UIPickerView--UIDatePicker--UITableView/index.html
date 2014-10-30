@@ -1,0 +1,552 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>UIPickerView--UIDatePicker--UITableView | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="7.251&amp;gt;UIPickerView   拾取器1.创建UIPickerView 
+UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];    picker.delegat">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/05/UIPickerView--UIDatePicker--UITableView/" title="UIPickerView--UIDatePicker--UITableView" itemprop="url">UIPickerView--UIDatePicker--UITableView</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-05T05:12:00.000Z" itemprop="datePublished">9月 5 2013</time>
+    Updated:<time datetime="2014-10-30T10:45:58.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>7.25<br>1&gt;UIPickerView   拾取器<br>1.创建UIPickerView </p>
+<p>UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];<br>    picker.delegate = self;<br>    picker.dataSource = self;<br>    picker.showsSelectionIndicator = YES;<br>    [self.view addSubview:picker];<br>    [picker release];<br>2.设置picker的列行.</p>
+<p>//有几列</p>
+<ul>
+<li>(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView<br>{<br>  //NSLog(@”numberOfComponentsInPickerView”);<br>  return 2;<br>}</li>
+</ul>
+<p>//每一列有多少行</p>
+<ul>
+<li><p>(NSInteger):(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component<br>{<br>  //NSLog(@”numberOfRowsInComponent  %d”,component);<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="keyword">return</span> [_provinceArray <span class="built_in">count</span>];
+</code></pre><p>  }<br>  else if(component == 1)<br>  {</p>
+<pre><code>  <span class="keyword">int</span> selectedProvinceRow = [pickerView selectedRowInComponent:<span class="number">0</span>];
+
+  <span class="keyword">return</span> [[_cityArray objectAtIndex:selectedProvinceRow] <span class="keyword">count</span>];
+</code></pre><p>  }</p>
+<p>  return 0;<br>}<br>3.调用picker的协议方法<br>4.设置picker的行列显示的内容</p>
+</li>
+<li><p>(NSString <em>)pickerView:(UIPickerView </em>)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component<br>{<br>  NSLog(@”titleForRow  %d   component  %d”,row ,component);<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="keyword">return</span> [_provinceArray objectAtIndex:row];
+</code></pre><p>  }<br>  else if(component == 1)<br>  {</p>
+<pre><code>  <span class="keyword">int</span> selectedProvinceRow = [pickerView selectedRowInComponent:<span class="number">0</span>];
+  <span class="keyword">return</span> [[_cityArray objectAtIndex:selectedProvinceRow] objectAtIndex:row];
+</code></pre><p>  }<br>  return @””;<br>}<br>5.当列和行发生改变时刷新行列</p>
+</li>
+<li><p>(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component<br>{<br>  NSLog(@”row    %d    component   %d”,row,component);<br>  //第0列变化的时候，需要更新第1列的值<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="attr_selector">[pickerView reloadComponent:1]</span>;
+  <span class="comment">//手动的制定选择某一列，某一行</span>
+  <span class="attr_selector">[pickerView selectRow:0 inComponent:1 animated:YES]</span>;
+  <span class="comment">//[pickerView reloadAllComponents];</span>
+</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<p>2&gt;UIDatePicker      时间拾取器</p>
+<p>//1.创建UIDatePicker及绑定方法<br>    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];<br>    [datePicker addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventValueChanged];</p>
+<p>//2.获取自定义格式的UIDatePicker的时间<br>    NSDate *now = datePicker.date;</p>
+<pre><code><span class="comment">//日期格式器</span>
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+<span class="comment">//设置日期格式器的样式</span>
+<span class="comment">//yyyy 年  yy 两位数的年   year</span>
+<span class="comment">//MM 月  month</span>
+<span class="comment">//dd  日  day</span>
+<span class="comment">//HH 24小时制  ，hh 12小时制，hour</span>
+<span class="comment">//mm  分 ，minute</span>
+<span class="comment">//ss 秒   second</span>
+<span class="comment">//a 上午，下午</span>
+
+[dateFormatter setDateFormat:<span class="string">@"yyyy年MM月dd日 hh:mm:ss a  eeee"</span>];
+[dateFormatter setAMSymbol:<span class="string">@"上午"</span>];
+[dateFormatter setPMSymbol:<span class="string">@"下午"</span>];
+[dateFormatter setWeekdaySymbols:[<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"星期日"</span>,<span class="string">@"星期一"</span>,<span class="string">@"星期二"</span>,<span class="string">@"星期三"</span>,<span class="string">@"星期四"</span>,<span class="string">@"星期五"</span>,<span class="string">@"星期六"</span>,<span class="literal">nil</span>]];
+<span class="comment">//按照设定的样式来格式化日期，返回格式化后的字符串</span>
+<span class="built_in">NSString</span> *dateString = [dateFormatter stringFromDate:now];
+</code></pre><p>3&gt;UITableView        </p>
+<pre><code><span class="comment">//1.UITableView的创建和基本设置</span>
+
+<span class="built_in">UITableView</span> *tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">300</span>) style:UITableViewStyleGrouped];
+<span class="comment">//tableView.separatorColor = [UIColor redColor];</span>
+<span class="comment">//设置分割线风格</span>
+tableView<span class="variable">.separatorStyle</span> = UITableViewCellSeparatorStyleNone;
+tableView<span class="variable">.dataSource</span> = <span class="keyword">self</span>;
+tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;
+<span class="comment">//设置全局每行高度</span>
+tableView<span class="variable">.rowHeight</span> = <span class="number">80</span>;
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:tableView];
+[tableView release];
+</code></pre><p>//2.UITableView的 dataSource和delegate协议方法</p>
+<p>//返回表中有多少个“区”，默认为一个，此方法不是必须的，不实现默认为一个区</p>
+<ul>
+<li>(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView<br>{<br>  return 2;<br>}</li>
+</ul>
+<p>//返回表中每个“区”的行数</p>
+<ul>
+<li>(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section<br>{<br>  return 10;<br>}</li>
+</ul>
+<p>//返回每一行的内容  indexPath  返回行和列,  row   section</p>
+<ul>
+<li><p>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>{<br>  static NSString </em>cellIdentifier = @”CellIdentifier”;</p>
+<p>  //queue 队列 Reusable 可重用的<br>  //从tableview当中取得一个可以重用的cell，如果取不到可以重用的cell。该方法返回空nil<br>  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];</p>
+<p>  //如果没有就创建<br>  if (!cell)<br>  {</p>
+<pre><code>  cell = [[[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+  <span class="built_in">NSLog</span>(<span class="string">@"创建新的cell"</span>);
+
+  <span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] init];
+  label<span class="variable">.text</span> = <span class="string">@"sdfsdf"</span>;
+  label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+  label<span class="variable">.frame</span> = CGRectMake(<span class="number">200</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">40</span>);
+  [cell addSubview:label];
+  [label release];
+
+  <span class="comment">//系统分割线被隐藏,so,需要手动添加一个分割线</span>
+  <span class="built_in">UIView</span> *separatorView = [[<span class="built_in">UIView</span> alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">79</span>, <span class="number">320</span>, <span class="number">1</span>)];
+  separatorView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];
+  [cell addSubview:separatorView];
+  [separatorView release];
+  <span class="comment">//设置选中状态颜色,默认为蓝色</span>
+  cell<span class="variable">.selectionStyle</span> = UITableViewCellSelectionStyleNone;
+
+  cell<span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"fleet8.png"</span>];
+  <span class="comment">//设置右边显示内容,btn或..</span>
+  cell<span class="variable">.accessoryType</span> = UITableViewCellAccessoryCheckmark;
+</code></pre><p>  }</p>
+<p>  //配置cell上的文字,配置cell上可变的内容<br>  cell.textLabel.text = [NSString stringWithFormat:@”%d”,indexPath.row];</p>
+<p>  //cell.detailTextLabel.text = @”sdfsdfsdf”;</p>
+<p>  return cell;<br>}</p>
+</li>
+</ul>
+<p>//只有当每一行的高度不一样的时候，才使用代理方法设置行高，如果每一行的高度都一样，最好使用tableview.rowHeight属性来统一的设置行高<br>//- (CGFloat)tableView:(UITableView <em>)tableView heightForRowAtIndexPath:(NSIndexPath </em>)indexPath<br>//{<br>//    NSLog(@”dddddd”);<br>//    return indexPath.row * 2 + 10;<br>//}</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/09/05/UIPickerView--UIDatePicker--UITableView/" data-title="UIPickerView--UIDatePicker--UITableView | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/05/内存管理基础/" title="内存管理基础">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  内存管理基础</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/05/UINavigationController/"  title="UINavigationController">
+ <strong>NEXT:</strong><br/> 
+ <span>UINavigationController
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

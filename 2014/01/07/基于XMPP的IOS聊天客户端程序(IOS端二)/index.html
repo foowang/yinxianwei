@@ -1,0 +1,774 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>基于XMPP的IOS聊天客户端程序(IOS端二) | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="本文转自：http://blog.csdn.net/kangx6/article/details/7744304
+接上一章的，这一章我们着重介绍XMPP为了方便程序调用，我们把XMPP的一些主要方法写在AppDelegate中
+在AppDelegate.m下这几个方法为：
+[java] view p">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端二)/" title="基于XMPP的IOS聊天客户端程序(IOS端二)" itemprop="url">基于XMPP的IOS聊天客户端程序(IOS端二)</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-01-07T07:35:00.000Z" itemprop="datePublished">1月 7 2014</time>
+    Updated:<time datetime="2014-10-30T10:46:28.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p><a href="http://blog.csdn.net/kangx6/article/details/7744304" target="_blank" rel="external">本文转自：http://blog.csdn.net/kangx6/article/details/7744304</a></p>
+<p>接上一章的，这一章我们着重介绍XMPP<br>为了方便程序调用，我们把XMPP的一些主要方法写在AppDelegate中<br><img src="http://my.csdn.net/uploads/201207/13/1342165427_8599.png" alt=""></p>
+<p>在AppDelegate.m下这几个方法为：</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. -(void)setupStream{  </p>
+<ol>
+<li></li>
+<li>//初始化XMPPStream  </li>
+<li>xmppStream = [[XMPPStream alloc] init];  </li>
+<li>[xmppStream addDelegate:self delegateQueue:dispatch_get_current_queue()];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>-(void)goOnline{  </li>
+<li></li>
+<li>//发送在线状态  </li>
+<li>XMPPPresence *presence = [XMPPPresence presence];  </li>
+<li>[[self xmppStream] sendElement:presence];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>-(void)goOffline{  </li>
+<li></li>
+<li>//发送下线状态  </li>
+<li>XMPPPresence *presence = [XMPPPresence presenceWithType:@”unavailable”];  </li>
+<li>[[self xmppStream] sendElement:presence];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>-(BOOL)connect{  </li>
+<li></li>
+<li>[self setupStream];  </li>
+<li></li>
+<li>//从本地取得用户名，密码和服务器地址  </li>
+<li>NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  </li>
+<li></li>
+<li>NSString *userId = [defaults stringForKey:USERID];  </li>
+<li>NSString *pass = [defaults stringForKey:PASS];  </li>
+<li>NSString *server = [defaults stringForKey:SERVER];  </li>
+<li></li>
+<li>if (![xmppStream isDisconnected]) {  </li>
+<li>return YES;  </li>
+<li>}  </li>
+<li></li>
+<li>if (userId == nil || pass == nil) {  </li>
+<li>return NO;  </li>
+<li>}  </li>
+<li></li>
+<li>//设置用户  </li>
+<li>[xmppStream setMyJID:[XMPPJID jidWithString:userId]];  </li>
+<li>//设置服务器  </li>
+<li>[xmppStream setHostName:server];  </li>
+<li>//密码  </li>
+<li>password = pass;  </li>
+<li></li>
+<li>//连接服务器  </li>
+<li>NSError *error = nil;  </li>
+<li>if (![xmppStream connect:&amp;error]) {  </li>
+<li>NSLog(@”cant connect %@”, server);  </li>
+<li>return NO;  </li>
+<li>}  </li>
+<li></li>
+<li>return YES;  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>-(void)disconnect{  </li>
+<li></li>
+<li>[self goOffline];  </li>
+<li>[xmppStream disconnect];  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>这几个是基础方法，接下来就是XMPPStreamDelegate中的方法，也是接受好友状态，接受消息的重要方法</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. //连接服务器  </p>
+<ol>
+<li><ul>
+<li>(void)xmppStreamDidConnect:(XMPPStream *)sender{  </li>
+</ul>
+</li>
+<li></li>
+<li>isOpen = YES;  </li>
+<li>NSError *error = nil;  </li>
+<li>//验证密码  </li>
+<li>[[self xmppStream] authenticateWithPassword:password error:&amp;error];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>//验证通过  </li>
+<li><ul>
+<li>(void)xmppStreamDidAuthenticate:(XMPPStream *)sender{  </li>
+</ul>
+</li>
+<li></li>
+<li>[self goOnline];  </li>
+<li>}  </li>
+<li></li>
+<li>//收到消息  </li>
+<li><ul>
+<li>(void)xmppStream:(XMPPStream <em>)sender didReceiveMessage:(XMPPMessage </em>)message{  </li>
+</ul>
+</li>
+<li></li>
+<li>//    NSLog(@”message = %@”, message);  </li>
+<li></li>
+<li>NSString *msg = [[message elementForName:@”body”] stringValue];  </li>
+<li>NSString *from = [[message attributeForName:@”from”] stringValue];  </li>
+<li></li>
+<li>NSMutableDictionary *dict = [NSMutableDictionary dictionary];  </li>
+<li>[dict setObject:msg forKey:@”msg”];  </li>
+<li>[dict setObject:from forKey:@”sender”];  </li>
+<li></li>
+<li>//消息委托(这个后面讲)  </li>
+<li>[messageDelegate newMessageReceived:dict];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>//收到好友状态  </li>
+<li><ul>
+<li>(void)xmppStream:(XMPPStream <em>)sender didReceivePresence:(XMPPPresence </em>)presence{  </li>
+</ul>
+</li>
+<li></li>
+<li>//    NSLog(@”presence = %@”, presence);  </li>
+<li></li>
+<li>//取得好友状态  </li>
+<li>NSString *presenceType = [presence type]; //online/offline  </li>
+<li>//当前用户  </li>
+<li>NSString *userId = [[sender myJID] user];  </li>
+<li>//在线用户  </li>
+<li>NSString *presenceFromUser = [[presence from] user];  </li>
+<li></li>
+<li>if (![presenceFromUser isEqualToString:userId]) {  </li>
+<li></li>
+<li>//在线状态  </li>
+<li>if ([presenceType isEqualToString:@”available”]) {  </li>
+<li></li>
+<li>//用户列表委托(后面讲)  </li>
+<li>[chatDelegate newBuddyOnline:[NSString stringWithFormat:@”%@@%@”, presenceFromUser, @”nqc1338a”]];  </li>
+<li></li>
+<li>}else if ([presenceType isEqualToString:@”unavailable”]) {  </li>
+<li>//用户列表委托(后面讲)  </li>
+<li>[chatDelegate buddyWentOffline:[NSString stringWithFormat:@”%@@%@”, presenceFromUser, @”nqc1338a”]];  </li>
+<li>}  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>这里面有两个委托方法，一个是用户列表委托，还有一个就是消息委托，用户列表委托主要就是取得在线用户，更新用户TableView，消息委托就是取得好友发送的消息，并更新消息TableView，当然这两个TableView是在不同的Controller中的<br><img src="http://my.csdn.net/uploads/201207/13/1342166381_8738.png" alt=""></p>
+<p><img src="http://my.csdn.net/uploads/201207/13/1342166396_5139.png" alt=""></p>
+<p>定义完两个委托，我们就要在不同的Controller中实现这两个委托了<br>在好友Controller中实现<kkchatdelegate>并写入如下方法</kkchatdelegate></p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. //取得当前程序的委托  </p>
+<ol>
+<li>-(KKAppDelegate *)appDelegate{  </li>
+<li></li>
+<li>return (KKAppDelegate *)[[UIApplication sharedApplication] delegate];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>//取得当前的XMPPStream  </li>
+<li>-(XMPPStream *)xmppStream{  </li>
+<li></li>
+<li>return [[self appDelegate] xmppStream];  </li>
+<li>}  </li>
+<li></li>
+<li>//在线好友  </li>
+<li>-(void)newBuddyOnline:(NSString *)buddyName{  </li>
+<li></li>
+<li>if (![onlineUsers containsObject:buddyName]) {  </li>
+<li>[onlineUsers addObject:buddyName];  </li>
+<li>[self.tView reloadData];  </li>
+<li>}  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>//好友下线  </li>
+<li>-(void)buddyWentOffline:(NSString *)buddyName{  </li>
+<li></li>
+<li>[onlineUsers removeObject:buddyName];  </li>
+<li>[self.tView reloadData];  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>在viewDidLoad中加入</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. //设定在线用户委托  </p>
+<ol>
+<li>KKAppDelegate *del = [self appDelegate];  </li>
+<li>del.chatDelegate = self;  </li>
+</ol>
+<p>这两行代码，让好友列表的委托实现方法在本程序中<br>在viewWillAppear中加入</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. [super viewWillAppear:animated];  </p>
+<ol>
+<li></li>
+<li>NSString *login = [[NSUserDefaults standardUserDefaults] objectForKey:@”userId”];  </li>
+<li></li>
+<li>if (login) {  </li>
+<li></li>
+<li>if ([[self appDelegate] connect]) {  </li>
+<li>NSLog(@”show buddy list”);  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li>}else {  </li>
+<li></li>
+<li>//设定用户  </li>
+<li>[self Account:self];  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>判断本地保存的数据中是否有userId，没有的话就跳转到登录页面<br>这里最重要的就是connect了，这一句话就是登录了，成功的话，页面就会显示好友列表了。</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. #pragma mark UITableViewDelegate  </p>
+<ol>
+<li>-(void)tableView:(UITableView <em>)tableView didSelectRowAtIndexPath:(NSIndexPath </em>)indexPath{  </li>
+<li></li>
+<li>//start a Chat  </li>
+<li>chatUserName = (NSString *)[onlineUsers objectAtIndex:indexPath.row];  </li>
+<li></li>
+<li>[self performSegueWithIdentifier:@”chat” sender:self];  </li>
+<li></li>
+<li>}  </li>
+<li>-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{  </li>
+<li></li>
+<li>if ([segue.identifier isEqualToString:@”chat”]) {  </li>
+<li>KKChatController *chatController = segue.destinationViewController;  </li>
+<li>chatController.chatWithUser = chatUserName;  </li>
+<li>}  </li>
+<li>}  </li>
+</ol>
+<p>当显示出好友列表，我们选择一个好友进行聊天<br>将当前好友名称发送给聊天页面<br>下面是聊天Controller了<br>在KKChatController.h中加入</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. NSMutableArray *messages;  </p>
+<p>这是我们要显示的消息，每一条消息为一条字典<br>接下来就是每一条消息的显示了</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. -(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{  </p>
+<ol>
+<li></li>
+<li>static NSString *identifier = @”msgCell”;  </li>
+<li></li>
+<li>UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];  </li>
+<li></li>
+<li>if (cell == nil) {  </li>
+<li>cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];  </li>
+<li>}  </li>
+<li></li>
+<li>NSMutableDictionary *dict = [messages objectAtIndex:indexPath.row];  </li>
+<li></li>
+<li>cell.textLabel.text = [dict objectForKey:@”msg”];  </li>
+<li>cell.detailTextLabel.text = [dict objectForKey:@”sender”];  </li>
+<li>cell.accessoryType = UITableViewCellAccessoryNone;  </li>
+<li></li>
+<li>return cell;  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>跟上面好友Controller一样，这里我们也需要XMPPStream</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. -(KKAppDelegate *)appDelegate{  </p>
+<ol>
+<li></li>
+<li>return (KKAppDelegate *)[[UIApplication sharedApplication] delegate];  </li>
+<li>}  </li>
+<li></li>
+<li>-(XMPPStream *)xmppStream{  </li>
+<li></li>
+<li>return [[self appDelegate] xmppStream];  </li>
+<li>}  </li>
+</ol>
+<p>在ViewDidLoad中加入</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. KKAppDelegate *del = [self appDelegate];  </p>
+<ol>
+<li>del.messageDelegate = self;  </li>
+</ol>
+<p>设定消息委托由自己来接收和处理</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. #pragma mark KKMessageDelegate  </p>
+<ol>
+<li>-(void)newMessageReceived:(NSDictionary *)messageCotent{  </li>
+<li></li>
+<li>[messages addObject:messageCotent];  </li>
+<li></li>
+<li>[self.tView reloadData];  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>接下来最重要的就是发送消息了</p>
+<p><strong>[java]</strong> <a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/kangx6/article/details/7744304#" title="copy" target="_blank" rel="external">copy</a>1. - (IBAction)sendButton:(id)sender {  </p>
+<ol>
+<li></li>
+<li>//本地输入框中的信息  </li>
+<li>NSString *message = self.messageTextField.text;  </li>
+<li></li>
+<li>if (message.length &gt; 0) {  </li>
+<li></li>
+<li>//XMPPFramework主要是通过KissXML来生成XML文件  </li>
+<li>//生成<body>文档  </body></li>
+<li>NSXMLElement *body = [NSXMLElement elementWithName:@”body”];  </li>
+<li>[body setStringValue:message];  </li>
+<li></li>
+<li>//生成XML消息文档  </li>
+<li>NSXMLElement *mes = [NSXMLElement elementWithName:@”message”];  </li>
+<li>//消息类型  </li>
+<li>[mes addAttributeWithName:@”type” stringValue:@”chat”];  </li>
+<li>//发送给谁  </li>
+<li>[mes addAttributeWithName:@”to” stringValue:chatWithUser];  </li>
+<li>//由谁发送  </li>
+<li>[mes addAttributeWithName:@”from” stringValue:[[NSUserDefaults standardUserDefaults] stringForKey:USERID]];  </li>
+<li>//组合  </li>
+<li>[mes addChild:body];  </li>
+<li></li>
+<li>//发送消息  </li>
+<li>[[self xmppStream] sendElement:mes];  </li>
+<li></li>
+<li>self.messageTextField.text = @””;  </li>
+<li>[self.messageTextField resignFirstResponder];  </li>
+<li></li>
+<li>NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];  </li>
+<li></li>
+<li>[dictionary setObject:message forKey:@”msg”];  </li>
+<li>[dictionary setObject:@”you” forKey:@”sender”];  </li>
+<li></li>
+<li>[messages addObject:dictionary];  </li>
+<li></li>
+<li>//重新刷新tableView  </li>
+<li>[self.tView reloadData];  </li>
+<li></li>
+<li>}  </li>
+<li></li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>上面都加了注释，大家应该能明白，接下来还有一个章节，我们会对发送的消息在界面进行美化，跟苹果自带的消息一样。谢谢大家有耐心看完，我这个人比较不喜欢打字，所以有的地方注释比较少，希望大家别介意，还有希望大家能够多多支持， 以后会接着介绍XMPP文件传输之类的内容。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios开发/">ios开发</a><a href="/tags/iphone/">iphone</a><a href="/tags/iphone开发/">iphone开发</a><a href="/tags/XMPP/">XMPP</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之社交软件/">iOS应用开发之社交软件</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端二)/" data-title="基于XMPP的IOS聊天客户端程序(IOS端二) | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端三)/" title="基于XMPP的IOS聊天客户端程序(IOS端三)">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  基于XMPP的IOS聊天客户端程序(IOS端三)</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/07/基于XMPP的IOS聊天客户端程序(IOS端一)/"  title="基于XMPP的IOS聊天客户端程序(IOS端一)">
+ <strong>NEXT:</strong><br/> 
+ <span>基于XMPP的IOS聊天客户端程序(IOS端一)
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

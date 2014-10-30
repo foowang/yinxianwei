@@ -1,0 +1,520 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>进程和线程.View椭圆运动 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="7.19进程和线程.//进程：一个运行中的应用程序，就一个进程，他是资源分配的单位，譬如地址空间,系统自动生成主线程
+//线程：是cpu分配的基本单位，一个进程运行后系统自动分配一个主线程，你可以手动生成子线程，多个子线程运行在进程的地址空间中，一个线程必须依附于一个进程，多线程的好处，可以防止主界">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/05/进程和线程.View椭圆运动/" title="进程和线程.View椭圆运动" itemprop="url">进程和线程.View椭圆运动</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-05T05:07:00.000Z" itemprop="datePublished">9月 5 2013</time>
+    Updated:<time datetime="2014-10-30T10:45:58.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#}"><span class="toc-number">1.</span> <span class="toc-text">}</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#}-1"><span class="toc-number">2.</span> <span class="toc-text">}</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_IMG_WIDTH_50"><span class="toc-number">3.</span> <span class="toc-text">define IMG_WIDTH  50</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_IMG_HEIGHT_50"><span class="toc-number">4.</span> <span class="toc-text">define IMG_HEIGHT 50</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_CENTER_X_160"><span class="toc-number">5.</span> <span class="toc-text">define CENTER_X   160</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_CENTER_Y_230"><span class="toc-number">6.</span> <span class="toc-text">define CENTER_Y   230</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_LONG_AXIS_(160-25)"><span class="toc-number">7.</span> <span class="toc-text">define LONG_AXIS  (160-25)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_SHORT_AXIS_80"><span class="toc-number">8.</span> <span class="toc-text">define SHORT_AXIS  80</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_ANGLE2RADIO(x)_(x*M_PI/180)"><span class="toc-number">9.</span> <span class="toc-text">define ANGLE2RADIO(x) (x*M_PI/180)</span></a></li></ol>
+		</div>
+		
+		<p>7.19<br>进程和线程.<br>//进程：一个运行中的应用程序，就一个进程，他是资源分配的单位，譬如地址空间,系统自动生成主线程</p>
+<p>//线程：是cpu分配的基本单位，一个进程运行后系统自动分配一个主线程，你可以手动生成子线程，多个子线程运行在进程的地址空间中，一个线程必须依附于一个进程，多线程的好处，可以防止主界面卡死，还可以同时处理多个事情。</p>
+<p>1.通过路径获取图片<br>//NSBundle应用程序束，其实就是一个目录，存放的是导入资源<br>//每个应用程序有一个主应用程序束，可以通过[NSBundle mainBundle]获取<br>NSBundle* bundle = [NSBundle mainBundle];</p>
+<p>//通过应用程序束获取资源的路径<br>NSString* path = [bundle pathForResource:@”b2” ofType:@”png”];<br>NSLog(@”%@”,path);</p>
+<p>//通过路径，获取UIImage<br>UIImage* image = [UIImage imageWithContentsOfFile:path];</p>
+<p>//通过[UIImage imageNamed]会缓存图片而通过路径不会缓存<br>UIImageView* bombImgView = [[UIImageView alloc]initWithImage:image];</p>
+<p>============================================================================================================</p>
+<p>2.线程和进程</p>
+<ul>
+<li><p>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  UIButton* button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];<br>  [button1 setTitle:@”复杂运算” forState:UIControlStateNormal];<br>  button1.frame = CGRectMake(10, 30, 60, 39);</p>
+<p>  [button1 addTarget:self action:@selector(bigCalucate) forControlEvents:UIControlEventTouchUpInside];<br>  [self.view addSubview:button1];</p>
+</li>
+</ul>
+<pre><code><span class="built_in">UIButton</span>* button2 = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];
+[button2 setTitle:<span class="string">@"normal"</span> forState:UIControlStateNormal];
+button2<span class="variable">.frame</span> = CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">60</span>, <span class="number">40</span>);
+[button2 addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(normalButtonClick) forControlEvents:UIControlEventTouchUpInside];
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button2];
+</code></pre><p>}</p>
+<p>//进程：一个运行中的应用程序，就一个进程，他是资源分配的单位，譬如地址空间,系统自动生成主线程</p>
+<p>//线程：是cpu分配的基本单位，一个进程运行后系统自动分配一个主线程，你可以手动生成子线程，多个子线程运行在进程的地址空间中，一个线程必须依附于一个进程，多线程的好处，可以防止主界面卡死，还可以同时处理多个事情。</p>
+<p>-(void)bigCalucate<br>{<br>    //while (1) {<br>//        NSLog(@”fff”);<br>//    }<br>    //Thread 线程<br>    //通过 NSThread detachNewThreadSelector 生成一个线程<br>    //线程函数：就是线程启动后运行的函数，这里就是caluateInThread<br>    //detach 分离 New Thread<br>    [NSThread detachNewThreadSelector:@selector(caluateInThread:) toTarget:self withObject:@”abc”];<br>}</p>
+<p>-(void)normalButtonClick<br>{<br>    NSLog(@”我要cpu，让我执行”);<br>}</p>
+<p>-(void)caluateInThread:(id)parameter<br>{<br>    NSLog(@”%@”,parameter);<br>    while (1) {<br>        //NSLog(@”大数据量运算”);<br>    }</p>
+<h1 id="}">}</h1>
+<p>3.线程实现椭圆运动,界面更新一般在主线程,在子线程里会发生未知情况</p>
+<ul>
+<li><p>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  movedImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@”b2.png”]];<br>  movedImageView.frame = CGRectMake(0,0,IMG_WIDHT,IMG_HEIGHT);<br>  [self.view addSubview:movedImageView];</p>
+<p>  //NSThread* thread = [[NSThread alloc]initWithTarget:self selector:@selector(onThread) object:nil];<br>//    [thread start];</p>
+<p>  TestObject* test = [[TestObject alloc]initWithName:@”小强”];</p>
+<p>  //withObject 出入一个对象，可以是数组，改对象可以在子线程中获取<br>  [NSThread detachNewThreadSelector:@selector(onThread:) toTarget:self withObject:test];</p>
+<p>  //sleepForTimeInterval 让线程睡眠5秒<br>  //NSLog(@”before——————-“);<br>//    [NSThread sleepForTimeInterval:5];<br>//    NSLog(@”after——————“);<br>}</p>
+</li>
+</ul>
+<p>-(void)onThread:(id)parameter<br>{<br>    TestObject<em> test = (TestObject</em>)parameter;<br>    NSLog(@”%@”,test.strName);</p>
+<pre><code><span class="keyword">while</span> (<span class="number">1</span>) {
+    angle += <span class="number">5</span>;
+    xPos = CENTER_X + LONG_AXIS*cos(ANGLE2RADIO(angle));
+    yPos = CENTER_Y + SHORT_AXIS*sin(ANGLE2RADIO(angle));
+    <span class="built_in">NSLog</span>(<span class="string">@"(%d,%d)"</span>,xPos,yPos);
+
+    <span class="comment">//更改界面的操作要放到主线程中</span>
+    <span class="comment">//perform 执行</span>
+    <span class="comment">//selector 方法</span>
+    <span class="comment">//OnMainThread 在主线程</span>
+    <span class="comment">//waitUntilDone 是否等到主线程中的操作执行完毕，即UpdateUI执行完毕</span>
+    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateUI) withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span>];
+
+    <span class="comment">//movedImageView.center = CGPointMake(xPos, yPos);</span>
+
+    <span class="comment">//让当前线程睡眠0.2秒</span>
+    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">0.2</span>];
+}
+</code></pre><p>}<br>-(void)updateUI<br>{<br>    movedImageView.center = CGPointMake(xPos, yPos);</p>
+<h1 id="}-1">}</h1>
+<p>4.利用计时器实现View的椭圆运动</p>
+<h1 id="define_IMG_WIDTH_50">define IMG_WIDTH  50</h1>
+<h1 id="define_IMG_HEIGHT_50">define IMG_HEIGHT 50</h1>
+<h1 id="define_CENTER_X_160">define CENTER_X   160</h1>
+<h1 id="define_CENTER_Y_230">define CENTER_Y   230</h1>
+<h1 id="define_LONG_AXIS_(160-25)">define LONG_AXIS  (160-25)</h1>
+<h1 id="define_SHORT_AXIS_80">define SHORT_AXIS  80</h1>
+<h1 id="define_ANGLE2RADIO(x)_(x*M_PI/180)">define ANGLE2RADIO(x) (x*M_PI/180)</h1>
+<p>movedImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@”b2.png”]];<br>    movedImgView.frame = CGRectMake(0, 0, IMG_WIDTH, IMG_HEIGHT);<br>    [self.view addSubview:movedImgView];</p>
+<pre><code><span class="comment">//定时器需要等0.2秒后才触发</span>
+[NSTimer scheduledTimerWithTimeInterval:<span class="number">0.2</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(onTimer) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];
+
+<span class="comment">//使用fire 马上触发定时器</span>
+<span class="comment">//NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];</span>
+<span class="comment">//[timer fire];</span>
+</code></pre><p>-(void)onTimer<br>{<br>    angle += 5;<br>    int xPos = CENTER_X + LONG_AXIS<em>cos(ANGLE2RADIO(angle));<br>    int yPos = CENTER_Y + SHORT_AXIS</em>sin(ANGLE2RADIO(angle));</p>
+<pre><code>移动的X坐标等于   中心x坐标+  横轴/2- W/2 <span class="keyword">*</span>cos(移动坐标<span class="keyword">*</span>M_PI/180);
+移动的Y坐标等于   中心Y坐标+  竖轴/2- H/2<span class="keyword">*</span>sin(移动坐标<span class="keyword">*</span>M_PI/180);
+movedImgView.center = CGPointMake(xPos, yPos);
+</code></pre><p>}</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之多线程/">iOS应用开发之多线程</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/09/05/进程和线程.View椭圆运动/" data-title="进程和线程.View椭圆运动 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/05/UITouch/" title="UITouch">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  UITouch</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/05/矩形打印和碰撞/"  title="矩形打印和碰撞">
+ <strong>NEXT:</strong><br/> 
+ <span>矩形打印和碰撞
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#}"><span class="toc-number">1.</span> <span class="toc-text">}</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#}-1"><span class="toc-number">2.</span> <span class="toc-text">}</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_IMG_WIDTH_50"><span class="toc-number">3.</span> <span class="toc-text">define IMG_WIDTH  50</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_IMG_HEIGHT_50"><span class="toc-number">4.</span> <span class="toc-text">define IMG_HEIGHT 50</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_CENTER_X_160"><span class="toc-number">5.</span> <span class="toc-text">define CENTER_X   160</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_CENTER_Y_230"><span class="toc-number">6.</span> <span class="toc-text">define CENTER_Y   230</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_LONG_AXIS_(160-25)"><span class="toc-number">7.</span> <span class="toc-text">define LONG_AXIS  (160-25)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_SHORT_AXIS_80"><span class="toc-number">8.</span> <span class="toc-text">define SHORT_AXIS  80</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_ANGLE2RADIO(x)_(x*M_PI/180)"><span class="toc-number">9.</span> <span class="toc-text">define ANGLE2RADIO(x) (x*M_PI/180)</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

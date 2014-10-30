@@ -1,0 +1,630 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS 应用程序内部国际化，不跟随系统语言 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="前言：网络上关于iOS国际化的文章很多，但基本上都是基于跟随系统语言的国际化，笔者就不赘述了-0 –今天要讲的是不跟随系统的切换语言版本方案，即程序内部的切换语言版本方案。
+一、总则：       应用内部语言不跟随系统语言，由应用自己进行控制，通过配置多个语言文件，根据用户的选择动态获取不同文件夹">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/" title="iOS 应用程序内部国际化，不跟随系统语言" itemprop="url">iOS 应用程序内部国际化，不跟随系统语言</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-02-27T02:12:00.000Z" itemprop="datePublished">2月 27 2014</time>
+    Updated:<time datetime="2014-10-30T10:47:18.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#import_"><span class="toc-number">1.</span> <span class="toc-text">import </span></a></li></ol>
+		</div>
+		
+		<p>前言：网络上关于iOS国际化的文章很多，但基本上都是基于跟随系统语言的国际化，笔者就不赘述了-0 –<br>今天要讲的是不跟随系统的切换语言版本方案，即程序内部的切换语言版本方案。</p>
+<p><strong>一、总则：</strong><br>       应用内部语言不跟随系统语言，由应用自己进行控制，通过配置多个语言文件，根据用户的选择动态获取不同文件夹下的语言文件，显示在界面上。<br>       最后把用户选择的语言持久化到本地，下次运行时读取。</p>
+<p><strong>二、应用内的国际化</strong><br><strong>1、新建工程</strong><br>      新建Single View Application工程，取名为MyInternational。<br>                                                      <img src="http://img.blog.csdn.net/20130925230149234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFuZzg0NTYyMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><strong>2、添加多语言文件</strong><br>      我们选择使用自己的语言文件，而不是系统的localizable.string，因为在项目开发使用svn时，多人操作同一文件可能会造成冲突。<br>在Resource中添加新的Strings File：<br>                                                            <img src="http://img.blog.csdn.net/20130925230247031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFuZzg0NTYyMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<pre><code>  取名为hello（记得Targets要勾选项目）
+                                                             ![](http:<span class="comment">//img.blog.csdn.net/20130925230328453)</span>
+
+  新建完成之后会生成hello.<span class="keyword">string</span>文件，把它拖进Supporting Files里。
+</code></pre><p><strong>3、配置hello.string国际化</strong><br>      首先配置刚才的hello.string文件。<br>      点击hello.strings文件，点击圈中的Make localized（本地化）。<br>                                                                             <img src="http://img.blog.csdn.net/20130925230418656" alt=""></p>
+<pre><code>  只有English，没关系点击确定。
+                                                            ![](http:<span class="comment">//img.blog.csdn.net/20130925230550453)</span>
+</code></pre><p><strong>4、配置项目国际化</strong><br>      网络上很多配置方法不靠谱，因为新版的Xcode位置“+”号的位置换了，这里教大家正确的方法，点击项目—&gt;选择Project—&gt;选择Info—&gt;点击“+”号。<br>                                                     <img src="http://img.blog.csdn.net/20130925230623281" alt=""></p>
+<pre><code>  点击“+”号后，添加中文，当然也可以添加其他的语言，弹出对话框，infoPlist是配置系统的国际化文件，可以配置图标之类的多语言环境，不属于本文范围，nib文件看需要配，这里选择不配。
+                                                  ![](http:<span class="comment">//img.blog.csdn.net/20130925230628156)</span>
+
+  配置完成之后，再看hello.<span class="keyword">string</span>便分成了两个文件。
+                                                                             ![](http:<span class="comment">//img.blog.csdn.net/20130925230701593)</span>
+  完成上面的四步便完成了项目内的多语言环境配置，下面来看看代码怎么写。
+</code></pre><p><strong>5、添加需要的字符串</strong><br>      分别在hello.strings（English）与hello.strings（Chinese）里面添加对应语言的字符串。<br>      字符串的格式为“key”=“value”;键值对（别忘记分号！）<br>      接下来配置项目需要的字符串，一个用于lable的显示，一个用于button的显示。</p>
+<pre><code>hello.strings（English）
+<span class="string">"invite"</span> =<span class="string">"hello atany,come to join in us!"</span>;
+</code></pre><p>   “buttonInfo” =”change Language”;</p>
+<pre><code>hello.strings（Chinese）
+<span class="string">"invite"</span> =<span class="string">"你好 atany,快来加入我们吧！"</span>;
+<span class="string">"buttonInfo"</span> =<span class="string">"切换语言"</span>;
+</code></pre><p><strong>6、看看流程</strong><br>                                                     <img src="http://img.blog.csdn.net/20130925230801343" alt=""></p>
+<p>【实现思路:】<br>      在初始化首个Controller的时候，进行应用语言的加载。首次加载因为userLanguage（应用内语言）不存在，则使用系统当前的语言，保存到userlanguage，下次直接读。读出来之后，获取到对应文件路径，得到文件的索引，储存到工具类InternationalControl的静态变量bundle中。<br>其他地方需要用字符串时，用工具类获得bundle即可读取相应文件中的字符串。</p>
+<p><strong>7、新建工具类InternationalControl</strong><br>                           <img src="http://img.blog.csdn.net/20130925230849375" alt=""></p>
+<p><strong>InternationalControl.h</strong><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. #import <foundation foundation.h="">  </foundation></p>
+<ol>
+<li></li>
+<li><h1 id="import_">import <uikit uikit.h=""></uikit></h1>
+</li>
+<li></li>
+<li>@interface InternationalControl : NSObject  </li>
+<li></li>
+<li>+(NSBundle *)bundle;//获取当前资源文件  </li>
+<li></li>
+<li>+(void)initUserLanguage;//初始化语言文件  </li>
+<li></li>
+<li>+(NSString *)userLanguage;//获取应用当前语言  </li>
+<li></li>
+<li>+(void)setUserlanguage:(NSString *)language;//设置当前语言  </li>
+<li></li>
+<li>@end  </li>
+</ol>
+<p><strong>InternationalControl.m</strong><br>1）创建静态变量bundle，以及获取方法bundle（注：此处不要使用getBundle）。</p>
+<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. static NSBundle *bundle = nil;  </p>
+<ol>
+<li></li>
+<li><ul>
+<li>( NSBundle * )bundle{  </li>
+</ul>
+</li>
+<li></li>
+<li>return bundle;  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>2）初始化方法：<br> userLanguage储存在NSUserDefaults中，首次加载时要检测是否存在，如果不存在的话读AppleLanguages，并赋值给userLanguage。<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(void)initUserLanguage{  </p>
+<ol>
+<li></li>
+<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
+<li></li>
+<li>NSString *string = [def valueForKey:@”userLanguage”];  </li>
+<li></li>
+<li>if(string.length == 0){  </li>
+<li></li>
+<li>//获取系统当前语言版本(中文zh-Hans,英文en)  </li>
+<li></li>
+<li>NSArray* languages = [def objectForKey:@”AppleLanguages”];  </li>
+<li></li>
+<li><pre class="cpp" name="code">        NSString *current = [languages objectAtIndex:0];  </pre></li>
+<li></li>
+<li>string = current;  </li>
+<li></li>
+<li>[def setValue:current forKey:@”userLanguage”];  </li>
+<li></li>
+<li>[def synchronize];//持久化，不加的话不会保存  </li>
+<li>}  </li>
+<li></li>
+<li>//获取文件路径  </li>
+<li>NSString *path = [[NSBundle mainBundle] pathForResource:string ofType:@”lproj”];  </li>
+<li></li>
+<li>bundle = [NSBundle bundleWithPath:path];//生成bundle  </li>
+<li>}  </li>
+<li>  </li>
+</ol>
+<p>3）获得当前语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(NSString *)userLanguage{  </p>
+<ol>
+<li></li>
+<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
+<li></li>
+<li>NSString *language = [def valueForKey:@”userLanguage”];  </li>
+<li></li>
+<li>return language;  </li>
+<li>}  </li>
+</ol>
+<p>4）设置语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(void)setUserlanguage:(NSString *)language{  </p>
+<ol>
+<li></li>
+<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
+<li></li>
+<li>//1.第一步改变bundle的值  </li>
+<li>NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@”lproj” ];  </li>
+<li></li>
+<li>bundle = [NSBundle bundleWithPath:path];  </li>
+<li></li>
+<li>//2.持久化  </li>
+<li>[def setValue:language forKey:@”userLanguage”];  </li>
+<li></li>
+<li>[def synchronize];  </li>
+<li>}  </li>
+</ol>
+<p><strong>8、拖nib，配置点击事件</strong><br>一个button，一个label，button用于切换语言，label用于显示信息。<br>                                                                        <img src="http://img.blog.csdn.net/20130925231125046" alt=""></p>
+<p><strong>9、配置加载的第一个Controller，这里是YGViewController</strong><br><strong>YGViewController.h</strong><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. #import <uikit uikit.h="">  </uikit></p>
+<ol>
+<li></li>
+<li>@interface YGViewController : UIViewController  </li>
+<li></li>
+<li>@property (retain, nonatomic) IBOutlet UILabel *inviteLabel;//label  </li>
+<li></li>
+<li><ul>
+<li>(IBAction)changeLanguage:(id)sender;//点击事件  </li>
+</ul>
+</li>
+<li></li>
+<li>@property (retain, nonatomic) IBOutlet UIButton *btChange;//button  </li>
+<li></li>
+<li>@end  </li>
+</ol>
+<p><strong>
+</strong><br><strong>YGViewController.m</strong><br>1）加载：<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. - (void)viewDidLoad  </p>
+<ol>
+<li>{  </li>
+<li>//注册通知，用于接收改变语言的通知  </li>
+<li>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguage) name:@”changeLanguage” object:nil];  </li>
+<li></li>
+<li>[InternationalControl initUserLanguage];//初始化应用语言  </li>
+<li></li>
+<li>NSBundle *bundle = [InternationalControl bundle];  </li>
+<li></li>
+<li>NSString *inviteMsg = [bundle localizedStringForKey:@”invite” value:nil table:@”hello”];  </li>
+<li></li>
+<li>NSString *buttonInfo = [bundle localizedStringForKey:@”buttonInfo” value:nil table:@”hello”];//table为hello.string的文件名  </li>
+<li></li>
+<li>[_btChange setTitle:buttonInfo forState:UIControlStateNormal];  </li>
+<li></li>
+<li>_inviteLabel.text = inviteMsg;  </li>
+<li></li>
+<li>[super viewDidLoad];  </li>
+<li>}  </li>
+</ol>
+<p>2）点击修改语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. - (IBAction)changeLanguage:(id)sender {  </p>
+<ol>
+<li></li>
+<li>NSString *lan = [InternationalControl userLanguage];  </li>
+<li></li>
+<li>if([lan isEqualToString:@”en”]){//判断当前的语言，进行改变  </li>
+<li></li>
+<li>[InternationalControl setUserlanguage:@”zh-Hans”];  </li>
+<li></li>
+<li>}else{  </li>
+<li></li>
+<li>[InternationalControl setUserlanguage:@”en”];  </li>
+<li>}  </li>
+<li></li>
+<li>//改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面  </li>
+<li>[[NSNotificationCenter defaultCenter] postNotificationName:@”changeLanguage” object:nil];  </li>
+<li>}  </li>
+</ol>
+<p>3）接收到通知执行方法，刷新界面<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. -(void)changeLanguage{  </p>
+<ol>
+<li></li>
+<li>[_btChange setTitle:[[InternationalControl bundle] localizedStringForKey:@”buttonInfo” value:nil table:@”hello”] forState:UIControlStateNormal];  </li>
+<li></li>
+<li>_inviteLabel.text =[[InternationalControl bundle] localizedStringForKey:@”invite” value:nil table:@”hello”];  </li>
+<li>}  </li>
+</ol>
+<p>如果有多个界面的话，需要每个界面都配置接收通知，用于修改界面。</p>
+<p><strong>10、运行界面</strong><br>                                                                             <img src="http://img.blog.csdn.net/20130925231323250" alt=""></p>
+<pre><code>                                                                         ![](http:<span class="comment">//img.blog.csdn.net/20130925231423796)</span>
+</code></pre><p>可以看到点击切换语言之后，语言切换成功。<br>退出程序再次进入，保留了上次选择的语言。</p>
+<p>atany原创，转载请注明博主与博文链接,3Q<img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif" alt="吐舌头"><br> <a href="http://blog.csdn.net/yang8456211/article/details/12031667" target="_blank" rel="external">http://blog.csdn.net/yang8456211/article/details/12031667</a><a href="http://blog.csdn.net/yang8456211/article/details/11783823" target="_blank" rel="external">
+</a><br> —— by atany</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS国际化/">iOS国际化</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/" data-title="iOS 应用程序内部国际化，不跟随系统语言 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/03/03/boundingRectWithSizeoptionsattributescontext计算尺寸的使用/" title="boundingRectWithSize:options:attributes:context:计算尺寸的使用">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  boundingRectWithSize:options:attributes:context:计算尺寸的使用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/02/26/如何改进iOS App的离线使用体验/"  title="如何改进iOS App的离线使用体验">
+ <strong>NEXT:</strong><br/> 
+ <span>如何改进iOS App的离线使用体验
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#import_"><span class="toc-number">1.</span> <span class="toc-text">import </span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

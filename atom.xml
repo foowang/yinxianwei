@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="/about/"/>
-  <updated>2014-10-29T08:48:42.935Z</updated>
+  <updated>2014-10-30T13:30:25.905Z</updated>
   <id>/about/</id>
   
   <author>
@@ -16,10 +16,10 @@
   
   <entry>
     <title><![CDATA[个人博客搞定了]]></title>
-    <link href="/about/2014/10/29/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
-    <id>/about/2014/10/29/个人博客搞定了/</id>
-    <published>2014-10-29T08:48:33.000Z</published>
-    <updated>2014-10-29T08:48:33.000Z</updated>
+    <link href="/about/2014/10/30/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
+    <id>/about/2014/10/30/个人博客搞定了/</id>
+    <published>2014-10-30T12:54:16.000Z</published>
+    <updated>2014-10-29T08:48:32.000Z</updated>
     <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
 <blockquote>
 <p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
@@ -30,6 +30,618 @@
 <blockquote>
 <p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
     </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS8的APP移交流程]]></title>
+    <link href="/about/2014/10/23/iOS8%E7%9A%84APP%E7%A7%BB%E4%BA%A4%E6%B5%81%E7%A8%8B/"/>
+    <id>/about/2014/10/23/iOS8的APP移交流程/</id>
+    <published>2014-10-23T06:49:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<p>1.<br><img src="http://img.blog.csdn.net/20141023144103953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>2.<img src="http://img.blog.csdn.net/20141023144543715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>3.<img src="http://img.blog.csdn.net/20141023144113093?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>4.<img src="http://img.blog.csdn.net/20141023144117343?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>5.<img src="http://img.blog.csdn.net/20141023144121953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>6.<br><img src="http://img.blog.csdn.net/20141023144601749?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>7.<br><img src="http://img.blog.csdn.net/20141023144607599?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>8.<img src="http://img.blog.csdn.net/20141023144615336?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>9.最后补充附加信息提交就可以了。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>1.<br><img src="http://img.blog.csdn.net/20141023144103953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fo]]>
+    </summary>
+    
+      <category term="iOS8" scheme="/about/tags/iOS8/"/>
+    
+      <category term="iOS应用开发之app上架" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8Bapp%E4%B8%8A%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS生成特定形状、彩色的二维码]]></title>
+    <link href="/about/2014/10/20/iOS%E7%94%9F%E6%88%90%E7%89%B9%E5%AE%9A%E5%BD%A2%E7%8A%B6%E3%80%81%E5%BD%A9%E8%89%B2%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    <id>/about/2014/10/20/iOS生成特定形状、彩色的二维码/</id>
+    <published>2014-10-20T08:16:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<p>Git地址：<a href="https://github.com/smallMas/FMTQRCode" target="_blank" rel="external">https://github.com/smallMas/FMTQRCode</a><br>可惜没有生成中间带有logo的二维码</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Git地址：<a href="https://github.com/smallMas/FMTQRCode" target="_blank" rel="external">https://github.com/smallMas/FMTQRCode</a><br>可惜没有生成中]]>
+    </summary>
+    
+      <category term="二维码" scheme="/about/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    
+      <category term="ios" scheme="/about/tags/ios/"/>
+    
+      <category term="iOS应用开发之第三方框架" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CoreData+MagicalRecord的使用]]></title>
+    <link href="/about/2014/10/15/CoreData+MagicalRecord%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>/about/2014/10/15/CoreData+MagicalRecord的使用/</id>
+    <published>2014-10-15T02:54:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<p>1.首先导入文件，地址：<a href="https://github.com/magicalpanda/MagicalRecord" target="_blank" rel="external">https://github.com/magicalpanda/MagicalRecord</a><br>2.然后创建xcdatamodeld和实例对象，如下图<br><img src="http://img.blog.csdn.net/20141015103725687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>不会创建的话请参照我的另一份文章：<a href="http://blog.csdn.net/yin_xianwei/article/details/20618755" target="_blank" rel="external">http://blog.csdn.net/yin_xianwei/article/details/20618755</a><br>3.导入头文件，大家都会</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#import <span class="title">"CoreData+MagicalRecord.h"</span></span></div></pre></td></tr></table></figure>
+
+<p>4.在appdelgate创建数据库</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[MagicalRecord setupCoreDataStackWithStoreNamed:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@.sqlite"</span>, <span class="string">@"Test"</span>]];</div></pre></td></tr></table></figure>
+
+<p>5.启动应用之后你会在你的模拟器沙盒路径下的Library/Application Support/工程名/  下看到数据库文件（iOS7）<br>6.接下来就是操作它了<br>你的Entity会有这些方法<br>6.1查找</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//查找所有</span></div><div class="line">   <span class="built_in">NSArray</span> *ary1 = [DogEntity MR_findAll];</div><div class="line">    </div><div class="line">    <span class="comment">//查找并按name升序排序</span></div><div class="line">  <span class="built_in">NSArray</span> *ary2 = [DogEntity MR_findAllSortedBy:<span class="string">@"name"</span> ascending:<span class="literal">YES</span>]; <span class="comment">//查找type为2的数据</span></div><div class="line">   <span class="built_in">NSArray</span> *ary3 = [DogEntity MR_findByAttribute:<span class="string">@"type"</span> withValue:<span class="string">@"2"</span>];</div><div class="line"><span class="comment">//查找第一条数据</span></div><div class="line">	 DogEntity *entyty = [DogEntity MR_findFirst];</div></pre></td></tr></table></figure>
+
+
+<p>6.2增加</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DogEntity *dog = [DogEntity MR_createEntity];</div><div class="line"></div><div class="line">dog<span class="variable">.name</span> = <span class="string">@"huahua"</span>;</div><div class="line">dog<span class="variable">.type</span> = <span class="string">@"2"</span>;</div><div class="line">[[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];</div></pre></td></tr></table></figure>
+
+<p>6.3更新</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *ary = [DogEntity MR_findAll];</div><div class="line"></div><div class="line">  DogEntity *dog = [ary lastObject];</div><div class="line">     dog<span class="variable">.name</span> = <span class="string">@"hhhhhh"</span>;</div><div class="line">     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];</div></pre></td></tr></table></figure>
+
+<p>6.4删除</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *ary = [DogEntity MR_findAll];</div><div class="line"></div><div class="line">     DogEntity *dog = [ary lastObject];</div><div class="line">     [dog MR_deleteEntity];</div><div class="line">     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];</div></pre></td></tr></table></figure>
+
+<p>7.那么问题来了，你会发现所有的操作都会有一个MR_前缀（反正我觉得挺cool的），想要去掉的话就这样导入头文件：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#define MR_SHORTHAND</span></div><div class="line"><span class="preprocessor">#import <span class="title">"CoreData+MagicalRecord.h"</span></span></div></pre></td></tr></table></figure>
+
+<p>8.有一些常用的方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">根据某个属性某个条件查询</div><div class="line"><span class="built_in">NSArray</span> *dogs = [DogEntity MR_findByAttribute:<span class="string">@"name"</span> withValue:<span class="string">@"Y.X."</span>];</div><div class="line"></div><div class="line">根据排序取得搜索结果</div><div class="line"><span class="built_in">NSArray</span> *dogs = [DogEntity MR_findAllSortedBy:<span class="string">@"name"</span> ascending:<span class="literal">YES</span>];</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//    查询所有记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAll;</div><div class="line"><span class="comment">//根据上下文句柄查询所有记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllInContext:(NSManagedObjectContext *)context;</div><div class="line"><span class="comment">//根据某个属性排序查询所有记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllSortedBy:(<span class="built_in">NSString</span> *)sortTerm ascending:(<span class="built_in">BOOL</span>)ascending;</div><div class="line"><span class="comment">//根据某个属性排序以及上下文操作句柄查询所有记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllSortedBy:(<span class="built_in">NSString</span> *)sortTerm ascending:(<span class="built_in">BOOL</span>)ascending inContext:(NSManagedObjectContext *)context;</div><div class="line"><span class="comment">//根据某个属性排序用谓词来查询记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllSortedBy:(<span class="built_in">NSString</span> *)sortTerm ascending:(<span class="built_in">BOOL</span>)ascending withPredicate:(NSPredicate *)searchTerm;</div><div class="line"><span class="comment">//根据某个属性排序以及上下文操作句柄用谓词来查询记录</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllSortedBy:(<span class="built_in">NSString</span> *)sortTerm ascending:(<span class="built_in">BOOL</span>)ascending withPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;</div><div class="line"><span class="comment">//根据谓词查询</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllWithPredicate:(NSPredicate *)searchTerm;</div><div class="line"><span class="comment">//根据谓词以及上下文操作句柄来查询</span></div><div class="line">+ (<span class="built_in">NSArray</span> *) MR_findAllWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;</div><div class="line"><span class="comment">//以下都是查询一个对象时的操作,与上面重复,不一一赘述</span></div><div class="line">+ (instancetype) MR_findFirst;</div><div class="line">+ (instancetype) MR_findFirstInContext:(NSManagedObjectContext *)context;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm inContext:(NSManagedObjectContext *)context;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(<span class="built_in">NSString</span> *)property ascending:(<span class="built_in">BOOL</span>)ascending;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchterm sortedBy:(<span class="built_in">NSString</span> *)property ascending:(<span class="built_in">BOOL</span>)ascending inContext:(NSManagedObjectContext *)context;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(<span class="built_in">NSArray</span> *)attributes;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm andRetrieveAttributes:(<span class="built_in">NSArray</span> *)attributes inContext:(NSManagedObjectContext *)context;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(<span class="built_in">NSString</span> *)sortBy ascending:(<span class="built_in">BOOL</span>)ascending andRetrieveAttributes:(<span class="keyword">id</span>)attributes, ...;</div><div class="line">+ (instancetype) MR_findFirstWithPredicate:(NSPredicate *)searchTerm sortedBy:(<span class="built_in">NSString</span> *)sortBy ascending:(<span class="built_in">BOOL</span>)ascending inContext:(NSManagedObjectContext *)context andRetrieveAttributes:(<span class="keyword">id</span>)attributes, ...;</div><div class="line">+ (instancetype) MR_findFirstByAttribute:(<span class="built_in">NSString</span> *)attribute withValue:(<span class="keyword">id</span>)searchValue;</div><div class="line">+ (instancetype) MR_findFirstByAttribute:(<span class="built_in">NSString</span> *)attribute withValue:(<span class="keyword">id</span>)searchValue inContext:(NSManagedObjectContext *)context;</div><div class="line">+ (instancetype) MR_findFirstOrderedByAttribute:(<span class="built_in">NSString</span> *)attribute ascending:(<span class="built_in">BOOL</span>)ascending;</div><div class="line">+ (instancetype) MR_findFirstOrderedByAttribute:(<span class="built_in">NSString</span> *)attribute ascending:(<span class="built_in">BOOL</span>)ascending inContext:(NSManagedObjectContext *)context;</div></pre></td></tr></table></figure>
+
+<p>参考：<a href="http://www.haogongju.net/art/2570005" target="_blank" rel="external">http://www.haogongju.net/art/2570005</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>1.首先导入文件，地址：<a href="https://github.com/magicalpanda/MagicalRecord" target="_blank" rel="external">https://github.com/magicalpanda/Magica]]>
+    </summary>
+    
+      <category term="MagicalRecord" scheme="/about/tags/MagicalRecord/"/>
+    
+      <category term="iOS应用开发之第三方框架" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS十进制分割格式转换]]></title>
+    <link href="/about/2014/10/10/iOS%E5%8D%81%E8%BF%9B%E5%88%B6%E5%88%86%E5%89%B2%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
+    <id>/about/2014/10/10/iOS十进制分割格式转换/</id>
+    <published>2014-10-10T08:45:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<p>//@”123456789” 转换后 @”123,456,789”</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">num</span>)</span></div><div class="line"></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)money;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSString</span> (<span class="title">num</span>)</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)money{</div><div class="line">    </div><div class="line">    NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];</div><div class="line">    [numFormat setNumberStyle:NSNumberFormatterDecimalStyle];</div><div class="line">    <span class="built_in">NSNumber</span> *num = [<span class="built_in">NSNumber</span> numberWithDouble:[<span class="keyword">self</span> doubleValue]];</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> [numFormat stringFromNumber:num];</div><div class="line">}</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>//@”123456789” 转换后 @”123,456,789”</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div cla]]>
+    </summary>
+    
+      <category term="NSString" scheme="/about/tags/NSString/"/>
+    
+      <category term="iOS应用开发之常用方法" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS ... NS_REQUIRES_NIL_TERMINATION]]></title>
+    <link href="/about/2014/10/10/iOS%20...%20NS_REQUIRES_NIL_TERMINATION/"/>
+    <id>/about/2014/10/10/iOS ... NS_REQUIRES_NIL_TERMINATION/</id>
+    <published>2014-10-10T03:18:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<p>看到官方的一个例子不错，这里留记。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#import <span class="title">&lt;Cocoa/Cocoa.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableArray</span> (<span class="title">variadicMethodExample</span>)</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) appendObjects:(<span class="keyword">id</span>) firstObject, ...; <span class="comment">// This method takes a nil-terminated list of objects.</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSMutableArray</span> (<span class="title">variadicMethodExample</span>)</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) appendObjects:(<span class="keyword">id</span>) firstObject, ...</div><div class="line">{</div><div class="line"><span class="keyword">id</span> eachObject;</div><div class="line">va_list argumentList;</div><div class="line"><span class="keyword">if</span> (firstObject) <span class="comment">// The first argument isn't part of the varargs list,</span></div><div class="line">  {                                   <span class="comment">// so we'll handle it separately.</span></div><div class="line">  [<span class="keyword">self</span> addObject: firstObject];</div><div class="line">  va_start(argumentList, firstObject); <span class="comment">// Start scanning for arguments after firstObject.</span></div><div class="line">  <span class="keyword">while</span> (eachObject = va_arg(argumentList, <span class="keyword">id</span>)) <span class="comment">// As many times as we can get an argument of type "id"</span></div><div class="line">      [<span class="keyword">self</span> addObject: eachObject]; <span class="comment">// that isn't nil, add it to self's contents.</span></div><div class="line">  va_end(argumentList);</div><div class="line">  }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+<p>地址：<a href="https://developer.apple.com/library/mac/qa/qa1405/_index.html" target="_blank" rel="external">https://developer.apple.com/library/mac/qa/qa1405/_index.html</a><br>最经常见到的应该是UIAlertView里用的了。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)initWithTitle:(<span class="built_in">NSString</span> *)title message:(<span class="built_in">NSString</span> *)message delegate:(<span class="keyword">id</span> <span class="comment">/*&lt;UIAlertViewDelegate&gt;*/</span>)delegate cancelButtonTitle:(<span class="built_in">NSString</span> *)cancelButtonTitle otherButtonTitles:(<span class="built_in">NSString</span> *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>看到官方的一个例子不错，这里留记。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div]]>
+    </summary>
+    
+      <category term="UIAlertView" scheme="/about/tags/UIAlertView/"/>
+    
+      <category term="iOS应用开发之常用方法" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS 向服务器提交Byte数组格式图片]]></title>
+    <link href="/about/2014/10/09/iOS%20%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8F%90%E4%BA%A4Byte%E6%95%B0%E7%BB%84%E6%A0%BC%E5%BC%8F%E5%9B%BE%E7%89%87/"/>
+    <id>/about/2014/10/09/iOS 向服务器提交Byte数组格式图片/</id>
+    <published>2014-10-09T09:37:00.000Z</published>
+    <updated>2014-10-30T10:47:12.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image.png"</span>];</div><div class="line"> NSData *data = UIImagePNGRepresentation(image);</div><div class="line"> <span class="built_in">NSString</span> *byteArray = [data base64Encoding];</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="uiimage" scheme="/about/tags/uiimage/"/>
+    
+      <category term="bytearray" scheme="/about/tags/bytearray/"/>
+    
+      <category term="iOS应用开发之网络通讯" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[用 AFNetworking 通过 POST 方式发送数据]]></title>
+    <link href="/about/2014/09/13/%E7%94%A8%20AFNetworking%20%E9%80%9A%E8%BF%87%20POST%20%E6%96%B9%E5%BC%8F%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/"/>
+    <id>/about/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/</id>
+    <published>2014-09-13T07:14:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<p>AFNetworking进行POST请求中 发送json数据有些特别 。<br><strong>AFNetworking 版本为 2.0.2</strong><br>POST 发送数据有两种形式：<br>1、发送纯文本的内容<br>2、发送的 body 部分带有文件（图片，音频或者其他二进制数据）<br>对应的 Content-Type 有两种：<br>1、application/x-www-form-urlencoded<br>2、multipart/form-data<br>传统的使用 POST 的方式发送数据用于上传文件，AFNetworking 中提供了直接的接口：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> POST:post_url parameters:params</div><div class="line">constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">    <span class="comment">// 直接以 key value 的形式向 formData 中追加二进制数据</span></div><div class="line">    [formData appendPartWithFormData:[str dataUsingEncoding:NSUTF8StringEncoding] </div><div class="line">              name:<span class="string">@"key1"</span>];</div><div class="line">    [formData appendPartWithFileData:imgData name:<span class="string">@"imagefile"</span> </div><div class="line">              fileName:<span class="string">@"img.jpg"</span> mimeType:<span class="string">@"image/jpeg"</span>];</div><div class="line">    }</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p>使用 POST 方式发送纯文本内容：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (NSMutableURLRequest *)postRequestWithURL:(<span class="built_in">NSString</span> *)url content:(<span class="built_in">NSString</span> *)text</div><div class="line">{</div><div class="line">    NSMutableURLRequest *request =</div><div class="line">        [[NSMutableURLRequest alloc] initWithURL:url];</div><div class="line">    [request setHTTPMethod:<span class="string">@"POST"</span>];</div><div class="line">    [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> </div><div class="line">             forHTTPHeaderField:<span class="string">@"Contsetent-Type"</span>];</div><div class="line">    [request setHTTPBody:<span class="number">1</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> request;</div><div class="line">}</div><div class="line"> </div><div class="line">NSOperation *operation =</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> HTTPRequestOperationWithRequest:request</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span><span class="variable">.operationQueue</span> addOperation:operation];</div></pre></td></tr></table></figure>
+
+
+<p>其中 self.manager 为 AFHTTPRequestOperationManager 实例。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">_manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];</div><div class="line"> </div><div class="line"><span class="comment">// 对于网站成功返回 JSON 格式的数据但是却在 failure 回调中显示的，</span></div><div class="line"><span class="comment">// 是因为服务器返回数据的网页中 content type 没有设置为 text/json</span></div><div class="line"><span class="comment">// 对于我们公司的服务器返回的 content type 为 text/html 所以我设置为如下这样，</span></div><div class="line"><span class="comment">// 对于不同的情况可以根据自己的情况设置合适的接受的 content type 的类型</span></div><div class="line">_manager<span class="variable">.responseSerializer</span><span class="variable">.acceptableContentTypes</span> = [<span class="built_in">NSSet</span> setWithObject:<span class="string">@"text/html"</span>];</div></pre></td></tr></table></figure>
+
+
+<p>本文转自：<a href="http://www.iliunian.com/2879.html" target="_blank" rel="external">http://www.iliunian.com/2879.html</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>AFNetworking进行POST请求中 发送json数据有些特别 。<br><strong>AFNetworking 版本为 2.0.2</strong><br>POST 发送数据有两种形式：<br>1、发送纯文本的内容<br>2、发送的 body 部分带有文件（图片，]]>
+    </summary>
+    
+      <category term="AFNetworking" scheme="/about/tags/AFNetworking/"/>
+    
+      <category term="iOS应用开发之网络通讯" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Xcode5.1制作formework]]></title>
+    <link href="/about/2014/08/11/Xcode5.1%E5%88%B6%E4%BD%9Cformework/"/>
+    <id>/about/2014/08/11/Xcode5.1制作formework/</id>
+    <published>2014-08-11T09:26:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li>新建一个工程，选择framework &amp; library - Cocoa Touch Static Library,命名为TestKit。<img src="http://img.blog.csdn.net/20140811170140857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>删除不必要的文件。TestKitTests 和TestKit target。<br><img src="http://img.blog.csdn.net/20140811170014011?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>新建一个Bundle 。new-file-target；选择OS X目录下FrameWork&amp;Library中的Bundle,取名为TestiOSKit。<img src="http://img.blog.csdn.net/20140811165819234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li><p>删除TestiOSKit中TestiOSKit-Prefix.pch中的#import<cocoa cocoa.h="">。<img src="http://img.blog.csdn.net/20140811170026211?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></cocoa></p>
+</li>
+<li><p>修改target设置Build Settings选项卡：<br>Base SDK选择Latest iOS(iOS 7.1)<br>Build ActiveArchitecture Only选择NO<br>Dead Code Stripping选择NO<br>Mach-O Type选择Relocatable Object File</p>
+<pre><code>  <span class="keyword">Link</span> <span class="keyword">With</span> Standard Libraries选择NO
+</code></pre><p>Wrapper Extension修改为framework<br>Info选项卡：<br>Bundle OS Type code 修改为FMWK<br>Build Phases选项卡:<br>首先选择Editor-Add Build Phase-Add Copy Haeders Build Phase,在Build Phases下会多出一行Copy Headers;<img src="http://img.blog.csdn.net/20140811170030844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>点击右下角的Add Build Phases,选择AddCopy Headers. 添加头文件和源文件。<img src="http://img.blog.csdn.net/20140811165835281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>删除系统的Frameworks。(Remove References)</p>
+<pre><code>  ![](<span class="symbol">http:</span>/<span class="regexp">/img.blog.csdn.net/</span><span class="number">20140811170100328</span>?watermark/<span class="number">2</span>/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=<span class="regexp">/font/</span><span class="number">5</span>a6L5L2T/fontsize/<span class="number">400</span>/fill/<span class="constant">I0JBQkFCMA</span>==<span class="regexp">/dissolve/</span><span class="number">70</span>/gravity/<span class="constant">SouthEast</span>)
+</code></pre></li>
+<li><p>在TestKit.h和TestMarkKit.m里面写入你的函数声明和实现<br><img src="http://img.blog.csdn.net/20140811165840218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><img src="http://img.blog.csdn.net/20140811165845062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</li>
+</ol>
+<ol>
+<li>选择Run Scheme<br><img src="http://img.blog.csdn.net/20140811165849625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+</ol>
+<ol>
+<li>查看framework build路径<br>点击Xcode右上角Organizer,选择Projects选项卡如图，点击箭头可以进入bulid路径。<img src="http://img.blog.csdn.net/20140811170055570?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>或者选择iOS Device运行一下，然后在工程的Products-TestiOSKit.framework右键，show in finder。文件夹下en.lproj和Info.plist都可以直接删除。<br><img src="http://img.blog.csdn.net/20140811170603171?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+</ol>
+<ol>
+<li><p>使用framework<br>只需要在新的工程导入并使用就行啦。<img src="http://img.blog.csdn.net/20140811170859077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</li>
+<li><p>但是我们会遇到一个问题，就是这个framework的包分两个，一个是模拟器，一个是真机，所以我们要把它合并成一个通用的包。</p>
+</li>
+</ol>
+<p>在finder下是这样的：<br><img src="http://img.blog.csdn.net/20140811170913218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>一个是真机，一个是模拟器，下面开始合并。<br>1.先把其中一个framework包放到桌面。<br>2.打开终端运行&gt; lipo -create/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphoneos/TestiOSKit.framework/TestiOSKit/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphonesimulator/TestiOSKit.framework/TestiOSKit-output /Users/Jerry/Desktop/TestiOSKit</p>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140811172349714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+<pre><code>说明一下这段代码，红色为固有字段，黑色部分均为路径，前两个是模拟器路径和真机的路径，后面的为输出路径。
+3.把输出的文件TestiOSKit替换第一步放在桌面上的framework里的TestiOSKit，然后这个framework就是通用的了。
+</code></pre><p>此方法同样适用.a文件的合成。<br>              <img src="http://img.blog.csdn.net/20140811172415984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<ol>
+<li>我把常用的宏定义和类别做成的framework地址：<a href="https://code.csdn.net/yinxianwei88/utilitytools" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/utilitytools</a></li>
+<li>本贴参考：<br><a href="http://blog.csdn.net/smking/article/details/24434819" target="_blank" rel="external">http://blog.csdn.net/smking/article/details/24434819</a><br><a href="http://blog.csdn.net/mark_creative/article/details/9450887" target="_blank" rel="external">http://blog.csdn.net/mark_creative/article/details/9450887</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li>新建一个工程，选择framework &amp; library - Cocoa Touch Static Library,命名为TestKit。<img src="http://img.blog.csdn.net/20140811170140857?water]]>
+    </summary>
+    
+      <category term="framework" scheme="/about/tags/framework/"/>
+    
+      <category term="iOS应用开发之Xcode配置" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BXcode%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[实现简单的糗百，以下是连接：]]></title>
+    <link href="/about/2014/07/21/%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E7%B3%97%E7%99%BE%EF%BC%8C%E4%BB%A5%E4%B8%8B%E6%98%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A/"/>
+    <id>/about/2014/07/21/实现简单的糗百，以下是连接：/</id>
+    <published>2014-07-21T07:57:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/s]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_8_扩展&类别]]></title>
+    <link href="/about/2014/07/21/Swift_8_%E6%89%A9%E5%B1%95&%E7%B1%BB%E5%88%AB/"/>
+    <id>/about/2014/07/21/Swift_8_扩展&类别/</id>
+    <published>2014-07-21T07:45:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">class People{</div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">}</div><div class="line"><span class="comment">//方法扩展</span></div><div class="line">extension People{</div><div class="line">    func test() -&gt; String{</div><div class="line">        <span class="keyword">return</span> <span class="string">"abc"</span></div><div class="line"></div><div class="line">    }</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">let p = People();</div><div class="line"></div><div class="line">var v1 = p<span class="variable">.test</span>();</div><div class="line"></div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_7_继承]]></title>
+    <link href="/about/2014/07/21/Swift_7_%E7%BB%A7%E6%89%BF/"/>
+    <id>/about/2014/07/21/Swift_7_继承/</id>
+    <published>2014-07-21T07:44:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"></div><div class="line">class People {</div><div class="line">    </div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">    init(){</div><div class="line">        <span class="keyword">self</span><span class="variable">.name</span>=<span class="string">"李四"</span></div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">//防止重写关键字 @final</span></div><div class="line">    @final var age = <span class="number">15</span></div><div class="line">}</div><div class="line"></div><div class="line">class Man : People{</div><div class="line">    init(){</div><div class="line">        <span class="keyword">super</span><span class="variable">.init</span>()</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">let p = Man()</div><div class="line"></div><div class="line">p<span class="variable">.name</span> = <span class="string">"张三"</span></div><div class="line"></div><div class="line">println(<span class="string">"p name is \(p.name)"</span>)</div><div class="line"></div><div class="line">let p2 = Man()</div><div class="line"></div><div class="line">println(<span class="string">"p2 name is \(p2.name)"</span>)</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_6_方法]]></title>
+    <link href="/about/2014/07/21/Swift_6_%E6%96%B9%E6%B3%95/"/>
+    <id>/about/2014/07/21/Swift_6_方法/</id>
+    <published>2014-07-21T07:43:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">class Dog {</div><div class="line">    func age() -&gt; String {</div><div class="line">    <span class="keyword">return</span> <span class="string">"2"</span></div><div class="line">    }</div><div class="line">    </div><div class="line">    var name : String?</div><div class="line">    </div><div class="line">    func getName(name1:String) -&gt; String{</div><div class="line">        <span class="keyword">self</span><span class="variable">.name</span> = name1;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span><span class="variable">.name</span>!</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">let dog = Dog()</div><div class="line"></div><div class="line">var age = dog<span class="variable">.age</span>();</div><div class="line"></div><div class="line"><span class="comment">//dog.name = "小黑"</span></div><div class="line"></div><div class="line">var dogName = dog<span class="variable">.name</span>;</div><div class="line"></div><div class="line">var getName = dog<span class="variable">.getName</span>(<span class="string">"123"</span>)</div><div class="line"></div><div class="line">var name2 = dog<span class="variable">.name</span>;</div><div class="line"></div><div class="line">println(<span class="string">"dog age is \(age) name is \(dogName) getName is \(getName)  name2 is \(name2)"</span>)</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_5_类和结构体]]></title>
+    <link href="/about/2014/07/21/Swift_5_%E7%B1%BB%E5%92%8C%E7%BB%93%E6%9E%84%E4%BD%93/"/>
+    <id>/about/2014/07/21/Swift_5_类和结构体/</id>
+    <published>2014-07-21T07:42:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">class PeopleClass{</div><div class="line"></div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">struct</span> PeopleStruct{</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">struct</span> Resolution {</div><div class="line">    var width = <span class="number">0</span></div><div class="line">    var heigth = <span class="number">0</span></div><div class="line">}</div><div class="line"></div><div class="line">class VideoMode {</div><div class="line">    var resolution = Resolution()</div><div class="line">    var interlaced = <span class="literal">false</span></div><div class="line">    var frameRate = <span class="number">0.0</span></div><div class="line">    var name : String?</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">let someResolution = Resolution()</div><div class="line">let someVideoMode = VideoMode()</div><div class="line"></div><div class="line">println(<span class="string">"The width of someResolution is \(someResolution.width)"</span>)</div><div class="line"></div><div class="line">someVideoMode<span class="variable">.resolution</span><span class="variable">.width</span> = <span class="number">12880</span></div><div class="line">println(<span class="string">"The width of someVideoMode is now \(someVideoMode.resolution.width)"</span>)</div><div class="line"></div><div class="line">let vga = Resolution(width:<span class="number">640</span>, heigth: <span class="number">480</span>)</div><div class="line"></div><div class="line">println(<span class="string">"vga is \(vga.width) \(vga.heigth)"</span>)</div><div class="line"></div><div class="line">let hd = Resolution(width: <span class="number">1920</span>, heigth: <span class="number">1080</span>)</div><div class="line">var cinema = hd</div><div class="line">cinema<span class="variable">.width</span> = <span class="number">2048</span></div><div class="line"></div><div class="line"></div><div class="line">println(<span class="string">"cinema is now  \(cinema.width) pixels wide"</span>)</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_4_闭包(Blocks)]]></title>
+    <link href="/about/2014/07/21/Swift_4_%E9%97%AD%E5%8C%85(Blocks)/"/>
+    <id>/about/2014/07/21/Swift_4_闭包(Blocks)/</id>
+    <published>2014-07-21T04:56:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">var arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">74</span>,<span class="number">2</span>]</div><div class="line"></div><div class="line">func hasClosure(list:[Int], v2:Int, cb:(num:Int, v3:Int) -&gt;Bool)  -&gt;Bool{</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> arr{</div><div class="line">        <span class="keyword">if</span>(cb(num:item, v3:v2)){</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line">var v2 = hasClosure(arr, <span class="number">82</span>, {</div><div class="line">    (num:Int, v3:Int) -&gt;Bool <span class="keyword">in</span></div><div class="line">    <span class="keyword">return</span> num &gt;= v3;</div><div class="line">    });</div><div class="line">println(<span class="string">"v2 is \(v2)"</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//sort函数  会根据您提供的排序闭包将已知类型数组中的值进行排序。 一旦排序完成，函数会返回一个与原数组大小相同的新数组，该数组中包含已经正确排序的同类型元素</span></div><div class="line">let names = [<span class="string">"Chris"</span>, <span class="string">"Alex"</span>, <span class="string">"Ewa"</span>, <span class="string">"Barry"</span>, <span class="string">"Daniella"</span>]</div><div class="line"></div><div class="line">func backwards(s1: String, s2: String) -&gt; Bool {</div><div class="line">    <span class="keyword">return</span> s1 &gt; s2</div><div class="line">}</div><div class="line"></div><div class="line">var reversed = sort(names, backwards)</div><div class="line"><span class="comment">// reversed is equal to ["Ewa", "Daniella", "Chris", "Barry", "Alex"]</span></div><div class="line"><span class="comment">//闭包版</span></div><div class="line">reversed = sort(names, { (s1: String, s2: String) -&gt; Bool <span class="keyword">in</span></div><div class="line">    <span class="keyword">return</span> s1 &gt; s2</div><div class="line">    })</div><div class="line"></div><div class="line"><span class="comment">//单行</span></div><div class="line">reversed = sort(names, { (s1: String, s2: String) -&gt; Bool <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 } )</div><div class="line"></div><div class="line"><span class="comment">//再精简</span></div><div class="line">reversed = sort(names, { s1, s2 <span class="keyword">in</span> s1 &gt; s2 } )</div><div class="line"></div><div class="line"><span class="comment">//极致精简</span></div><div class="line">reversed = sort(names, { $<span class="number">0</span> &gt; $<span class="number">1</span> } )</div><div class="line"></div><div class="line"><span class="comment">//终极精简</span></div><div class="line">reversed = sort(names, &gt;)</div><div class="line"></div><div class="line">println(<span class="string">"reversed is \(reversed)"</span>)</div><div class="line"></div><div class="line"><span class="comment">//闭包表达式</span></div><div class="line"><span class="comment">//{</span></div><div class="line"><span class="comment">//    (parameters) -&gt; returnType in</span></div><div class="line"><span class="comment">//    statements</span></div><div class="line"><span class="comment">//}</span></div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_3_函数]]></title>
+    <link href="/about/2014/07/21/Swift_3_%E5%87%BD%E6%95%B0/"/>
+    <id>/about/2014/07/21/Swift_3_函数/</id>
+    <published>2014-07-21T03:45:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//声明一个函数 不带参数 没有返回值</span></div><div class="line">func func1(){</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//声明一个函数 传入两个String类型参数 , 没有返回值</span></div><div class="line">func func2(v1:String, v2:String){</div><div class="line">    println(v1 + <span class="string">"and"</span> + v2)</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//声明一个求和的函数</span></div><div class="line">func func3(v1:Int, v2:Int) -&gt;Int{</div><div class="line"></div><div class="line">    <span class="keyword">return</span> v1+v2;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//数组内是否有大于num的数字</span></div><div class="line">func func4(list:[Int], num:Int) -&gt;Bool{</div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> list{</div><div class="line">        <span class="keyword">if</span>(func5(s,num)){</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;}</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//v1 是否大于 v2</span></div><div class="line">func func5(v1:Int, v2:Int) -&gt;Bool{</div><div class="line">    <span class="keyword">if</span>(v1&gt;v2){</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//函数嵌套函数</span></div><div class="line">func func6(v1:Int) -&gt;Int{</div><div class="line">    func func7(v2:Int) -&gt;Int{</div><div class="line">        <span class="keyword">return</span> v2+<span class="number">1</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> func7(v1);</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">func1();</div><div class="line"></div><div class="line">func2(<span class="string">"1"</span>,<span class="string">"2"</span>);</div><div class="line"></div><div class="line">var v1 = func3(<span class="number">3</span>,<span class="number">4</span>);</div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div><div class="line"></div><div class="line"></div><div class="line">var arr = [<span class="number">11</span>,<span class="number">2</span>,<span class="number">44</span>,<span class="number">58</span>,<span class="number">72</span>,<span class="number">20</span>];</div><div class="line"></div><div class="line">var v2 = func4(arr, <span class="number">100</span>);</div><div class="line"></div><div class="line">println(<span class="string">"v2 is \(v2)"</span>);</div><div class="line"></div><div class="line">var v3 = func6(<span class="number">100</span>);</div><div class="line"></div><div class="line">println(<span class="string">"v3 is \(v3)"</span>);</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Swift_2_控制语句]]></title>
+    <link href="/about/2014/07/21/Swift_2_%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
+    <id>/about/2014/07/21/Swift_2_控制语句/</id>
+    <published>2014-07-21T03:41:00.000Z</published>
+    <updated>2014-10-30T10:47:14.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">for  do While  While Switch</div><div class="line">*/</div><div class="line"></div><div class="line">var arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>];</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr{</div><div class="line">    println(<span class="string">" i is \(i)"</span>);</div><div class="line">}</div><div class="line"></div><div class="line">var count = arr<span class="variable">.count</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (var i = <span class="number">0</span> ; i&lt;count; i++){</div><div class="line">    var index = arr[i];</div><div class="line">    println(<span class="string">"index is \(index)"</span>);</div><div class="line">}</div><div class="line"></div><div class="line">var index = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">do</span>{</div><div class="line">    var j = arr[index];</div><div class="line">    println(<span class="string">"j is \(j)"</span>);</div><div class="line">}<span class="keyword">while</span>(++index &lt; count);</div><div class="line"></div><div class="line"></div><div class="line">var x = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span>(x&lt;count){</div><div class="line">    println(<span class="string">"arr num is \(arr[x]) index = \(x++)"</span>);</div><div class="line">};</div><div class="line"></div><div class="line">var type = <span class="string">"iOS"</span></div><div class="line"></div><div class="line"><span class="comment">///没有break默认不执行下面语句, 如果想要执行(穿透)就加上fallthrough</span></div><div class="line"><span class="keyword">switch</span> type{</div><div class="line">    <span class="keyword">case</span> <span class="string">"iOS"</span>:</div><div class="line">        println(<span class="string">"------"</span>)</div><div class="line"><span class="comment">//        fallthrough;</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"22"</span>:</div><div class="line">        println(<span class="string">"======="</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        println(<span class="string">"三三三三三"</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="Swift" scheme="/about/tags/Swift/"/>
+    
+      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[UITableView&UITableViewCell]]></title>
+    <link href="/about/2014/06/04/UITableView&UITableViewCell/"/>
+    <id>/about/2014/06/04/UITableView&UITableViewCell/</id>
+    <published>2014-06-04T10:18:00.000Z</published>
+    <updated>2014-10-30T10:47:16.000Z</updated>
+    <content type="html"><![CDATA[<p>本文转自:<a href="http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html" target="_blank" rel="external">http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html</a></p>
+<p>　　看TableView的资料其实已经蛮久了，一直想写点儿东西，却总是因为各种原因拖延，今天晚上有时间静下心来记录一些最近学习的TableView的知识。下面进入正题，UITableView堪称UIKit里面最复杂的一个控件了，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，tableViewCell的设计和重用以及tableView的效率等问题。<br><strong>下面分9个方面进行介绍：</strong><br><strong>一、UITableView概述</strong><br>　　UITableView继承自UIScrollView，可以表现为Plain和Grouped两种风格，分别如下图所示：<br>      <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719341052.png" alt="">        <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719344359.png" alt=""><br>　　其中左边的是Plain风格的，右边的是Grouped风格，这个区别还是很明显的。<br>　　查看UITableView的帮助文档我们会注意到UITableView有两个Delegate分别为：dataSource和delegate。<br>　　<strong>dataSource</strong>是UITableViewDataSource类型，主要为UITableView提供显示用的数据(UITableViewCell)，指定UITableViewCell支持的编辑操作类型(insert，delete和reordering)，并根据用户的操作进行相应的数据更新操作，如果数据没有更具操作进行正确的更新，可能会导致显示异常，甚至crush。<br>　　<strong>delegate</strong>是UITableViewDelegate类型，主要提供一些可选的方法，用来控制tableView的选择、指定section的头和尾的显示以及协助完成cell的删除和排序等功能。<br>　　提到UITableView，就必须的说一说NSIndexPath。UITableView声明了一个NSIndexPath的类别，主要用来标识当前cell的在tableView中的位置，该类别有section和row两个属性，前者标识当前cell处于第几个section中，后者代表在该section中的第几行。<br>　　UITableView只能有一列数据(cell)，且只支持纵向滑动，当创建好的tablView第一次显示的时候，我们需要调用其reloadData方法，强制刷新一次，从而使tableView的数据更新到最新状态。</p>
+<p><strong>二、UITableViewController简介</strong><br>　　UITableViewController是系统提供的一个便利类，主要是为了方便我们使用UITableView，该类生成的时候就将自身设置成了其包含的tableView的dataSource和delegate，并创建了很多代理函数的框架，为我们大大的节省了时间，我们可以通过其tableView属性获取该controller内部维护的tableView对象。默认情况下使用UITableViewController创建的tableView是充满全屏的，如果需要用到tableView是不充满全屏的话，我们应该使用UIViewController自己创建和维护tableView。<br>　　UITableViewController提供一个初始化函数initWithStyle:，根据需要我们可以创建Plain或者Grouped类型的tableView，当我们使用其从UIViewController继承来的init初始化函数的时候，默认将会我们创建一个Plain类型的tableView。<br>　　UITableViewController默认的会在viewWillAppear的时候，清空所有选中cell，我们可以通过设置self.clearsSelectionOnViewWillAppear<br> = NO，来禁用该功能，并在viewDidAppear中调用UIScrollView的flashScrollIndicators方法让滚动条闪动一次，从而提示用户该控件是可以滑动的。 </p>
+<p><strong>三、UITableViewCell介绍</strong><br> 　　UITableView中显示的每一个单元都是一个UITableViewCell对象，看文档的话我们会发现其初始化函数initWithStyle:reuseIdentifier:比较特别，跟我们平时看到的UIView的初始化函数不同。这个主要是为了效率考虑，因为在tableView快速滑动的滑动的过程中，频繁的alloc对象是比较费时的，于是引入了cell的重用机制，这个也是我们在dataSource中要重点注意的地方，用好重用机制会让我们的tableView滑动起来更加流畅。<br>　　我们可以通过cell的selectionStyle属性指定cell选中时的显示风格，以及通过accessoryType来指定cell右边的显示的内容，或者直接指定accessoryView来定制右边显示的view。<br>　　系统提供的UITableView也包含了四种风格的布局，分别是:<br>    typedef enum {<br>        UITableViewCellStyleDefault,<br>        UITableViewCellStyleValue1,<br>        UITableViewCellStyleValue2,<br>        UITableViewCellStyleSubtitle<br>    } UITableViewCellStyle;<br>　　这几种文档中都有详细描述，这儿就不在累赘。然而可以想象系统提供的只是最常用的几种类型，当系统提供的风格不符合我们需要的时候，我们就需要对cell进行定制了，有以下两种定制方式可选：<br>　　<strong>1、直接向cell的contentView上面添加subView</strong><br>　　这是比较简单的一种的，根据布局需要我们可以在不同的位置添加subView。但是此处需要注意：所有添加的subView都最好设置为不透明的，因为如果subView是半透明的话，view图层的叠加将会花费一定的时间，这会严重影响到效率。同时如果每个cell上面添加的subView个数过多的话(通常超过3，4个)，效率也会受到比较大的影响。<br>　　下面我们看一个例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>    {<br>        NSArray </em>sections = [SvTableViewDataModal sections];<br>        SvSectionModal *sectionModal = [sections objectAtIndex:indexPath.section];</p>
+<pre><code>    <span class="keyword">static</span> <span class="built_in">NSString</span> *reuseIdetify = <span class="string">@"SvTableViewCell"</span>;
+    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdetify];
+    <span class="keyword">if</span> (!cell) {
+        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify];
+        cell<span class="variable">.accessoryType</span> = UITableViewCellAccessoryDisclosureIndicator;
+        cell<span class="variable">.showsReorderControl</span> = <span class="literal">YES</span>;
+
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i) {
+            <span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] initWithFrame:CGRectMake(<span class="number">100</span> + <span class="number">15</span> * i, <span class="number">0</span>, <span class="number">30</span>, <span class="number">20</span>)];
+            label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];
+            label<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d"</span>, i];
+            [cell<span class="variable">.contentView</span> addSubview:label];
+            [label release];
+        }
+    }
+
+    cell<span class="variable">.textLabel</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+    cell<span class="variable">.textLabel</span><span class="variable">.text</span> = [sectionModal<span class="variable">.cityNames</span> objectAtIndex:indexPath<span class="variable">.row</span>];
+    <span class="keyword">return</span> cell;
+} 
+</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　在上面这个例子中，我往每个cell中添加了6个subView，而且每个subView都是半透明(UIView默认是半透明的)，这个时候滑动起来明显就可以感觉到有点颤抖，不是很流畅。当把每一个subView的opaque属性设置成YES的时候，滑动会比之前流畅一些，不过还是有点儿卡。<br>　　<strong>2、从UITableViewCell派生一个类</strong><br>　　通过从UITableViewCell中派生一个类，可以更深度的定制一个cell，可以指定cell在进入edit模式的时候如何相应等等。最简单的实现方式就是将所有要绘制的内容放到一个定制的subView中，并且重载该subView的drawRect方法直接把要显示的内容绘制出来(这样可以避免subView过多导致的性能瓶颈)，最后再将该subView添加到cell派生类中的contentView中即可。但是这样定制的cell需要注意在数据改变的时候，通过手动调用该subView的setNeedDisplay方法来刷新界面，这个例子可以在苹果的帮助文档中的TableViewSuite工程中找到，这儿就不举例了。<br>　　观看这两种定制cell的方法，我们会发现subView都是添加在cell的contentView上面的，而不是直接加到cell上面，这样写也是有原因的。下面我们看一下cell在正常状态下和编辑状态下的构成图：<br>　　cell在正常状态下的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819321126.png" alt=""><br>　　进入编辑状态下cell的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819324942.png" alt=""><br>　　通过观察上面两幅图片我们可以看出来，当cell在进入编辑状态的时候，contentView会自动的缩放来给Editing control腾出位置。这也就是说如果我们把subView添加到contentView上，如果设置autoresizingMask为更具父view自动缩放的话，cell默认的机制会帮我们处理进入编辑状态的情况。而且在tableView是Grouped样式的时候，会为cell设置一个背景色，如果我们直接添加在cell上面的话，就需要自己考虑到这个背景色的显示问题，如果添加到contentView上，则可以通过view的叠加帮助我们完成该任务。综上，subView最好还是添加到cell的contentView中。</p>
+<p><strong>四、Reordering</strong><br>　　为了使UITableVeiew进入edit模式以后，如果该cell支持reordering的话，reordering控件就会临时的把accessaryView覆盖掉。为了显示reordering控件，我们必须将cell的showsReorderControl属性设置成YES，同时实现dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法。我们还可以同时通过实现dataSource中的 tableView:canMoveRowAtIndexPath:返回NO，来禁用某一些cell的reordering功能。<br>　　下面看苹果官方的一个reordering流程图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819375133.png" alt=""><br>　　上图中当tableView进入到edit模式的时候，tableView会去对当前可见的cell逐个调用dataSource的tableView:canMoveRowAtIndexPath:方法(此处官方给出的流程图有点儿问题)，决定当前cell是否显示reoedering控件，当开始进入拖动cell进行拖动的时候，每滑动过一个cell的时候，会去掉用delegate的tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:方法，去判断当前划过的cell位置是否可以被替换，如果不行则给出建议的位置。当用户放手时本次reordering操作结束，调用dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法更新tableView对应的数据。<br>　　此处给个我写demo中的更新数据的小例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    // if you want show reordering control, you must implement moveRowAtndexPath, or the reordering control will not show // when use reordering end, this method is invoke </p>
+<pre><code>- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)<span class="built_in">source</span>IndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    // update DataModal
+
+    NSArray *sections = [SvTableViewDataModal sections];
+    SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:<span class="built_in">source</span>IndexPath.section];
+    NSString *city = [[<span class="built_in">source</span>SectionModal.cityNames objectAtIndex:<span class="built_in">source</span>IndexPath.row] retain];
+    [<span class="built_in">source</span>SectionModal.cityNames removeObject:city];
+    [SvTableViewDataModal replaceSectionAtIndex:<span class="built_in">source</span>IndexPath.section withSection:<span class="built_in">source</span>SectionModal];
+
+    SvSectionModal *desinationsSectionModal= [[SvTableViewDataModal sections] objectAtIndex:destinationIndexPath.section];
+    [desinationsSectionModal.cityNames insertObject:city atIndex:destinationIndexPath.row];
+    [SvTableViewDataModal replaceSectionAtIndex:destinationIndexPath.section withSection:desinationsSectionModal];
+
+    [city release];
+}
+</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面代码中首先拿到源cell所处的section，然后从该section对应的数据中移除，然后拿到目标section的数据，然后将源cell的数据添加到目标section中，并更新回数据模型，如果我们没有正确更新数据模型的话，显示的内容将会出现异常。</p>
+<p><strong>五、Delete &amp; Insert</strong><br>　　cell的delete和insert操作大部分流程都是一样的，当进入编辑模式的时候具体的显示是delete<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819411122.png" alt="">还是insert<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819440770.png" alt="">取决与该cell的editingStyle的值，editStyle的定义如下：<br>    typedef enum {<br>        UITableViewCellEditingStyleNone,<br>        UITableViewCellEditingStyleDelete,<br>        UITableViewCellEditingStyleInsert<br>    } UITableViewCellEditingStyle;<br>　　当tableView进入编辑模式以后，cell上面显示的delete还是insert除了跟cell的editStyle有关，还与 tableView的delegate的tableView:editingStyleForRowAtIndexPath:方法的返回值有关(在这里唠叨一句，其实delegate提供了很多改变cell属性的机会，如非必要，还是不要去实现这些方法，因为执行这些方法也造成一定的开销)。<br>　　delete和insert的流程如下苹果官方文档中给出的图所示：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819454344.png" alt=""><br>　　下面是我写的demo中删除和添加部分的代码：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #pragma mark -</p>
+<pre><code>- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle <span class="keyword">for</span>RowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@<span class="string">"commit editStyle: %d"</span>, editingStyle);
+
+    <span class="keyword">if</span> (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *sections = [SvTableViewDataModal sections];
+        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
+        [<span class="built_in">source</span>SectionModal.cityNames removeObjectAtIndex:indexPath.row];
+
+        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    }
+    <span class="keyword">else</span> {
+        // <span class="keyword">do</span> something <span class="keyword">for</span> add it
+        NSArray *sections = [SvTableViewDataModal sections];
+        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
+        [<span class="built_in">source</span>SectionModal.cityNames insertObject:@<span class="string">"new City"</span> atIndex:indexPath.row];
+        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
+
+        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
+    }
+}
+</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　代码中首先判断当前操作是delete操作还是insert操作，相应的更新数据，最后根据情况调用tableView的insertRowsAtIndexPaths:withRowAnimation:或者deleteRowsAtIndexPaths:withRowAnimation:方法，对tableView的视图进行更新。cell的删除和添加操作相对还是比较简单的。</p>
+<p><strong>六、Cell的Select操作</strong><br>　　当我们在tableView中点击一个cell的时候，将会调用tableView的delegate中的tableView:didSelectRowAtIndexPath:方法。<br>　　关于tableView的cell的选中，苹果官方有以下几个建议：<br> 　　1、不要使用selection来表明cell的选择状态，而应该使用accessaryView中的checkMark或者自定义accessaryView来显示选中状态。<br> 　　2、当选中一个cell的时候，你应该取消前一个cell的选中。<br> 　　3、如果cell选中的时候，进入下一级viewCOntroller，你应该在该级菜单从navigationStack上弹出的时候，取消该cell的选中。<br>　　这块儿再提一点，当一个cell的accessaryType为UITableViewCellAccessoryDisclosureIndicator的时候，点击该accessary区域通常会将消息继续向下传递，即跟点击cell的其他区域一样，将会掉delegate的tableView:didSelectRowAtIndexPath:方法，当时如果accessaryView为 UITableViewCellAccessoryDetailDisclosureButton的时候，点击accessaryView将会调用delegate的 tableView:accessoryButtonTappedForRowWithIndexPath:方法。</p>
+<p><strong>七、批量插入，删除，部分更新操作</strong><br>　　UITableView提供了一个批量操作的特性，这个功能在一次进行多个row或者scetion的删除，插入，获取更新多个cell内容的时候特别好用。所有的批量操作需要包含在beginUpdates和endUpdates块中，否则会出现异常。<br>　　下面请看我demo中的一个批量操作的例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (void)groupEdit:(UIBarButtonItem*)sender<br>    {<br>        [_tableView beginUpdates];</p>
+<pre><code>    <span class="comment">// first update the data modal</span>
+    [_tableView insertRowsAtIndexPaths:[<span class="built_in">NSArray</span> arrayWithObject:[<span class="built_in">NSIndexPath</span> indexPathForRow:<span class="number">0</span> inSection:<span class="number">0</span>]] withRowAnimation:UITableViewRowAnimationTop];
+
+    [_tableView deleteSections:[<span class="built_in">NSIndexSet</span> indexSetWithIndex:<span class="number">0</span>] withRowAnimation:UITableViewRowAnimationTop];
+
+    [SvTableViewDataModal deleteSectionAtIndex:<span class="number">0</span>];
+
+    SvSectionModal *section = [[SvTableViewDataModal sections] objectAtIndex:<span class="number">0</span>];
+    [section<span class="variable">.cityNames</span> insertObject:<span class="string">@"帝都"</span> atIndex:<span class="number">0</span>];
+    [SvTableViewDataModal replaceSectionAtIndex:<span class="number">0</span> withSection:section];
+
+    [_tableView endUpdates];
+}
+</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面的例子中我们可以看到先往tableView的第0个section的第0行添加一个cell，然后将第0个section删掉。按照我们程序中写的顺序，那么新添加进去的“帝都”，将不在会显示，因为包含它的整个section都已经被删除了。<br>　　执行程序前后结果如下图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062820003824.png" alt="">              <img src="http://pic002.cnblogs.com/images/2012/302680/2012062820012876.png" alt=""><br>　　demo中第0个section是陕西省的城市，第1个section是北京。左边是执行前的截图，右边是执行后的截图，观察发现结果并不像我们前面推测的那样。那是因为在批量操作时，不管代码中先写的添加操作还是删除操作，添加操作都会被推出执行，直到这个块中所有的删除操作都执行完以后，才会执行添加操作，这也就是上面苹果官方图片上要表达的意思。<br>　　苹果官方文档有一副图可以帮助我们更好的理解这一点：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819544595.png" alt=""><br>　　原图中操作是：首先删除section 0中的row 1，然后删除section 1，再向section 1中添加一行。执行完批量更新以后就得到右半边的结果。<br> 　　<br><strong>八、IndexList</strong><br>　　当我们tableView中section有很多，数据量比较大的时候我们可以引入indexList，来方便完成section的定位，例如系统的通讯录程序。我们可以通过设置tableView的sectionIndexMinimumDisplayRowCount属性来指定当tableView中多少行的时候开始显示IndexList，默认的设置是NSIntegerMax，即默认是不显示indexList的。<br>　　为了能够使用indexlist我们还需要实现dataSource中一下两个方法：</p>
+<pre><code><span class="pp">- <span class="params">(<span class="variable">NSArray</span> *)</span>sectionIndexTitlesForTableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView; - <span class="params">(<span class="variable">NSInteger</span>)</span>tableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView sectionForSectionIndexTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title atIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index; </span>
+</code></pre><p>　　第一个方法返回用于显示在indexList中的内容的数组，通常为A，B，C…Z。第二个方法的主要作用是根据用户在indexList中点击的位置，返回相应的section的index值。这个例子可以在苹果官方给出的TableViewSuite中找到，实现起来还是很简单的。</p>
+<p><strong>九、其他</strong><br>　　<strong>1**</strong>、分割线<strong><br>　　我们可以通过设置tableView的separatorStyle属性来设置有无分割线以及分割线的风格，其中style定义如下：<br>    typedef enum {<br>        UITableViewCellSeparatorStyleNone,<br>        UITableViewCellSeparatorStyleSingleLine,<br>        UITableViewCellSeparatorStyleSingleLineEtched<br>    } UITableViewCellSeparatorStyle;<br>　　同时还可以通过tableView的separatorColor属性来设置分割线的颜色。
+　　</strong>2、如何提高tableView的性能**</p>
+<p>　　<strong>a、重用cell</strong><br>　　我们都知道申请内存是需要时间，特别是在一段时间内频繁的申请内存将会造成很大的开销，而且上tebleView中cell大部分情况下布局都是一样的，这个时候我们可以通过回收重用机制来提高性能。<br>　　<strong>b、避免content的重新布局</strong><br>　　尽量避免在重用cell时候，对cell的重新布局，一般情况在在创建cell的时候就将cell布局好。<br>　　<strong>c、使用不透明的subView</strong><br>　　在定制cell的时候，将要添加的subView设置成不透明的会大大减少多个view层叠加时渲染所需要的时间。<br>　　<strong>d、如果方便，直接重载subView的drawRect方法</strong><br><strong>　　</strong>如果定制cell的过程中需要多个小的元素的话，最好直接对要显示的多个项目进行绘制，而不是采用添加多个subView。<br>　　<strong>e、tableView的delegate的方法如非必要，尽量不要实现</strong><br>　　tableView的delegate中的很多函数提供了对cell属性的进一步控制，比如每个cell的高度，cell是否可以编辑，支持的edit风格等，如非必要最好不要实现这些方法因为快速的调用这些方法也会影响性能。<br>　　(以上5点建议，前三点来自苹果官方文档，后两点我自己加的，有什么不对的地方，欢迎指正)</p>
+<p><strong>小结：</strong>UITableView本身是很复杂的，本片博客只起到抛砖引玉的作用，欢迎大家补充。想用好UITableView，还是需要实际项目中的锻炼的。</p>
+<p>注：1、博客中的图片出了程序运行截图，其他的都来自苹果官方文档。<br>　　2、欢迎转载，转载请在显著位置添加原文链接地址和作者名称，谢谢！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文转自:<a href="http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html" target="_blank" rel="external">http://www.cnblogs.com/]]>
+    </summary>
+    
+      <category term="uitableviewcell" scheme="/about/tags/uitableviewcell/"/>
+    
+      <category term="uitableview" scheme="/about/tags/uitableview/"/>
+    
+      <category term="iOS应用开发之UITableViewCell" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BUITableViewCell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS6新特征：UIRefreshControl[下拉刷新]使用示例]]></title>
+    <link href="/about/2014/05/04/iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl%5B%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%5D%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/"/>
+    <id>/about/2014/05/04/iOS6新特征：UIRefreshControl[下拉刷新]使用示例/</id>
+    <published>2014-05-04T12:44:00.000Z</published>
+    <updated>2014-10-30T10:47:16.000Z</updated>
+    <content type="html"><![CDATA[<p>原文出处:<a href="http://www.devdiv.com/iOS_iPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl_%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0_%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-thread-127741-1-1.html" target="_blank" rel="external">http://www.devdiv.com/iOS<em>iPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl</em>%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0_%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-thread-127741-1-1.html</a><br>注：这里是iOS6新特征汇总贴链接 <a href="http://www.devdiv.com/iOS_iPhone-ios_-thread-127965-1-1.html" target="_blank" rel="external">iOS6新特征：参考资料和示例汇总</a></p>
+<p>小弟不才，今天研究了一下iOS6中的一个新控件UIRefreshControl，下面与大家分享一下。</p>
+<p>不会模仿的公司不是好公司不会剽窃的公司不是优秀公司<br>不会调戏代码的不是骨灰级码工<br>你同意吗？<br>苹果估计想取代第三方的pull to refresh】</p>
+<p>下面是效果图，这里是代码示例 <img src="http://www.devdiv.com/static/image/filetype/zip.gif" alt=""><a href="http://www.devdiv.com/forum.php?mod=misc&amp;action=attachpay&amp;aid=32936&amp;tid=127741" target="_blank" rel="external">DevDiv_UIRefreshControl.zip</a> (144.42<br> KB, 下载次数: 1042, 售价: 1 资源分) </p>
+<p><img src="http://www.devdiv.com/forum.php?mod=attachment&amp;aid=MzI5Mzd8Mzk1NmY0NjZ8MTM5OTIwNzU1NnwwfDEyNzc0MQ%3D%3D&amp;noupdate=yes" alt="QQ20120615-2.png" title="QQ20120615-2.png"></p>
+<p>下面大致介绍一下UIRefreshControl的使用</p>
+<p>1、使用范围<br>如果你装了xcode_4.5_developer_preview，那么在UITableViewController.h文件中你会看到，UITableViewController里面有如下声明，说明UITableViewController已经内置了UIRefreshControl控件</p>
+<p><code>1``@property
+ (nonatomic,retain) UIRefreshControl *refreshControl NS_AVAILABLE_IOS(6_0);</code></p>
+<p>【注】：UIRefreshControl目前只能用于UITableViewController，如果用在其他ViewController中，运行时会得到如下错误提示：（即UIRefreshControl只能被UITableViewController管理）</p>
+<p><code>1``2012-06-15
+ 14:34:34.908 DevDivUIRefreshControl[722:10103] *** Terminating app due to uncaught exception ``&#39;NSInternalInconsistencyException&#39;``,
+ reason: ``&#39;UIRefreshControl
+ may only be managed by a UITableViewController&#39;``2``***
+ First ``throw</code> <code>call
+ stack:``3``(0x186fd72
+ 0x1066e51 0x186fb4b 0x55a559 0x57238 0x5d482 0x55ad2 0x2ebb 0xeb2a3 0xeb30e 0x10b7e9 0x10b624 0x109aef 0x10999c 0x107adc 0x1082c6 0xecf24 0xed1e0 0xee084 0x5645c 0x5cf31 0x55ad2 0x4131d 0x414f6 0x4168c 0x49871 0x10a90 0x1196a 0x222be 0x22f9f 0x153fd 0x17ccf39
+ 0x17ccc10 0x17e5da5 0x17e5b12 0x1816b46 0x1815ed4 0x1815dab 0x1128f 0x12e71 0x29fd 0x2925)``4``libc++abi.dylib:
+ terminate called throwing an exception``5``(lldb)</code></p>
+<p>2、如何使用<br>    a)初始化<br>如何在UITableViewController 中使用UIRefreshControl呢，在上面给出的代码附件中，你可以很详细的知道，这里介绍一下关键的部分：</p>
+<p><code>1``   ``self.refreshControl
+ = [[UIRefreshControl alloc]init];``2``    ``// 
+   self.refreshControl.tintColor = [UIColor blueColor];``3``    ``self.refreshControl.attributedTitle
+ = [[NSAttributedString alloc]initWithString:@``&quot;下拉刷新&quot;``];``4``    ``[self.refreshControl
+ addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];</code></p>
+<p>如上面看到的代码，虽然UITableViewController已经声明了UIRefreshControl，但是貌似还没有初始化，所以需要我们自己初始化。很神奇，初始化的时候并不需要给它指定frame，UITableViewController会为我们进行管理。遗憾的时目前只看到下拉刷新功能，上拉刷新还没有，估计在最终版里面苹果会考虑加入上拉刷新功能。<br>我们还可以给UIRefreshControl设置tintColor和attributedTitle。</p>
+<pre><code>b)下拉刷新事件监听
+</code></pre><p>当用户进行下拉刷新操作时，UIRefreshControl 会触发一个UIControlEventValueChanged事件，通过监听这个事件，我们就可以进行类似数据请求的操作了。如下代码：</p>
+<p><code>1``[self.refreshControl
+ addTarget:self action:@selector(RefreshViewControlEventValueChanged)</code></p>
+<pre><code><span class="built_in">c</span>)进行数据请求
+</code></pre><p>在示例中，为了演示数据请求，我简单的做了一个延时处理，2秒钟后，调用handleData</p>
+<p><code>1``[self
+ performSelector:@selector(handleData) withObject:nil afterDelay:2];</code></p>
+<p>在handleData里面，就表示已经请求到了数据，在此进行UI更新即可。也需要注意的是，我们调用UIRefreshControl 的endRefreshing方法，表示刷新结束，让UIRefreshControl更新显示。</p>
+<p><code>1``-
+ (``void``)
+ handleData``2``{``3``    ``NSLog(@``&quot;refreshed&quot;``);``4``    ``[self.refreshControl
+ endRefreshing];``5``    ``self.refreshControl.attributedTitle
+ = [[NSAttributedString alloc]initWithString:@``&quot;下拉刷新&quot;``];``6</code> <code>7``    ``self.count++;``8``    ``[self.tableView
+ reloadData];``9``}</code></p>
+<p>3、官方头文件<br>下面是sdk中UIRefreshControl的声明，想必看了下面的代码，你已经知道如何使用了。<br><a href="http://www.devdiv.com/#viewSource" title="view source" target="_blank" rel="external">view<br> source</a><a href="http://www.devdiv.com/#printSource" title="print" target="_blank" rel="external">print</a><a href="http://www.devdiv.com/#about" title="?" target="_blank" rel="external">?</a><code>01``//``02``//  UIRefreshControl.h``03``//  UIKit``04``//``05``//  Copyright
+ 2012 Apple Inc. All rights reserved.``06``//``07</code> <code>08``#import
+ &lt;Foundation/Foundation.h&gt;``09``#import
+ &lt;UIKit/UIControl.h&gt;``10``#import
+ &lt;UIKit/UIKitDefines.h&gt;``11</code> <code>12``NS_CLASS_AVAILABLE_IOS(6_0)
+ @interface UIRefreshControl : UIControl``13</code> <code>14``/*
+ The designated initializer``15`` ``*
+ This initializes a UIRefreshControl with a default height and width.``16`` ``*
+ Once assigned to a UITableViewController, the frame of the control is managed automatically.``17`` ``*
+ When a user has pulled-to-refresh, the UIRefreshControl fires its UIControlEventValueChanged event.``18`` ``*/``19``-
+ (id)init;``20</code> <code>21``@property
+ (nonatomic, readonly, getter=isRefreshing) ``BOOL</code> <code>refreshing;``22</code> <code>23``@property
+ (nonatomic, retain) UIColor *tintColor UI_APPEARANCE_SELECTOR;``24``@property
+ (nonatomic, retain) NSAttributedString *attributedTitle UI_APPEARANCE_SELECTOR;``25</code> <code>26``//
+ May be used to indicate to the refreshControl that an external event has initiated the refresh action``27``-
+ (``void``)beginRefreshing
+ NS_AVAILABLE_IOS(6_0);``28``//
+ Must be explicitly called when the refreshing has completed``29``-
+ (``void``)endRefreshing
+ NS_AVAILABLE_IOS(6_0);``30</code> `31``@end</p>
+<p>`</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>原文出处:<a href="http://www.devdiv.com/iOS_iPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl_%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96]]>
+    </summary>
+    
+      <category term="UITableViewControlle" scheme="/about/tags/UITableViewControlle/"/>
+    
+      <category term="iOS应用开发之UI" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BUI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[IOS开发～web在线安装App]]></title>
+    <link href="/about/2014/04/30/IOS%E5%BC%80%E5%8F%91%EF%BD%9Eweb%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85App/"/>
+    <id>/about/2014/04/30/IOS开发～web在线安装App/</id>
+    <published>2014-04-30T01:39:00.000Z</published>
+    <updated>2014-10-30T10:47:16.000Z</updated>
+    <content type="html"><![CDATA[<p>经测试，在越狱设备上可以安装，如果设备不越狱也想安装，就要企业发布权限了，可惜我没有，所以不能测试了！</p>
+<p>1、创建ipa及plist文件：<br>XCode菜单栏-&gt;Product-&gt;Archive-&gt;Distribute-&gt;Save for Enterprise or Ad-Hod Deploymemnt<br>点击Next<br>选择你的Code signing Identity，我选的是Team profile<br>点击Next<br>选择Save for Enterprise Distribution，并且填写信息<br><img src="http://img.blog.csdn.net/20130812172507484?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl6aG9uZ2Z1MjAxMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>说明：Large Image URL 与 Small Image URL 对应你的App安装过程中的icon</p>
+<p>点击保存后，会生成ipa文件和plist文件。<br>plist文件如下：<br><img src="http://img.blog.csdn.net/20130812173125406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl6aG9uZ2Z1MjAxMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>2、创建web下载页面</p>
+<p><strong>[html]</strong> <a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="copy" target="_blank" rel="external">copy</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="print" target="_blank" rel="external">print</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="?" target="_blank" rel="external">?</a>1. &lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a>  </p>
+<ol>
+<li><html xmlns="http://www.w3.org/1999/xhtml">  </html></li>
+<li><head>  </head></li>
+<li><meta http-equiv="Content-Type" content="text/html; charset=utf-8">  </li>
+<li>  </li>
+<li><body>  </body></li>
+<li><div align="center">  </div></li>
+<li><a href="itms-services://?action=download-manifest&url=http://yiwenxue.cn/game/game-demo.plist" target="_blank" rel="external">在线安装</a>  </li>
+<li><div>  </div></li>
+<li>  </li>
+<li>  </li>
+</ol>
+<p>3、部署与测试<br>将项目ipa文件、plist文件、Large Image、Small Image、第（2）部创建的web页面部署到服务器目录中，IOS设备输入<a href="http://yiwenxue.cn/game，然后点击安装，安装URL根据你实际情况而定。另，有想自己亲手测试一下的，可以把文件都发给我，我帮忙部署（如果和商业有关，那就免了）！仅限空闲时间！" target="_blank" rel="external">http://yiwenxue.cn/game，然后点击安装，安装URL根据你实际情况而定。另，有想自己亲手测试一下的，可以把文件都发给我，我帮忙部署（如果和商业有关，那就免了）！仅限空闲时间！</a></p>
+<p>转载出处:<a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409" target="_blank" rel="external">http://blog.csdn.net/lizhongfu2013/article/details/9930409</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>经测试，在越狱设备上可以安装，如果设备不越狱也想安装，就要企业发布权限了，可惜我没有，所以不能测试了！</p>
+<p>1、创建ipa及plist文件：<br>XCode菜单栏-&gt;Product-&gt;Archive-&gt;Distribute-&gt;Save f]]>
+    </summary>
+    
+      <category term="iOS开发" scheme="/about/tags/iOS%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="iOS应用开发之Xcode配置" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BXcode%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   

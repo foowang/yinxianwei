@@ -1,0 +1,506 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS6新特征：UIRefreshControl[下拉刷新]使用示例 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="原文出处:http://www.devdiv.com/iOSiPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0_%E4%BD%BF%E7%94%A8%E">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/04/iOS6新特征：UIRefreshControl[下拉刷新]使用示例/" title="iOS6新特征：UIRefreshControl[下拉刷新]使用示例" itemprop="url">iOS6新特征：UIRefreshControl[下拉刷新]使用示例</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-05-04T12:44:00.000Z" itemprop="datePublished">5月 4 2014</time>
+    Updated:<time datetime="2014-10-30T10:47:16.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>原文出处:<a href="http://www.devdiv.com/iOS_iPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl_%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0_%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-thread-127741-1-1.html" target="_blank" rel="external">http://www.devdiv.com/iOS<em>iPhone-iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl</em>%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0_%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-thread-127741-1-1.html</a><br>注：这里是iOS6新特征汇总贴链接 <a href="http://www.devdiv.com/iOS_iPhone-ios_-thread-127965-1-1.html" target="_blank" rel="external">iOS6新特征：参考资料和示例汇总</a></p>
+<p>小弟不才，今天研究了一下iOS6中的一个新控件UIRefreshControl，下面与大家分享一下。</p>
+<p>不会模仿的公司不是好公司不会剽窃的公司不是优秀公司<br>不会调戏代码的不是骨灰级码工<br>你同意吗？<br>苹果估计想取代第三方的pull to refresh】</p>
+<p>下面是效果图，这里是代码示例 <img src="http://www.devdiv.com/static/image/filetype/zip.gif" alt=""><a href="http://www.devdiv.com/forum.php?mod=misc&amp;action=attachpay&amp;aid=32936&amp;tid=127741" target="_blank" rel="external">DevDiv_UIRefreshControl.zip</a> (144.42<br> KB, 下载次数: 1042, 售价: 1 资源分) </p>
+<p><img src="http://www.devdiv.com/forum.php?mod=attachment&amp;aid=MzI5Mzd8Mzk1NmY0NjZ8MTM5OTIwNzU1NnwwfDEyNzc0MQ%3D%3D&amp;noupdate=yes" alt="QQ20120615-2.png" title="QQ20120615-2.png"></p>
+<p>下面大致介绍一下UIRefreshControl的使用</p>
+<p>1、使用范围<br>如果你装了xcode_4.5_developer_preview，那么在UITableViewController.h文件中你会看到，UITableViewController里面有如下声明，说明UITableViewController已经内置了UIRefreshControl控件</p>
+<p><code>1``@property
+ (nonatomic,retain) UIRefreshControl *refreshControl NS_AVAILABLE_IOS(6_0);</code></p>
+<p>【注】：UIRefreshControl目前只能用于UITableViewController，如果用在其他ViewController中，运行时会得到如下错误提示：（即UIRefreshControl只能被UITableViewController管理）</p>
+<p><code>1``2012-06-15
+ 14:34:34.908 DevDivUIRefreshControl[722:10103] *** Terminating app due to uncaught exception ``&#39;NSInternalInconsistencyException&#39;``,
+ reason: ``&#39;UIRefreshControl
+ may only be managed by a UITableViewController&#39;``2``***
+ First ``throw</code> <code>call
+ stack:``3``(0x186fd72
+ 0x1066e51 0x186fb4b 0x55a559 0x57238 0x5d482 0x55ad2 0x2ebb 0xeb2a3 0xeb30e 0x10b7e9 0x10b624 0x109aef 0x10999c 0x107adc 0x1082c6 0xecf24 0xed1e0 0xee084 0x5645c 0x5cf31 0x55ad2 0x4131d 0x414f6 0x4168c 0x49871 0x10a90 0x1196a 0x222be 0x22f9f 0x153fd 0x17ccf39
+ 0x17ccc10 0x17e5da5 0x17e5b12 0x1816b46 0x1815ed4 0x1815dab 0x1128f 0x12e71 0x29fd 0x2925)``4``libc++abi.dylib:
+ terminate called throwing an exception``5``(lldb)</code></p>
+<p>2、如何使用<br>    a)初始化<br>如何在UITableViewController 中使用UIRefreshControl呢，在上面给出的代码附件中，你可以很详细的知道，这里介绍一下关键的部分：</p>
+<p><code>1``   ``self.refreshControl
+ = [[UIRefreshControl alloc]init];``2``    ``// 
+   self.refreshControl.tintColor = [UIColor blueColor];``3``    ``self.refreshControl.attributedTitle
+ = [[NSAttributedString alloc]initWithString:@``&quot;下拉刷新&quot;``];``4``    ``[self.refreshControl
+ addTarget:self action:@selector(RefreshViewControlEventValueChanged) forControlEvents:UIControlEventValueChanged];</code></p>
+<p>如上面看到的代码，虽然UITableViewController已经声明了UIRefreshControl，但是貌似还没有初始化，所以需要我们自己初始化。很神奇，初始化的时候并不需要给它指定frame，UITableViewController会为我们进行管理。遗憾的时目前只看到下拉刷新功能，上拉刷新还没有，估计在最终版里面苹果会考虑加入上拉刷新功能。<br>我们还可以给UIRefreshControl设置tintColor和attributedTitle。</p>
+<pre><code>b)下拉刷新事件监听
+</code></pre><p>当用户进行下拉刷新操作时，UIRefreshControl 会触发一个UIControlEventValueChanged事件，通过监听这个事件，我们就可以进行类似数据请求的操作了。如下代码：</p>
+<p><code>1``[self.refreshControl
+ addTarget:self action:@selector(RefreshViewControlEventValueChanged)</code></p>
+<pre><code><span class="built_in">c</span>)进行数据请求
+</code></pre><p>在示例中，为了演示数据请求，我简单的做了一个延时处理，2秒钟后，调用handleData</p>
+<p><code>1``[self
+ performSelector:@selector(handleData) withObject:nil afterDelay:2];</code></p>
+<p>在handleData里面，就表示已经请求到了数据，在此进行UI更新即可。也需要注意的是，我们调用UIRefreshControl 的endRefreshing方法，表示刷新结束，让UIRefreshControl更新显示。</p>
+<p><code>1``-
+ (``void``)
+ handleData``2``{``3``    ``NSLog(@``&quot;refreshed&quot;``);``4``    ``[self.refreshControl
+ endRefreshing];``5``    ``self.refreshControl.attributedTitle
+ = [[NSAttributedString alloc]initWithString:@``&quot;下拉刷新&quot;``];``6</code> <code>7``    ``self.count++;``8``    ``[self.tableView
+ reloadData];``9``}</code></p>
+<p>3、官方头文件<br>下面是sdk中UIRefreshControl的声明，想必看了下面的代码，你已经知道如何使用了。<br><a href="http://www.devdiv.com/#viewSource" title="view source" target="_blank" rel="external">view<br> source</a><a href="http://www.devdiv.com/#printSource" title="print" target="_blank" rel="external">print</a><a href="http://www.devdiv.com/#about" title="?" target="_blank" rel="external">?</a><code>01``//``02``//  UIRefreshControl.h``03``//  UIKit``04``//``05``//  Copyright
+ 2012 Apple Inc. All rights reserved.``06``//``07</code> <code>08``#import
+ &lt;Foundation/Foundation.h&gt;``09``#import
+ &lt;UIKit/UIControl.h&gt;``10``#import
+ &lt;UIKit/UIKitDefines.h&gt;``11</code> <code>12``NS_CLASS_AVAILABLE_IOS(6_0)
+ @interface UIRefreshControl : UIControl``13</code> <code>14``/*
+ The designated initializer``15`` ``*
+ This initializes a UIRefreshControl with a default height and width.``16`` ``*
+ Once assigned to a UITableViewController, the frame of the control is managed automatically.``17`` ``*
+ When a user has pulled-to-refresh, the UIRefreshControl fires its UIControlEventValueChanged event.``18`` ``*/``19``-
+ (id)init;``20</code> <code>21``@property
+ (nonatomic, readonly, getter=isRefreshing) ``BOOL</code> <code>refreshing;``22</code> <code>23``@property
+ (nonatomic, retain) UIColor *tintColor UI_APPEARANCE_SELECTOR;``24``@property
+ (nonatomic, retain) NSAttributedString *attributedTitle UI_APPEARANCE_SELECTOR;``25</code> <code>26``//
+ May be used to indicate to the refreshControl that an external event has initiated the refresh action``27``-
+ (``void``)beginRefreshing
+ NS_AVAILABLE_IOS(6_0);``28``//
+ Must be explicitly called when the refreshing has completed``29``-
+ (``void``)endRefreshing
+ NS_AVAILABLE_IOS(6_0);``30</code> `31``@end</p>
+<p>`</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/UITableViewControlle/">UITableViewControlle</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/05/04/iOS6新特征：UIRefreshControl[下拉刷新]使用示例/" data-title="iOS6新特征：UIRefreshControl[下拉刷新]使用示例 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/06/04/UITableView&UITableViewCell/" title="UITableView&amp;UITableViewCell">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  UITableView&amp;UITableViewCell</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/04/30/IOS开发～web在线安装App/"  title="IOS开发～web在线安装App">
+ <strong>NEXT:</strong><br/> 
+ <span>IOS开发～web在线安装App
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

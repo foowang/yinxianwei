@@ -1,0 +1,736 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>IOS开发之Block 编程（翻译官方文档） | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="本文转自：http://blog.csdn.net/perfect_promise/article/details/7757746
+注：小弟才疏学浅，英文水平够烂，若有不正确或误导的地方，请大家指出，欢迎大家指正和修改。本文中涉及的词法范围：作用范围，例如if{}else{}，两个{}分别是if和e">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/01/08/IOS开发之Block 编程（翻译官方文档）/" title="IOS开发之Block 编程（翻译官方文档）" itemprop="url">IOS开发之Block 编程（翻译官方文档）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-01-08T05:09:00.000Z" itemprop="datePublished">1月 8 2014</time>
+    Updated:<time datetime="2014-10-30T10:46:26.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明和使用Block"><span class="toc-number">1.</span> <span class="toc-text">声明和使用Block</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接使用Block"><span class="toc-number"></span> <span class="toc-text">直接使用Block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cocoa_Block"><span class="toc-number"></span> <span class="toc-text">Cocoa Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#_block变量"><span class="toc-number">1.</span> <span class="toc-text">_block变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Block功能"><span class="toc-number"></span> <span class="toc-text">Block功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用法"><span class="toc-number"></span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明block参考"><span class="toc-number"></span> <span class="toc-text">声明block参考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建block"><span class="toc-number"></span> <span class="toc-text">创建block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局block"><span class="toc-number"></span> <span class="toc-text">全局block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量类型"><span class="toc-number"></span> <span class="toc-text">变量类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#_block存储类型"><span class="toc-number"></span> <span class="toc-text">_block存储类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象和block变量"><span class="toc-number"></span> <span class="toc-text">对象和block变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C_对象"><span class="toc-number">0.1.</span> <span class="toc-text">Objective-C 对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调用block"><span class="toc-number"></span> <span class="toc-text">调用block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用block作为函数参数"><span class="toc-number"></span> <span class="toc-text">使用block作为函数参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用block作为方法参数"><span class="toc-number"></span> <span class="toc-text">使用block作为方法参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#复制block"><span class="toc-number"></span> <span class="toc-text">复制block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#避免的模式"><span class="toc-number"></span> <span class="toc-text">避免的模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调试"><span class="toc-number"></span> <span class="toc-text">调试</span></a>
+		</div>
+		
+		<p>本文转自：<a href="http://blog.csdn.net/perfect_promise/article/details/7757746" target="_blank" rel="external">http://blog.csdn.net/perfect_promise/article/details/7757746</a></p>
+<p>注：小弟才疏学浅，英文水平够烂，若有不正确或误导的地方，请大家指出，欢迎大家指正和修改。本文中涉及的词法范围：作用范围，例如if{}else{}，两个{}分别是if和else的作用范围。#<a href=""></a>介绍<br>Block对象是一个C级别的语法和运行机制。它与标准的C函数类似，不同之处在于，它除了有可执行代码以外，它还包含了与堆、栈内存绑定的变量。因此，Block对象包含着一组状态数据，这些数据在程序执行时用于对行为产生影响。</p>
+<p>你可以用Block来写一些可以传到API中的函数语句，可选择性地存储，并可以使用多线程。作为一个回调，Block特别的有用，因为block既包含了回调期间的代码，又包含了执行期间需要的数据。<br>作为Mac OS X v10.6 Xcode开发工具附带的工具，Block在GCC和Clang中同样可用。你能在Mac OS X v10.6 及其以上版本和iOS 4.0及其以上版本中使用Block。.Block的运行是开源的，因此你能在<a href="http://llvm.org/svn/llvm-project/compiler-rt/trunk/" target="_blank" rel="external">LLVM’s<br> compiler-rt subproject repository</a>里面找到它。Block也已经被提交到C标准工作组作为 <a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1370.pdf" target="_blank" rel="external">N1370:<br> Apple’s Extensions to C</a>。 由于Objective-C 和 C++ 都是衍生自 C，block被设计为可同时兼容这三种语言。<br>你应该阅读这篇文档，去学习Block是什么，以及在C、C++和OC中如何使用Block使你的程序更加的高效和更易于维护。</p>
+<h2 id="声明和使用Block"><a href=""></a>声明和使用Block</h2>
+<p>用^操作符来声明一个Block变量，并指明Block述句的开始。Block的主体部分包含在 <code>{}内，像下面的例子中一样（与C语法一样，“；”指明语句的结束）：</code><br>    int multiplier = 7;<br>    int (^myBlock)(int) = ^(int num) {<br>        return num <em> multiplier;<br>    };<br><img src="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Art/blocks.jpg" alt="image: ../Art/blocks.jpg">注意：Block可以使用定义范围之内的任何变量。<br>如果你把Block声明为一个变量，你以后就可以像调用一个方法一样使用它：<br>    int multiplier = 7;<br>    int (^myBlock)(int) = ^(int num) {<br>        return num </em> multiplier;<br>    };</p>
+<pre><code><span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span>"</span>, myBlock(<span class="number">3</span>));
+<span class="regexp">//</span> prints <span class="string">"21"</span>
+</code></pre><h1 id="直接使用Block"><a href=""></a>直接使用Block</h1>
+<p>很多情况下，你不需要声明Block变量；你只是简单地写一个Block语句内联在需要使用它作为参数的地方。下面的例子使用了 <code>qsort_b方法，</code>qsort_b方法与标准的qsort_r类似，只是用Block作为它的最后一个参数。``<br>    char *myCharacters[3] = { “TomJohn”, “George”, “Charles Condomine” };</p>
+<pre><code>qsort_b(myCharacters, 3, sizeof(char <span class="keyword">*</span>), ^(const void <span class="keyword">*</span>l, const void <span class="keyword">*</span>r) {
+    char <span class="keyword">*</span>left = <span class="keyword">*</span>(char <span class="keyword">*</span><span class="keyword">*</span>)l;
+    char <span class="keyword">*</span>right = <span class="keyword">*</span>(char <span class="keyword">*</span><span class="keyword">*</span>)r;
+    return strncmp(left, right, 1);
+});
+
+// myCharacters is now { <span class="string">"Charles Condomine"</span>, <span class="string">"George"</span>, <span class="string">"TomJohn"</span> }
+</code></pre><h1 id="Cocoa_Block"><a href=""></a>Cocoa Block</h1>
+<p>Cocoa框架中有几个方法使用Block作为参数，通常是在执行对象的操作集合，或者操作完成后使用它作为回调。下面的例子向我们展示了<br><code>在NSArray</code> 对象的方法<code>[sortedArrayUsingComparator:怎样使用Block](http://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/NSArray.html#//apple_ref/occ/instm/NSArray/sortedArrayUsingComparator:)</code>.。这个方法只有单一的参数，block被定义为<code>[NSComparator](http://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_DataTypes/Reference/reference.html#//apple_ref/c/tdef/NSComparator)</code> 局部变量：<br>    NSArray *stringsArray = [NSArray arrayWithObjects:<br>                                     @”string 1”,<br>                                     @”String 21”,<br>                                     @”string 12”,<br>                                     @”String 11”,<br>                                     @”String 02”, nil];</p>
+<pre><code>static NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch | NSNumericSearch |
+        NSWidthInsensitiveSearch | NSForcedOrderingSearch;
+NSLocale *currentLocale = [NSLocale currentLocale];
+
+NSComparator finderSortBlock = ^(<span class="property">id</span> string1, <span class="property">id</span> string2) {
+
+    NSRange string1Range = NSMakeRange(<span class="number">0</span>, [string1 <span class="property">length</span>]);
+<span class="command">    return</span> [string1 compare:string2 options:comparisonOptions range:string1Range locale:currentLocale];
+};
+
+NSArray *finderSortArray = [stringsArray sortedArrayUsingComparator:finderSortBlock];
+NSLog(@<span class="string">"finderSortArray: %@"</span>, finderSortArray);
+
+/*
+Output:
+finderSortArray: (
+    <span class="string">"string 1"</span>,
+    <span class="string">"String 02"</span>,
+    <span class="string">"String 11"</span>,
+    <span class="string">"string 12"</span>,
+    <span class="string">"String 21"</span>
+)
+*/
+</code></pre><h2 id="_block变量"><a href=""></a>_block变量</h2>
+<p>Block的一个强大的特性是，它能在相同的词法范围内修改变量值。Block能修改变量是通过_block存储类型标示符。与 <a href="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/bxGettingStarted.html#//apple_ref/doc/uid/TP40007502-CH7-SW4" target="_blank" rel="external">“Cocoa<br> Block”</a> 中的例子一样，你能使用一个block变量来计算有多少字符串与下面例子中是相同的。 Block直接被用，并且用 <code>currentLocale作为一个只读变量在block中。</code><br>    NSArray *stringsArray = [NSArray arrayWithObjects:<br>                             @”string 1”,<br>                             @”String 21”, // &lt;-<br>                             @”string 12”,<br>                             @”String 11”,<br>                             @”Strîng 21”, // &lt;-<br>                             @”Striñg 21”, // &lt;-<br>                             @”String 02”, nil];</p>
+<pre><code>NSLocale *currentLocale = [NSLocale currentLocale];
+__block NSUInteger orderedSameCount = <span class="number">0</span>;
+
+NSArray *diacriticInsensitiveSortArray = [stringsArray sortedArrayUsingComparator:^(<span class="property">id</span> string1, <span class="property">id</span> string2) {
+
+    NSRange string1Range = NSMakeRange(<span class="number">0</span>, [string1 <span class="property">length</span>]);
+    NSComparisonResult comparisonResult = [string1 compare:string2 options:NSDiacriticInsensitiveSearch range:string1Range locale:currentLocale];
+
+    <span class="keyword">if</span> (comparisonResult == NSOrderedSame) {
+        orderedSameCount++;
+    }
+<span class="command">    return</span> comparisonResult;
+}];
+
+NSLog(@<span class="string">"diacriticInsensitiveSortArray: %@"</span>, diacriticInsensitiveSortArray);
+NSLog(@<span class="string">"orderedSameCount: %d"</span>, orderedSameCount);
+
+/*
+Output:
+
+diacriticInsensitiveSortArray: (
+    <span class="string">"String 02"</span>,
+    <span class="string">"string 1"</span>,
+    <span class="string">"String 11"</span>,
+    <span class="string">"string 12"</span>,
+    <span class="string">"String 21"</span>,
+    <span class="string">"Str\U00eeng 21"</span>,
+    <span class="string">"Stri\U00f1g 21"</span>
+)
+orderedSameCount: <span class="number">2</span>
+*/
+</code></pre><p>更详细的内容请查看 <a href="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/bxVariables.html#//apple_ref/doc/uid/TP40007502-CH6-SW1" target="_blank" rel="external">“Blocks<br> 和变量.”</a></p>
+<h1 id="Block功能"><a href=""></a>Block功能</h1>
+<p>Block是一个匿名的内嵌代码集：</p>
+<ul>
+<li><p>与方法一样，有一个类型参数列表</p>
+</li>
+<li><p>有一个隐形或声明的返回类型</p>
+</li>
+<li><p>能从它定义的词法范围内获取状态</p>
+</li>
+<li><p>能有选择性地修改词法范围中的状态</p>
+</li>
+<li><p>能共享相同词法范围内其他块定义的修改的潜在性</p>
+</li>
+<li><p>词法范围被销毁后仍能继续在已定义的词法范围内共享和修改状态</p>
+</li>
+</ul>
+<p>你能复制一个block，并把它传递给其他线程来延迟执行（或者，在它自己的线程内，做一个运行环）。编译和运行过程中，从block中引用的所有变量都保留乐一份block的副本。block不仅适用于纯 C 和 C++，同时block也是一个Objective-C 对象。</p>
+<h1 id="用法"><a href=""></a>用法</h1>
+<p>Blocks通常表示比较小的，独立的代码段。因此，它特别适用于可能被同时执行的封装单元工作的模式，或者是集合中的项目，或者是当另一个操作完成后的一个回调。<br>Blocks之所以能替代传统的回调方法主要有以下两个理由：</p>
+<ol>
+<li><p>它允许你在调用点写代码，调用点稍后会在方法实现段被执行。<br>Blocks通常也是框架方法中的参数。</p>
+</li>
+<li><p>它允许访问局部变量。<br>与其使用回调，需要一个包含所有上下文信息的数据结构，你只需要执行一个操作，直接访问局部变量即可。</p>
+</li>
+</ol>
+<h1 id="声明block参考"><a href=""></a>声明block参考</h1>
+<p>Block变量持有Block引用。 声明它的语法与在函数中声明指针类似，用 <code>^代替</code> <code>*。</code> 其余部分，与C类型系统，具有完全的互操作性。以下时所有有效块的变量声明：<br>    void (^blockReturningVoidWithVoidArgument)(void);<br>    int (^blockReturningIntWithIntAndCharArguments)(int, char);<br>    void (^arrayOfTenBlocksReturningVoidWithIntArgument[10])(int);<br>Block支持可变参数 (<code>...</code>)参数。 不带任何参数的block，在参数列表中必须指定为void。Block的设计考虑到类型安全，通过提供给编译器全套的元数据来验证block的使用、传递参数到block中和返回值分配。一个块引用可以转换到任意类型的指针，反之亦然。但是，你不能通过*来获得block的值，因而在编译时，block的大小也不能被计算出来。<br>你可以创建一个block类型，当你在多个地方使用到同一个签名的block时，这种方式时很好的。<br>    typedef float (^MyBlockType)(float, float);</p>
+<pre><code>MyBlockType myFirstBlock = // <span class="keyword">...</span> ;
+MyBlockType mySecondBlock = // <span class="keyword">...</span> ;
+</code></pre><h1 id="创建block"><a href=""></a>创建block</h1>
+<p>用^指明block语句的开始。在它后面的（）是参数列表。block的主体部分在{ }里面.。下面的例子定义了一个简单的block，并把先前定义的变量（oneForm）分配给它。<br>    int (^oneFrom)(int);</p>
+<pre><code>oneFrom = ^(<span class="keyword">int</span> anInt) {
+    <span class="keyword">return</span> anInt - <span class="number">1</span>;
+};
+</code></pre><p>如果你不显式声明块表达式的返回值，它可以根据block的内容进行自动匹配。如果返回类型和参数列表都是void，你也可以省略参数列表。 如果存在多个返回语句，应该正确的进行匹配(又需要的话，可以使用类型转换)。</p>
+<h1 id="全局block"><a href=""></a>全局block</h1>
+<p>在文件级别，你可以使用block作为一个全局表达式。</p>
+<pre><code><span class="preprocessor">#import &lt;stdio.h&gt;</span>
+
+<span class="keyword">int</span> GlobalInt = <span class="number">0</span>;
+<span class="keyword">int</span> (^getGlobalInt)(<span class="keyword">void</span>) = ^{ <span class="keyword">return</span> GlobalInt; };
+</code></pre><h1 id="变量类型"><a href=""></a>变量类型</h1>
+<p>block对象的代码中，变量被看成五种不同的方式。<br>与函数一样，block支持三种标准类型的变量：</p>
+<ul>
+<li><p>全局变量，带有static修饰符的变量</p>
+</li>
+<li><p>全局函数（不是专门的变量）</p>
+</li>
+<li><p>局部变量和参数</p>
+</li>
+</ul>
+<p>Blocks也支持其他两种变量类型：</p>
+<ol>
+<li><p>函数级别的_block变量。如有引用块被复制到堆，block中的_block变量是可变的。</p>
+</li>
+<li><p><code>const</code></p>
+</li>
+</ol>
+<p>最后，在一个方法的实现，块可能引用的Objective-C的实例变量—参考<a href="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/bxVariables.html#//apple_ref/doc/uid/TP40007502-CH6-SW3" target="_blank" rel="external">“Object<br> and Block Variables.”</a><br>以下是在block中使用变量的规则：</p>
+<ol>
+<li><p>可以访问全局变量，包括词法范围内存在的static变量。</p>
+</li>
+<li><p>可以传参给block，与传参给函数的方式是一样的。</p>
+</li>
+<li><p>局部词法范围内的堆栈变量被看成时const变量。<br>他们的值存放在程序内的block语句中。 在嵌套block中，他们的值来自于最近的词法范围内。</p>
+</li>
+<li><p>声明为_block类型的<br>局部词法范围内的变量是可改变的。更改的适用范围仅为局部词法范围，包括词法范围内定义的其他block。 在<a href="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/bxVariables.html#//apple_ref/doc/uid/TP40007502-CH6-SW6" target="_blank" rel="external">“The<br>__block Storage Type.”</a>中有更详细的描述。</p>
+</li>
+<li>block作用范围内声明的局部变量，与函数中的局部变量一样。<br>block的每一次调用，都重新生成此变量的新的副本。这些变量可以被转换为const或引用变量在块内的作用域。</li>
+</ol>
+<p>下面的例子说明了局部非静态变量的使用：</p>
+<pre><code><span class="keyword">int</span> <span class="keyword">x</span> = <span class="number">123</span>;
+
+void (^printXAndY)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> <span class="keyword">y</span>) {
+
+    <span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span> <span class="variable">%d</span>\n"</span>, <span class="keyword">x</span>, <span class="keyword">y</span>);
+};
+
+printXAndY(<span class="number">456</span>); <span class="regexp">//</span> prints: <span class="number">123</span> <span class="number">456</span>
+</code></pre><p>如上所述，在block内试图分配一个新的x的值将会报错：<br>    int x = 123;</p>
+<pre><code>void (^printXAndY)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> <span class="keyword">y</span>) {
+
+    <span class="keyword">x</span> = <span class="keyword">x</span> + <span class="keyword">y</span>; <span class="regexp">//</span> error
+    <span class="keyword">printf</span>(<span class="string">"<span class="variable">%d</span> <span class="variable">%d</span>\n"</span>, <span class="keyword">x</span>, <span class="keyword">y</span>);
+};
+</code></pre><p>为了使一个变量在block内部可以被修改，你应该使用_block来修饰这个变量—参考 <a href="http://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/Blocks/Articles/bxVariables.html#//apple_ref/doc/uid/TP40007502-CH6-SW6" target="_blank" rel="external">“The<br> __block Storage Type.”</a></p>
+<h1 id="_block存储类型"><a href=""></a>_block存储类型</h1>
+<p>在变量前面加上_block类型修饰符，我们可以指定传进来的变量是可变或者可读写的。_block存储与它类似，但是局部变量的寄存器、auto变量和static存储类型之间相互排斥。<br><code>_block变量共享变量之间的作用域和块之间的作用域拷贝变量存储范围内。因此，如果block中定义的所有拷贝在框架内的生存超越帧结束（例如，正在排队等待执行），堆栈帧被破坏后存储也将继续存在</code>。在一个给定的词法范围的多个块，可以同时使用共享变量。<br>作为优化，在堆栈上的块存储块启动就像自身调用一样。如果块被复制，使用Block_copy（或在Objective-C中块发送一个副本），变量将被复制到堆。因此，_block块的地址可以随时更改。<br>_block变量有两个进一步的限制：他们不能是可变数组，不能包含C99的可变长数组的结构。<br>下面的例子说明了_block变量的作用：<br>    __block int x = 123; //  x lives in block storage</p>
+<pre><code><span class="keyword">void</span> (^printXAndY)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> y) {
+
+    x = x + y;
+    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, x, y);
+};
+printXAndY(<span class="number">456</span>); <span class="comment">// prints: 579 456</span>
+<span class="comment">// x is now 579</span>
+</code></pre><p>下面的例子显示了几种类型的变量块的相互作用：<br>    extern NSInteger CounterGlobal;<br>    static NSInteger CounterStatic;</p>
+<pre><code>{
+    <span class="built_in">NSInteger</span> localCounter = <span class="number">42</span>;
+    __block <span class="keyword">char</span> localCharacter;
+
+    <span class="keyword">void</span> (^aBlock)(<span class="keyword">void</span>) = ^(<span class="keyword">void</span>) {
+        ++CounterGlobal;
+        ++CounterStatic;
+        CounterGlobal = localCounter; <span class="comment">// localCounter fixed at block creation</span>
+        localCharacter = <span class="string">'a'</span>; <span class="comment">// sets localCharacter in enclosing scope</span>
+    };
+
+    ++localCounter; <span class="comment">// unseen by the block</span>
+    localCharacter = <span class="string">'b'</span>;
+
+    aBlock(); <span class="comment">// execute the block</span>
+    <span class="comment">// localCharacter now 'a'</span>
+}
+</code></pre><h1 id="对象和block变量"><a href=""></a>对象和block变量</h1>
+<p>Block提供支持的Objective-C和C+ +的对象，和其他块，作为变量。</p>
+<h3 id="Objective-C_对象"><a href=""></a>Objective-C 对象</h3>
+<p>在手动引用计数的环境， 复制块时，块内使用局部变量保留。Block内使用的局部变量引用技术将retain。如果您想覆盖一个特定对象变量的这种行为，你可以标记_block修饰符来修饰该变量。<br>如果您使用ARC，当block被copy时对象变量被保留，并自动释放，和延迟释放。<br><a href="&quot;Note&quot;"></a><strong>注：在垃圾收集的环境，如果你给变量同时使用_weak和_block修饰符，那么该block将无法确保是否还存在。</strong></p>
+<p>如果你在执行方法内使用block，实例变量对象的内存管理规则更加微妙：</p>
+<ul>
+<li><p>如果您访问实例变量的参照，对象retain；</p>
+</li>
+<li><p>如果您访问实例变量的值，对象retain；</p>
+</li>
+</ul>
+<p>下面的例子说明了两种不同的情况：<br>    dispatch_async(queue, ^{<br>        // instanceVariable is used by reference, self is retained<br>        doSomethingWithObject(instanceVariable);<br>    });</p>
+<pre><code>id localVariable = instanceVariable;
+dispatch_async(queue, ^{
+    <span class="regexp">//</span> localVariable <span class="keyword">is</span> used <span class="keyword">by</span> value, localVariable <span class="keyword">is</span> retained (<span class="keyword">not</span> self)
+    doSomethingWithObject(localVariable);
+});
+</code></pre><h1 id="调用block"><a href=""></a>调用block</h1>
+<p>如果你声明block作为一个变量，你可以像使用函数一样使用它，就像下面两个示例所示一样：<br>    int (^oneFrom)(int) = ^(int anInt) {<br>        return anInt - 1;<br>    };</p>
+<pre><code><span class="built_in">printf</span>(<span class="string">"1 from 10 is %d"</span>, oneFrom(<span class="number">10</span>));
+<span class="comment">// Prints "1 from 10 is 9"</span>
+
+<span class="keyword">float</span> (^distanceTraveled) (<span class="keyword">float</span>, <span class="keyword">float</span>, <span class="keyword">float</span>) =
+                          ^(<span class="keyword">float</span> startingSpeed, <span class="keyword">float</span> acceleration, <span class="keyword">float</span> time) {
+
+    <span class="keyword">float</span> <span class="built_in">distance</span> = (startingSpeed * time) + (<span class="number">0.5</span> * acceleration * time * time);
+    <span class="keyword">return</span> <span class="built_in">distance</span>;
+};
+
+<span class="keyword">float</span> howFar = distanceTraveled(<span class="number">0.0</span>, <span class="number">9.8</span>, <span class="number">1.0</span>);
+<span class="comment">// howFar = 4.9</span>
+</code></pre><p>然而，通常情况下，你使用block作为一个函数或方法的参数，在这些情况下，你通常创建一个块“内联”。</p>
+<h1 id="使用block作为函数参数"><a href=""></a>使用block作为函数参数</h1>
+<p>可以把block作为函数参数进行传递，就像其他参数一样。然后，很多时候你不需要声明block；而你只需把他们内联到需要使用block作为一个参数的地方。下面的例子使用了 <code>qsort_b方法，</code>qsort_b方法与标准的qsort_r类似，只是用Block作为它的最后一个参数。``<br>    char *myCharacters[3] = { “TomJohn”, “George”, “Charles Condomine” };</p>
+<pre><code>qsort_b(myCharacters, 3, sizeof(char <span class="keyword">*</span>), ^(const void <span class="keyword">*</span>l, const void <span class="keyword">*</span>r) {
+    char <span class="keyword">*</span>left = <span class="keyword">*</span>(char <span class="keyword">*</span><span class="keyword">*</span>)l;
+    char <span class="keyword">*</span>right = <span class="keyword">*</span>(char <span class="keyword">*</span><span class="keyword">*</span>)r;
+    return strncmp(left, right, 1);
+});
+// Block implementation ends at <span class="string">"}"</span>
+
+// myCharacters is now { <span class="string">"Charles Condomine"</span>, <span class="string">"George"</span>, <span class="string">"TomJohn"</span> }
+</code></pre><p>请注意，该块包含在函数的参数列表。<br>下面的示例显示如何使用block的dispatch_apply函数。 <code>dispatch_apply``使用以下方式进行定义：</code><br>    void dispatch_apply(size_t iterations, dispatch_queue_t queue, void (^block)(size_t));<br>功能是提交一个block到一个调度队列进行多次调用。它携带了三个参数；第一个参数指定执行的迭代的数量；第二个参数指定block被提交到哪个队列； 点歌参数就是block自身，反过来这需要一个参数迭代的当前索引。<br>可以使用<code>dispatch_apply</code> 分别打印出迭代索引，如下所示：</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;dispatch/dispatch.h&gt;</span>
+size_t count = <span class="number">10</span>;
+dispatch_queue_t <span class="built_in">queue</span> = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);
+
+dispatch_apply(count, <span class="built_in">queue</span>, ^(size_t i) {
+    <span class="built_in">printf</span>(<span class="string">"%u\n"</span>, i);
+});
+</code></pre><h1 id="使用block作为方法参数"><a href=""></a>使用block作为方法参数</h1>
+<p><a href="">Cocoa提供了一种方法，使用blocks。传递block作为参数与传递其他参数的方式是一样的。</a><br>下面的示例，确定一个数组前五个元素中任意一个在过滤集中的索引数。<br>    NSArray <em>array = [NSArray arrayWithObjects: @”A”, @”B”, @”C”, @”A”, @”B”, @”Z”,@”G”, @”are”, @”Q”, nil];<br>    NSSet </em>filterSet = [NSSet setWithObjects: @”A”, @”Z”, @”Q”, nil];</p>
+<pre><code><span class="built_in">BOOL</span> (^test)(<span class="keyword">id</span> obj, NSUInteger idx, <span class="built_in">BOOL</span> *stop);
+
+test = ^ (<span class="keyword">id</span> obj, NSUInteger idx, <span class="built_in">BOOL</span> *stop) {
+
+    <span class="keyword">if</span> (idx &lt; <span class="number">5</span>) {
+        <span class="keyword">if</span> ([filterSet containsObject: obj]) {
+            <span class="keyword">return</span> <span class="literal">YES</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="literal">NO</span>;
+};
+
+<span class="built_in">NSIndexSet</span> *indexes = [array indexesOfObjectsPassingTest:test];
+
+<span class="built_in">NSLog</span>(<span class="string">@"indexes: %@"</span>, indexes);
+
+<span class="comment">/*
+Output:
+indexes: &lt;NSIndexSet: 0x10236f0&gt;[number of indexes: 2 (in 2 ranges), indexes: (0 3)]
+*/</span>
+</code></pre><p>下方的例子是确定一个NSSet对象中是否包含有局部变量指定的一个单词，如果包含的话，设置另一个局部变量的值为YES。found也被声明为一个_block变量， 这个block是定义联：<br>    __block BOOL found = NO;<br>    NSSet <em>aSet = [NSSet setWithObjects: @”Alpha”, @”Beta”, @”Gamma”, @”X”, nil];<br>    NSString </em>string = @”gamma”;</p>
+<pre><code>[aSet enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, <span class="built_in">BOOL</span> *stop) {
+    <span class="keyword">if</span> ([obj localizedCaseInsensitiveCompare:string] == NSOrderedSame) {
+        *stop = <span class="literal">YES</span>;
+        found = <span class="literal">YES</span>;
+    }
+}];
+
+<span class="comment">// At this point, found == YES</span>
+</code></pre><h1 id="复制block"><a href=""></a>复制block</h1>
+<p>通常情况下，你不需要复制（或保留）一个块。如果你想要block在它的定义域被销毁后仍可以被使用，你仅仅只需要创建一个副本。复制移动block到堆中。.<br>你能用C函数来复制和释放block：<br>    Block_copy();<br>    Block_release();<br>如果你使用Objective-C，block的属性可以使用copy、retain、release和autorelease。<br>为了避免产生内存泄露，block的copy和retain的使用必须平衡。使用了copy和retain的地方必须进行release（autorelease除外）——除非在一个垃圾收集环境。</p>
+<h1 id="避免的模式"><a href=""></a>避免的模式</h1>
+<p>块文本（即，^{…}）是一个堆栈的本地数据结构的地址块。因此堆栈的本地数据结构的范围是封闭的复合语句，所以你应该避免使用下例中的模式：,<br>    void dontDoThis() {<br>        void (^blockArray[3])(void);  // an array of 3 block references</p>
+<pre><code>    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) {
+        blockArray[i] = ^{ printf(<span class="string">"hello, %d\n"</span>, i); };
+        // <span class="type">WRONG</span>: <span class="type">The</span> <span class="keyword">block</span> literal scope <span class="keyword">is</span> the <span class="string">"for"</span> loop
+    }
+}
+
+<span class="type">void</span> dontDoThisEither() {
+    <span class="type">void</span> (^<span class="keyword">block</span>)(<span class="type">void</span>);
+
+    <span class="type">int</span> i = random():
+    <span class="keyword">if</span> (i &gt; <span class="number">1000</span>) {
+        <span class="keyword">block</span> = ^{ printf(<span class="string">"got i at: %d\n"</span>, i); };
+        // <span class="type">WRONG</span>: <span class="type">The</span> <span class="keyword">block</span> literal scope <span class="keyword">is</span> the <span class="string">"then"</span> clause
+    }
+    // ...
+}
+</code></pre><h1 id="调试"><a href=""></a>调试</h1>
+<p>在block中你可以设置断点进行单步调试。你可以从调用块内GDB会议调用一个block，如下例所示：<br>    $ invoke-block myBlock 10 20<br>如果你想传一个C字符串值，你必须使用引用。例如， 把这个字符串传到<code>doSomethingWithString</code> block中，你可以像下面这样写：<br>    $ invoke-block doSomethingWithString “\”this string\””</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iphone开发/">iphone开发</a><a href="/tags/ios开发/">ios开发</a><a href="/tags/ios/">ios</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/01/08/IOS开发之Block 编程（翻译官方文档）/" data-title="IOS开发之Block 编程（翻译官方文档） | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/01/15/iOS 7, 导航栏和状态栏自定义/" title="iOS 7, 导航栏和状态栏自定义">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  iOS 7, 导航栏和状态栏自定义</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/01/08/IOS应用如何配置iTunes文件共享/"  title="IOS应用如何配置iTunes文件共享">
+ <strong>NEXT:</strong><br/> 
+ <span>IOS应用如何配置iTunes文件共享
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#声明和使用Block"><span class="toc-number">1.</span> <span class="toc-text">声明和使用Block</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接使用Block"><span class="toc-number"></span> <span class="toc-text">直接使用Block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cocoa_Block"><span class="toc-number"></span> <span class="toc-text">Cocoa Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#_block变量"><span class="toc-number">1.</span> <span class="toc-text">_block变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Block功能"><span class="toc-number"></span> <span class="toc-text">Block功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用法"><span class="toc-number"></span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明block参考"><span class="toc-number"></span> <span class="toc-text">声明block参考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建block"><span class="toc-number"></span> <span class="toc-text">创建block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局block"><span class="toc-number"></span> <span class="toc-text">全局block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量类型"><span class="toc-number"></span> <span class="toc-text">变量类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#_block存储类型"><span class="toc-number"></span> <span class="toc-text">_block存储类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象和block变量"><span class="toc-number"></span> <span class="toc-text">对象和block变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C_对象"><span class="toc-number">0.1.</span> <span class="toc-text">Objective-C 对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调用block"><span class="toc-number"></span> <span class="toc-text">调用block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用block作为函数参数"><span class="toc-number"></span> <span class="toc-text">使用block作为函数参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用block作为方法参数"><span class="toc-number"></span> <span class="toc-text">使用block作为方法参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#复制block"><span class="toc-number"></span> <span class="toc-text">复制block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#避免的模式"><span class="toc-number"></span> <span class="toc-text">避免的模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调试"><span class="toc-number"></span> <span class="toc-text">调试</span></a>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

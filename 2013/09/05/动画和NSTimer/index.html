@@ -1,0 +1,543 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>动画和NSTimer | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="UIViewController只是容器不能显示，内有view可供调用
+【导入头文件】
+/Implement 实现//additional 额外的//setup   设置//loading 加载//typically 典型的
+//视图被加载后调用方法
+
+UIViewController的执行
+
+
+(">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/05/动画和NSTimer/" title="动画和NSTimer" itemprop="url">动画和NSTimer</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-05T05:04:00.000Z" itemprop="datePublished">9月 5 2013</time>
+    Updated:<time datetime="2014-10-30T10:46:00.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>UIViewController只是容器不能显示，内有view可供调用</p>
+<p>【导入头文件】</p>
+<p>/Implement 实现<br>//additional 额外的<br>//setup   设置<br>//loading 加载<br>//typically 典型的</p>
+<p>//视图被加载后调用方法</p>
+<ol>
+<li>UIViewController的执行</li>
+</ol>
+<ul>
+<li>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  //这里可以继续设置view的属性，或布局view，譬如背景色等<br>}</li>
+</ul>
+<p>2.view的切换和获得<br>    //这种方式是生成了一个新的window，不符合要求<br>    //UIWindow* window = [[UIWindow alloc]init];</p>
+<pre><code><span class="comment">//我们要找的是AppDelegate的window，要找到AppDelegate的window需要有一个AppDelegate的对象。</span>
+<span class="comment">//要获取AppDelegate的对象，只要获取UIApplication的对象通过打点调用就可以获取AppDelegate的对象</span>
+<span class="comment">//通过调用[UIApplication sharedApplication]可以获取UIApplication的对象</span>
+
+<span class="comment">//share共享的</span>
+入口类方法名* delegate =[<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.delegate</span>;
+<span class="comment">//此时window指向AppDelegate的window  //然后就可以为所欲为了</span>
+<span class="built_in">UIWindow</span>* window = delegate<span class="variable">.window</span>;
+
+<span class="comment">//懒加载（延迟加载视图），生成对象的时候不会把视图加载进来，只有在添加到视图层次体系中时，才真正的把视图加载进来</span>
+<span class="comment">// 把即将加进来来的UIViewController初始化</span>
+新的<span class="built_in">UIViewController</span>* rvc = [[新的<span class="built_in">UIViewController</span> alloc]init];
+</code></pre><p>3.动画的实现<br>    [UIView beginAnimations:nil context:nil];<br>    [UIView setAnimationDuration:1];<br>    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:window cache:YES];</p>
+<pre><code><span class="comment">//对于基本动画，譬如frame，bounds，center</span>
+
+ <span class="comment">//alpha这些要放到动画里面  </span>
+
+<span class="attr_selector">[UIView commitAnimations]</span>;
+
+<span class="comment">//对于视图切换的动画，一般放到动画块外面</span>
+<span class="comment">//移除当前view    </span>
+<span class="attr_selector">[self.view removeFromSuperview]</span>;
+ <span class="comment">//向获得的window添加view</span>
+<span class="attr_selector">[window addSubview:rvc.view]</span>;
+</code></pre><ol>
+<li><p>// 获取屏幕的大小返回frame<br> [[UIScreen mainScreen] bounds];</p>
+<p> //隐藏状态栏<br> [[UIApplication sharedApplication] setStatusBarHidden:YES];</p>
+<p> //[[UIScreen mainScreen] applicationFrame] 获取不算上状态栏的位置，如果状态栏显示，y坐标从20开始，如果态栏隐藏，y坐标从0开始<br> NSLog(@”%@”,NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));</p>
+<p> //手动创建一个UIWindow<br> self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];<br> // Override point for customization after application launch.</p>
+<p> //通过xib创建ViewController，init会默认调用initWithNibName<br> //NibName默认是和类名称一致，不带后缀<br> self.viewController = [[[ViewController alloc] initWithNibName:@”ViewController” bundle:nil] autorelease];</p>
+<p> //相当与先把原来的remove，然后再addSubView，系统内部帮你做<br> self.window.rootViewController = self.viewController;<br>5.setAnimationCurve<br> setAnimationCurve:动画的运动曲线属性</p>
+<p> //UIViewAnimationCurveEaseInOut 动画开始和结束的时候慢，中间快<br> //UIViewAnimationCurveEaseIn 动画开始慢，逐渐加速<br> //UIViewAnimationCurveEaseOut 开始快，结束时慢<br> //UIViewAnimationCurveLinear  匀速</p>
+</li>
+</ol>
+<p>6.计时器<br>    //不得不提计时器<br>    [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(执行方法) userInfo:nil repeats:YES];</p>
+<pre><code>//用c的%<span class="number">02</span>d占位符来填充图片名字后缀<span class="number">01</span>，<span class="number">02</span>前的<span class="number">0</span>   
+NSString* <span class="variable">strImageName =</span> [NSString stringWithFormat:@<span class="string">"campFire%02d.gif"</span>,count];
+UIImage* <span class="variable">image =</span> [UIImage imageNamed:strImageName];
+imageView.<span class="variable">image =</span> image;
+<span class="keyword">if</span>(<span class="variable">count =</span>= <span class="number">17</span>)
+{
+
+    <span class="variable">count =</span> <span class="number">0</span>;
+}
+</code></pre><p>7.九宫格的实现<br>    //首先宏定义大小</p>
+<pre><code><span class="preprocessor">#define BTN_WIDTH  70</span>
+<span class="preprocessor">#define BTN_HEIGHT 70</span>
+-(<span class="keyword">void</span>)layoutMouse
+{
+    <span class="comment">//计算得出坐标</span>
+    <span class="keyword">float</span> xSpace = (<span class="number">320</span>-BTN_WIDTH*<span class="number">3</span>)/<span class="number">4</span>;
+    <span class="keyword">float</span> ySpace = (<span class="number">480</span>-BTN_HEIGHT*<span class="number">3</span>)/<span class="number">4</span>;
+
+    <span class="keyword">int</span> count = <span class="number">1</span>;
+    <span class="comment">//双层嵌套，先做行，再做列</span>
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) 
+        {
+            <span class="keyword">float</span> xPos = (j+<span class="number">1</span>)*xSpace+j*BTN_WIDTH;
+            <span class="keyword">float</span> yPos = (i+<span class="number">1</span>)*ySpace+i*BTN_HEIGHT;
+            <span class="comment">//</span>
+            <span class="built_in">UIButton</span>* button = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];
+            <span class="comment">//button的tag值从1开始</span>
+            button<span class="variable">.tag</span> = count;
+            count++;
+
+            button<span class="variable">.frame</span> = CGRectMake(xPos, yPos, BTN_WIDTH, BTN_HEIGHT);
+            <span class="comment">//关联事件hitMouse</span>
+            [button addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span> (hitMouse:)forControlEvents:UIControlEventTouchUpInside];
+
+            [<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
+        }
+    }
+}
+</code></pre><ol>
+<li>UIImageView的动画实现<br> //1首先定义一个成员变量UIImageView <em>view;并初始化获取frame值<br> view=[[UIImageView alloc]initWithFrame:self.view.frame];<br> //在界面上显示view<br> [self.view addSubview:view];<br> //定义一个可变数组，初始化为20个存储单位<br> NSMutableArray</em>image=[[NSMutableArray alloc] initWithCapacity:20];<br> //用for循环(c%02d占位符)向数组添加UIImage 对象的名字<br> for(int i=1;i&lt;=17;i++)<br> {  <pre><code> <span class="built_in">NSString</span>*name=[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"campFire%02d.gif"</span>,i];
+ <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);
+ [image addObject:[<span class="built_in">UIImage</span> imageNamed:name]];
+</code></pre> }<br> //数组添加<br> view.animationImages=image;<br> //每次遍历时间<br> view.animationDuration=5;<br> //动画遍历次数，0为无限循环<br> view.animationRepeatCount=0;<br> //动画开始  stopAnimating结束 isAnimating 正在动画<br> [view startAnimating];</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iphone开发/">iphone开发</a><a href="/tags/ios/">ios</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之动画/">iOS应用开发之动画</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/09/05/动画和NSTimer/" data-title="动画和NSTimer | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/05/View旋转动画/" title="View旋转动画">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  View旋转动画</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/05/NSTimer动画/"  title="NSTimer动画">
+ <strong>NEXT:</strong><br/> 
+ <span>NSTimer动画
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

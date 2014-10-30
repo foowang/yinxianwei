@@ -1,0 +1,483 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CALayer,动画 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="1.图层-CALayer
+12345678910111213141516UIView *tView = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 100, 100)];	[self.view addSubview:tView];	CALayer">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/09/19/CALayer,动画/" title="CALayer,动画" itemprop="url">CALayer,动画</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-09-19T07:17:00.000Z" itemprop="datePublished">9月 19 2013</time>
+    Updated:<time datetime="2014-10-30T10:46:34.000Z" itemprop="dateModified">10月 30 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>1.图层-CALayer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">UIView *tView = [[UIView alloc] initWithFrame:CGRectMake(50, 50, 100, 100)];</div><div class="line">	[self.view addSubview:tView];</div><div class="line">	CALayer *layer = tView.view.layer;</div><div class="line">    //图层的拐角半径</div><div class="line">	layer.cornerRadius = 50;</div><div class="line">	//边框的宽度</div><div class="line">    layer.borderWidth = 10;</div><div class="line">    //边框的颜色CGColorRef  不可以直接用UIColor来创建对象</div><div class="line">    //可以用UIColor来创建对象，然后调CGColor来获得CGColorRef的内容</div><div class="line">    layer.borderColor = [UIColor blueColor].CGColor;</div><div class="line">  //设置阴影的偏移量(默认向上偏移并有一定的扩散程度)</div><div class="line">	tView.layer.shadowOffset = CGSizeMake(5, 5);</div><div class="line">    //设置阴影的半径(是阴影的模糊的半径)</div><div class="line">	tView.layer.shadowRadius = 50;</div><div class="line">    //阴影的默认的透明度是0，如果想要阴影显示出来 必须设置阴影的透明度为非0</div><div class="line">	tView.layer.shadowOpacity = 1;</div></pre></td></tr></table></figure>
+
+<p>2.事物处理 - CATransaction<br> 图层的动画属性的每一个修改必然是事务的一个部分。CATransaction 是核心动画里面负责协调多个动画原子更新显示操作。事务支持嵌套使用。 核心动画支持两种事务:隐式事务和显式事务。在图层的动画属性被一个线程修 改,同时该线程下次迭代的时候自动提交该修改的时候隐式事务自动创建。显式事务 发生在程序在修改动画属性之前给 CATransaction 发送了一个开始消息,在动画属性修改之后提交该消息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[CATransaction begin];</div><div class="line">    //设置动画的时间</div><div class="line">    [CATransaction setAnimationDuration:10];</div><div class="line">    //设置动画效果不可用 默认为NO</div><div class="line">    [CATransaction setDisableActions:YES];</div><div class="line">	//-1旋转 正数不旋转</div><div class="line">    _nLayer.transform = CATransform3DMakeScale(1.5, 1.5, -1);</div><div class="line">	//如果设置图层的多个属性，那么这些隐式动画会叠加到一起</div><div class="line">    [CATransaction commit];</div><div class="line">	 //设置图层的位置  图层中的 position  相当于视图中的 center，默认的是几何中心</div><div class="line">    //_nLayer.position = CGPointMake(200, 200);</div></pre></td></tr></table></figure>
+
+<p>3.图层动画<br>     3.1.CAPropertyAnimation<br>         是一个抽象的子类,它支持动画的显示图层的关键路 径中指定的属性<br>     3.2.CABasicAnimation<br>        简单的为图层的属性提供修改。<br>    3.3.CAKeyframeAnimation<br>        支持关键帧动画,你可以指定的图层属性的关键路径动画,包括动画的每个阶段的价值,以及关键帧时间和计时功能的 一的系列值。在动画运行时,每个值被特定的插入值替代。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad {</div><div class="line">	 button = [UIButton buttonWithType:UIButtonTypeCustom];</div><div class="line">	button.backgroundColor = [UIColor redColor];</div><div class="line">	button.frame = CGRectMake(0, 230, 60, 60);</div><div class="line">	[self.view addSubview:button];</div><div class="line">	</div><div class="line">	[button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">	[button setTitle:@"按钮" forState:UIControlStateNormal];</div><div class="line">    </div><div class="line">	button.layer.cornerRadius = 30;</div><div class="line">	button.layer.shadowRadius = 10;</div><div class="line">	button.layer.shadowColor = [UIColor blueColor].CGColor;</div><div class="line">	button.layer.shadowOpacity = 0.5;</div><div class="line">	button.layer.shadowOffset = CGSizeMake(10, 10);</div><div class="line">	 button.layer.position = CGPointMake(0, 230);</div><div class="line">	CAKeyframeAnimation *tAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];</div><div class="line">    tAnimation.delegate = self;</div><div class="line">    </div><div class="line">    //动画的关键点，第一个是起始位置，目标位置...</div><div class="line">    tAnimation.values = [NSArray arrayWithObjects:</div><div class="line">                         [NSValue valueWithCGPoint:CGPointMake(0, 230)],</div><div class="line">                         [NSValue valueWithCGPoint:CGPointMake(260, 230)],</div><div class="line">                         [NSValue valueWithCGPoint:CGPointMake(100, 230)],</div><div class="line">                         [NSValue valueWithCGPoint:CGPointMake(160, 230)],</div><div class="line">                         nil];</div><div class="line">    //动画的关键时间点，和values相对应，第一个是开始的时间比（总时间乘以这个比例），接下来是运动到下一个目标的时间，以此类推</div><div class="line">    tAnimation.keyTimes = [NSArray arrayWithObjects:</div><div class="line">                           [NSNumber numberWithFloat:0],</div><div class="line">                           [NSNumber numberWithFloat:0.5],</div><div class="line">                           [NSNumber numberWithFloat:0.8],</div><div class="line">                           [NSNumber numberWithFloat:1],</div><div class="line">                           nil];</div><div class="line">    </div><div class="line">    //结束的时候不移除</div><div class="line">    //tAnimation.removedOnCompletion = NO;</div><div class="line">    //结束的时候保持结束的状态</div><div class="line">    //tAnimation.fillMode = kCAFillModeForwards;</div><div class="line">    //设置动画的时间，如果不设置时间，会有一个默认的时间，时间是比较快的，但是得到的duration是0</div><div class="line">    tAnimation.duration = 2;</div><div class="line">    [button.layer addAnimation:tAnimation forKey:@"key"];</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag</div><div class="line">{</div><div class="line">	button.layer.position = CGPointMake(160, 230);</div><div class="line">	/*第二种移动方法</div><div class="line">	// 初始化一个关键帧动画，移动位置</div><div class="line">    CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];</div><div class="line">    </div><div class="line">    positionAnimation.fillMode = kCAFillModeForwards;</div><div class="line">    positionAnimation.removedOnCompletion = NO;</div><div class="line">    positionAnimation.duration = 3;</div><div class="line">    </div><div class="line">    //时间的变化曲线</div><div class="line">    positionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];</div><div class="line"> </div><div class="line">    //创建路径信息，开始点 － 最远点 － 最近点 － 结束点</div><div class="line">    CGMutablePathRef path = CGPathCreateMutable();</div><div class="line">    CGPathMoveToPoint(path, NULL, 0, 100);</div><div class="line">    CGPathAddLineToPoint(path, NULL, 260, 100);</div><div class="line">    CGPathAddLineToPoint(path, NULL, 100, 100);</div><div class="line">    CGPathAddLineToPoint(path, NULL, 160, 100);</div><div class="line">    positionAnimation.path = path;</div><div class="line">    CGPathRelease(path);</div><div class="line">    [button.layer addAnimation:positionAnimation forKey:@"animation"];</div><div class="line">	*/</div><div class="line">	//绕着z轴旋转</div><div class="line">    CAKeyframeAnimation *rotateAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];</div><div class="line">    rotateAnimation.fillMode = kCAFillModeForwards;</div><div class="line">    rotateAnimation.removedOnCompletion = NO;</div><div class="line">    rotateAnimation.duration = 5;</div><div class="line">    //旋转时间</div><div class="line">    rotateAnimation.keyTimes = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.2],[NSNumber numberWithFloat:0.6], nil];</div><div class="line">    //旋转角度</div><div class="line">    rotateAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:M_PI/4],[NSNumber numberWithFloat:0.0f], nil];</div><div class="line">    </div><div class="line">    [_layer2 addAnimation:rotateAnimation forKey:@"animation2"];</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">-(void)buttonClick:(UIButton *)button</div><div class="line">{</div><div class="line">	//CABasicAnimation</div><div class="line">	    //toValue传递的是最中的效果   byValue是初始状态的一个增量</div><div class="line">    //如果没有设置formValue那么会在当前的基础上到达最终效果</div><div class="line">    //1.旋转</div><div class="line">    CABasicAnimation *theAnimation;</div><div class="line">	theAnimation=[CABasicAnimation animationWithKeyPath:@"transform.rotation"];</div><div class="line">	theAnimation.duration = 1;</div><div class="line">	theAnimation.repeatCount = 0;</div><div class="line">	theAnimation.removedOnCompletion = FALSE;</div><div class="line">	theAnimation.fillMode = kCAFillModeBoth;</div><div class="line">	theAnimation.autoreverses = NO;</div><div class="line">    theAnimation.fromValue = [NSNumber numberWithFloat:M_PI / 4];</div><div class="line">	theAnimation.byValue = [NSNumber numberWithFloat:M_PI / 2];</div><div class="line">	[_layer addAnimation:theAnimation forKey:@"animation3"];</div><div class="line">    </div><div class="line">    //2.缩放</div><div class="line">    CABasicAnimation *theAnimation2;</div><div class="line">	theAnimation2=[CABasicAnimation animationWithKeyPath:@"transform.scale"];</div><div class="line">	theAnimation2.duration = 1;</div><div class="line">	theAnimation2.repeatCount = 0;</div><div class="line">	theAnimation2.removedOnCompletion = FALSE;</div><div class="line">	theAnimation2.fillMode = kCAFillModeBoth;</div><div class="line">	theAnimation2.autoreverses = NO;</div><div class="line">	theAnimation2.toValue = [NSNumber numberWithFloat:2];</div><div class="line">	[_layer2 addAnimation:theAnimation2 forKey:@"animation4"];</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p> 3.4.CAAnimationGroup 允许一系列动画效果组合在一起,并行显示动画。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">CAAnimationGroup *animationgroup = [CAAnimationGroup animation];</div><div class="line">   animationgroup.animations = [NSArray arrayWithObjects:positionAnimation, rotateAnimation, nil];</div><div class="line">   //设置动画事件</div><div class="line">   animationgroup.duration = 10.0f;</div><div class="line">   </div><div class="line">   animationgroup.removedOnCompletion = NO;</div><div class="line">   animationgroup.fillMode = kCAFillModeForwards;</div><div class="line">   </div><div class="line">   animationgroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];</div><div class="line">   </div><div class="line">   [_label.layer addAnimation:animationgroup forKey:@"label_animation"];</div></pre></td></tr></table></figure>
+
+<p>4.View的拖动,点击<br>把具有相同属性的View集成到一个类中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//需要设置支持多点触摸，默认的是单点</div><div class="line"> self.multipleTouchEnabled = YES;</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event</div><div class="line">{</div><div class="line">	[self.superview bringSubviewToFront:self];</div><div class="line">	    //获得当前触控点数</div><div class="line">	 if ([touches count] == 1) {</div><div class="line">        UITouch *touch = [touches anyObject];</div><div class="line">		//在一定时间内点击的次数 用于处理双击事件</div><div class="line">        int count = [touch tapCount];</div><div class="line">        switch (count) {</div><div class="line">		//把锚点和中心点移到点击的地方 只设置锚点,锚点会寻找中心点放置</div><div class="line">            case 1:</div><div class="line">            {</div><div class="line">                //获得相对于小view的点</div><div class="line">                CGPoint point1 = [touch locationInView:self];</div><div class="line">                //获得相对于大view的点</div><div class="line">                CGPoint point2 = [touch locationInView:self.superview];</div><div class="line">                self.layer.anchorPoint = CGPointMake(point1.x / self.frame.size.width, point1.y / self.frame.size.height);</div><div class="line">                self.center = point2;</div><div class="line">            }</div><div class="line">                break;</div><div class="line">            case 2: </div><div class="line">                NSLog(@"处理双击ing...");</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                break;</div><div class="line">        }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event</div><div class="line">{</div><div class="line">    if ([touches count] == 1) {</div><div class="line">        UITouch *touch = [touches anyObject];</div><div class="line">        CGPoint point2 = [touch locationInView:[self superview]];</div><div class="line">        </div><div class="line">        self.center = point2;</div><div class="line">    }</div><div class="line">    else if ([touches count] == 2) {</div><div class="line">        //获得当前点击的两个触控点</div><div class="line">        NSArray *array = [touches allObjects];</div><div class="line">        UITouch *touch1 = [array objectAtIndex:0];</div><div class="line">        UITouch *touch2 = [array objectAtIndex:1];</div><div class="line">        CGPoint point1 = [touch1 locationInView:self];</div><div class="line">        CGPoint point2 = [touch2 locationInView:self];</div><div class="line">        //获得x坐标移动的绝对值 abs();</div><div class="line">        int distance = abs(point1.x - point2.x);</div><div class="line"></div><div class="line">        //如果发生缩放</div><div class="line">        if (_oldDistance != 0) {</div><div class="line">            //得到缩放距离</div><div class="line">            int newDistance = distance - _oldDistance;</div><div class="line">            CGRect rect = self.frame;</div><div class="line">            //把当前的View以比例缩放</div><div class="line">            rect.origin.x -= newDistance / 2;</div><div class="line">            rect.origin.y -= newDistance / 2;</div><div class="line">            rect.size.width += newDistance;</div><div class="line">            rect.size.height += newDistance;</div><div class="line">            self.frame = rect;</div><div class="line">        }</div><div class="line">        //保存当前缩放距离</div><div class="line">        _oldDistance = distance;</div><div class="line">        </div><div class="line">    }	</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event</div><div class="line">{	</div><div class="line">	//结束时清零</div><div class="line">    _oldDistance = 0;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>//set方法和UI的绑定 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">-(void)setTitle:(NSString *)title</div><div class="line">{</div><div class="line">    //在set方法中 self.不可以出现在 = 号左边</div><div class="line">    if (_title != title) {</div><div class="line">        </div><div class="line">        [_title release];</div><div class="line">        _title = [title retain];</div><div class="line">        </div><div class="line">        _titleLabel.text = self.title;</div><div class="line">        </div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/iphone开发/">iphone开发</a><a href="/tags/动画/">动画</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之动画/">iOS应用开发之动画</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/09/19/CALayer,动画/" data-title="CALayer,动画 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/09/20/AnchorPoint和Position/" title="AnchorPoint和Position">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  AnchorPoint和Position</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/09/19/对View的旋转,缩放,滑动,长按/"  title="对View的旋转,缩放,滑动,长按">
+ <strong>NEXT:</strong><br/> 
+ <span>对View的旋转,缩放,滑动,长按
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
+		
+			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
+		
+			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
