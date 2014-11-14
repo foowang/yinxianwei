@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="/about/"/>
-  <updated>2014-11-14T12:48:10.388Z</updated>
+  <updated>2014-11-14T14:14:24.831Z</updated>
   <id>/about/</id>
   
   <author>
@@ -125,6 +125,25 @@
     </summary>
     
       <category term="iOS应用开发之第三方框架" scheme="/about/tags/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[个人博客搞定了]]></title>
+    <link href="/about/2014/11/09/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
+    <id>/about/2014/11/09/个人博客搞定了/</id>
+    <published>2014-11-08T18:04:16.000Z</published>
+    <updated>2014-10-29T08:48:32.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
+    </summary>
     
   </entry>
   
@@ -330,25 +349,6 @@
     </summary>
     
       <category term="iOS应用开发之app上架" scheme="/about/tags/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8Bapp%E4%B8%8A%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[个人博客搞定了]]></title>
-    <link href="/about/2014/10/29/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
-    <id>/about/2014/10/29/个人博客搞定了/</id>
-    <published>2014-10-29T08:48:32.000Z</published>
-    <updated>2014-10-29T08:48:32.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
-    </summary>
     
   </entry>
   
