@@ -1,0 +1,860 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>IOS离线缓存致内存和本地的方法 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="缓存由四个文件组成。
+FlashDiskCacheManager.hFlashDiskCacheManager.m
+这个类是以单例的模式提供的，您可以在您想要缓存的地方来share
+URLCacheElement.hURLCacheElement.m
+这个类您永远都不要使用，每一个缓存就是一个URL">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="http://www.yinxianwei.cn">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/02/26/IOS离线缓存致内存和本地的方法/" title="IOS离线缓存致内存和本地的方法" itemprop="url">IOS离线缓存致内存和本地的方法</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-02-26T06:16:00.000Z" itemprop="datePublished">2月 26 2014</time>
+    Updated:<time datetime="2014-11-20T04:06:02.000Z" itemprop="dateModified">11月 20 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#import_"><span class="toc-number">1.</span> <span class="toc-text">import </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“URLCacheElement-h”"><span class="toc-number">2.</span> <span class="toc-text">import “URLCacheElement.h”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“FlashDiskCacheManager-h”"><span class="toc-number">3.</span> <span class="toc-text">import “FlashDiskCacheManager.h”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_-1"><span class="toc-number">4.</span> <span class="toc-text">import </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KData_@”urlData”"><span class="toc-number">5.</span> <span class="toc-text">define KData @”urlData”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KUserInfo_@”userInfo”"><span class="toc-number">6.</span> <span class="toc-text">define KUserInfo @”userInfo”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KDate_@”date”"><span class="toc-number">7.</span> <span class="toc-text">define KDate @”date”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KName_@”name”"><span class="toc-number">8.</span> <span class="toc-text">define KName @”name”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“URLCacheElement-h”-1"><span class="toc-number">9.</span> <span class="toc-text">import “URLCacheElement.h”</span></a></li></ol>
+		</div>
+		
+		<p>缓存由四个文件组成。</p>
+<p>FlashDiskCacheManager.h<br>FlashDiskCacheManager.m</p>
+<p>这个类是以单例的模式提供的，您可以在您想要缓存的地方来share</p>
+<p>URLCacheElement.h<br>URLCacheElement.m</p>
+<p>这个类您永远都不要使用，每一个缓存就是一个URLCacheElement的对象，然后归档到文件中，实现磁盘缓存。</p>
+<p>具体见FlashDiskCacheManager类的注释部分。</p>
+<p>FlashDiskCacheManager.h</p>
+<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="copy" target="_blank" rel="external">copy</a>1. //  </p>
+<ol>
+<li>//  FlashDiskCacheManager.h  </li>
+<li>//    </li>
+<li>//  </li>
+<li>//  Created by jeffrey on 10-12-21.  </li>
+<li>//  Copyright 2010 AppUFO. All rights reserved.  </li>
+<li>//  </li>
+<li><h1 id="import_">import <foundation foundation.h=""></foundation></h1>
+</li>
+<li><h1 id="import_“URLCacheElement-h”">import “URLCacheElement.h”</h1>
+</li>
+<li>@interface FlashDiskCacheManager : NSObject  </li>
+<li>{  </li>
+<li>/<strong> 存储已经缓存的url </strong>/  </li>
+<li>NSMutableDictionary* urlDictionary;  </li>
+<li></li>
+<li>NSKeyedUnarchiver* reader;  </li>
+<li>}  </li>
+<li>@property (nonatomic, retain) NSMutableDictionary *urlDictionary;  </li>
+<li>/** </li>
+<li>* </li>
+<li><ul>
+<li>设置保存时间 </li>
+</ul>
+</li>
+<li>* </li>
+<li>*/  </li>
+<li><ul>
+<li>(void) setMinStoreInterval:(double)interval;  </li>
+</ul>
+</li>
+<li><ul>
+<li>(FlashDiskCacheManager*) sharedManager;  </li>
+</ul>
+</li>
+<li>/** </li>
+<li>* </li>
+<li><ul>
+<li>获取缓存的对象 如果为nil，则缓存已经失效，或者无缓存 </li>
+</ul>
+</li>
+<li>* </li>
+<li>*/  </li>
+<li><ul>
+<li>(URLCacheElement<em>) cachedForWithURL:(NSURL</em>)url;  </li>
+</ul>
+</li>
+<li>/** </li>
+<li>* </li>
+<li><ul>
+<li>缓存请求1 </li>
+</ul>
+</li>
+<li>* </li>
+<li>*/  </li>
+<li><ul>
+<li>(void) cachedWithURLResponse:(NSCachedURLResponse*) cachedResponse;  </li>
+</ul>
+</li>
+<li>/** </li>
+<li>* </li>
+<li><ul>
+<li>缓存请求2 </li>
+</ul>
+</li>
+<li>* </li>
+<li>*/  </li>
+<li><ul>
+<li>(void) cachedWithData:(NSData<em>)data theUrl:(NSURL</em>)url;  </li>
+</ul>
+</li>
+<li>/** </li>
+<li>* </li>
+<li><ul>
+<li>写入闪存 </li>
+</ul>
+</li>
+<li>* </li>
+<li>*/  </li>
+<li><ul>
+<li>(void) storeToDisk;  </li>
+</ul>
+</li>
+<li>@end  </li>
+</ol>
+<p>FlashDiskCacheManager.m</p>
+<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="copy" target="_blank" rel="external">copy</a>1. //  </p>
+<ol>
+<li>//  FlashDiskCacheManager.m  </li>
+<li>//    </li>
+<li>//  </li>
+<li>//  Created by jeffrey on 10-12-21.  </li>
+<li>//  Copyright 2010 AppUFO. All rights reserved.  </li>
+<li><h1 id="import_“FlashDiskCacheManager-h”">import “FlashDiskCacheManager.h”</h1>
+</li>
+<li></li>
+<li>@implementation FlashDiskCacheManager  </li>
+<li>@synthesize urlDictionary;  </li>
+<li>static FlashDiskCacheManager* defaultManager = nil;  </li>
+<li>/<strong> 存储实效时间 </strong>/  </li>
+<li>static NSTimeInterval minStoreInterval = 10 <em> 60 </em> 60;  </li>
+<li><ul>
+<li>(void) setMinStoreInterval:(double)interval  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>minStoreInterval = interval;  </li>
+<li>}  </li>
+<li><ul>
+<li>(FlashDiskCacheManager*) sharedManager  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>@synchronized(self)  </li>
+<li>{  </li>
+<li>if (defaultManager == nil)  </li>
+<li>{  </li>
+<li>defaultManager = [[self alloc] init];  </li>
+<li>}  </li>
+<li>return defaultManager;  </li>
+<li>}  </li>
+<li>}  </li>
+<li><ul>
+<li>(id) init  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>self = [super init];  </li>
+<li>if (self)  </li>
+<li>{  </li>
+<li>NSArray* path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  </li>
+<li>self.urlDictionary = [[NSMutableDictionary alloc] init];  </li>
+<li>[urlDictionary release];  </li>
+<li></li>
+<li>//解档  </li>
+<li>for (NSInteger index = 0; index &lt; 100000; ++index)  </li>
+<li>{  </li>
+<li>NSString* document = [path objectAtIndex:0];  </li>
+<li>document = [document stringByAppendingPathComponent:[NSString stringWithFormat:@”cache%d”, index]];  </li>
+<li>if ([[NSFileManager defaultManager] fileExistsAtPath:document])  </li>
+<li>{  </li>
+<li>NSMutableData* data = [[NSMutableData alloc] initWithContentsOfFile:document];  </li>
+<li>reader = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];  </li>
+<li>URLCacheElement* element = [reader decodeObjectForKey:[NSString stringWithFormat:@”cache%d”, index]];  </li>
+<li>[reader finishDecoding];  </li>
+<li>NSURL* urlKey = [[NSURL alloc] initWithString:element.name];  </li>
+<li>NSTimeInterval now = [element.date timeIntervalSinceNow];  </li>
+<li></li>
+<li>if (fabs(now) - minStoreInterval &gt; 0)  </li>
+<li>{  </li>
+<li>[data release];  </li>
+<li>[urlKey release];  </li>
+<li>[reader release];  </li>
+<li>continue;  </li>
+<li>}  </li>
+<li></li>
+<li>[urlDictionary setObject:element forKey:urlKey];  </li>
+<li>[data release];  </li>
+<li>[urlKey release];  </li>
+<li>[reader release];  </li>
+<li>}  </li>
+<li>else  </li>
+<li>{  </li>
+<li>break;  </li>
+<li>}  </li>
+<li>}  </li>
+<li>return self;  </li>
+<li>}  </li>
+<li>return nil;  </li>
+<li>}  </li>
+<li><ul>
+<li>(URLCacheElement<em>) cachedForWithURL:(NSURL</em>)url  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>URLCacheElement* element =  [urlDictionary objectForKey:url];  </li>
+<li>if (element == nil)  </li>
+<li>{  </li>
+<li>return nil;  </li>
+<li>}  </li>
+<li></li>
+<li>NSTimeInterval now = [element.date timeIntervalSinceNow];  </li>
+<li>if (fabs(now) - minStoreInterval &gt; 0)  </li>
+<li>{  </li>
+<li>[self.urlDictionary removeObjectForKey:url];  </li>
+<li>return nil;  </li>
+<li>}  </li>
+<li>return element;  </li>
+<li>}  </li>
+<li><ul>
+<li>(void) cachedWithURLResponse:(NSCachedURLResponse*) cachedResponse  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>NSURLResponse* response = [cachedResponse response];  </li>
+<li></li>
+<li>//要存储的url  </li>
+<li>NSURL* url = [response URL];  </li>
+<li></li>
+<li>//要存储的数据  </li>
+<li>NSData* data = [cachedResponse data];  </li>
+<li></li>
+<li>//存储的时间  </li>
+<li>NSDate* date = [NSDate date];  </li>
+<li></li>
+<li>// 存储的用户信息  </li>
+<li>NSDictionary* user = [cachedResponse userInfo];  </li>
+<li></li>
+<li>URLCacheElement* element = [[URLCacheElement alloc] initWithData:data :date :user];  </li>
+<li>[self.urlDictionary setObject:element forKey:url];  </li>
+<li></li>
+<li>[element release];  </li>
+<li>}  </li>
+<li><ul>
+<li>(void) cachedWithData:(NSData<em>)data theUrl:(NSURL</em>)url  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>//存储的时间  </li>
+<li>NSDate* date = [NSDate date];  </li>
+<li></li>
+<li>// 存储的用户信息  </li>
+<li>NSDictionary* user = nil;  </li>
+<li></li>
+<li>URLCacheElement* element = [[URLCacheElement alloc] initWithData:data :date :user];  </li>
+<li>[self.urlDictionary setObject:element forKey:url];  </li>
+<li></li>
+<li>[element release];    </li>
+<li>}  </li>
+<li><ul>
+<li>(void) storeToDisk  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>NSArray* path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);  </li>
+<li>NSArray* arrayOfKeys = [urlDictionary allKeys];  </li>
+<li></li>
+<li>//归档  </li>
+<li>for (NSInteger index = 0; index &lt; [arrayOfKeys count]; ++index)  </li>
+<li>{  </li>
+<li>NSURL<em> url = (NSURL</em>)[arrayOfKeys objectAtIndex:index];  </li>
+<li>NSString* name = [url absoluteString];  </li>
+<li></li>
+<li>//初始化路径  </li>
+<li>NSString* document = [path objectAtIndex:0];  </li>
+<li>document = [document stringByAppendingPathComponent:[NSString stringWithFormat:@”cache%d”, index]];  </li>
+<li></li>
+<li>NSMutableData* tData = [[NSMutableData alloc] init];  </li>
+<li>NSKeyedArchiver* write = [[NSKeyedArchiver alloc] initForWritingWithMutableData:tData];  </li>
+<li>URLCacheElement* element = [urlDictionary objectForKey:[arrayOfKeys objectAtIndex:index]];  </li>
+<li></li>
+<li>//记录这个缓存的名字  </li>
+<li>element.name = name;  </li>
+<li></li>
+<li>[write encodeObject:element forKey:[NSString stringWithFormat:@”cache%d”, index]];  </li>
+<li></li>
+<li>[write finishEncoding];  </li>
+<li>[tData writeToFile:document atomically:YES];  </li>
+<li></li>
+<li>[tData release];  </li>
+<li>[write release];  </li>
+<li>}  </li>
+<li>}  </li>
+<li><ul>
+<li>(void) dealloc  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>[super dealloc];  </li>
+<li>[urlDictionary release];  </li>
+<li>}  </li>
+<li>@end  </li>
+</ol>
+<p>URLCacheElement.h</p>
+<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="copy" target="_blank" rel="external">copy</a>1. //  </p>
+<ol>
+<li>//  URLCacheElement.h  </li>
+<li>//    </li>
+<li>//  </li>
+<li>//  Created by jeffrey on 10-12-21.  </li>
+<li>//  Copyright 2010 AppUFO. All rights reserved.  </li>
+<li>//  </li>
+<li><h1 id="import_-1">import <foundation foundation.h=""></foundation></h1>
+</li>
+<li><h1 id="define_KData_@”urlData”">define KData @”urlData”</h1>
+</li>
+<li><h1 id="define_KUserInfo_@”userInfo”">define KUserInfo @”userInfo”</h1>
+</li>
+<li><h1 id="define_KDate_@”date”">define KDate @”date”</h1>
+</li>
+<li><h1 id="define_KName_@”name”">define KName @”name”</h1>
+</li>
+<li>@interface URLCacheElement : NSObject<nscoding, nscopying="">  </nscoding,></li>
+<li>{  </li>
+<li>/<strong> url存储的数据 </strong>/  </li>
+<li>NSData* data;  </li>
+<li></li>
+<li>/<strong> 存储的用户信息 </strong>/  </li>
+<li>NSDictionary* userInfo;  </li>
+<li></li>
+<li>/<strong> 存储的时间 </strong>/  </li>
+<li>NSDate* date;  </li>
+<li></li>
+<li>NSString* name;  </li>
+<li>}  </li>
+<li><ul>
+<li>(id) initWithData:(NSData<em>)indata :(NSDate</em>)indate :(NSDictionary*)inuserInfo;  </li>
+</ul>
+</li>
+<li>@property (nonatomic, retain) NSData *data;  </li>
+<li>@property (nonatomic, retain) NSDictionary *userInfo;  </li>
+<li>@property (nonatomic, retain) NSDate *date;  </li>
+<li>@property (nonatomic, retain) NSString *name;  </li>
+<li>@end  </li>
+</ol>
+<p>URLCacheElement.m</p>
+<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/windows_star/article/details/6117392#" title="copy" target="_blank" rel="external">copy</a>1. //  </p>
+<ol>
+<li>//  URLCacheElement.m  </li>
+<li>//    </li>
+<li>//  </li>
+<li>//  Created by jeffrey on 10-12-21.  </li>
+<li>//  Copyright 2010 AppUFO. All rights reserved.  </li>
+<li><h1 id="import_“URLCacheElement-h”-1">import “URLCacheElement.h”</h1>
+</li>
+<li></li>
+<li>@implementation URLCacheElement  </li>
+<li>@synthesize data;  </li>
+<li>@synthesize date;  </li>
+<li>@synthesize userInfo;  </li>
+<li>@synthesize name;  </li>
+<li><ul>
+<li>(id) initWithData:(NSMutableData<em>)indata :(NSDate</em>)indate :(NSMutableDictionary*)inuserInfo  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>self = [super init];  </li>
+<li>if (self)  </li>
+<li>{  </li>
+<li>self.data = indata;  </li>
+<li>self.date = indate;  </li>
+<li>self.userInfo = inuserInfo;  </li>
+<li>return self;  </li>
+<li>}  </li>
+<li>return nil;  </li>
+<li>}  </li>
+<li></li>
+<li><ul>
+<li>(id) initWithCoder:(NSCoder *)aDecoder  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>self = [super init];  </li>
+<li>if (self)  </li>
+<li>{  </li>
+<li>self.data = [aDecoder decodeObjectForKey:KData];  </li>
+<li>self.date = [aDecoder decodeObjectForKey:KDate];  </li>
+<li>self.userInfo = [aDecoder decodeObjectForKey:KUserInfo];  </li>
+<li>self.name = [aDecoder decodeObjectForKey:KName];  </li>
+<li>return self;  </li>
+<li>}  </li>
+<li>return nil;  </li>
+<li>}  </li>
+<li></li>
+<li><ul>
+<li>(void) encodeWithCoder:(NSCoder *)aCoder  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>[aCoder encodeObject:data forKey:KData];  </li>
+<li>[aCoder encodeObject:date forKey:KDate];  </li>
+<li>[aCoder encodeObject:userInfo forKey:KUserInfo];  </li>
+<li>[aCoder encodeObject:name forKey:KName];  </li>
+<li>}  </li>
+<li><ul>
+<li>(id) copyWithZone:(NSZone *)zone  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>URLCacheElement *copy = [[[self class] allocWithZone:zone] init];  </li>
+<li></li>
+<li>self.data = [data copy];  </li>
+<li>self.date = [date copy];  </li>
+<li>self.userInfo = [userInfo copy];  </li>
+<li>name = [name copy];  </li>
+<li></li>
+<li>return copy;  </li>
+<li>}  </li>
+<li><ul>
+<li>(void) dealloc  </li>
+</ul>
+</li>
+<li>{  </li>
+<li>[super dealloc];  </li>
+<li>}  </li>
+<li>@end  </li>
+</ol>
+<p>本文转自:<a href="http://blog.csdn.net/windows_star/article/details/6117392" target="_blank" rel="external">http://blog.csdn.net/windows_star/article/details/6117392</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/缓存/">缓存</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之网络通讯/">iOS应用开发之网络通讯</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2014/02/26/IOS离线缓存致内存和本地的方法/" data-title="IOS离线缓存致内存和本地的方法 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/" title="iOS 应用程序内部国际化，不跟随系统语言">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  iOS 应用程序内部国际化，不跟随系统语言</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/02/26/如何改进iOS App的离线使用体验/"  title="如何改进iOS App的离线使用体验">
+ <strong>NEXT:</strong><br/> 
+ <span>如何改进iOS App的离线使用体验
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#import_"><span class="toc-number">1.</span> <span class="toc-text">import </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“URLCacheElement-h”"><span class="toc-number">2.</span> <span class="toc-text">import “URLCacheElement.h”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“FlashDiskCacheManager-h”"><span class="toc-number">3.</span> <span class="toc-text">import “FlashDiskCacheManager.h”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_-1"><span class="toc-number">4.</span> <span class="toc-text">import </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KData_@”urlData”"><span class="toc-number">5.</span> <span class="toc-text">define KData @”urlData”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KUserInfo_@”userInfo”"><span class="toc-number">6.</span> <span class="toc-text">define KUserInfo @”userInfo”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KDate_@”date”"><span class="toc-number">7.</span> <span class="toc-text">define KDate @”date”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#define_KName_@”name”"><span class="toc-number">8.</span> <span class="toc-text">define KName @”name”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#import_“URLCacheElement-h”-1"><span class="toc-number">9.</span> <span class="toc-text">import “URLCacheElement.h”</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS之常用方法/" title="iOS之常用方法">iOS之常用方法<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS之应用发布/" title="iOS之应用发布">iOS之应用发布<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>9</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>16</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>9</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>26</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之开发证书/" title="iOS应用开发之开发证书">iOS应用开发之开发证书<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">2</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/URL-Scheme/" title="URL Scheme">URL Scheme<sup>1</sup></a></li>
+		
+			<li><a href="/tags/URL编码/" title="URL编码">URL编码<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

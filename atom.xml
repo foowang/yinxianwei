@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="/about/"/>
-  <updated>2014-11-20T02:13:52.423Z</updated>
+  <updated>2014-11-20T04:16:11.784Z</updated>
   <id>/about/</id>
   
   <author>
@@ -13,6 +13,58 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[iOS监听屏幕旋转]]></title>
+    <link href="/about/2014/11/20/iOS%E7%9B%91%E5%90%AC%E5%B1%8F%E5%B9%95%E6%97%8B%E8%BD%AC/"/>
+    <id>/about/2014/11/20/iOS监听屏幕旋转/</id>
+    <published>2014-11-20T02:52:56.000Z</published>
+    <updated>2014-11-20T03:24:08.000Z</updated>
+    <content type="html"><![CDATA[<p>做一个用来把图片集show在屏幕上，iPad的项目，需要支持4个屏幕方向，问题就是屏幕方向的适应的更改，所以就找来了一些资料。</p>
+<p><strong>首先是获取当前屏幕的宽高</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">CGSize</span> appScreenSize;</div><div class="line"><span class="keyword">static</span> <span class="built_in">UIInterfaceOrientation</span> lastOrientation;</div><div class="line"></div><div class="line">+(<span class="built_in">CGSize</span>) screenSize{</div><div class="line">    <span class="built_in">UIInterfaceOrientation</span> orientation =[<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.statusBarOrientation</span>;</div><div class="line">    <span class="keyword">if</span>(appScreenSize<span class="variable">.width</span>==<span class="number">0</span> || lastOrientation != orientation){</div><div class="line">        appScreenSize = CGSizeMake(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">        <span class="built_in">CGSize</span> screenSize = [[UIScreen mainScreen] bounds]<span class="variable">.size</span>; <span class="comment">// 这里如果去掉状态栏，只要用applicationFrame即可。</span></div><div class="line">        <span class="keyword">if</span>(orientation == UIDeviceOrientationLandscapeLeft ||orientation == UIDeviceOrientationLandscapeRight){</div><div class="line">            <span class="comment">// 横屏，那么，返回的宽度就应该是系统给的高度。注意这里，全屏应用和非全屏应用，应该注意自己增减状态栏的高度。</span></div><div class="line">            appScreenSize<span class="variable">.width</span> = screenSize<span class="variable">.height</span>;</div><div class="line">            appScreenSize<span class="variable">.height</span> = screenSize<span class="variable">.width</span>;</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            appScreenSize<span class="variable">.width</span> = screenSize<span class="variable">.width</span>;</div><div class="line">            appScreenSize<span class="variable">.height</span> = screenSize<span class="variable">.height</span>;</div><div class="line">        }</div><div class="line">        lastOrientation = orientation;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> appScreenSize;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><strong>再来就是检测屏幕方向的变化</strong></p>
+<ul>
+<li>添加通知和移除通知的方法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">\- (<span class="keyword">void</span>)addobserver{</div><div class="line">    <span class="comment">// Do any additional setup after loading the view from its nib.</span></div><div class="line">    <span class="comment">//----- SETUP DEVICE ORIENTATION CHANGE NOTIFICATION -----</span></div><div class="line">    UIDevice *device = [UIDevice currentDevice]; <span class="comment">//Get the device object</span></div><div class="line">    [device beginGeneratingDeviceOrientationNotifications]; <span class="comment">//Tell it to start monitoring the accelerometer for orientation</span></div><div class="line">    <span class="built_in">NSNotificationCenter</span> *nc = [<span class="built_in">NSNotificationCenter</span> defaultCenter]; <span class="comment">//Get the notification centre for the app</span></div><div class="line">    [nc addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];</div><div class="line">}</div><div class="line"></div><div class="line">\- (<span class="keyword">void</span>)removeobserver{</div><div class="line">    <span class="built_in">NSNotificationCenter</span> *nc = [<span class="built_in">NSNotificationCenter</span> defaultCenter];</div><div class="line">    UIDevice *device = [UIDevice currentDevice]; <span class="comment">//Get the device object</span></div><div class="line">    [nc removeObserver:<span class="keyword">self</span> name:UIDeviceOrientationDidChangeNotification object:device];</div><div class="line">}</div><div class="line"></div><div class="line">\- (<span class="keyword">void</span>)orientationChanged:(<span class="built_in">NSNotification</span> *)note  {      UIDeviceOrientation o = [[UIDevice currentDevice] orientation];</div><div class="line">    <span class="keyword">switch</span> (o) {</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationPortrait:            <span class="comment">// Device oriented vertically, home button on the bottom</span></div><div class="line">            [<span class="keyword">self</span>  rotation_icon:<span class="number">0.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationPortraitUpsideDown:  <span class="comment">// Device oriented vertically, home button on the top</span></div><div class="line">            [<span class="keyword">self</span>  rotation_icon:<span class="number">180.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationLandscapeLeft :      <span class="comment">// Device oriented horizontally, home button on the right</span></div><div class="line">            [[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:<span class="literal">YES</span>];</div><div class="line">            </div><div class="line">   [<span class="keyword">self</span>  rotation_icon:<span class="number">90.0</span>*<span class="number">3</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationLandscapeRight:      <span class="comment">// Device oriented horizontally, home button on the left</span></div><div class="line">            [[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:<span class="literal">YES</span>];</div><div class="line">            </div><div class="line">  [<span class="keyword">self</span>  rotation_icon:<span class="number">90.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ul>
+<li>然后你就可以获取屏幕旋转发生的变化了</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\-(<span class="keyword">void</span>)rotation_icon:(<span class="keyword">float</span>)n {</div><div class="line">	</div><div class="line">}</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[做一个用来把图片集show在屏幕上，iPad的项目，需要支持4个屏幕方向，问题就是屏幕方向的适应的更改，所以就找来了一些资料。]]>
+    
+    </summary>
+    
+      <category term="屏幕旋转" scheme="/about/tags/%E5%B1%8F%E5%B9%95%E6%97%8B%E8%BD%AC/"/>
+    
+      <category term="iOS应用开发之常用方法" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[个人博客搞定了]]></title>
+    <link href="/about/2014/11/20/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
+    <id>/about/2014/11/20/个人博客搞定了/</id>
+    <published>2014-11-20T01:59:42.000Z</published>
+    <updated>2014-10-29T08:48:32.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[CocoaPods制作篇]]></title>
@@ -125,25 +177,6 @@
     </summary>
     
       <category term="iOS应用开发之第三方框架" scheme="/about/tags/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[个人博客搞定了]]></title>
-    <link href="/about/2014/11/09/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
-    <id>/about/2014/11/09/个人博客搞定了/</id>
-    <published>2014-11-08T18:04:16.000Z</published>
-    <updated>2014-10-29T08:48:32.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
-    </summary>
     
   </entry>
   
@@ -353,6 +386,21 @@
   </entry>
   
   <entry>
+    <title><![CDATA[终端命令超级管理员执行]]></title>
+    <link href="/about/2014/10/27/%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98%E6%89%A7%E8%A1%8C/"/>
+    <id>/about/2014/10/27/终端命令超级管理员执行/</id>
+    <published>2014-10-27T03:42:00.000Z</published>
+    <updated>2014-11-20T03:49:17.000Z</updated>
+    <content type="html"><![CDATA[<p>sudo xxx sumeru</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>sudo xxx sumeru</p>
+]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[iOS8的APP移交流程]]></title>
     <link href="/about/2014/10/23/iOS8%E7%9A%84APP%E7%A7%BB%E4%BA%A4%E6%B5%81%E7%A8%8B/"/>
     <id>/about/2014/10/23/iOS8的APP移交流程/</id>
@@ -387,6 +435,21 @@
       <category term="ios" scheme="/about/tags/ios/"/>
     
       <category term="iOS应用开发之第三方框架" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Versions 崩溃（Mac升级OS X Yonsemite 10.10）]]></title>
+    <link href="/about/2014/10/17/Versions%20%E5%B4%A9%E6%BA%83%EF%BC%88Mac%E5%8D%87%E7%BA%A7OS%20X%20Yonsemite%2010.10%EF%BC%89/"/>
+    <id>/about/2014/10/17/Versions 崩溃（Mac升级OS X Yonsemite 10.10）/</id>
+    <published>2014-10-17T09:40:00.000Z</published>
+    <updated>2014-11-20T04:09:05.000Z</updated>
+    <content type="html"><![CDATA[<p>今天兴冲冲的升级到了OS X Yonsemite 10.10，结果发现SVN工具不能用了，于是找到一个临时的解决办法<br>1.打开文件夹~/.subversion/servers<br><img src="http://img.blog.csdn.net/20141017173827607?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>2.在[global] 下添加http-library = serf并保存</p>
+<p><img src="http://img.blog.csdn.net/20141017173832911?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>原文链接：<a href="http://help.blackpixel.com/kb/versions/versions-crashing-in-os-x-yosemite-1010" target="_blank" rel="external">http://help.blackpixel.com/kb/versions/versions-crashing-in-os-x-yosemite-1010</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天兴冲冲的升级到了OS X Yonsemite 10.10，结果发现SVN工具不能用了，于是找到一个临时的解决办法<br>1.打开文件夹~/.subversion/servers<br><img src="http://img.blog.csdn.net/20141017]]>
+    </summary>
     
   </entry>
   
@@ -434,6 +497,30 @@
       <category term="MagicalRecord" scheme="/about/tags/MagicalRecord/"/>
     
       <category term="iOS应用开发之第三方框架" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS8定位]]></title>
+    <link href="/about/2014/10/14/iOS8%E5%AE%9A%E4%BD%8D/"/>
+    <id>/about/2014/10/14/iOS8定位/</id>
+    <published>2014-10-14T02:02:00.000Z</published>
+    <updated>2014-11-20T04:04:58.000Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CLLocationManager  *_locationManager = [[CLLocationManager alloc] init];</div><div class="line">    _locationManager<span class="variable">.delegate</span> = <span class="keyword">self</span>;</div><div class="line">    _locationManager<span class="variable">.desiredAccuracy</span> = kCLLocationAccuracyBest; <span class="comment">//add by zhangzhenqiang</span></div><div class="line">    _locationManager<span class="variable">.activityType</span> = CLActivityTypeFitness;</div><div class="line">    _locationManager<span class="variable">.distanceFilter</span> = <span class="number">1000.0</span>;</div><div class="line">    _locationManager<span class="variable">.pausesLocationUpdatesAutomatically</span> = <span class="literal">YES</span>;</div><div class="line">    <span class="keyword">if</span> (CurrentSystemVersion &gt;= <span class="number">8.0</span>)</div><div class="line">    {</div><div class="line">        [appDelegate<span class="variable">.locationManager</span> requestAlwaysAuthorization];</div><div class="line">        [appDelegate<span class="variable">.locationManager</span> startUpdatingLocation];</div><div class="line">    }</div><div class="line">    <span class="keyword">else</span></div><div class="line">    {</div><div class="line">        [appDelegate<span class="variable">.locationManager</span> startUpdatingLocation];</div><div class="line">    }</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status</div><div class="line">{</div><div class="line">    </div><div class="line">    <span class="keyword">switch</span> (status)</div><div class="line">    {  <span class="keyword">case</span> kCLAuthorizationStatusNotDetermined:</div><div class="line">        <span class="keyword">if</span> ([_locationManager respondsToSelector:<span class="keyword">@selector</span>(requestAlwaysAuthorization)])</div><div class="line">        {</div><div class="line">            [_locationManager requestWhenInUseAuthorization];</div><div class="line">        }</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><img src="http://img.blog.csdn.net/20141014100229799?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
+    </summary>
+    
+      <category term="iOS8定位" scheme="/about/tags/iOS8%E5%AE%9A%E4%BD%8D/"/>
+    
+      <category term="iOS应用开发之地图" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%9C%B0%E5%9B%BE/"/>
     
   </entry>
   
@@ -678,172 +765,6 @@
       <category term="Swift" scheme="/about/tags/Swift/"/>
     
       <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift_4_闭包(Blocks)]]></title>
-    <link href="/about/2014/07/21/Swift_4_%E9%97%AD%E5%8C%85(Blocks)/"/>
-    <id>/about/2014/07/21/Swift_4_闭包(Blocks)/</id>
-    <published>2014-07-21T04:56:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">var arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">74</span>,<span class="number">2</span>]</div><div class="line"></div><div class="line">func hasClosure(list:[Int], v2:Int, cb:(num:Int, v3:Int) -&gt;Bool)  -&gt;Bool{</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> arr{</div><div class="line">        <span class="keyword">if</span>(cb(num:item, v3:v2)){</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line">var v2 = hasClosure(arr, <span class="number">82</span>, {</div><div class="line">    (num:Int, v3:Int) -&gt;Bool <span class="keyword">in</span></div><div class="line">    <span class="keyword">return</span> num &gt;= v3;</div><div class="line">    });</div><div class="line">println(<span class="string">"v2 is \(v2)"</span>)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//sort函数  会根据您提供的排序闭包将已知类型数组中的值进行排序。 一旦排序完成，函数会返回一个与原数组大小相同的新数组，该数组中包含已经正确排序的同类型元素</span></div><div class="line">let names = [<span class="string">"Chris"</span>, <span class="string">"Alex"</span>, <span class="string">"Ewa"</span>, <span class="string">"Barry"</span>, <span class="string">"Daniella"</span>]</div><div class="line"></div><div class="line">func backwards(s1: String, s2: String) -&gt; Bool {</div><div class="line">    <span class="keyword">return</span> s1 &gt; s2</div><div class="line">}</div><div class="line"></div><div class="line">var reversed = sort(names, backwards)</div><div class="line"><span class="comment">// reversed is equal to ["Ewa", "Daniella", "Chris", "Barry", "Alex"]</span></div><div class="line"><span class="comment">//闭包版</span></div><div class="line">reversed = sort(names, { (s1: String, s2: String) -&gt; Bool <span class="keyword">in</span></div><div class="line">    <span class="keyword">return</span> s1 &gt; s2</div><div class="line">    })</div><div class="line"></div><div class="line"><span class="comment">//单行</span></div><div class="line">reversed = sort(names, { (s1: String, s2: String) -&gt; Bool <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 } )</div><div class="line"></div><div class="line"><span class="comment">//再精简</span></div><div class="line">reversed = sort(names, { s1, s2 <span class="keyword">in</span> s1 &gt; s2 } )</div><div class="line"></div><div class="line"><span class="comment">//极致精简</span></div><div class="line">reversed = sort(names, { $<span class="number">0</span> &gt; $<span class="number">1</span> } )</div><div class="line"></div><div class="line"><span class="comment">//终极精简</span></div><div class="line">reversed = sort(names, &gt;)</div><div class="line"></div><div class="line">println(<span class="string">"reversed is \(reversed)"</span>)</div><div class="line"></div><div class="line"><span class="comment">//闭包表达式</span></div><div class="line"><span class="comment">//{</span></div><div class="line"><span class="comment">//    (parameters) -&gt; returnType in</span></div><div class="line"><span class="comment">//    statements</span></div><div class="line"><span class="comment">//}</span></div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="Swift" scheme="/about/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift_3_函数]]></title>
-    <link href="/about/2014/07/21/Swift_3_%E5%87%BD%E6%95%B0/"/>
-    <id>/about/2014/07/21/Swift_3_函数/</id>
-    <published>2014-07-21T03:45:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//声明一个函数 不带参数 没有返回值</span></div><div class="line">func func1(){</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//声明一个函数 传入两个String类型参数 , 没有返回值</span></div><div class="line">func func2(v1:String, v2:String){</div><div class="line">    println(v1 + <span class="string">"and"</span> + v2)</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//声明一个求和的函数</span></div><div class="line">func func3(v1:Int, v2:Int) -&gt;Int{</div><div class="line"></div><div class="line">    <span class="keyword">return</span> v1+v2;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//数组内是否有大于num的数字</span></div><div class="line">func func4(list:[Int], num:Int) -&gt;Bool{</div><div class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> list{</div><div class="line">        <span class="keyword">if</span>(func5(s,num)){</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;}</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//v1 是否大于 v2</span></div><div class="line">func func5(v1:Int, v2:Int) -&gt;Bool{</div><div class="line">    <span class="keyword">if</span>(v1&gt;v2){</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">//函数嵌套函数</span></div><div class="line">func func6(v1:Int) -&gt;Int{</div><div class="line">    func func7(v2:Int) -&gt;Int{</div><div class="line">        <span class="keyword">return</span> v2+<span class="number">1</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> func7(v1);</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">func1();</div><div class="line"></div><div class="line">func2(<span class="string">"1"</span>,<span class="string">"2"</span>);</div><div class="line"></div><div class="line">var v1 = func3(<span class="number">3</span>,<span class="number">4</span>);</div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div><div class="line"></div><div class="line"></div><div class="line">var arr = [<span class="number">11</span>,<span class="number">2</span>,<span class="number">44</span>,<span class="number">58</span>,<span class="number">72</span>,<span class="number">20</span>];</div><div class="line"></div><div class="line">var v2 = func4(arr, <span class="number">100</span>);</div><div class="line"></div><div class="line">println(<span class="string">"v2 is \(v2)"</span>);</div><div class="line"></div><div class="line">var v3 = func6(<span class="number">100</span>);</div><div class="line"></div><div class="line">println(<span class="string">"v3 is \(v3)"</span>);</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="Swift" scheme="/about/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift_2_控制语句]]></title>
-    <link href="/about/2014/07/21/Swift_2_%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/"/>
-    <id>/about/2014/07/21/Swift_2_控制语句/</id>
-    <published>2014-07-21T03:41:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">for  do While  While Switch</div><div class="line">*/</div><div class="line"></div><div class="line">var arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>];</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr{</div><div class="line">    println(<span class="string">" i is \(i)"</span>);</div><div class="line">}</div><div class="line"></div><div class="line">var count = arr<span class="variable">.count</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (var i = <span class="number">0</span> ; i&lt;count; i++){</div><div class="line">    var index = arr[i];</div><div class="line">    println(<span class="string">"index is \(index)"</span>);</div><div class="line">}</div><div class="line"></div><div class="line">var index = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">do</span>{</div><div class="line">    var j = arr[index];</div><div class="line">    println(<span class="string">"j is \(j)"</span>);</div><div class="line">}<span class="keyword">while</span>(++index &lt; count);</div><div class="line"></div><div class="line"></div><div class="line">var x = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span>(x&lt;count){</div><div class="line">    println(<span class="string">"arr num is \(arr[x]) index = \(x++)"</span>);</div><div class="line">};</div><div class="line"></div><div class="line">var type = <span class="string">"iOS"</span></div><div class="line"></div><div class="line"><span class="comment">///没有break默认不执行下面语句, 如果想要执行(穿透)就加上fallthrough</span></div><div class="line"><span class="keyword">switch</span> type{</div><div class="line">    <span class="keyword">case</span> <span class="string">"iOS"</span>:</div><div class="line">        println(<span class="string">"------"</span>)</div><div class="line"><span class="comment">//        fallthrough;</span></div><div class="line">    <span class="keyword">case</span> <span class="string">"22"</span>:</div><div class="line">        println(<span class="string">"======="</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        println(<span class="string">"三三三三三"</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="Swift" scheme="/about/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[UITableView&UITableViewCell]]></title>
-    <link href="/about/2014/06/04/UITableView&UITableViewCell/"/>
-    <id>/about/2014/06/04/UITableView&UITableViewCell/</id>
-    <published>2014-06-04T10:18:00.000Z</published>
-    <updated>2014-10-30T10:47:16.000Z</updated>
-    <content type="html"><![CDATA[<p>本文转自:<a href="http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html" target="_blank" rel="external">http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html</a></p>
-<p>　　看TableView的资料其实已经蛮久了，一直想写点儿东西，却总是因为各种原因拖延，今天晚上有时间静下心来记录一些最近学习的TableView的知识。下面进入正题，UITableView堪称UIKit里面最复杂的一个控件了，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，tableViewCell的设计和重用以及tableView的效率等问题。<br><strong>下面分9个方面进行介绍：</strong><br><strong>一、UITableView概述</strong><br>　　UITableView继承自UIScrollView，可以表现为Plain和Grouped两种风格，分别如下图所示：<br>      <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719341052.png" alt="">        <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719344359.png" alt=""><br>　　其中左边的是Plain风格的，右边的是Grouped风格，这个区别还是很明显的。<br>　　查看UITableView的帮助文档我们会注意到UITableView有两个Delegate分别为：dataSource和delegate。<br>　　<strong>dataSource</strong>是UITableViewDataSource类型，主要为UITableView提供显示用的数据(UITableViewCell)，指定UITableViewCell支持的编辑操作类型(insert，delete和reordering)，并根据用户的操作进行相应的数据更新操作，如果数据没有更具操作进行正确的更新，可能会导致显示异常，甚至crush。<br>　　<strong>delegate</strong>是UITableViewDelegate类型，主要提供一些可选的方法，用来控制tableView的选择、指定section的头和尾的显示以及协助完成cell的删除和排序等功能。<br>　　提到UITableView，就必须的说一说NSIndexPath。UITableView声明了一个NSIndexPath的类别，主要用来标识当前cell的在tableView中的位置，该类别有section和row两个属性，前者标识当前cell处于第几个section中，后者代表在该section中的第几行。<br>　　UITableView只能有一列数据(cell)，且只支持纵向滑动，当创建好的tablView第一次显示的时候，我们需要调用其reloadData方法，强制刷新一次，从而使tableView的数据更新到最新状态。</p>
-<p><strong>二、UITableViewController简介</strong><br>　　UITableViewController是系统提供的一个便利类，主要是为了方便我们使用UITableView，该类生成的时候就将自身设置成了其包含的tableView的dataSource和delegate，并创建了很多代理函数的框架，为我们大大的节省了时间，我们可以通过其tableView属性获取该controller内部维护的tableView对象。默认情况下使用UITableViewController创建的tableView是充满全屏的，如果需要用到tableView是不充满全屏的话，我们应该使用UIViewController自己创建和维护tableView。<br>　　UITableViewController提供一个初始化函数initWithStyle:，根据需要我们可以创建Plain或者Grouped类型的tableView，当我们使用其从UIViewController继承来的init初始化函数的时候，默认将会我们创建一个Plain类型的tableView。<br>　　UITableViewController默认的会在viewWillAppear的时候，清空所有选中cell，我们可以通过设置self.clearsSelectionOnViewWillAppear<br> = NO，来禁用该功能，并在viewDidAppear中调用UIScrollView的flashScrollIndicators方法让滚动条闪动一次，从而提示用户该控件是可以滑动的。 </p>
-<p><strong>三、UITableViewCell介绍</strong><br> 　　UITableView中显示的每一个单元都是一个UITableViewCell对象，看文档的话我们会发现其初始化函数initWithStyle:reuseIdentifier:比较特别，跟我们平时看到的UIView的初始化函数不同。这个主要是为了效率考虑，因为在tableView快速滑动的滑动的过程中，频繁的alloc对象是比较费时的，于是引入了cell的重用机制，这个也是我们在dataSource中要重点注意的地方，用好重用机制会让我们的tableView滑动起来更加流畅。<br>　　我们可以通过cell的selectionStyle属性指定cell选中时的显示风格，以及通过accessoryType来指定cell右边的显示的内容，或者直接指定accessoryView来定制右边显示的view。<br>　　系统提供的UITableView也包含了四种风格的布局，分别是:<br>    typedef enum {<br>        UITableViewCellStyleDefault,<br>        UITableViewCellStyleValue1,<br>        UITableViewCellStyleValue2,<br>        UITableViewCellStyleSubtitle<br>    } UITableViewCellStyle;<br>　　这几种文档中都有详细描述，这儿就不在累赘。然而可以想象系统提供的只是最常用的几种类型，当系统提供的风格不符合我们需要的时候，我们就需要对cell进行定制了，有以下两种定制方式可选：<br>　　<strong>1、直接向cell的contentView上面添加subView</strong><br>　　这是比较简单的一种的，根据布局需要我们可以在不同的位置添加subView。但是此处需要注意：所有添加的subView都最好设置为不透明的，因为如果subView是半透明的话，view图层的叠加将会花费一定的时间，这会严重影响到效率。同时如果每个cell上面添加的subView个数过多的话(通常超过3，4个)，效率也会受到比较大的影响。<br>　　下面我们看一个例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>    {<br>        NSArray </em>sections = [SvTableViewDataModal sections];<br>        SvSectionModal *sectionModal = [sections objectAtIndex:indexPath.section];</p>
-<pre><code>    <span class="keyword">static</span> <span class="built_in">NSString</span> *reuseIdetify = <span class="string">@"SvTableViewCell"</span>;
-    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdetify];
-    <span class="keyword">if</span> (!cell) {
-        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify];
-        cell<span class="variable">.accessoryType</span> = UITableViewCellAccessoryDisclosureIndicator;
-        cell<span class="variable">.showsReorderControl</span> = <span class="literal">YES</span>;
-
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i) {
-            <span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] initWithFrame:CGRectMake(<span class="number">100</span> + <span class="number">15</span> * i, <span class="number">0</span>, <span class="number">30</span>, <span class="number">20</span>)];
-            label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];
-            label<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d"</span>, i];
-            [cell<span class="variable">.contentView</span> addSubview:label];
-            [label release];
-        }
-    }
-
-    cell<span class="variable">.textLabel</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
-    cell<span class="variable">.textLabel</span><span class="variable">.text</span> = [sectionModal<span class="variable">.cityNames</span> objectAtIndex:indexPath<span class="variable">.row</span>];
-    <span class="keyword">return</span> cell;
-} 
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　在上面这个例子中，我往每个cell中添加了6个subView，而且每个subView都是半透明(UIView默认是半透明的)，这个时候滑动起来明显就可以感觉到有点颤抖，不是很流畅。当把每一个subView的opaque属性设置成YES的时候，滑动会比之前流畅一些，不过还是有点儿卡。<br>　　<strong>2、从UITableViewCell派生一个类</strong><br>　　通过从UITableViewCell中派生一个类，可以更深度的定制一个cell，可以指定cell在进入edit模式的时候如何相应等等。最简单的实现方式就是将所有要绘制的内容放到一个定制的subView中，并且重载该subView的drawRect方法直接把要显示的内容绘制出来(这样可以避免subView过多导致的性能瓶颈)，最后再将该subView添加到cell派生类中的contentView中即可。但是这样定制的cell需要注意在数据改变的时候，通过手动调用该subView的setNeedDisplay方法来刷新界面，这个例子可以在苹果的帮助文档中的TableViewSuite工程中找到，这儿就不举例了。<br>　　观看这两种定制cell的方法，我们会发现subView都是添加在cell的contentView上面的，而不是直接加到cell上面，这样写也是有原因的。下面我们看一下cell在正常状态下和编辑状态下的构成图：<br>　　cell在正常状态下的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819321126.png" alt=""><br>　　进入编辑状态下cell的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819324942.png" alt=""><br>　　通过观察上面两幅图片我们可以看出来，当cell在进入编辑状态的时候，contentView会自动的缩放来给Editing control腾出位置。这也就是说如果我们把subView添加到contentView上，如果设置autoresizingMask为更具父view自动缩放的话，cell默认的机制会帮我们处理进入编辑状态的情况。而且在tableView是Grouped样式的时候，会为cell设置一个背景色，如果我们直接添加在cell上面的话，就需要自己考虑到这个背景色的显示问题，如果添加到contentView上，则可以通过view的叠加帮助我们完成该任务。综上，subView最好还是添加到cell的contentView中。</p>
-<p><strong>四、Reordering</strong><br>　　为了使UITableVeiew进入edit模式以后，如果该cell支持reordering的话，reordering控件就会临时的把accessaryView覆盖掉。为了显示reordering控件，我们必须将cell的showsReorderControl属性设置成YES，同时实现dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法。我们还可以同时通过实现dataSource中的 tableView:canMoveRowAtIndexPath:返回NO，来禁用某一些cell的reordering功能。<br>　　下面看苹果官方的一个reordering流程图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819375133.png" alt=""><br>　　上图中当tableView进入到edit模式的时候，tableView会去对当前可见的cell逐个调用dataSource的tableView:canMoveRowAtIndexPath:方法(此处官方给出的流程图有点儿问题)，决定当前cell是否显示reoedering控件，当开始进入拖动cell进行拖动的时候，每滑动过一个cell的时候，会去掉用delegate的tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:方法，去判断当前划过的cell位置是否可以被替换，如果不行则给出建议的位置。当用户放手时本次reordering操作结束，调用dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法更新tableView对应的数据。<br>　　此处给个我写demo中的更新数据的小例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    // if you want show reordering control, you must implement moveRowAtndexPath, or the reordering control will not show // when use reordering end, this method is invoke </p>
-<pre><code>- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)<span class="built_in">source</span>IndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    // update DataModal
-
-    NSArray *sections = [SvTableViewDataModal sections];
-    SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:<span class="built_in">source</span>IndexPath.section];
-    NSString *city = [[<span class="built_in">source</span>SectionModal.cityNames objectAtIndex:<span class="built_in">source</span>IndexPath.row] retain];
-    [<span class="built_in">source</span>SectionModal.cityNames removeObject:city];
-    [SvTableViewDataModal replaceSectionAtIndex:<span class="built_in">source</span>IndexPath.section withSection:<span class="built_in">source</span>SectionModal];
-
-    SvSectionModal *desinationsSectionModal= [[SvTableViewDataModal sections] objectAtIndex:destinationIndexPath.section];
-    [desinationsSectionModal.cityNames insertObject:city atIndex:destinationIndexPath.row];
-    [SvTableViewDataModal replaceSectionAtIndex:destinationIndexPath.section withSection:desinationsSectionModal];
-
-    [city release];
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面代码中首先拿到源cell所处的section，然后从该section对应的数据中移除，然后拿到目标section的数据，然后将源cell的数据添加到目标section中，并更新回数据模型，如果我们没有正确更新数据模型的话，显示的内容将会出现异常。</p>
-<p><strong>五、Delete &amp; Insert</strong><br>　　cell的delete和insert操作大部分流程都是一样的，当进入编辑模式的时候具体的显示是delete<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819411122.png" alt="">还是insert<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819440770.png" alt="">取决与该cell的editingStyle的值，editStyle的定义如下：<br>    typedef enum {<br>        UITableViewCellEditingStyleNone,<br>        UITableViewCellEditingStyleDelete,<br>        UITableViewCellEditingStyleInsert<br>    } UITableViewCellEditingStyle;<br>　　当tableView进入编辑模式以后，cell上面显示的delete还是insert除了跟cell的editStyle有关，还与 tableView的delegate的tableView:editingStyleForRowAtIndexPath:方法的返回值有关(在这里唠叨一句，其实delegate提供了很多改变cell属性的机会，如非必要，还是不要去实现这些方法，因为执行这些方法也造成一定的开销)。<br>　　delete和insert的流程如下苹果官方文档中给出的图所示：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819454344.png" alt=""><br>　　下面是我写的demo中删除和添加部分的代码：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #pragma mark -</p>
-<pre><code>- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle <span class="keyword">for</span>RowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@<span class="string">"commit editStyle: %d"</span>, editingStyle);
-
-    <span class="keyword">if</span> (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *sections = [SvTableViewDataModal sections];
-        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
-        [<span class="built_in">source</span>SectionModal.cityNames removeObjectAtIndex:indexPath.row];
-
-        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-    <span class="keyword">else</span> {
-        // <span class="keyword">do</span> something <span class="keyword">for</span> add it
-        NSArray *sections = [SvTableViewDataModal sections];
-        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
-        [<span class="built_in">source</span>SectionModal.cityNames insertObject:@<span class="string">"new City"</span> atIndex:indexPath.row];
-        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
-
-        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　代码中首先判断当前操作是delete操作还是insert操作，相应的更新数据，最后根据情况调用tableView的insertRowsAtIndexPaths:withRowAnimation:或者deleteRowsAtIndexPaths:withRowAnimation:方法，对tableView的视图进行更新。cell的删除和添加操作相对还是比较简单的。</p>
-<p><strong>六、Cell的Select操作</strong><br>　　当我们在tableView中点击一个cell的时候，将会调用tableView的delegate中的tableView:didSelectRowAtIndexPath:方法。<br>　　关于tableView的cell的选中，苹果官方有以下几个建议：<br> 　　1、不要使用selection来表明cell的选择状态，而应该使用accessaryView中的checkMark或者自定义accessaryView来显示选中状态。<br> 　　2、当选中一个cell的时候，你应该取消前一个cell的选中。<br> 　　3、如果cell选中的时候，进入下一级viewCOntroller，你应该在该级菜单从navigationStack上弹出的时候，取消该cell的选中。<br>　　这块儿再提一点，当一个cell的accessaryType为UITableViewCellAccessoryDisclosureIndicator的时候，点击该accessary区域通常会将消息继续向下传递，即跟点击cell的其他区域一样，将会掉delegate的tableView:didSelectRowAtIndexPath:方法，当时如果accessaryView为 UITableViewCellAccessoryDetailDisclosureButton的时候，点击accessaryView将会调用delegate的 tableView:accessoryButtonTappedForRowWithIndexPath:方法。</p>
-<p><strong>七、批量插入，删除，部分更新操作</strong><br>　　UITableView提供了一个批量操作的特性，这个功能在一次进行多个row或者scetion的删除，插入，获取更新多个cell内容的时候特别好用。所有的批量操作需要包含在beginUpdates和endUpdates块中，否则会出现异常。<br>　　下面请看我demo中的一个批量操作的例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (void)groupEdit:(UIBarButtonItem*)sender<br>    {<br>        [_tableView beginUpdates];</p>
-<pre><code>    <span class="comment">// first update the data modal</span>
-    [_tableView insertRowsAtIndexPaths:[<span class="built_in">NSArray</span> arrayWithObject:[<span class="built_in">NSIndexPath</span> indexPathForRow:<span class="number">0</span> inSection:<span class="number">0</span>]] withRowAnimation:UITableViewRowAnimationTop];
-
-    [_tableView deleteSections:[<span class="built_in">NSIndexSet</span> indexSetWithIndex:<span class="number">0</span>] withRowAnimation:UITableViewRowAnimationTop];
-
-    [SvTableViewDataModal deleteSectionAtIndex:<span class="number">0</span>];
-
-    SvSectionModal *section = [[SvTableViewDataModal sections] objectAtIndex:<span class="number">0</span>];
-    [section<span class="variable">.cityNames</span> insertObject:<span class="string">@"帝都"</span> atIndex:<span class="number">0</span>];
-    [SvTableViewDataModal replaceSectionAtIndex:<span class="number">0</span> withSection:section];
-
-    [_tableView endUpdates];
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面的例子中我们可以看到先往tableView的第0个section的第0行添加一个cell，然后将第0个section删掉。按照我们程序中写的顺序，那么新添加进去的“帝都”，将不在会显示，因为包含它的整个section都已经被删除了。<br>　　执行程序前后结果如下图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062820003824.png" alt="">              <img src="http://pic002.cnblogs.com/images/2012/302680/2012062820012876.png" alt=""><br>　　demo中第0个section是陕西省的城市，第1个section是北京。左边是执行前的截图，右边是执行后的截图，观察发现结果并不像我们前面推测的那样。那是因为在批量操作时，不管代码中先写的添加操作还是删除操作，添加操作都会被推出执行，直到这个块中所有的删除操作都执行完以后，才会执行添加操作，这也就是上面苹果官方图片上要表达的意思。<br>　　苹果官方文档有一副图可以帮助我们更好的理解这一点：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819544595.png" alt=""><br>　　原图中操作是：首先删除section 0中的row 1，然后删除section 1，再向section 1中添加一行。执行完批量更新以后就得到右半边的结果。<br> 　　<br><strong>八、IndexList</strong><br>　　当我们tableView中section有很多，数据量比较大的时候我们可以引入indexList，来方便完成section的定位，例如系统的通讯录程序。我们可以通过设置tableView的sectionIndexMinimumDisplayRowCount属性来指定当tableView中多少行的时候开始显示IndexList，默认的设置是NSIntegerMax，即默认是不显示indexList的。<br>　　为了能够使用indexlist我们还需要实现dataSource中一下两个方法：</p>
-<pre><code><span class="pp">- <span class="params">(<span class="variable">NSArray</span> *)</span>sectionIndexTitlesForTableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView; - <span class="params">(<span class="variable">NSInteger</span>)</span>tableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView sectionForSectionIndexTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title atIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index; </span>
-</code></pre><p>　　第一个方法返回用于显示在indexList中的内容的数组，通常为A，B，C…Z。第二个方法的主要作用是根据用户在indexList中点击的位置，返回相应的section的index值。这个例子可以在苹果官方给出的TableViewSuite中找到，实现起来还是很简单的。</p>
-<p><strong>九、其他</strong><br>　　<strong>1**</strong>、分割线<strong><br>　　我们可以通过设置tableView的separatorStyle属性来设置有无分割线以及分割线的风格，其中style定义如下：<br>    typedef enum {<br>        UITableViewCellSeparatorStyleNone,<br>        UITableViewCellSeparatorStyleSingleLine,<br>        UITableViewCellSeparatorStyleSingleLineEtched<br>    } UITableViewCellSeparatorStyle;<br>　　同时还可以通过tableView的separatorColor属性来设置分割线的颜色。
-　　</strong>2、如何提高tableView的性能**</p>
-<p>　　<strong>a、重用cell</strong><br>　　我们都知道申请内存是需要时间，特别是在一段时间内频繁的申请内存将会造成很大的开销，而且上tebleView中cell大部分情况下布局都是一样的，这个时候我们可以通过回收重用机制来提高性能。<br>　　<strong>b、避免content的重新布局</strong><br>　　尽量避免在重用cell时候，对cell的重新布局，一般情况在在创建cell的时候就将cell布局好。<br>　　<strong>c、使用不透明的subView</strong><br>　　在定制cell的时候，将要添加的subView设置成不透明的会大大减少多个view层叠加时渲染所需要的时间。<br>　　<strong>d、如果方便，直接重载subView的drawRect方法</strong><br><strong>　　</strong>如果定制cell的过程中需要多个小的元素的话，最好直接对要显示的多个项目进行绘制，而不是采用添加多个subView。<br>　　<strong>e、tableView的delegate的方法如非必要，尽量不要实现</strong><br>　　tableView的delegate中的很多函数提供了对cell属性的进一步控制，比如每个cell的高度，cell是否可以编辑，支持的edit风格等，如非必要最好不要实现这些方法因为快速的调用这些方法也会影响性能。<br>　　(以上5点建议，前三点来自苹果官方文档，后两点我自己加的，有什么不对的地方，欢迎指正)</p>
-<p><strong>小结：</strong>UITableView本身是很复杂的，本片博客只起到抛砖引玉的作用，欢迎大家补充。想用好UITableView，还是需要实际项目中的锻炼的。</p>
-<p>注：1、博客中的图片出了程序运行截图，其他的都来自苹果官方文档。<br>　　2、欢迎转载，转载请在显著位置添加原文链接地址和作者名称，谢谢！</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>本文转自:<a href="http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html" target="_blank" rel="external">http://www.cnblogs.com/]]>
-    </summary>
-    
-      <category term="uitableviewcell" scheme="/about/tags/uitableviewcell/"/>
-    
-      <category term="uitableview" scheme="/about/tags/uitableview/"/>
-    
-      <category term="iOS应用开发之UITableViewCell" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BUITableViewCell/"/>
     
   </entry>
   

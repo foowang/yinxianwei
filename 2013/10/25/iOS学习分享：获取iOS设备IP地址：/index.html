@@ -4,14 +4,20 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>个人博客搞定了 | 一枝红杏出墙来</title>
+    <title>iOS学习分享：获取iOS设备IP地址： | 一枝红杏出墙来</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="尹现伟">
     
-    <meta name="description" content="在此感谢:
+    <meta name="description" content="123#include &amp;lt;arpa/inet.h&amp;gt;#include &amp;lt;net/if.h&amp;gt;#include &amp;lt;ifaddrs.h&amp;gt;
 
-http://blog.csdn.net/poem_of_sunshine/article/details/29369785">
+
+
+12
+
+
+
+12345678910111213141516171819202122232425262728293031- (NS">
     
     
     
@@ -68,15 +74,15 @@ http://blog.csdn.net/poem_of_sunshine/article/details/29369785">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/11/09/个人博客搞定了/" title="个人博客搞定了" itemprop="url">个人博客搞定了</a>
+      <a href="/2013/10/25/iOS学习分享：获取iOS设备IP地址：/" title="iOS学习分享：获取iOS设备IP地址：" itemprop="url">iOS学习分享：获取iOS设备IP地址：</a>
   </h1>
   <p class="article-author">By
     
       <a href="/about" title="尹现伟">尹现伟</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-11-08T18:04:16.000Z" itemprop="datePublished">11月 9 2014</time>
-    Updated:<time datetime="2014-10-29T08:48:32.000Z" itemprop="dateModified">10月 29 2014</time>
+    <time datetime="2013-10-25T07:59:00.000Z" itemprop="datePublished">10月 25 2013</time>
+    Updated:<time datetime="2014-11-20T04:06:50.000Z" itemprop="dateModified">11月 20 2014</time>
     
   </p>
 </header>
@@ -85,23 +91,40 @@ http://blog.csdn.net/poem_of_sunshine/article/details/29369785">
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在此感谢:"><span class="toc-number">1.</span> <span class="toc-text">在此感谢:</span></a></li></ol>
+		
 		</div>
 		
-		<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
-</blockquote>
+		<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#include <span class="title">&lt;arpa/inet.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;net/if.h&gt;</span></span></div><div class="line"><span class="preprocessor">#include <span class="title">&lt;ifaddrs.h&gt;</span></span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">NSString</span> *)getIPAddress</div><div class="line">{</div><div class="line">    <span class="built_in">NSString</span> *address = <span class="string">@"error"</span>;</div><div class="line">    <span class="keyword">struct</span> ifaddrs *interfaces = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">struct</span> ifaddrs *temp_addr = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> success = <span class="number">0</span>;</div><div class="line">    <span class="comment">// retrieve the current interfaces - returns 0 on success</span></div><div class="line">    success = getifaddrs(&interfaces);</div><div class="line">    <span class="keyword">if</span> (success == <span class="number">0</span>)</div><div class="line">    {</div><div class="line">        <span class="comment">// Loop through linked list of interfaces</span></div><div class="line">        temp_addr = interfaces;</div><div class="line">        <span class="keyword">while</span>(temp_addr != <span class="literal">NULL</span>)</div><div class="line">        {</div><div class="line">            <span class="keyword">if</span>(temp_addr-&gt;ifa_addr-&gt;sa_family == AF_INET)</div><div class="line">            {</div><div class="line">                <span class="comment">// Check if interface is en0 which is the wifi connection on the iPhone</span></div><div class="line">                <span class="keyword">if</span>([[<span class="built_in">NSString</span> stringWithUTF8String:temp_addr-&gt;ifa_name] isEqualToString:<span class="string">@"en0"</span>])</div><div class="line">                {</div><div class="line">                    <span class="comment">// Get NSString from C String</span></div><div class="line">                    address = [<span class="built_in">NSString</span> stringWithUTF8String:inet_ntoa(((<span class="keyword">struct</span> sockaddr_in *)temp_addr-&gt;ifa_addr)-&gt;sin_addr)];</div><div class="line">                }</div><div class="line">            }</div><div class="line">            temp_addr = temp_addr-&gt;ifa_next;</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="comment">// Free memory</span></div><div class="line">    freeifaddrs(interfaces);</div><div class="line">    <span class="keyword">return</span> address;</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><a href="http://www.cocoachina.com/bbs/read.php?tid=142534" target="_blank" rel="external">From:http://www.cocoachina.com/bbs/read.php?tid=142534</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/获取iP地址/">获取iP地址</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS之常用方法/">iOS之常用方法</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="/about/2014/11/09/个人博客搞定了/" data-title="个人博客搞定了 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  <div data-url="/about/2013/10/25/iOS学习分享：获取iOS设备IP地址：/" data-title="iOS学习分享：获取iOS设备IP地址： | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -111,18 +134,18 @@ http://blog.csdn.net/poem_of_sunshine/article/details/29369785">
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/11/12/CocoaPods制作篇/" title="CocoaPods制作篇">
+ <a href="/2013/10/29/在 iOS 应用中直接跳转到 AppStore 的方法/" title="在 iOS 应用中直接跳转到 AppStore 的方法">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  CocoaPods制作篇</span>
+  在 iOS 应用中直接跳转到 AppStore 的方法</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/11/07/APP被Rejected的各种原因翻译/"  title="APP被Rejected的各种原因翻译">
+<a href="/2013/10/21/ios 地图在viewDidLoad里面获得经纬度/"  title="ios 地图在viewDidLoad里面获得经纬度">
  <strong>NEXT:</strong><br/> 
- <span>APP被Rejected的各种原因翻译
+ <span>ios 地图在viewDidLoad里面获得经纬度
 </span>
 </a>
 </div>
@@ -149,7 +172,7 @@ var duoshuoQuery = {short_name:"yinxianwei"};
       
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在此感谢:"><span class="toc-number">1.</span> <span class="toc-text">在此感谢:</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
@@ -184,19 +207,23 @@ var duoshuoQuery = {short_name:"yinxianwei"};
 	<p class="asidetitle">Categories</p>
 		<ul>
 		
+			<li><a href="/categories/iOS之常用方法/" title="iOS之常用方法">iOS之常用方法<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS之应用发布/" title="iOS之应用发布">iOS之应用发布<sup>1</sup></a></li>
+		
 			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>8</sup></a></li>
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>9</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>15</sup></a></li>
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>16</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>7</sup></a></li>
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>9</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
 		
@@ -204,13 +231,15 @@ var duoshuoQuery = {short_name:"yinxianwei"};
 		
 			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>1</sup></a></li>
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>2</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>4</sup></a></li>
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>7</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>20</sup></a></li>
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>26</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之开发证书/" title="iOS应用开发之开发证书">iOS应用开发之开发证书<sup>1</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
 		
@@ -220,11 +249,11 @@ var duoshuoQuery = {short_name:"yinxianwei"};
 		
 			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
 		
-			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>6</sup></a></li>
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>8</sup></a></li>
 		
 			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
 		
-			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>4</sup></a></li>
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>5</sup></a></li>
 		
 		</ul>
 </div>
@@ -233,7 +262,7 @@ var duoshuoQuery = {short_name:"yinxianwei"};
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">Archives</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">2</span></li></ul>
   </div>
 
 
@@ -256,7 +285,7 @@ var duoshuoQuery = {short_name:"yinxianwei"};
 		
 			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Swift/" title="Swift">Swift<sup>8</sup></a></li>
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
 		
 			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
 		
@@ -266,21 +295,21 @@ var duoshuoQuery = {short_name:"yinxianwei"};
 		
 			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
 		
+			<li><a href="/tags/URL-Scheme/" title="URL Scheme">URL Scheme<sup>1</sup></a></li>
+		
+			<li><a href="/tags/URL编码/" title="URL编码">URL编码<sup>1</sup></a></li>
+		
 			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
 		
 			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
 		
-			<li><a href="/tags/api/" title="api">api<sup>4</sup></a></li>
+			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
 		
 			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
 		
+			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
+		
 			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
-		
-			<li><a href="/tags/cell自适应高度/" title="cell自适应高度">cell自适应高度<sup>1</sup></a></li>
-		
-			<li><a href="/tags/cocos2d/" title="cocos2d">cocos2d<sup>3</sup></a></li>
-		
-			<li><a href="/tags/fontfontiPhone开发font/" title="fontfontiPhone开发font">fontfontiPhone开发font<sup>1</sup></a></li>
 		
 		</ul>
 </div>

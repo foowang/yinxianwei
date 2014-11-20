@@ -1,0 +1,461 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>ipa怎样实现网上直接安装 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    <meta name="description" content="you have to have two file.yourapp.ipayourapp.plistin the plist :
+&amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;&amp;lt;!DOCTYPE plist PUBLIC “-//Apple//DTD ">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="http://www.yinxianwei.cn">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div></li>
+
+				</ul>
+			</nav>	
+</div>
+
+    </header>
+    <div id="container" class="clearfix">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/11/22/ipa怎样实现网上直接安装/" title="ipa怎样实现网上直接安装" itemprop="url">ipa怎样实现网上直接安装</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="/about" title="尹现伟">尹现伟</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-11-22T09:39:00.000Z" itemprop="datePublished">11月 22 2013</time>
+    Updated:<time datetime="2014-11-20T04:07:16.000Z" itemprop="dateModified">11月 20 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>you have to have two file.<br>yourapp.ipa<br>yourapp.plist<br>in the plist :</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;<br>&lt;!DOCTYPE plist PUBLIC “-//Apple//DTD PLIST 1.0//EN” “<a href="http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;" target="_blank" rel="external">http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</a></p>
+<plist version="1.0"><br><dict><br>    <key>items</key><br>    <array><br>        <dict><br>            <key>assets</key><br>            <array><br>                <dict><br>                    <key>kind</key><br>                    <string>software-package</string><br>                    <key>url</key><br>                    <string><a href="http://urlofyourapp/appname.ipa" target="_blank" rel="external">http://urlofyourapp/appname.ipa</a></string><br>                </dict><br>            </array><br>            <key>metadata</key><br>            <dict><br>                <key>bundle-identifier</key><br>                <string>com.domain.appname</string><br>                <key>bundle-version</key><br>                <string>1.0</string><br>                <key>kind</key><br>                <string>software</string><br>                <key>title</key><br>                <string>YourAppName</string><br>            </dict><br>        </dict><br>    </array><br></dict><br></plist>
+
+<p>and create a webpage with a link<br><a href="itms-services://?action=download-manifest&url=http://yourappurl/yourapp.plist" target="_blank" rel="external">click<br> to install</a></p>
+<p>最后要注意对方的机器里要有相应的provision profile.</p>
+<p>哦？ls的再说说，这样的安装需要itunes不？<br><strong>capsen</strong>2011-07-09 21:10不需要，完全使用网络安装，只要对方机器有了相应的provision profile，直接访问网页按后按那个连接选择安装就可以了。<br><strong>superarts</strong>2011-07-10 13:33profile也可以网络下载安装吗？<br><strong>capsen</strong>2011-07-10 15:21可以，但profile必须针对对方机器的ccid.<br><strong>visen_api</strong>2011-08-05 11:08是ccid，还是udid?<br><strong>fordmendeo</strong>2011-08-05 11:09mark。。。<br><strong>visen_api</strong>2011-08-05 11:09profile文件需要什么内容？<br><strong>visen_api</strong>2011-08-09 16:41重启问题未解决，顶！<br><strong>titi007</strong>2012-04-13 09:29重启的问题，有人解决吗？<br><strong>nouon</strong>2012-10-24 09:14我也遇到和楼主一样的问题，也是重启后就有了，不知道楼主是这么解决的</p>
+<p>但是看到楼主的最后登录时间是2012-09-26</p>
+<p>不知道楼主什么时候会回复我的问题，唉。。。<br><strong>wuyingce</strong>2012-12-19 10:52在下载的plist文件中，又这样一个属性<br>                 <key>bundle-identifier</key><br>                <string>com.domain.appname</string></p>
+<p>需要根据你的app中的bundle－identifier 来进行修改！之后就不会出现安装完成后消失的情况！<a href="http://www.cocoachina.com/applenews/devnews/2013/0501/6113.html" target="_blank" rel="external">http://www.cocoachina.com/applenews/devnews/2013/0501/6113.html</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ios/">ios</a><a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS之应用发布/">iOS之应用发布</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="/about/2013/11/22/ipa怎样实现网上直接安装/" data-title="ipa怎样实现网上直接安装 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/11/25/CLLocationManager_ MKMapView/" title="CLLocationManager_ MKMapView">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  CLLocationManager_ MKMapView</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/10/29/JSON在线解析效验+URL解码编码/"  title="JSON在线解析效验+URL解码编码">
+ <strong>NEXT:</strong><br/> 
+ <span>JSON在线解析效验+URL解码编码
+</span>
+</a>
+</div>
+
+</nav>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"yinxianwei"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>  
+      
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div id="authorInfo">
+	
+		<div class="author-logo"></div>		
+	
+	
+	<section class="author-info">
+		
+			<p> 尹现伟</p>
+		
+		
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
+		
+		
+	</div>
+</div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/iOS之常用方法/" title="iOS之常用方法">iOS之常用方法<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS之应用发布/" title="iOS之应用发布">iOS之应用发布<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>9</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>16</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>9</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>7</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>26</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之开发证书/" title="iOS应用开发之开发证书">iOS应用开发之开发证书<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>8</sup></a></li>
+		
+			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
+		
+			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>5</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">Archives</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">March 2014</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">2</span></li></ul>
+  </div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
+		
+			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
+		
+			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
+		
+			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
+		
+			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
+		
+			<li><a href="/tags/URL-Scheme/" title="URL Scheme">URL Scheme<sup>1</sup></a></li>
+		
+			<li><a href="/tags/URL编码/" title="URL编码">URL编码<sup>1</sup></a></li>
+		
+			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+		
+			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
+		
+			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
+		
+			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
+		
+			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+  }
+  backToTop();
+
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,240-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
