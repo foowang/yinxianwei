@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="/about/"/>
-  <updated>2014-11-25T07:16:43.881Z</updated>
+  <updated>2014-12-03T02:58:15.066Z</updated>
   <id>/about/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[CoreData实体的DeleteRule属性]]></title>
+    <link href="/about/2014/12/03/CoreData%E5%AE%9E%E4%BD%93%E7%9A%84DeleteRule%E5%B1%9E%E6%80%A7/"/>
+    <id>/about/2014/12/03/CoreData实体的DeleteRule属性/</id>
+    <published>2014-12-03T02:46:50.000Z</published>
+    <updated>2014-12-03T02:54:36.000Z</updated>
+    <content type="html"><![CDATA[<p>在使用CoreData的时候碰到这个属性，Delete Rule。</p>
+<pre><code>把对应的<span class="keyword">Delete</span> <span class="keyword">Rule</span>属性设置为：Cascade 就可以了。
+</code></pre><blockquote>
+<ul>
+<li>如果关系的删除规则设定为Nullify（作废）。当A对象的关系指向的B对象被删除后，A对象的关系将被设为nil。对于To Many关系类型，B对象只会从A对象的关系的容器中被移除。</li>
+<li>如果关系的删除规则为Cascade（级联），当B对象的关系指向的C对象被删除后，B对象也会被删除。B对象关联（以Cascade删除规则）的二级对象A也会被删除。以此类推。</li>
+<li>如果关系的删除规则为Deny（拒绝），如果删除A对象时，A对象的关系指向的B对象仍存在，则删除操作会被拒绝。</li>
+<li>如果关系的删除规则为NO Action，当A对象的关系指向的B对象被删除后，A对象保持不变，这意味着A对象的关系会指向一个不存在的对象。如果没有充分的理由，最好不要使用。</li>
+</ul>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[删除一个实体怎么同时删除与其关联的实体]]>
+    
+    </summary>
+    
+      <category term="CoreData" scheme="/about/tags/CoreData/"/>
+    
+      <category term="iOS应用开发之数据库" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[iOS8上方法失效]]></title>
@@ -757,25 +785,6 @@
     <published>2014-07-21T07:45:00.000Z</published>
     <updated>2014-10-30T10:47:14.000Z</updated>
     <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">class People{</div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">}</div><div class="line"><span class="comment">//方法扩展</span></div><div class="line">extension People{</div><div class="line">    func test() -&gt; String{</div><div class="line">        <span class="keyword">return</span> <span class="string">"abc"</span></div><div class="line"></div><div class="line">    }</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">let p = People();</div><div class="line"></div><div class="line">var v1 = p<span class="variable">.test</span>();</div><div class="line"></div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="Swift" scheme="/about/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="/about/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift_7_继承]]></title>
-    <link href="/about/2014/07/21/Swift_7_%E7%BB%A7%E6%89%BF/"/>
-    <id>/about/2014/07/21/Swift_7_继承/</id>
-    <published>2014-07-21T07:44:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line"></div><div class="line">class People {</div><div class="line">    </div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">    init(){</div><div class="line">        <span class="keyword">self</span><span class="variable">.name</span>=<span class="string">"李四"</span></div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="comment">//防止重写关键字 @final</span></div><div class="line">    @final var age = <span class="number">15</span></div><div class="line">}</div><div class="line"></div><div class="line">class Man : People{</div><div class="line">    init(){</div><div class="line">        <span class="keyword">super</span><span class="variable">.init</span>()</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">let p = Man()</div><div class="line"></div><div class="line">p<span class="variable">.name</span> = <span class="string">"张三"</span></div><div class="line"></div><div class="line">println(<span class="string">"p name is \(p.name)"</span>)</div><div class="line"></div><div class="line">let p2 = Man()</div><div class="line"></div><div class="line">println(<span class="string">"p2 name is \(p2.name)"</span>)</div></pre></td></tr></table></figure>
 
 ]]></content>
     <summary type="html">
