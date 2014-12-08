@@ -1,464 +1,209 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>CoreData | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tag: CoreData | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">CoreData</h2>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-12-03T02:46:50.000Z"><a href="/2014/12/03/CoreData实体的DeleteRule属性/">12月 3 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/12/03/CoreData实体的DeleteRule属性/">CoreData实体的DeleteRule属性</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>在使用CoreData的时候碰到这个属性，Delete Rule。</p>
-<pre><code>把对应的<span class="keyword">Delete</span> <span class="keyword">Rule</span>属性设置为：Cascade 就可以了。
-</code></pre><blockquote>
-<ul>
-<li>如果关系的删除规则设定为Nullify（作废）。当A对象的关系指向的B对象被删除后，A对象的关系将被设为nil。对于To Many关系类型，B对象只会从A对象的关系的容器中被移除。</li>
-<li>如果关系的删除规则为Cascade（级联），当B对象的关系指向的C对象被删除后，B对象也会被删除。B对象关联（以Cascade删除规则）的二级对象A也会被删除。以此类推。</li>
-<li>如果关系的删除规则为Deny（拒绝），如果删除A对象时，A对象的关系指向的B对象仍存在，则删除操作会被拒绝。</li>
-<li>如果关系的删除规则为NO Action，当A对象的关系指向的B对象被删除后，A对象保持不变，这意味着A对象的关系会指向一个不存在的对象。如果没有充分的理由，最好不要使用。</li>
-</ul>
-</blockquote>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之数据库/">iOS应用开发之数据库</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/CoreData/">CoreData</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-03-06T05:09:00.000Z"><a href="/2014/03/06/iOS的CoreData用法/">3月 6 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/03/06/iOS的CoreData用法/">iOS的CoreData用法</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>CoreData以前没用过，最近试用了一下，感觉省了好多的代码，很方便。当然，也只是会使用。</p>
-<ul>
-<li>首先来创建一个工程</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20140306123438156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>系统默认会给你增加一些东西，至于这些东西具体干嘛使的，自己去谷歌找找，说了，我只会使用。- 在工程目录下有一个.xcdatamodeld的文件，这就是CoreData的重点了。可以在这里面添加一些Modeld和配置Modeld的属性。</p>
-<p>在xcdatamodeld的左下角Add Entity相当于创建一个数据模型也相当于在数据库创建了一张表。<img src="http://img.blog.csdn.net/20140306123850140?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>现在我们创建一个名Dog的Modeld。同时，这个名字的首字母要大写。- 接下来我们来配置这个Dog的一些属性。点击+号添加属性，Type可以选择属性的类型。</p>
-<p><img src="http://img.blog.csdn.net/20140306124258921?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<ul>
-<li>然后在Editor里点击CreateNSManagedObject SubClass…选择Dog，然后Create就会多出一个Dog类。</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20140306124821421?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="">当然，我们完没有必要在意这些东西。 </p>
-<ul>
-<li>现在就是使用这个东西了，好吧，我承认这一块不太会描述，因为我的数据库学的不太好。</li>
-</ul>
-<p>在创建工程的时候，他会自动在AppDelegate里描述一个属性。<img src="http://img.blog.csdn.net/20140306125154531?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>我们就是使用NSManagedObjectContext来对文件的增删改查的操作。- 首先，我们来插入一条数据。别忘了导入Dog的头文件，虽然这是常识。</p>
-<p>创建一个Dog对象。（@(1) == [NSNumbernumberWithInt:1];）</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Dog *dog = [NSEntityDescription insertNewObjectForEntityForName:<span class="string">@"Dog"</span> inManagedObjectContext:<span class="keyword">self</span><span class="variable">.managedObjectContext</span>];</div><div class="line">   </div><div class="line">   [dog setName:<span class="string">@"花花"</span>];</div><div class="line">   [dog setAge:@(<span class="number">1</span>)];</div><div class="line">   [dog setSex:@(<span class="number">0</span>)];</div></pre></td></tr></table></figure>
-
-<p>保存</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line"><span class="built_in">BOOL</span> isSave =   [<span class="keyword">self</span><span class="variable">.managedObjectContext</span> save:&error];</div><div class="line"><span class="keyword">if</span> (!isSave) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"error:%@,%@"</span>,error,[error userInfo]);</div><div class="line">}</div><div class="line"><span class="keyword">else</span>{</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"保存成功"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ul>
-<li>然后就是查询这个表的数据，描述一个可变数组来保存他们。</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSMutableArray</span> *dataArray;</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建取回数据请求</span></div><div class="line">  NSFetchRequest *request = [[NSFetchRequest alloc] init];</div><div class="line">  <span class="comment">//设置要检索哪种类型的实体对象</span></div><div class="line">  NSEntityDescription *entity = [NSEntityDescription entityForName:<span class="string">@"Dog"</span>inManagedObjectContext:<span class="keyword">self</span><span class="variable">.managedObjectContext</span>];</div><div class="line">  <span class="comment">//设置请求实体</span></div><div class="line">  [request setEntity:entity];</div><div class="line">  <span class="comment">//指定对结果的排序方式</span></div><div class="line">  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:<span class="string">@"name"</span>ascending:<span class="literal">NO</span>];</div><div class="line">  <span class="built_in">NSArray</span> *sortDescriptions = [[<span class="built_in">NSArray</span> alloc]initWithObjects:sortDescriptor, <span class="literal">nil</span>];</div><div class="line">  [request setSortDescriptors:sortDescriptions];</div><div class="line">  <span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line">  <span class="comment">//执行获取数据请求，返回数组</span></div><div class="line">  <span class="built_in">NSMutableArray</span> *mutableFetchResult = [[<span class="keyword">self</span><span class="variable">.managedObjectContext</span> executeFetchRequest:request error:&error] mutableCopy];</div><div class="line">  <span class="keyword">if</span> (mutableFetchResult == <span class="literal">nil</span>) {</div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"Error: %@,%@"</span>,error,[error userInfo]);</div><div class="line">  }</div><div class="line">  <span class="keyword">self</span><span class="variable">.dataArray</span> = mutableFetchResult;</div><div class="line">  <span class="keyword">for</span> (Dog *dog <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.dataArray</span>) {</div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"age:%@---sex:%@---name:%@"</span>,dog<span class="variable">.age</span>,dog<span class="variable">.sex</span>,dog<span class="variable">.name</span>);</div><div class="line">  }</div></pre></td></tr></table></figure>
-
-<ul>
-<li>现在我们给一个对象改个名字。</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[dog setName:<span class="string">@"哮天犬"</span>];</div><div class="line"><span class="built_in">NSError</span> *error;</div><div class="line"><span class="built_in">BOOL</span> isUpdateSuccess = [<span class="keyword">self</span><span class="variable">.managedObjectContext</span> save:&error];</div><div class="line"><span class="keyword">if</span> (!isUpdateSuccess) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"error:%@,%@"</span>,error,[error userInfo]);</div><div class="line">}</div><div class="line"><span class="keyword">else</span>{</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"更新成功！"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ul>
-<li>最后再删除这条数据</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span><span class="variable">.managedObjectContext</span> deleteObject:dog];</div><div class="line">[<span class="keyword">self</span><span class="variable">.dataArray</span> removeObject:dog];</div><div class="line"><span class="built_in">NSError</span> *error;</div><div class="line"><span class="keyword">if</span> (![<span class="keyword">self</span><span class="variable">.managedObjectContext</span> save:&error]) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Error:%@,%@"</span>,error,[error userInfo]);</div><div class="line">}</div><div class="line"><span class="keyword">else</span>{</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"删除成功！"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>现在我就会这么多了，希望对你有所帮助。还有，系统默认是把数据保存到Documents下面。你可以在AppDelegate的这个方法里修改。当然，这不重要。<img src="http://img.blog.csdn.net/20140306130753031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之数据库/">iOS应用开发之数据库</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/数据库/">数据库</a>, <a href="/tags/CoreData/">CoreData</a>, <a href="/tags/iOS开发/">iOS开发</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
+				</ul>
+			</nav>	
 </div>
 
+      </header>
+      <div id="container" class="clearfix">
+        
+
+<div class="archive-title" >
+  <h2 class="tag-icon">CoreData</h2>
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
+</div>
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/12/03/CoreData实体的DeleteRule属性/" title="CoreData实体的DeleteRule属性" itemprop="url">
+      
+        CoreData实体的DeleteRule属性
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-12-03T02:46:50.000Z" itemprop="datePublished">12月 3 2014</time>
+      
+          <a href="/2014/12/03/CoreData实体的DeleteRule属性/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/03/06/iOS的CoreData用法/" title="iOS的CoreData用法" itemprop="url">
+      
+        iOS的CoreData用法
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-03-06T05:09:00.000Z" itemprop="datePublished">3月 6 2014</time>
+      
+          <a href="/2014/03/06/iOS的CoreData用法/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>

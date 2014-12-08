@@ -1,1204 +1,373 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>iOS应用开发之常用方法 | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Category: iOS应用开发之常用方法 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
+				</ul>
+			</nav>	
+</div>
+
+      </header>
+      <div id="container" class="clearfix">
+        
+
+<div class="archive-title" >
+  <h2 class="category-icon">iOS应用开发之常用方法</h2>
+  
+</div>
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
       
-        <li><a href="/">Home</a></li>
+        <a href="/2014/11/21/升级iOS8-1-1遇到的一些问题/" title="升级iOS8.1.1遇到的一些问题" itemprop="url">
       
-        <li><a href="/archives">Archives</a></li>
+        升级iOS8.1.1遇到的一些问题
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-11-21T09:21:55.000Z" itemprop="datePublished">11月 21 2014</time>
       
-    </ul>
-    <div class="clearfix"></div>
+          <a href="/2014/11/21/升级iOS8-1-1遇到的一些问题/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/11/20/iOS监听屏幕旋转/" title="iOS监听屏幕旋转" itemprop="url">
+      
+        iOS监听屏幕旋转
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-11-20T02:52:56.000Z" itemprop="datePublished">11月 20 2014</time>
+      
+          <a href="/2014/11/20/iOS监听屏幕旋转/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/10/10/iOS十进制分割格式转换/" title="iOS十进制分割格式转换" itemprop="url">
+      
+        iOS十进制分割格式转换
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-10-10T08:45:00.000Z" itemprop="datePublished">10月 10 2014</time>
+      
+          <a href="/2014/10/10/iOS十进制分割格式转换/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/10/10/iOS ... NS_REQUIRES_NIL_TERMINATION/" title="iOS ... NS_REQUIRES_NIL_TERMINATION" itemprop="url">
+      
+        iOS ... NS_REQUIRES_NIL_TERMINATION
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-10-10T03:18:00.000Z" itemprop="datePublished">10月 10 2014</time>
+      
+          <a href="/2014/10/10/iOS ... NS_REQUIRES_NIL_TERMINATION/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/04/16/NSDate的常用用法/" title="NSDate的常用用法" itemprop="url">
+      
+        NSDate的常用用法
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-04-16T03:49:00.000Z" itemprop="datePublished">4月 16 2014</time>
+      
+          <a href="/2014/04/16/NSDate的常用用法/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/04/14/iOS 关于枚举的使用/" title="iOS 关于枚举的使用" itemprop="url">
+      
+        iOS 关于枚举的使用
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-04-14T02:57:00.000Z" itemprop="datePublished">4月 14 2014</time>
+      
+          <a href="/2014/04/14/iOS 关于枚举的使用/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/03/03/通过APPID从appStore获取应用最新信息/" title="通过APPID从appStore获取应用最新信息" itemprop="url">
+      
+        通过APPID从appStore获取应用最新信息
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-03-03T08:37:00.000Z" itemprop="datePublished">3月 3 2014</time>
+      
+          <a href="/2014/03/03/通过APPID从appStore获取应用最新信息/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/03/03/boundingRectWithSizeoptionsattributescontext计算尺寸的使用/" title="boundingRectWithSize:options:attributes:context:计算尺寸的使用" itemprop="url">
+      
+        boundingRectWithSize:options:attributes:context:计算尺寸的使用
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-03-03T02:57:00.000Z" itemprop="datePublished">3月 3 2014</time>
+      
+          <a href="/2014/03/03/boundingRectWithSizeoptionsattributescontext计算尺寸的使用/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/02/28/URL Scheme/" title="URL Scheme" itemprop="url">
+      
+        URL Scheme
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-02-28T15:39:00.000Z" itemprop="datePublished">2月 28 2014</time>
+      
+          <a href="/2014/02/28/URL Scheme/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/" title="iOS 应用程序内部国际化，不跟随系统语言" itemprop="url">
+      
+        iOS 应用程序内部国际化，不跟随系统语言
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-02-27T02:12:00.000Z" itemprop="datePublished">2月 27 2014</time>
+      
+          <a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+
+  <nav id="page-nav" class="clearfix archive-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/categories/iOS应用开发之常用方法/page/2/">2</a><a class="page-number" href="/categories/iOS应用开发之常用方法/page/3/">3</a><a class="extend next" rel="next" href="/categories/iOS应用开发之常用方法/page/2/">Next &raquo;</a>
   </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title category">iOS应用开发之常用方法</h2>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-11-21T09:21:55.000Z"><a href="/2014/11/21/升级iOS8-1-1遇到的一些问题/">11月 21 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/11/21/升级iOS8-1-1遇到的一些问题/">升级iOS8.1.1遇到的一些问题</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>前些天手贱升级了iOS8.1.1，结果就遇到了一些问题。    </p>
-<ol>
-<li>Xcode5.1.1编译应用程序Run在手机上的时候要等1-2分钟才启动，82+iPhone6，显然不是设备的问题，并且之前一直都是很快的。</li>
-<li>进入应用后我发现了打开相册第一次是OK的，第二次相册页面弹出之后就黑屏了，就剩一个导航条杵在那儿，后来发现，UIImagePickerController原本是全局的，定义局部的变量就行了，但是每次都要new一个新的对象。当然，Xcode6.1编译就不用改了。</li>
-<li>还有一个奇怪的问题就是我的优胜美地升级到10.10.1之后，Xcode的模拟器打开照片就卡死了，还不知道怎么解决。</li>
-</ol>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/iOS8-1-1/">iOS8.1.1</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-11-20T02:52:56.000Z"><a href="/2014/11/20/iOS监听屏幕旋转/">11月 20 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/11/20/iOS监听屏幕旋转/">iOS监听屏幕旋转</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>做一个用来把图片集show在屏幕上，iPad的项目，需要支持4个屏幕方向，问题就是屏幕方向的适应的更改，所以就找来了一些资料。</p>
-<p><strong>首先是获取当前屏幕的宽高</strong></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">CGSize</span> appScreenSize;</div><div class="line"><span class="keyword">static</span> <span class="built_in">UIInterfaceOrientation</span> lastOrientation;</div><div class="line"></div><div class="line">+(<span class="built_in">CGSize</span>) screenSize{</div><div class="line">    <span class="built_in">UIInterfaceOrientation</span> orientation =[<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.statusBarOrientation</span>;</div><div class="line">    <span class="keyword">if</span>(appScreenSize<span class="variable">.width</span>==<span class="number">0</span> || lastOrientation != orientation){</div><div class="line">        appScreenSize = CGSizeMake(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">        <span class="built_in">CGSize</span> screenSize = [[UIScreen mainScreen] bounds]<span class="variable">.size</span>; <span class="comment">// 这里如果去掉状态栏，只要用applicationFrame即可。</span></div><div class="line">        <span class="keyword">if</span>(orientation == UIDeviceOrientationLandscapeLeft ||orientation == UIDeviceOrientationLandscapeRight){</div><div class="line">            <span class="comment">// 横屏，那么，返回的宽度就应该是系统给的高度。注意这里，全屏应用和非全屏应用，应该注意自己增减状态栏的高度。</span></div><div class="line">            appScreenSize<span class="variable">.width</span> = screenSize<span class="variable">.height</span>;</div><div class="line">            appScreenSize<span class="variable">.height</span> = screenSize<span class="variable">.width</span>;</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            appScreenSize<span class="variable">.width</span> = screenSize<span class="variable">.width</span>;</div><div class="line">            appScreenSize<span class="variable">.height</span> = screenSize<span class="variable">.height</span>;</div><div class="line">        }</div><div class="line">        lastOrientation = orientation;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> appScreenSize;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p><strong>再来就是检测屏幕方向的变化</strong></p>
-<ul>
-<li>添加通知和移除通知的方法</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">\- (<span class="keyword">void</span>)addobserver{</div><div class="line">    <span class="comment">// Do any additional setup after loading the view from its nib.</span></div><div class="line">    <span class="comment">//----- SETUP DEVICE ORIENTATION CHANGE NOTIFICATION -----</span></div><div class="line">    UIDevice *device = [UIDevice currentDevice]; <span class="comment">//Get the device object</span></div><div class="line">    [device beginGeneratingDeviceOrientationNotifications]; <span class="comment">//Tell it to start monitoring the accelerometer for orientation</span></div><div class="line">    <span class="built_in">NSNotificationCenter</span> *nc = [<span class="built_in">NSNotificationCenter</span> defaultCenter]; <span class="comment">//Get the notification centre for the app</span></div><div class="line">    [nc addObserver:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(orientationChanged:) name:UIDeviceOrientationDidChangeNotification  object:device];</div><div class="line">}</div><div class="line"></div><div class="line">\- (<span class="keyword">void</span>)removeobserver{</div><div class="line">    <span class="built_in">NSNotificationCenter</span> *nc = [<span class="built_in">NSNotificationCenter</span> defaultCenter];</div><div class="line">    UIDevice *device = [UIDevice currentDevice]; <span class="comment">//Get the device object</span></div><div class="line">    [nc removeObserver:<span class="keyword">self</span> name:UIDeviceOrientationDidChangeNotification object:device];</div><div class="line">}</div><div class="line"></div><div class="line">\- (<span class="keyword">void</span>)orientationChanged:(<span class="built_in">NSNotification</span> *)note  {      UIDeviceOrientation o = [[UIDevice currentDevice] orientation];</div><div class="line">    <span class="keyword">switch</span> (o) {</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationPortrait:            <span class="comment">// Device oriented vertically, home button on the bottom</span></div><div class="line">            [<span class="keyword">self</span>  rotation_icon:<span class="number">0.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationPortraitUpsideDown:  <span class="comment">// Device oriented vertically, home button on the top</span></div><div class="line">            [<span class="keyword">self</span>  rotation_icon:<span class="number">180.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationLandscapeLeft :      <span class="comment">// Device oriented horizontally, home button on the right</span></div><div class="line">            [[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:<span class="literal">YES</span>];</div><div class="line">            </div><div class="line">   [<span class="keyword">self</span>  rotation_icon:<span class="number">90.0</span>*<span class="number">3</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> UIDeviceOrientationLandscapeRight:      <span class="comment">// Device oriented horizontally, home button on the left</span></div><div class="line">            [[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:<span class="literal">YES</span>];</div><div class="line">            </div><div class="line">  [<span class="keyword">self</span>  rotation_icon:<span class="number">90.0</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ul>
-<li>然后你就可以获取屏幕旋转发生的变化了</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">\-(<span class="keyword">void</span>)rotation_icon:(<span class="keyword">float</span>)n {</div><div class="line">	</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/屏幕旋转/">屏幕旋转</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-10-10T08:45:00.000Z"><a href="/2014/10/10/iOS十进制分割格式转换/">10月 10 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/10/10/iOS十进制分割格式转换/">iOS十进制分割格式转换</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>//@”123456789” 转换后 @”123,456,789”</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSString</span> (<span class="title">num</span>)</span></div><div class="line"></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)money;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSString</span> (<span class="title">num</span>)</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)money{</div><div class="line">    </div><div class="line">    NSNumberFormatter *numFormat = [[NSNumberFormatter alloc] init];</div><div class="line">    [numFormat setNumberStyle:NSNumberFormatterDecimalStyle];</div><div class="line">    <span class="built_in">NSNumber</span> *num = [<span class="built_in">NSNumber</span> numberWithDouble:[<span class="keyword">self</span> doubleValue]];</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> [numFormat stringFromNumber:num];</div><div class="line">}</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/NSString/">NSString</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-10-10T03:18:00.000Z"><a href="/2014/10/10/iOS ... NS_REQUIRES_NIL_TERMINATION/">10月 10 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/10/10/iOS ... NS_REQUIRES_NIL_TERMINATION/">iOS ... NS_REQUIRES_NIL_TERMINATION</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>看到官方的一个例子不错，这里留记。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#import <span class="title">&lt;Cocoa/Cocoa.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableArray</span> (<span class="title">variadicMethodExample</span>)</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) appendObjects:(<span class="keyword">id</span>) firstObject, ...; <span class="comment">// This method takes a nil-terminated list of objects.</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSMutableArray</span> (<span class="title">variadicMethodExample</span>)</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>) appendObjects:(<span class="keyword">id</span>) firstObject, ...</div><div class="line">{</div><div class="line"><span class="keyword">id</span> eachObject;</div><div class="line">va_list argumentList;</div><div class="line"><span class="keyword">if</span> (firstObject) <span class="comment">// The first argument isn't part of the varargs list,</span></div><div class="line">  {                                   <span class="comment">// so we'll handle it separately.</span></div><div class="line">  [<span class="keyword">self</span> addObject: firstObject];</div><div class="line">  va_start(argumentList, firstObject); <span class="comment">// Start scanning for arguments after firstObject.</span></div><div class="line">  <span class="keyword">while</span> (eachObject = va_arg(argumentList, <span class="keyword">id</span>)) <span class="comment">// As many times as we can get an argument of type "id"</span></div><div class="line">      [<span class="keyword">self</span> addObject: eachObject]; <span class="comment">// that isn't nil, add it to self's contents.</span></div><div class="line">  va_end(argumentList);</div><div class="line">  }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
-
-<p>地址：<a href="https://developer.apple.com/library/mac/qa/qa1405/_index.html" target="_blank" rel="external">https://developer.apple.com/library/mac/qa/qa1405/_index.html</a><br>最经常见到的应该是UIAlertView里用的了。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)initWithTitle:(<span class="built_in">NSString</span> *)title message:(<span class="built_in">NSString</span> *)message delegate:(<span class="keyword">id</span> <span class="comment">/*&lt;UIAlertViewDelegate&gt;*/</span>)delegate cancelButtonTitle:(<span class="built_in">NSString</span> *)cancelButtonTitle otherButtonTitles:(<span class="built_in">NSString</span> *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/UIAlertView/">UIAlertView</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-04-16T03:49:00.000Z"><a href="/2014/04/16/NSDate的常用用法/">4月 16 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/04/16/NSDate的常用用法/">NSDate的常用用法</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p><strong>1. 创建或初始化可用以下方法</strong><br>    用于创建NSDate实例的类方法有</p>
-<pre><code>+ (<span class="keyword">id</span>)date;
-返回当前时间
-
-+ (<span class="keyword">id</span>)dateWithTimeIntervalSinceNow:(<span class="built_in">NSTimeInterval</span>)secs;   
-返回以当前时间为基准，然后过了secs秒的时间
-
-+ (<span class="keyword">id</span>)dateWithTimeIntervalSinceReferenceDate:(<span class="built_in">NSTimeInterval</span>)secs;
-返回以<span class="number">2001</span>/<span class="number">01</span>/<span class="number">01</span> GMT为基准，然后过了secs秒的时间
-
-+ (<span class="keyword">id</span>)dateWithTimeIntervalSince1970:(<span class="built_in">NSTimeInterval</span>)secs;
-返回以<span class="number">1970</span>/<span class="number">01</span>/<span class="number">01</span> GMT为基准，然后过了secs秒的时间
-
-+ (<span class="keyword">id</span>)distantFuture;
-返回很多年以后的未来的某一天。
-比如你需要一个比现在(Now)晚(大)很长时间的时间值，则可以调用该方法。测试返回了<span class="number">4000</span>/<span class="number">12</span>/<span class="number">31</span> <span class="number">16</span>:<span class="number">00</span>:<span class="number">00</span>
-
-+ (<span class="keyword">id</span>)distantPast;
-返回很多年以前的某一天。
-比如你需要一个比现在(Now)早(小)大很长时间的时间值，则可以调用该方法。测试返回了公元前<span class="number">0001</span>/<span class="number">12</span>/<span class="number">31</span> <span class="number">17</span>:<span class="number">00</span>:<span class="number">00</span>
-
-用于创建<span class="built_in">NSDate</span>实例的实例方法有
-- (<span class="keyword">id</span>)addTimeInterval:(<span class="built_in">NSTimeInterval</span>)secs;
-返回以目前的实例中保存的时间为基准，然后过了secs秒的时间
-
-用于初始化<span class="built_in">NSDate</span>实例的实例方法有
-- (<span class="keyword">id</span>)init;
-初始化为当前时间。类似date方法
-
-- (<span class="keyword">id</span>)initWithTimeIntervalSinceReferenceDate:(<span class="built_in">NSTimeInterval</span>)secs;
-初始化为以<span class="number">2001</span>/<span class="number">01</span>/<span class="number">01</span> GMT为基准，然后过了secs秒的时间。类似dateWithTimeIntervalSinceReferenceDate:方法
-
-- (<span class="keyword">id</span>)initWithTimeInterval:(<span class="built_in">NSTimeInterval</span>)secs sinceDate:(<span class="built_in">NSDate</span> *)refDate;
-初始化为以refDate为基准，然后过了secs秒的时间
-
-- (<span class="keyword">id</span>)initWithTimeIntervalSinceNow:(<span class="built_in">NSTimeInterval</span>)secs;
-初始化为以当前时间为基准，然后过了secs秒的时间
-</code></pre><p><strong>2. 日期之间比较可用以下方法</strong></p>
-<pre><code><span class="pp">- <span class="params">(<span class="variable">BOOL</span>)</span>isEqualToDate:<span class="params">(<span class="variable">NSDate</span> *)</span>otherDate;
-与otherDate比较，相同返回YES
-
-- <span class="params">(<span class="variable">NSDate</span> *)</span>earlierDate:<span class="params">(<span class="variable">NSDate</span> *)</span>anotherDate;
-与anotherDate比较，返回较早的那个日期
-
-- <span class="params">(<span class="variable">NSDate</span> *)</span>laterDate:<span class="params">(<span class="variable">NSDate</span> *)</span>anotherDate;
-与anotherDate比较，返回较晚的那个日期
-
-- <span class="params">(<span class="variable">NSComparisonResult</span>)</span>compare:<span class="params">(<span class="variable">NSDate</span> *)</span>other;
-该方法用于排序时调用:
-  </span>. 当实例保存的日期值与another<span class="variable">Date</span>相同时返回<span class="variable">NSOrderedSame</span>
-  . 当实例保存的日期值晚于another<span class="variable">Date</span>时返回<span class="variable">NSOrderedDescending</span>
-  . 当实例保存的日期值早于another<span class="variable">Date</span>时返回<span class="variable">NSOrderedAscending</span>
-</code></pre><p><strong>3. 取回时间间隔可用以下方法</strong></p>
-<pre><code><span class="pp">- <span class="params">(<span class="variable">NSTimeInterval</span>)</span>timeIntervalSinceDate:<span class="params">(<span class="variable">NSDate</span> *)</span>refDate;
-以refDate为基准时间，返回实例保存的时间与refDate的时间间隔
-
-- <span class="params">(<span class="variable">NSTimeInterval</span>)</span>timeIntervalSinceNow;
-以当前时间<span class="params">(<span class="variable">Now</span>)</span>为基准时间，返回实例保存的时间与当前时间<span class="params">(<span class="variable">Now</span>)</span>的时间间隔
-
-- <span class="params">(<span class="variable">NSTimeInterval</span>)</span>timeIntervalSince1970;
-以1970/01/01 GMT为基准时间，返回实例保存的时间与1970/01/01 GMT的时间间隔
-
-- <span class="params">(<span class="variable">NSTimeInterval</span>)</span>timeIntervalSinceReferenceDate;
-以2001/01/01 GMT为基准时间，返回实例保存的时间与2001/01/01 GMT的时间间隔
-
-
-+ <span class="params">(<span class="variable">NSTimeInterval</span>)</span>timeIntervalSinceReferenceDate;
-以2001/01/01 GMT为基准时间，返回当前时间<span class="params">(<span class="variable">Now</span>)</span>与2001/01/01 GMT的时间间隔</span>
-</code></pre><p><strong>4. 将时间表示成字符串</strong></p>
-<pre><code>- (<span class="constant">NSString</span> *)description;
-以<span class="constant">YYYY</span>-<span class="constant">MM</span>-<span class="constant">DD</span> <span class="constant">HH</span><span class="symbol">:MM</span><span class="symbol">:SS</span> ±<span class="constant">HHMM</span>的格式表示时间。
-其中 <span class="string">"±HHMM"</span> 表示与<span class="constant">GMT</span>的存在多少小时多少分钟的时区差异。比如，若时区设置在北京，则 <span class="string">"±HHMM"</span> 显示为 <span class="string">"+0800"</span>
-</code></pre><p>转自:<a href="http://hi.baidu.com/douxinchun/item/86c9732bc603349db73263ae" target="_blank" rel="external">http://hi.baidu.com/douxinchun/item/86c9732bc603349db73263ae</a></p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/NSDate/">NSDate</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-04-14T02:57:00.000Z"><a href="/2014/04/14/iOS 关于枚举的使用/">4月 14 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/04/14/iOS 关于枚举的使用/">iOS 关于枚举的使用</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p><strong>引言: 本文转自:<a href="http://blog.csdn.net/ysy441088327/article/details/8012677" target="_blank" rel="external">http://blog.csdn.net/ysy441088327/article/details/8012677</a></strong><br>枚举<strong>值</strong> 它是一个<strong>整形(int)  </strong>并且,它不参与内存的占用和释放<strong>,</strong>枚举定义变量即可直接使用,不用初始化.<br>在代码中使用枚举的目的只有一个,那就是增加代码的可读性.</p>
-<p><strong>使用:</strong><br><strong>枚举</strong>的定义如下:</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. typedef enum  </p>
-<ol>
-<li>{  </li>
-<li>//以下是枚举成员  </li>
-<li>TestA = 0,  </li>
-<li>TestB,  </li>
-<li>TestC,  </li>
-<li>TestD  </li>
-<li>}Test;//枚举名称  </li>
-</ol>
-<p>亦可以如下定义(推荐:结构比较清晰):</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. typedef NS_ENUM(NSInteger, Test1)  </p>
-<ol>
-<li>{  </li>
-<li>//以下是枚举成员  </li>
-<li>Test1A = 0,  </li>
-<li>Test1B = 1,  </li>
-<li>Test1C = 2,  </li>
-<li>Test1D = 3  </li>
-<li>};  </li>
-</ol>
-<p>枚举的定义还支持位运算的方式定义,如下:<br>等于号后面必须等于1</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. typedef NS_ENUM(NSInteger, Test)  </p>
-<ol>
-<li>{  </li>
-<li>TestA       = 1,      //1   1   1  </li>
-<li>TestB       = 1 &lt;&lt; 1, //2   2   10      转换成 10进制  2  </li>
-<li>TestC       = 1 &lt;&lt; 2, //4   3   100     转换成 10进制  4  </li>
-<li>TestD       = 1 &lt;&lt; 3, //8   4   1000    转换成 10进制  8  </li>
-<li>TestE       = 1 &lt;&lt; 4  //16  5   10000   转换成 10进制  16  </li>
-<li>};  </li>
-</ol>
-<p>什么时候要用到这种方式呢?<br>那就是一个枚举变量可能要代表多个枚举值的时候. 其实给一个枚举变量赋予多个枚举值的时候,原理只是把各个枚举值加起来罢了.<br>当加起来以后,就获取了一个新的值,那么为了保证这个值的唯一性,这个时候就体现了位运算的重要作用.<br>位运算可以确保枚举值组合的唯一性.<br>因为位运算的计算方式是将二进制转换成十进制,也就是说,枚举值里面存取的是 计算后的十进制值.<br>打个比方:<br>通过上面的位运算方式设定好枚举以后,打印出来的枚举值分别是: 1 2 4 8 16<br>这5个数字,无论你如何组合在一起,也不会产生两个同样的数字.<br>手工的去创建位运算枚举,还有稍微有点花时间的,好在Apple已经为我们准备的<strong>uint</strong>.所以,用下面这种方式来初始化一个位运算枚举吧:</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. typedef NS_ENUM(uint, Test)  </p>
-<ol>
-<li>{  </li>
-<li>TestA,  </li>
-<li>TestB,  </li>
-<li>TestC,  </li>
-<li>TestD,  </li>
-<li>TestE    </li>
-<li>};  </li>
-</ol>
-<p>多枚举值 赋值方式如下:</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. Test tes = (TestA|TestB);  </p>
-<p>判断枚举变量是否包含某个固定的枚举值,使用前需要确保枚举值以及各个组合的唯一性:</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. NSLog(@”%d %d %d %d %d”,TestA,TestB,TestC,TestD,TestE);  </p>
-<ol>
-<li>Test tes = (TestA|TestB);  </li>
-<li>NSLog(@”%d”,tes);  </li>
-<li>NSLog(@”%d”,(tes &amp; TestA));  </li>
-<li></li>
-<li>if ((tes &amp; TestA)) {  </li>
-<li>NSLog(@”有”);  </li>
-<li>}else  </li>
-<li>{  </li>
-<li>NSLog(@”没有”);  </li>
-<li>}  </li>
-<li>NSLog(@”%d”,(tes &amp; TestB));  </li>
-<li>if ((tes &amp; TestA)) {  </li>
-<li>NSLog(@”有”);  </li>
-<li>}else  </li>
-<li>{  </li>
-<li>NSLog(@”没有”);  </li>
-<li>}  </li>
-<li></li>
-<li>NSLog(@”%d”,(tes &amp; TestC));  </li>
-<li>if ((tes &amp; TestC)) {  </li>
-<li>NSLog(@”有”);  </li>
-<li>}else  </li>
-<li>{  </li>
-<li>NSLog(@”没有”);  </li>
-<li>}  </li>
-</ol>
-<p>如果 没有包含,将返回0, 0表示false NO 则进入else</p>
-<p>也可以随时为枚举变量累加某个值,但是要自己控制不要添加已经加入过的枚举值, 枚举变量的值不会有变动,但这样将会误导阅读代码的人</p>
-<p><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. tes |=TestC;  </p>
-<p>有累加,自然有累减了,如果累减不存在的枚举值, 那么本次累减的枚举值,会自动累加上去.<br><strong>[csharp]</strong> <a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/ysy441088327/article/details/8012677#" title="copy" target="_blank" rel="external">copy</a>1. tes^= TestE;  </p>
-<p>以上,差不多就介绍完了, 如果有什么疑问,欢迎提问.</p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/iOS开发/">iOS开发</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-03-03T08:37:00.000Z"><a href="/2014/03/03/通过APPID从appStore获取应用最新信息/">3月 3 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/03/03/通过APPID从appStore获取应用最新信息/">通过APPID从appStore获取应用最新信息</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</div><div class="line">{</div><div class="line">    <span class="keyword">self</span><span class="variable">.window</span> = [[<span class="built_in">UIWindow</span> alloc] initWithFrame:[[UIScreen mainScreen] bounds]];</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="keyword">int</span> appid = <span class="number">414478124</span>;</div><div class="line">    <span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:URL(<span class="string">@"http://itunes.apple.com/lookup?id=%d"</span>,appid)];</div><div class="line">    <span class="built_in">NSURLConnection</span> *Connection = [[<span class="built_in">NSURLConnection</span> alloc]initWithRequest:request delegate:<span class="keyword">self</span>];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="keyword">self</span><span class="variable">.window</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</div><div class="line">    [<span class="keyword">self</span><span class="variable">.window</span> makeKeyAndVisible];</div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveResponse:(NSURLResponse *)response{</div><div class="line">    <span class="keyword">self</span><span class="variable">.receiveData</span> = [NSMutableData data];</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didReceiveData:(NSData *)data{</div><div class="line">    [<span class="keyword">self</span><span class="variable">.receiveData</span> appendData:data];</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)connectionDidFinishLoading:(<span class="built_in">NSURLConnection</span> *)connection{</div><div class="line">    <span class="built_in">NSString</span> *receiveStr = [[<span class="built_in">NSString</span> alloc]initWithData:<span class="keyword">self</span><span class="variable">.receiveData</span> encoding:NSUTF8StringEncoding];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,receiveStr);</div><div class="line">}</div><div class="line">- (<span class="keyword">void</span>)connection:(<span class="built_in">NSURLConnection</span> *)connection didFailWithError:(<span class="built_in">NSError</span> *)error{</div><div class="line">    </div><div class="line">    </div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-03-03T02:57:00.000Z"><a href="/2014/03/03/boundingRectWithSizeoptionsattributescontext计算尺寸的使用/">3月 3 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/03/03/boundingRectWithSizeoptionsattributescontext计算尺寸的使用/">boundingRectWithSize:options:attributes:context:计算尺寸的使用</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>之前使用了NSString类的sizeWithFont:constrainedToSize:lineBreakMode:方法，但是该方法已经被iOS7 Deprecated了，而iOS7新出了一个boudingRectWithSize:options:attributes:context方法来代替。<br>而具体怎么使用呢，尤其那个attribute</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSDictionary</span> *attribute = @{NSFontAttributeName: [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">13</span>]};</div><div class="line"><span class="built_in">CGSize</span> size = [<span class="string">@"相关NSString"</span> boundingRectWithSize:CGSizeMake(<span class="number">100</span>, <span class="number">0</span>) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:<span class="literal">nil</span>]<span class="variable">.size</span>;</div></pre></td></tr></table></figure>
-
-<p>本文转自:<a href="http://blog.csdn.net/tongzhitao/article/details/18221973" target="_blank" rel="external">http://blog.csdn.net/tongzhitao/article/details/18221973</a></p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/cell自适应高度/">cell自适应高度</a>, <a href="/tags/ios开发/">ios开发</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-28T15:39:00.000Z"><a href="/2014/02/28/URL Scheme/">2月 28 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/28/URL Scheme/">URL Scheme</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>iOS 的设计思路是原则上禁止不同的应用程序之间相互访问彼此的数据。虽然对于像我这样的桌面应用开发人员而言，不能访问程序以外的数据是不能想象的。但是从安全角度来说不失为一个有效的策略。不过凡事总有例外，所以乔布斯还是为程序间通讯开放了几个接口。</p>
-<h2 id="URL_Scheme">URL Scheme</h2>
-<p>iOS 上的应用程序可以通过向其它应用程序发送一个URL 格式的字符串来向其发送数据。这个特性通常用于在应用程序中启动另外一个应用程序来打开一种特定格式的数据。例如：你的程序可以向Map 发送一个URL ，要求其打开指定的地图；或者在邮件程序里向Adobe Reader 发送一个URL ，要求其打开指定的PDF 文件。</p>
-<p>iOS 预定义了如下几种URL Scheme 。<br>Mail:          <a href="mailto:frank@wwdcdemo.example.com" target="_blank" rel="external">mailto:frank@wwdcdemo.example.com</a><br>Tel:            <a href="tel:1-408-555-5555" target="_blank" rel="external">tel:1-408-555-5555</a><br>SMS:        1-408-555-1212<br>Map:                  <a href="http://maps.google.com/maps?q=cupertino" target="_blank" rel="external">http://maps.google.com/maps?q=cupertino</a><br>YouTube: <a href="http://www.youtube.com/watch?v=VIDEO_IDENTIFIER" target="_blank" rel="external">http://www.youtube.com/watch?v=VIDEO_IDENTIFIER</a><br>iTunes:<br><a href="http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=156093464&amp;id=156093462&amp;s=143441" target="_blank" rel="external">http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewAlbum?i=156093464&amp;id=156093462&amp;s=143441</a></p>
-<p>你也可以自定义URL Scheme 。需要注意的是：在多个应用程序注册了同一种URL Scheme 的时候，iOS 系统程序的优先级高于第三方开发程序。但是如果一种URL Scheme 的注册应用程序都是第三方开发的，那么这些程序的优先级关系是不确定的。<br>(1)  注册URL Scheme<br>在应用程序的Info.plist 中添加CFBundleURLTypes 项。<br><em><key><strong>CFBundleURLTypes</strong> </key></em><br><em><array></array></em></p>
-<ul>
-<li><dict>*</dict></li>
-<li><key><strong>CFBundleURLName</strong> </key>*</li>
-<li><string>com.acme.todolist</string>*</li>
-<li><key><strong>CFBundleURLScheme</strong> </key>*</li>
-<li><array>*</array></li>
-<li><string>todolist</string>*</li>
-<li>*</li>
-<li><em>
-</em>*</li>
-</ul>
-<p>(2)  发送 URL Scheme<br><strong><em>NSURL **</em></strong>myURL = [NSURL URLWithString:@”URL Scheme”];<em>
-</em>[[<strong>UIApplication sharedApplication</strong> ] openURL:myURL];<em>
-</em><br>*<br>(3)    接收 URL Scheme<br>URL Schemes 由系统发送给 application delegate ，而 delegate 通常应该实现如下几个代理函数：<br>l  application:didFinishLaunchingWithOptions:<br>判断是否应该启动程序来处理传入的 URL Scheme 。这个函数只在程序从 not running 到running 时被调用。如果程序在 URL Scheme 传入时处于 Background 或者 Suspending 状态，那么校验工作应该在下面两个代理函数中实现。<br>l  application:openURL:sourceApplication:annotation<br>在 4.2 及之后版本的 iOS 中实现。<br>l  application:handleOpenURL:<br>在 4.1 及之前版本的 iOS 中实现。<br>(4)    安全性<br>            参考 Secure Coding Guide 中 Validating Input 部分。<br>本文转自:<a href="http://blog.csdn.net/flower4wine/article/details/6454957" target="_blank" rel="external">http://blog.csdn.net/flower4wine/article/details/6454957</a></p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/URL-Scheme/">URL Scheme</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-27T02:12:00.000Z"><a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/">2月 27 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/27/iOS 应用程序内部国际化，不跟随系统语言/">iOS 应用程序内部国际化，不跟随系统语言</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>前言：网络上关于iOS国际化的文章很多，但基本上都是基于跟随系统语言的国际化，笔者就不赘述了-0 –<br>今天要讲的是不跟随系统的切换语言版本方案，即程序内部的切换语言版本方案。</p>
-<p><strong>一、总则：</strong><br>       应用内部语言不跟随系统语言，由应用自己进行控制，通过配置多个语言文件，根据用户的选择动态获取不同文件夹下的语言文件，显示在界面上。<br>       最后把用户选择的语言持久化到本地，下次运行时读取。</p>
-<p><strong>二、应用内的国际化</strong><br><strong>1、新建工程</strong><br>      新建Single View Application工程，取名为MyInternational。<br>                                                      <img src="http://img.blog.csdn.net/20130925230149234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFuZzg0NTYyMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<p><strong>2、添加多语言文件</strong><br>      我们选择使用自己的语言文件，而不是系统的localizable.string，因为在项目开发使用svn时，多人操作同一文件可能会造成冲突。<br>在Resource中添加新的Strings File：<br>                                                            <img src="http://img.blog.csdn.net/20130925230247031?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWFuZzg0NTYyMTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<pre><code>  取名为hello（记得Targets要勾选项目）
-                                                             ![](http:<span class="comment">//img.blog.csdn.net/20130925230328453)</span>
-
-  新建完成之后会生成hello.<span class="keyword">string</span>文件，把它拖进Supporting Files里。
-</code></pre><p><strong>3、配置hello.string国际化</strong><br>      首先配置刚才的hello.string文件。<br>      点击hello.strings文件，点击圈中的Make localized（本地化）。<br>                                                                             <img src="http://img.blog.csdn.net/20130925230418656" alt=""></p>
-<pre><code>  只有English，没关系点击确定。
-                                                            ![](http:<span class="comment">//img.blog.csdn.net/20130925230550453)</span>
-</code></pre><p><strong>4、配置项目国际化</strong><br>      网络上很多配置方法不靠谱，因为新版的Xcode位置“+”号的位置换了，这里教大家正确的方法，点击项目—&gt;选择Project—&gt;选择Info—&gt;点击“+”号。<br>                                                     <img src="http://img.blog.csdn.net/20130925230623281" alt=""></p>
-<pre><code>  点击“+”号后，添加中文，当然也可以添加其他的语言，弹出对话框，infoPlist是配置系统的国际化文件，可以配置图标之类的多语言环境，不属于本文范围，nib文件看需要配，这里选择不配。
-                                                  ![](http:<span class="comment">//img.blog.csdn.net/20130925230628156)</span>
-
-  配置完成之后，再看hello.<span class="keyword">string</span>便分成了两个文件。
-                                                                             ![](http:<span class="comment">//img.blog.csdn.net/20130925230701593)</span>
-  完成上面的四步便完成了项目内的多语言环境配置，下面来看看代码怎么写。
-</code></pre><p><strong>5、添加需要的字符串</strong><br>      分别在hello.strings（English）与hello.strings（Chinese）里面添加对应语言的字符串。<br>      字符串的格式为“key”=“value”;键值对（别忘记分号！）<br>      接下来配置项目需要的字符串，一个用于lable的显示，一个用于button的显示。</p>
-<pre><code>hello.strings（English）
-<span class="string">"invite"</span> =<span class="string">"hello atany,come to join in us!"</span>;
-</code></pre><p>   “buttonInfo” =”change Language”;</p>
-<pre><code>hello.strings（Chinese）
-<span class="string">"invite"</span> =<span class="string">"你好 atany,快来加入我们吧！"</span>;
-<span class="string">"buttonInfo"</span> =<span class="string">"切换语言"</span>;
-</code></pre><p><strong>6、看看流程</strong><br>                                                     <img src="http://img.blog.csdn.net/20130925230801343" alt=""></p>
-<p>【实现思路:】<br>      在初始化首个Controller的时候，进行应用语言的加载。首次加载因为userLanguage（应用内语言）不存在，则使用系统当前的语言，保存到userlanguage，下次直接读。读出来之后，获取到对应文件路径，得到文件的索引，储存到工具类InternationalControl的静态变量bundle中。<br>其他地方需要用字符串时，用工具类获得bundle即可读取相应文件中的字符串。</p>
-<p><strong>7、新建工具类InternationalControl</strong><br>                           <img src="http://img.blog.csdn.net/20130925230849375" alt=""></p>
-<p><strong>InternationalControl.h</strong><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. #import <foundation foundation.h="">  </foundation></p>
-<ol>
-<li></li>
-<li><h1 id="import_">import <uikit uikit.h=""></uikit></h1>
-</li>
-<li></li>
-<li>@interface InternationalControl : NSObject  </li>
-<li></li>
-<li>+(NSBundle *)bundle;//获取当前资源文件  </li>
-<li></li>
-<li>+(void)initUserLanguage;//初始化语言文件  </li>
-<li></li>
-<li>+(NSString *)userLanguage;//获取应用当前语言  </li>
-<li></li>
-<li>+(void)setUserlanguage:(NSString *)language;//设置当前语言  </li>
-<li></li>
-<li>@end  </li>
-</ol>
-<p><strong>InternationalControl.m</strong><br>1）创建静态变量bundle，以及获取方法bundle（注：此处不要使用getBundle）。</p>
-<p><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. static NSBundle *bundle = nil;  </p>
-<ol>
-<li></li>
-<li><ul>
-<li>( NSBundle * )bundle{  </li>
-</ul>
-</li>
-<li></li>
-<li>return bundle;  </li>
-<li></li>
-<li>}  </li>
-</ol>
-<p>2）初始化方法：<br> userLanguage储存在NSUserDefaults中，首次加载时要检测是否存在，如果不存在的话读AppleLanguages，并赋值给userLanguage。<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(void)initUserLanguage{  </p>
-<ol>
-<li></li>
-<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
-<li></li>
-<li>NSString *string = [def valueForKey:@”userLanguage”];  </li>
-<li></li>
-<li>if(string.length == 0){  </li>
-<li></li>
-<li>//获取系统当前语言版本(中文zh-Hans,英文en)  </li>
-<li></li>
-<li>NSArray* languages = [def objectForKey:@”AppleLanguages”];  </li>
-<li></li>
-<li><pre class="cpp" name="code">        NSString *current = [languages objectAtIndex:0];  </pre></li>
-<li></li>
-<li>string = current;  </li>
-<li></li>
-<li>[def setValue:current forKey:@”userLanguage”];  </li>
-<li></li>
-<li>[def synchronize];//持久化，不加的话不会保存  </li>
-<li>}  </li>
-<li></li>
-<li>//获取文件路径  </li>
-<li>NSString *path = [[NSBundle mainBundle] pathForResource:string ofType:@”lproj”];  </li>
-<li></li>
-<li>bundle = [NSBundle bundleWithPath:path];//生成bundle  </li>
-<li>}  </li>
-<li>  </li>
-</ol>
-<p>3）获得当前语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(NSString *)userLanguage{  </p>
-<ol>
-<li></li>
-<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
-<li></li>
-<li>NSString *language = [def valueForKey:@”userLanguage”];  </li>
-<li></li>
-<li>return language;  </li>
-<li>}  </li>
-</ol>
-<p>4）设置语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. +(void)setUserlanguage:(NSString *)language{  </p>
-<ol>
-<li></li>
-<li>NSUserDefaults *def = [NSUserDefaults standardUserDefaults];  </li>
-<li></li>
-<li>//1.第一步改变bundle的值  </li>
-<li>NSString *path = [[NSBundle mainBundle] pathForResource:language ofType:@”lproj” ];  </li>
-<li></li>
-<li>bundle = [NSBundle bundleWithPath:path];  </li>
-<li></li>
-<li>//2.持久化  </li>
-<li>[def setValue:language forKey:@”userLanguage”];  </li>
-<li></li>
-<li>[def synchronize];  </li>
-<li>}  </li>
-</ol>
-<p><strong>8、拖nib，配置点击事件</strong><br>一个button，一个label，button用于切换语言，label用于显示信息。<br>                                                                        <img src="http://img.blog.csdn.net/20130925231125046" alt=""></p>
-<p><strong>9、配置加载的第一个Controller，这里是YGViewController</strong><br><strong>YGViewController.h</strong><br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. #import <uikit uikit.h="">  </uikit></p>
-<ol>
-<li></li>
-<li>@interface YGViewController : UIViewController  </li>
-<li></li>
-<li>@property (retain, nonatomic) IBOutlet UILabel *inviteLabel;//label  </li>
-<li></li>
-<li><ul>
-<li>(IBAction)changeLanguage:(id)sender;//点击事件  </li>
-</ul>
-</li>
-<li></li>
-<li>@property (retain, nonatomic) IBOutlet UIButton *btChange;//button  </li>
-<li></li>
-<li>@end  </li>
-</ol>
-<p><strong>
-</strong><br><strong>YGViewController.m</strong><br>1）加载：<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. - (void)viewDidLoad  </p>
-<ol>
-<li>{  </li>
-<li>//注册通知，用于接收改变语言的通知  </li>
-<li>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLanguage) name:@”changeLanguage” object:nil];  </li>
-<li></li>
-<li>[InternationalControl initUserLanguage];//初始化应用语言  </li>
-<li></li>
-<li>NSBundle *bundle = [InternationalControl bundle];  </li>
-<li></li>
-<li>NSString *inviteMsg = [bundle localizedStringForKey:@”invite” value:nil table:@”hello”];  </li>
-<li></li>
-<li>NSString *buttonInfo = [bundle localizedStringForKey:@”buttonInfo” value:nil table:@”hello”];//table为hello.string的文件名  </li>
-<li></li>
-<li>[_btChange setTitle:buttonInfo forState:UIControlStateNormal];  </li>
-<li></li>
-<li>_inviteLabel.text = inviteMsg;  </li>
-<li></li>
-<li>[super viewDidLoad];  </li>
-<li>}  </li>
-</ol>
-<p>2）点击修改语言方法<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. - (IBAction)changeLanguage:(id)sender {  </p>
-<ol>
-<li></li>
-<li>NSString *lan = [InternationalControl userLanguage];  </li>
-<li></li>
-<li>if([lan isEqualToString:@”en”]){//判断当前的语言，进行改变  </li>
-<li></li>
-<li>[InternationalControl setUserlanguage:@”zh-Hans”];  </li>
-<li></li>
-<li>}else{  </li>
-<li></li>
-<li>[InternationalControl setUserlanguage:@”en”];  </li>
-<li>}  </li>
-<li></li>
-<li>//改变完成之后发送通知，告诉其他页面修改完成，提示刷新界面  </li>
-<li>[[NSNotificationCenter defaultCenter] postNotificationName:@”changeLanguage” object:nil];  </li>
-<li>}  </li>
-</ol>
-<p>3）接收到通知执行方法，刷新界面<br><strong>[cpp]</strong> <a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/yang8456211/article/details/12031667#" title="copy" target="_blank" rel="external">copy</a>1. -(void)changeLanguage{  </p>
-<ol>
-<li></li>
-<li>[_btChange setTitle:[[InternationalControl bundle] localizedStringForKey:@”buttonInfo” value:nil table:@”hello”] forState:UIControlStateNormal];  </li>
-<li></li>
-<li>_inviteLabel.text =[[InternationalControl bundle] localizedStringForKey:@”invite” value:nil table:@”hello”];  </li>
-<li>}  </li>
-</ol>
-<p>如果有多个界面的话，需要每个界面都配置接收通知，用于修改界面。</p>
-<p><strong>10、运行界面</strong><br>                                                                             <img src="http://img.blog.csdn.net/20130925231323250" alt=""></p>
-<pre><code>                                                                         ![](http:<span class="comment">//img.blog.csdn.net/20130925231423796)</span>
-</code></pre><p>可以看到点击切换语言之后，语言切换成功。<br>退出程序再次进入，保留了上次选择的语言。</p>
-<p>atany原创，转载请注明博主与博文链接,3Q<img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif" alt="吐舌头"><br> <a href="http://blog.csdn.net/yang8456211/article/details/12031667" target="_blank" rel="external">http://blog.csdn.net/yang8456211/article/details/12031667</a><a href="http://blog.csdn.net/yang8456211/article/details/11783823" target="_blank" rel="external">
-</a><br> —— by atany</p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之常用方法/">iOS应用开发之常用方法</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/iOS国际化/">iOS国际化</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-
-  <nav id="pagination">
-  
-  
-    <a href="/categories/iOS应用开发之常用方法/page/2/" class="alignright next">Next</a>
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>

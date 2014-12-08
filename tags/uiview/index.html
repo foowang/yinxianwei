@@ -1,498 +1,229 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>uiview | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tag: uiview | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">uiview</h2>
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-19T03:00:00.000Z"><a href="/2014/02/19/stretchableImageWithLeftCapWidth/">2月 19 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/19/stretchableImageWithLeftCapWidth/">stretchableImageWithLeftCapWidth</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>原文:<a href="http://www.cnblogs.com/bandy/archive/2012/04/25/2469369.html" target="_blank" rel="external">http://www.cnblogs.com/bandy/archive/2012/04/25/2469369.html</a></p>
-<ul>
-<li>(UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:<br>(NSInteger)topCapHeight 这个函数是UIImage的一个实例函数，它的功能是创建一个内容可拉伸，而边角不拉伸的图片，需要两个参数，第一个是左边不拉伸区域的宽度，第二个参数是上面不拉伸的高度。<br>根据设置的宽度和高度，将接下来的一个像素进行左右扩展和上下拉伸。<br>注意：可拉伸的范围都是距离leftCapWidth后的1竖排像素，和距离topCapHeight后的1横排像素。<br>参数的意义是，如果参数指定10，5。那么，图片左边10个像素，上边5个像素。不会被拉伸，x坐标为11和一个像素会被横向复制，y坐标为6的一个像素会被纵向复制。<br>注意：只是对一个像素进行复制到一定宽度。而图像后面的剩余像素也不会被拉伸。</li>
-</ul>
-<p>UIImage <em>img=[UIImage imageNamed:@”bubbleSelf.png”];<br>    img=[img stretchableImageWithLeftCapWidth:15 topCapHeight:12];<br>    UIImageView </em>imgView=[[UIImageView alloc]initWithImage:img];<br>    [imgView setFrame:CGRectMake(10, 10, 200, 200)];<br>    [self. view addSubview:imgView]; <img src="http://images.cnblogs.com/cnblogs_com/bandy/1.jpg" alt=""> </p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/uiview/">uiview</a>, <a href="/tags/uiimage/">uiimage</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-01-21T09:12:00.000Z"><a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/">1月 21 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/">关于UIView 的autoresizingMask属性，即UIViewAutoresizing</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p><strong>作者：舍得333<br> 主页：</strong><a href="http://blog.sina.com.cn/u/1509658847" target="_blank" rel="external">http://blog.sina.com.cn/u/1509658847</a><br><strong>版权声明</strong>：原创作品，允许转载，转载时请务必以超链接形式标明文章原始出版、作者信息和本声明，否则将追究法律责任。</p>
-<p>enum<br> {<br>   UIViewAutoresizingNone                 =<br> 0,<br>   UIViewAutoresizingFlexibleLeftMargin   =<br> 1 &lt;&lt; 0,<br>   UIViewAutoresizingFlexibleWidth        =<br> 1 &lt;&lt; 1,<br>   UIViewAutoresizingFlexibleRightMargin  =<br> 1 &lt;&lt; 2,<br>   UIViewAutoresizingFlexibleTopMargin    =<br> 1 &lt;&lt; 3,<br>   UIViewAutoresizingFlexibleHeight       =<br> 1 &lt;&lt; 4,<br>   UIViewAutoresizingFlexibleBottomMargin<br> = 1 &lt;&lt; 5<br>};<br>typedef NSUInteger UIViewAutoresizing;<br>这六个值与xib文件里面的图形显示怎么对应起来，这个说起来很坑爹的。<br>代码设置与xib图形设置很不一至。</p>
-<p>根据UIView的API文档说明，autoresizingMask的默认值是UIViewAutoresizingNone<br>那么再xib文件里面对应的图形是：</p>
-<p>即四周选中，中间2个没有选中。这个真是有点变态啊，我刚开始以为是全都不选呢。</p>
-<p>再举个例子：<br>我想要view一直与左下角对齐，高度自由伸缩，xib设置如图：</p>
-<p>那么代码应该怎么写呢？一定要注意看清每个单词哦！！！，如下：<br>subView.autoresizingMask =<br>    UIViewAutoresizingFlexibleTopMargin<br> |<br>    UIViewAutoresizingFlexibleRightMargin<br> |<br>    UIViewAutoresizingFlexibleHeight;</p>
-<p>下面的文章参考自：<a href="http://www.cnblogs.com/kiao295338444/articles/2308903.html" target="_blank" rel="external">http://www.cnblogs.com/kiao295338444/articles/2308903.html</a><br>在 UIView 中有一个autoresizingMask的属性，它对应的是一个枚举的值（如下），属性的意思就是自动调整子控件与父控件中间的位置，宽高。<br>enum {<br>   UIViewAutoresizingNone                 = 0,<br>   UIViewAutoresizingFlexibleLeftMargin   = 1 &lt;&lt; 0,<br>   UIViewAutoresizingFlexibleWidth        = 1 &lt;&lt; 1,<br>   UIViewAutoresizingFlexibleRightMargin  = 1 &lt;&lt; 2,<br>   UIViewAutoresizingFlexibleTopMargin    = 1 &lt;&lt; 3,<br>   UIViewAutoresizingFlexibleHeight       = 1 &lt;&lt; 4,<br>   UIViewAutoresizingFlexibleBottomMargin = 1 &lt;&lt; 5<br>};<br>typedef NSUInteger UIViewAutoresizing;</p>
-<p>分别解释以上意思。<br>UIViewAutoresizingNone就是不自动调整。<br>UIViewAutoresizingFlexibleLeftMargin就是自动调整与superView左边的距离，也就是说，与superView右边的距离不变。<br>UIViewAutoresizingFlexibleRightMargin就是自动调整与superView的右边距离，也就是说，与superView左边的距离不变。<br>UIViewAutoresizingFlexibleTopMargin</p>
-<p>UIViewAutoresizingFlexibleBottomMargin<br>UIViewAutoresizingFlexibleWidth<br>UIViewAutoresizingFlexibleHeight<br>以上就不多解释了，参照上面的。<br>也可以多个枚举同时设置。如下：<br>subView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin  |UIViewAutoresizingFlexibleRightMargin;<br>如果有多个，就用“|”关联。<br>还有一个属性就是autoresizesSubviews，此属性的意思就是，是否可以让其subviews自动进行调整，默认状态是YES，就是允许，如果设置成NO，那么subView的autoresizingMask属性失效。</p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/iphone/">iphone</a>, <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/uiview/">uiview</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2013-09-05T03:39:00.000Z"><a href="/2013/09/05/UI界面和方法基础/">9月 5 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/09/05/UI界面和方法基础/">UI界面和方法基础</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
-        
-        <p>7.4</p>
-<p>关于UIView界面<br>MainWindow.xib ===&gt;界面文件</p>
-<pre><code><span class="built_in">UIWindow</span> *window;
-<span class="keyword">IBOutlet</span> <span class="built_in">UILabel</span> *label;
-<span class="keyword">IBOutlet</span> <span class="built_in">UIButton</span> *butteon;
-</code></pre><p>@property (nonatomic, retain) IBOutlet UIWindow *window;</p>
-<h1 id="可用-调用方法类。">可用.调用方法类。</h1>
-<p>分别创建窗口界面，标和按钮。<br>-(IBAction)butClick;<br>创建方法，此处IBAction为动作。可于能响应事件的控件绑定</p>
-<p>实现方法：</p>
-<p>-(IBAction)butClick<br>{<br>   label.text=@”好！”;   //更改label的text  属性<br>}</p>
-<pre><code> Alt+双击，显示方法细节
-</code></pre><p>============================================<br>//initWithFormat有拼接字符串的能力，然后把拼接的字符串创建成字符串对象<br>//注意：<br>//%@  字符串占位符<br>//%d  int占位符   %f float占位符<br>    NSString *s1=@”小明”;</p>
-<pre><code>NSString *<span class="variable">s2=</span>@<span class="string">"今天"</span>;
-
-NSString *<span class="variable">s3=</span>@<span class="string">"没上课"</span>;
-int <span class="variable">n=</span><span class="number">100</span>;
-NSString *<span class="variable">info=</span>[[NSString alloc] initWithFormat:@<span class="string">"%@%@%@--&gt;%d"</span>,s1, s2, s3, n];
-
-label.<span class="variable">text=</span>info;
-</code></pre><p> 此处text输出结果为：   小明今天没上课100  </p>
-<h1 id="_主要用于text输出为字符串，其它类型转换为string类型。"> 主要用于text输出为字符串，其它类型转换为string类型。</h1>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/uiview/">uiview</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
-  
-</div>
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
+				</ul>
+			</nav>	
 </div>
 
+      </header>
+      <div id="container" class="clearfix">
+        
+
+<div class="archive-title" >
+  <h2 class="tag-icon">uiview</h2>
   
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
+</div>
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/02/19/stretchableImageWithLeftCapWidth/" title="stretchableImageWithLeftCapWidth" itemprop="url">
+      
+        stretchableImageWithLeftCapWidth
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-02-19T03:00:00.000Z" itemprop="datePublished">2月 19 2014</time>
+      
+          <a href="/2014/02/19/stretchableImageWithLeftCapWidth/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/" title="关于UIView 的autoresizingMask属性，即UIViewAutoresizing" itemprop="url">
+      
+        关于UIView 的autoresizingMask属性，即UIViewAutoresizing
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-01-21T09:12:00.000Z" itemprop="datePublished">1月 21 2014</time>
+      
+          <a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
+      
+        <a href="/2013/09/05/UI界面和方法基础/" title="UI界面和方法基础" itemprop="url">
+      
+        UI界面和方法基础
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2013-09-05T03:39:00.000Z" itemprop="datePublished">9月 5 2013</time>
+      
+          <a href="/2013/09/05/UI界面和方法基础/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
+
+
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>

@@ -1,594 +1,189 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>多线程 | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tag: 多线程 | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">多线程</h2>
+				</ul>
+			</nav>	
+</div>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2013-12-27T06:21:00.000Z"><a href="/2013/12/27/IOS多线程编程系类/">12月 27 2013</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2013/12/27/IOS多线程编程系类/">IOS多线程编程系类</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
+      </header>
+      <div id="container" class="clearfix">
         
-        <h2 id="著作权声明：本文由http://blog-csdn-net/totogo2010/原创，欢迎转载分享。请尊重作者劳动，转载时保留该声明和作者博客链接，谢谢!">著作权声明：本文由<a href="http://blog.csdn.net/totogo2010/" target="_blank" rel="external">http://blog.csdn.net/totogo2010/</a>原创，欢迎转载分享。请尊重作者劳动，转载时保留该声明和作者博客链接，谢谢!</h2>
-<h2 id="1、简介："><a href=""></a>1、简介：</h2>
-<h3 id="1-1_iOS有三种多线程编程的技术，分别是："><a href=""></a>1.1 iOS有三种多线程编程的技术，分别是：</h3>
-<p>1.、<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/Foundation/Classes/NSThread_Class/Reference/Reference.html" target="_blank" rel="external">NSThread</a><br>2、<a href="https://developer.apple.com/documentation/Cocoa/Reference/NSOperation_class/Reference/Reference.html" target="_blank" rel="external">Cocoa NSOperation</a> （<a href="http://blog.csdn.net/totogo2010/article/details/8013316" target="_blank" rel="external">iOS多线程编程之NSOperation和NSOperationQueue的使用</a>）<br>3、<a href="http://developer.apple.com/library/ios/#documentation/Performance/Reference/GCD_libdispatch_Ref/Reference/reference.html#//apple_ref/doc/uid/TP40008079" target="_blank" rel="external">GCD</a>  全称：Grand Central Dispatch（ <a href="http://blog.csdn.net/totogo2010/article/details/8016129" target="_blank" rel="external">iOS多线程编程之Grand<br> Central Dispatch(GCD)介绍和使用</a>）<br>这三种编程方式从上到下，抽象度层次是从低到高的，抽象度越高的使用越简单，也是Apple最推荐使用的。<br>这篇我们主要介绍和使用NSThread，后面会继续2、3 的讲解和使用。</p>
-<h3 id="1-2_三种方式的有缺点介绍："><a href=""></a>1.2 三种方式的有缺点介绍：</h3>
-<p>NSThread:<br>优点：NSThread 比其他两个轻量级<br>缺点：需要自己管理线程的生命周期，线程同步。线程同步对数据的加锁会有一定的系统开销<br>NSThread实现的技术有下面三种：<br>Technology<br>Description<br>Cocoa threads<br>Cocoa implements threads using the <code>[NSThread](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSThread_Class/Reference/Reference.html#//apple_ref/occ/cl/NSThread)</code> class.<br> Cocoa also provides methods on <code>[NSObject](https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/Reference/Reference.html#//apple_ref/occ/cl/NSObject)</code> for<br> spawning new threads and executing code on already-running threads. For more information, see <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/CreatingThreads/CreatingThreads.html#//apple_ref/doc/uid/10000057i-CH15-SW11" target="_blank" rel="external">“Using<br> NSThread”</a> and <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/CreatingThreads/CreatingThreads.html#//apple_ref/doc/uid/10000057i-CH15-SW13" target="_blank" rel="external">“Using<br> NSObject to Spawn a Thread.”</a><br>POSIX threads<br>POSIX threads provide a C-based interface for creating threads. If you are not writing a Cocoa application, this is the best choice for creating threads. The POSIX interface is relatively simple to use and offers ample flexibility for configuring your threads.<br> For more information, see <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Multithreading/CreatingThreads/CreatingThreads.html#//apple_ref/doc/uid/10000057i-CH15-SW12" target="_blank" rel="external">“Using<br> POSIX Threads”</a><br>Multiprocessing Services<br>Multiprocessing Services is a legacy C-based interface used by applications transitioning from older versions of Mac OS. This technology is available in OS X only and should be avoided for any new development. Instead, you should use the <code>NSThread</code> class<br> or POSIX threads. If you need more information on this technology, see <em>Multiprocessing Services Programming Guide</em>.<br>一般使用cocoa thread 技术。<br><strong>Cocoa operation </strong><br>优点：不需要关心线程管理，数据同步的事情，可以把精力放在自己需要执行的操作上。<br>Cocoa operation 相关的类是 NSOperation ，NSOperationQueue。NSOperation是个抽象类，使用它必须用它的子类，可以实现它或者使用它定义好的两个子类：NSInvocationOperation 和 NSBlockOperation。创建NSOperation子类的对象，把对象添加到NSOperationQueue队列里执行。<br><strong>GCD</strong><br>Grand Central Dispatch (GCD)是Apple开发的一个多核编程的解决方法。在iOS4.0开始之后才能使用。GCD是一个替代诸如NSThread, NSOperationQueue, NSInvocationOperation等技术的很高效和强大的技术。现在的iOS系统都升级到6了，所以不用担心该技术不能使用。</p>
-<p>介绍完这三种多线程编程方式，我们这篇先介绍NSThread的使用。</p>
-<h2 id="2、NSThread的使用"><a href=""></a>2、NSThread的使用</h2>
-<h3 id="2-1_NSThread_有两种直接创建方式："><a href=""></a>2.1 NSThread 有两种直接创建方式：</h3>
-<ul>
-<li>(id)initWithTarget:(id)target selector:(SEL)selector object:(id)argument</li>
-</ul>
-<ul>
-<li>(void)detachNewThreadSelector:(SEL)aSelector toTarget:(id)aTarget withObject:(id)anArgument<br>第一个是实例方法，第二个是类方法<br><strong>[cpp]</strong><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="view plain" target="_blank" rel="external">view plain</a><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="copy" target="_blank" rel="external">copy</a>1. 1、[NSThread detachNewThreadSelector:@selector(doSomething:) toTarget:self withObject:nil];  </li>
-</ul>
-<ol>
-<li>2、NSThread* myThread = [[NSThread alloc] initWithTarget:self  </li>
-<li>selector:@selector(doSomething:)  </li>
-<li>object:nil];  </li>
-<li>[myThread start];  </li>
-</ol>
-<h3 id="2-2参数的意义："><a href=""></a>2.2参数的意义：</h3>
-<p>selector ：线程执行的方法，这个selector只能有一个参数，而且不能有返回值。<br>target  ：selector消息发送的对象<br>argument:传输给target的唯一参数，也可以是nil<br>第一种方式会直接创建线程并且开始运行线程，第二种方式是先创建线程对象，然后再运行线程操作，在运行线程操作前可以设置线程的优先级等线程信息</p>
-<h3 id="2-3_PS:不显式创建线程的方法："><a href=""></a>2.3 PS:不显式创建线程的方法：</h3>
-<p>用NSObject的类方法  performSelectorInBackground:withObject: 创建一个线程：<br>[Obj performSelectorInBackground:@selector(doSomething) withObject:nil];</p>
-<h3 id="2-4_下载图片的例子："><a href=""></a>2.4 下载图片的例子：</h3>
-<h4 id="2-4-1_新建singeView_app"><a href=""></a>2.4.1  新建singeView app</h4>
-<p>新建项目，并在xib文件上放置一个imageView控件。按住control键拖到viewControll<br>er.h文件中创建imageView IBOutlet<br>ViewController.m中实现：<br><strong>[cpp]</strong><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="view plain" target="_blank" rel="external">view plain</a><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="copy" target="_blank" rel="external">copy</a>1. //  </p>
-<ol>
-<li>//  ViewController.m  </li>
-<li>//  NSThreadDemo  </li>
-<li>//  </li>
-<li>//  Created by rongfzh on 12-9-23.  </li>
-<li>//  Copyright (c) 2012年 rongfzh. All rights reserved.  </li>
-<li>//  </li>
-<li></li>
-<li><h1 id="import_“ViewController-h”">import “ViewController.h”</h1>
-</li>
-<li><h1 id="define_kURL_@”http://avatar-csdn-net/2/C/D/1_totogo2010-jpg“">define kURL @”<a href="http://avatar.csdn.net/2/C/D/1_totogo2010.jpg" target="_blank" rel="external">http://avatar.csdn.net/2/C/D/1_totogo2010.jpg</a>“</h1>
-</li>
-<li>@interface ViewController ()  </li>
-<li></li>
-<li>@end  </li>
-<li></li>
-<li>@implementation ViewController  </li>
-<li></li>
-<li>-(void)downloadImage:(NSString *) url{  </li>
-<li>NSData *data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];  </li>
-<li>UIImage *image = [[UIImage alloc]initWithData:data];  </li>
-<li>if(image == nil){  </li>
-<li></li>
-<li>}else{  </li>
-<li>[self performSelectorOnMainThread:@selector(updateUI:) withObject:image waitUntilDone:YES];  </li>
-<li>}  </li>
-<li>}  </li>
-<li></li>
-<li>-(void)updateUI:(UIImage*) image{  </li>
-<li>self.imageView.image = image;  </li>
-<li>}  </li>
-<li></li>
-<li></li>
-<li><ul>
-<li>(void)viewDidLoad  </li>
-</ul>
-</li>
-<li>{  </li>
-<li>[super viewDidLoad];  </li>
-<li></li>
-<li>//    [NSThread detachNewThreadSelector:@selector(downloadImage:) toTarget:self withObject:kURL];  </li>
-<li>NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(downloadImage:) object:kURL];  </li>
-<li>[thread start];  </li>
-<li>}  </li>
-<li></li>
-<li><ul>
-<li>(void)didReceiveMemoryWarning  </li>
-</ul>
-</li>
-<li>{  </li>
-<li>[super didReceiveMemoryWarning];  </li>
-<li>// Dispose of any resources that can be recreated.  </li>
-<li>}  </li>
-<li></li>
-<li>@end  </li>
-</ol>
-<h4 id="2-4-2线程间通讯"><a href=""></a>2.4.2线程间通讯</h4>
-<p>线程下载完图片后怎么通知主线程更新界面呢？<br>[selfperformSelectorOnMainThread:@selector(updateUI:)withObject:imagewaitUntilDone:YES];<br>performSelectorOnMainThread是NSObject的方法，除了可以更新主线程的数据外，还可以更新其他线程的比如：用：performSelector:onThread:withObject:waitUntilDone:<br>运行下载图片：<img src="http://img.my.csdn.net/uploads/201209/23/1348412756_8445.png" alt=""><br>图片下载下来了。</p>
-<h3 id="2-3_线程同步"><a href=""></a>2.3 线程同步</h3>
-<p>我们演示一个经典的卖票的例子来讲NSThread的线程同步：<br>.h<br><strong>[cpp]</strong><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="view plain" target="_blank" rel="external">view plain</a><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="copy" target="_blank" rel="external">copy</a>1. #import <uikit uikit.h="">  </uikit></p>
-<ol>
-<li></li>
-<li>@class ViewController;  </li>
-<li></li>
-<li>@interface AppDelegate : UIResponder <uiapplicationdelegate>  </uiapplicationdelegate></li>
-<li>{  </li>
-<li>int tickets;  </li>
-<li>int count;  </li>
-<li>NSThread* ticketsThreadone;  </li>
-<li>NSThread* ticketsThreadtwo;  </li>
-<li>NSCondition* ticketsCondition;  </li>
-<li>NSLock *theLock;  </li>
-<li>}  </li>
-<li>@property (strong, nonatomic) UIWindow *window;  </li>
-<li></li>
-<li>@property (strong, nonatomic) ViewController *viewController;  </li>
-<li></li>
-<li>@end  </li>
-</ol>
-<p><strong>[cpp]</strong><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="view plain" target="_blank" rel="external">view plain</a><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="copy" target="_blank" rel="external">copy</a>1. - (BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions  </p>
-<ol>
-<li>{  </li>
-<li></li>
-<li>tickets = 100;  </li>
-<li>count = 0;  </li>
-<li>theLock = [[NSLock alloc] init];  </li>
-<li>// 锁对象  </li>
-<li>ticketsCondition = [[NSCondition alloc] init];  </li>
-<li>ticketsThreadone = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];  </li>
-<li>[ticketsThreadone setName:@”Thread-1”];  </li>
-<li>[ticketsThreadone start];  </li>
-<li></li>
-<li></li>
-<li>ticketsThreadtwo = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];  </li>
-<li>[ticketsThreadtwo setName:@”Thread-2”];  </li>
-<li>[ticketsThreadtwo start];  </li>
-<li></li>
-<li>self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];  </li>
-<li>// Override point for customization after application launch.  </li>
-<li>self.viewController = [[ViewController alloc] initWithNibName:@”ViewController” bundle:nil];  </li>
-<li>self.window.rootViewController = self.viewController;  </li>
-<li>[self.window makeKeyAndVisible];  </li>
-<li>return YES;  </li>
-<li>}  </li>
-<li></li>
-<li><ul>
-<li>(void)run{  </li>
-</ul>
-</li>
-<li>while (TRUE) {  </li>
-<li>// 上锁  </li>
-<li>//        [ticketsCondition lock];  </li>
-<li>[theLock lock];  </li>
-<li>if(tickets &gt;= 0){  </li>
-<li>[NSThread sleepForTimeInterval:0.09];  </li>
-<li>count = 100 - tickets;  </li>
-<li>NSLog(@”当前票数是:%d,售出:%d,线程名:%@”,tickets,count,[[NSThread currentThread] name]);  </li>
-<li>tickets—;  </li>
-<li>}else{  </li>
-<li>break;  </li>
-<li>}  </li>
-<li>[theLock unlock];  </li>
-<li>//        [ticketsCondition unlock];  </li>
-<li>}  </li>
-<li>}  </li>
-</ol>
-<p>如果没有线程同步的lock，卖票数可能是-1.加上lock之后线程同步保证了数据的正确性。<br>上面例子我使用了两种锁，一种NSCondition ，一种是：NSLock。 NSCondition我已经注释了。####<a href=""></a>线程的顺序执行<br>他们都可以通过<br>        [ticketsConditionsignal]; 发送信号的方式，在一个线程唤醒另外一个线程的等待。<br>比如：</p>
-<p><strong>[cpp]</strong><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="view plain" target="_blank" rel="external">view plain</a><a href="http://blog.csdn.net/totogo2010/article/details/8010231#" title="copy" target="_blank" rel="external">copy</a>1. #import “AppDelegate.h”  </p>
-<ol>
-<li></li>
-<li><h1 id="import_“ViewController-h”-1">import “ViewController.h”</h1>
-</li>
-<li></li>
-<li>@implementation AppDelegate  </li>
-<li></li>
-<li><ul>
-<li>(BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions  </li>
-</ul>
-</li>
-<li>{  </li>
-<li></li>
-<li>tickets = 100;  </li>
-<li>count = 0;  </li>
-<li>theLock = [[NSLock alloc] init];  </li>
-<li>// 锁对象  </li>
-<li>ticketsCondition = [[NSCondition alloc] init];  </li>
-<li>ticketsThreadone = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];  </li>
-<li>[ticketsThreadone setName:@”Thread-1”];  </li>
-<li>[ticketsThreadone start];  </li>
-<li></li>
-<li>ticketsThreadtwo = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];  </li>
-<li>[ticketsThreadtwo setName:@”Thread-2”];  </li>
-<li>[ticketsThreadtwo start];  </li>
-<li></li>
-<li>NSThread *ticketsThreadthree = [[NSThread alloc] initWithTarget:self selector:@selector(run3) object:nil];  </li>
-<li>[ticketsThreadthree setName:@”Thread-3”];  </li>
-<li>[ticketsThreadthree start];      </li>
-<li>self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];  </li>
-<li>// Override point for customization after application launch.  </li>
-<li>self.viewController = [[ViewController alloc] initWithNibName:@”ViewController” bundle:nil];  </li>
-<li>self.window.rootViewController = self.viewController;  </li>
-<li>[self.window makeKeyAndVisible];  </li>
-<li>return YES;  </li>
-<li>}  </li>
-<li></li>
-<li>-(void)run3{  </li>
-<li>while (YES) {  </li>
-<li>[ticketsCondition lock];  </li>
-<li>[NSThread sleepForTimeInterval:3];  </li>
-<li>[ticketsCondition signal];  </li>
-<li>[ticketsCondition unlock];  </li>
-<li>}  </li>
-<li>}  </li>
-<li></li>
-<li><ul>
-<li>(void)run{  </li>
-</ul>
-</li>
-<li>while (TRUE) {  </li>
-<li>// 上锁  </li>
-<li>[ticketsCondition lock];  </li>
-<li>[ticketsCondition wait];  </li>
-<li>[theLock lock];  </li>
-<li>if(tickets &gt;= 0){  </li>
-<li>[NSThread sleepForTimeInterval:0.09];  </li>
-<li>count = 100 - tickets;  </li>
-<li>NSLog(@”当前票数是:%d,售出:%d,线程名:%@”,tickets,count,[[NSThread currentThread] name]);  </li>
-<li>tickets—;  </li>
-<li>}else{  </li>
-<li>break;  </li>
-<li>}  </li>
-<li>[theLock unlock];  </li>
-<li>[ticketsCondition unlock];  </li>
-<li>}  </li>
-<li>}  </li>
-</ol>
-<p>wait是等待，我加了一个 线程3 去唤醒其他两个线程锁中的wait</p>
-<h4 id="其他同步"><a href=""></a>其他同步</h4>
-<p>我们可以使用指令 @synchronized 来简化 NSLock的使用，这样我们就不必显示编写创建NSLock,加锁并解锁相关代码。</p>
-<ul>
-<li>(void)doSomeThing:(id)anObj<br>{<br>  @synchronized(anObj)<br>  {<pre><code>  <span class="comment">// Everything between the braces is protected by the @synchronized directive.</span>
-</code></pre>  }<br>}<br>还有其他的一些锁对象，比如：循环锁NSRecursiveLock，条件锁NSConditionLock，分布式锁NSDistributedLock等等,可以自己看官方文档学习<br>NSThread下载图片的例子代码：<a href="http://download.csdn.net/detail/totogo2010/4591149" target="_blank" rel="external">http://download.csdn.net/detail/totogo2010/4591149</a></li>
-</ul>
 
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之多线程/">iOS应用开发之多线程</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/多线程/">多线程</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
+<div class="archive-title" >
+  <h2 class="tag-icon">多线程</h2>
   
 </div>
-        
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+        <a href="/2013/12/27/IOS多线程编程系类/" title="IOS多线程编程系类" itemprop="url">
+      
+        IOS多线程编程系类
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2013-12-27T06:21:00.000Z" itemprop="datePublished">12月 27 2013</time>
+      
+          <a href="/2013/12/27/IOS多线程编程系类/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
 
 
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>

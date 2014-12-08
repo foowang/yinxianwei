@@ -1,374 +1,189 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>2d | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tag: 2d | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">2d</h2>
+				</ul>
+			</nav>	
+</div>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-02-13T01:36:00.000Z"><a href="/2014/02/13/Cocos2d 中对图片的各种操作/">2月 13 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/02/13/Cocos2d 中对图片的各种操作/">Cocos2d 中对图片的各种操作</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
+      </header>
+      <div id="container" class="clearfix">
         
-        <p>关于精灵的各种操作，总结一下以便以后复习查找。<br>内容简要：<br>1、初始化 2、创建无图的精灵 3、设置精灵贴图大小  4、添加入层中<br>5、对精灵进行缩放  6、对精灵款或高进行缩放  7、旋转精灵<br>8、设置精灵透明度  9、精灵的镜像反转  10、设置精灵的颜色<br>11、得到图的宽高   12、按照像素设定图片大小  13、在原有的基础上加xy的坐标<br>14、设置图片锚点    15、从新排列z轴顺序   16、更换精灵贴图<br>17、设置可视区域 18、贴图无锯齿</p>
-<p>原文地址：<a href="http://blog.csdn.net/dingkun520wy/article/details/6976558" target="_blank" rel="external">http://blog.csdn.net/dingkun520wy/article/details/6976558</a>  </p>
-<hr>
-<p>//初始化<br>CCSprite<em> sprite =[CCSprite spriteWithFile:@”Icon.png”];<br> //创建无图的精灵<br>CCSprite</em>sprite2 =[CCSprite node];<br>//设置精灵贴图大小<br>sprite2.textureRect=CGRectMake(0, 0, 20, 20);//设置其为宽20，高20.</p>
-<p>//添加入层中</p>
-<p>[self addChild:sprite z:2]; //将精灵加入层中设置其z轴为2<br>//对精灵进行缩放<br>sprite.scale=2;//放大2倍<br>//对精灵款或高进行缩放<br>sprite.scaleX = 2;//宽放大2倍<br>sprite.scaleY = 2;//高放大2倍<br>//旋转精灵<br>sprite.rotation=90;//旋转90度<br>//设置精灵透明度<br>sprite.opacity=255;//设置透明度为完全不透明（范围0～255）<br>//定义精灵位置<br>sprite.position=ccp(100,100);//设置精灵中心点坐标是x=100，y=100<br>//精灵的镜像反转<br>[sprite setFlipX:YES];//X轴镜像反转<br>[sprite setFlipY:YES];//Y轴镜像反转<br>//设置精灵的颜色<br>[sprite setColor:ccc3(255, 0, 0)];//设置颜色为红色<br>//得到图的宽高</p>
-<p>float  contentSize  = sprite .contentSize.width //得到图片的宽高<br>//按照像素设定图片大小</p>
-<p>sprite.scaleX=(20)/contentSize; //按照像素定制图片宽高<br>//在原有的基础上加xy的坐标<br>sprite.position = ccpAdd(sprite.position,ccp(20,20));//在原有坐标的基础上加减坐标<br>//设置图片锚点<br>[sprite setAnchorPoint:ccp(0.5,0.5) ];//设置图片的锚点<br>//从新排列z轴顺序<br>[self reorderChild:sprite z:1];//从新排列z轴顺序<br>//更换精灵贴图<br>CCTexture2D * test=[[CCTextureCache sharedTextureCache] addImage: @”test.png”];//新建贴图</p>
-<p>[sprite setTexture:test];<br>//更换精灵贴图，加载帧缓存，这个test.plist保存了fram这张图<br>[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@”test.plist”];<br>CCSpriteFrame* frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@”fram.png”];<br>[sprite2 setDisplayFrame:frame];</p>
-<p>//设置可视区域<br>CCSprite * sprite3 =[CCSprite spriteWithFile:@”icon.png” rect:CGRectMake(0, 0, 20,20)];//创建时设置</p>
-<p>[sprite3 setTextureRect:CGRectMake(10, 10, 30, 30)];//创建后设置<br>//贴图无锯齿<br>[sprite3 .texture setAliasTexParameters];</p>
 
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS游戏开发之基础学习/">iOS游戏开发之基础学习</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/cocos2d/">cocos2d</a>, <a href="/tags/2d/">2d</a>, <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>, <a href="/tags/ios开发/">ios开发</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
+<div class="archive-title" >
+  <h2 class="tag-icon">2d</h2>
   
 </div>
-        
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+        <a href="/2014/02/13/Cocos2d 中对图片的各种操作/" title="Cocos2d 中对图片的各种操作" itemprop="url">
+      
+        Cocos2d 中对图片的各种操作
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-02-13T01:36:00.000Z" itemprop="datePublished">2月 13 2014</time>
+      
+          <a href="/2014/02/13/Cocos2d 中对图片的各种操作/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
 
 
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>

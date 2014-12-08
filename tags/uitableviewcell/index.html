@@ -1,453 +1,189 @@
-<!DOCTYPE HTML>
-<html>
+
+  <!DOCTYPE HTML>
+<html lang="zh_CN">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   
-  <title>uitableviewcell | 一枝红杏出墙来</title>
-  <meta name="author" content="尹现伟">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Tag: uitableviewcell | 一枝红杏出墙来</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="尹现伟">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
-  
-  <meta property="og:site_name" content="一枝红杏出墙来"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.ico" rel="shortcut icon">
-  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-  
-
+	
+	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
+	
 </head>
 
+    <body>
+      <header>
+        <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+                    <ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/atom.xml">订阅</a></li>
+					
+						<li><a href="/about">关于我</a></li>
+					
+					<li>
+					
+					</li>
+                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-<body>
-  <header id="header" class="inner"><div id="nav-top">
-  <div class="alignleft main-title">
-    <h1>一枝红杏出墙来</h1>
-    <h2></h2>
-  </div>
-  <nav id="main-nav" class="alignright">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
-</div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">uitableviewcell</h2>
+				</ul>
+			</nav>	
+</div>
 
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-      
-        <div class="icon"></div>
-        <time datetime="2014-06-04T10:18:00.000Z"><a href="/2014/06/04/UITableView&UITableViewCell/">6月 4 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/06/04/UITableView&UITableViewCell/">UITableView&amp;UITableViewCell</a></h1>
-  
-
-      
-    </header>
-    <div class="entry">
-      
+      </header>
+      <div id="container" class="clearfix">
         
-        <p>本文转自:<a href="http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html" target="_blank" rel="external">http://www.cnblogs.com/smileEvday/archive/2012/06/28/tableView.html</a></p>
-<p>　　看TableView的资料其实已经蛮久了，一直想写点儿东西，却总是因为各种原因拖延，今天晚上有时间静下心来记录一些最近学习的TableView的知识。下面进入正题，UITableView堪称UIKit里面最复杂的一个控件了，使用起来不算难，但是要用好并不容易。当使用的时候我们必须要考虑到后台数据的设计，tableViewCell的设计和重用以及tableView的效率等问题。<br><strong>下面分9个方面进行介绍：</strong><br><strong>一、UITableView概述</strong><br>　　UITableView继承自UIScrollView，可以表现为Plain和Grouped两种风格，分别如下图所示：<br>      <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719341052.png" alt="">        <img src="http://pic002.cnblogs.com/images/2012/302680/2012062719344359.png" alt=""><br>　　其中左边的是Plain风格的，右边的是Grouped风格，这个区别还是很明显的。<br>　　查看UITableView的帮助文档我们会注意到UITableView有两个Delegate分别为：dataSource和delegate。<br>　　<strong>dataSource</strong>是UITableViewDataSource类型，主要为UITableView提供显示用的数据(UITableViewCell)，指定UITableViewCell支持的编辑操作类型(insert，delete和reordering)，并根据用户的操作进行相应的数据更新操作，如果数据没有更具操作进行正确的更新，可能会导致显示异常，甚至crush。<br>　　<strong>delegate</strong>是UITableViewDelegate类型，主要提供一些可选的方法，用来控制tableView的选择、指定section的头和尾的显示以及协助完成cell的删除和排序等功能。<br>　　提到UITableView，就必须的说一说NSIndexPath。UITableView声明了一个NSIndexPath的类别，主要用来标识当前cell的在tableView中的位置，该类别有section和row两个属性，前者标识当前cell处于第几个section中，后者代表在该section中的第几行。<br>　　UITableView只能有一列数据(cell)，且只支持纵向滑动，当创建好的tablView第一次显示的时候，我们需要调用其reloadData方法，强制刷新一次，从而使tableView的数据更新到最新状态。</p>
-<p><strong>二、UITableViewController简介</strong><br>　　UITableViewController是系统提供的一个便利类，主要是为了方便我们使用UITableView，该类生成的时候就将自身设置成了其包含的tableView的dataSource和delegate，并创建了很多代理函数的框架，为我们大大的节省了时间，我们可以通过其tableView属性获取该controller内部维护的tableView对象。默认情况下使用UITableViewController创建的tableView是充满全屏的，如果需要用到tableView是不充满全屏的话，我们应该使用UIViewController自己创建和维护tableView。<br>　　UITableViewController提供一个初始化函数initWithStyle:，根据需要我们可以创建Plain或者Grouped类型的tableView，当我们使用其从UIViewController继承来的init初始化函数的时候，默认将会我们创建一个Plain类型的tableView。<br>　　UITableViewController默认的会在viewWillAppear的时候，清空所有选中cell，我们可以通过设置self.clearsSelectionOnViewWillAppear<br> = NO，来禁用该功能，并在viewDidAppear中调用UIScrollView的flashScrollIndicators方法让滚动条闪动一次，从而提示用户该控件是可以滑动的。 </p>
-<p><strong>三、UITableViewCell介绍</strong><br> 　　UITableView中显示的每一个单元都是一个UITableViewCell对象，看文档的话我们会发现其初始化函数initWithStyle:reuseIdentifier:比较特别，跟我们平时看到的UIView的初始化函数不同。这个主要是为了效率考虑，因为在tableView快速滑动的滑动的过程中，频繁的alloc对象是比较费时的，于是引入了cell的重用机制，这个也是我们在dataSource中要重点注意的地方，用好重用机制会让我们的tableView滑动起来更加流畅。<br>　　我们可以通过cell的selectionStyle属性指定cell选中时的显示风格，以及通过accessoryType来指定cell右边的显示的内容，或者直接指定accessoryView来定制右边显示的view。<br>　　系统提供的UITableView也包含了四种风格的布局，分别是:<br>    typedef enum {<br>        UITableViewCellStyleDefault,<br>        UITableViewCellStyleValue1,<br>        UITableViewCellStyleValue2,<br>        UITableViewCellStyleSubtitle<br>    } UITableViewCellStyle;<br>　　这几种文档中都有详细描述，这儿就不在累赘。然而可以想象系统提供的只是最常用的几种类型，当系统提供的风格不符合我们需要的时候，我们就需要对cell进行定制了，有以下两种定制方式可选：<br>　　<strong>1、直接向cell的contentView上面添加subView</strong><br>　　这是比较简单的一种的，根据布局需要我们可以在不同的位置添加subView。但是此处需要注意：所有添加的subView都最好设置为不透明的，因为如果subView是半透明的话，view图层的叠加将会花费一定的时间，这会严重影响到效率。同时如果每个cell上面添加的subView个数过多的话(通常超过3，4个)，效率也会受到比较大的影响。<br>　　下面我们看一个例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>    {<br>        NSArray </em>sections = [SvTableViewDataModal sections];<br>        SvSectionModal *sectionModal = [sections objectAtIndex:indexPath.section];</p>
-<pre><code>    <span class="keyword">static</span> <span class="built_in">NSString</span> *reuseIdetify = <span class="string">@"SvTableViewCell"</span>;
-    <span class="built_in">UITableViewCell</span> *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdetify];
-    <span class="keyword">if</span> (!cell) {
-        cell = [[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdetify];
-        cell<span class="variable">.accessoryType</span> = UITableViewCellAccessoryDisclosureIndicator;
-        cell<span class="variable">.showsReorderControl</span> = <span class="literal">YES</span>;
 
-        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i) {
-            <span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] initWithFrame:CGRectMake(<span class="number">100</span> + <span class="number">15</span> * i, <span class="number">0</span>, <span class="number">30</span>, <span class="number">20</span>)];
-            label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> redColor];
-            label<span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%d"</span>, i];
-            [cell<span class="variable">.contentView</span> addSubview:label];
-            [label release];
-        }
-    }
-
-    cell<span class="variable">.textLabel</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
-    cell<span class="variable">.textLabel</span><span class="variable">.text</span> = [sectionModal<span class="variable">.cityNames</span> objectAtIndex:indexPath<span class="variable">.row</span>];
-    <span class="keyword">return</span> cell;
-} 
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　在上面这个例子中，我往每个cell中添加了6个subView，而且每个subView都是半透明(UIView默认是半透明的)，这个时候滑动起来明显就可以感觉到有点颤抖，不是很流畅。当把每一个subView的opaque属性设置成YES的时候，滑动会比之前流畅一些，不过还是有点儿卡。<br>　　<strong>2、从UITableViewCell派生一个类</strong><br>　　通过从UITableViewCell中派生一个类，可以更深度的定制一个cell，可以指定cell在进入edit模式的时候如何相应等等。最简单的实现方式就是将所有要绘制的内容放到一个定制的subView中，并且重载该subView的drawRect方法直接把要显示的内容绘制出来(这样可以避免subView过多导致的性能瓶颈)，最后再将该subView添加到cell派生类中的contentView中即可。但是这样定制的cell需要注意在数据改变的时候，通过手动调用该subView的setNeedDisplay方法来刷新界面，这个例子可以在苹果的帮助文档中的TableViewSuite工程中找到，这儿就不举例了。<br>　　观看这两种定制cell的方法，我们会发现subView都是添加在cell的contentView上面的，而不是直接加到cell上面，这样写也是有原因的。下面我们看一下cell在正常状态下和编辑状态下的构成图：<br>　　cell在正常状态下的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819321126.png" alt=""><br>　　进入编辑状态下cell的构成图如下：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819324942.png" alt=""><br>　　通过观察上面两幅图片我们可以看出来，当cell在进入编辑状态的时候，contentView会自动的缩放来给Editing control腾出位置。这也就是说如果我们把subView添加到contentView上，如果设置autoresizingMask为更具父view自动缩放的话，cell默认的机制会帮我们处理进入编辑状态的情况。而且在tableView是Grouped样式的时候，会为cell设置一个背景色，如果我们直接添加在cell上面的话，就需要自己考虑到这个背景色的显示问题，如果添加到contentView上，则可以通过view的叠加帮助我们完成该任务。综上，subView最好还是添加到cell的contentView中。</p>
-<p><strong>四、Reordering</strong><br>　　为了使UITableVeiew进入edit模式以后，如果该cell支持reordering的话，reordering控件就会临时的把accessaryView覆盖掉。为了显示reordering控件，我们必须将cell的showsReorderControl属性设置成YES，同时实现dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法。我们还可以同时通过实现dataSource中的 tableView:canMoveRowAtIndexPath:返回NO，来禁用某一些cell的reordering功能。<br>　　下面看苹果官方的一个reordering流程图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819375133.png" alt=""><br>　　上图中当tableView进入到edit模式的时候，tableView会去对当前可见的cell逐个调用dataSource的tableView:canMoveRowAtIndexPath:方法(此处官方给出的流程图有点儿问题)，决定当前cell是否显示reoedering控件，当开始进入拖动cell进行拖动的时候，每滑动过一个cell的时候，会去掉用delegate的tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:方法，去判断当前划过的cell位置是否可以被替换，如果不行则给出建议的位置。当用户放手时本次reordering操作结束，调用dataSource中的tableView:moveRowAtIndexPath:toIndexPath:方法更新tableView对应的数据。<br>　　此处给个我写demo中的更新数据的小例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    // if you want show reordering control, you must implement moveRowAtndexPath, or the reordering control will not show // when use reordering end, this method is invoke </p>
-<pre><code>- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)<span class="built_in">source</span>IndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    // update DataModal
-
-    NSArray *sections = [SvTableViewDataModal sections];
-    SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:<span class="built_in">source</span>IndexPath.section];
-    NSString *city = [[<span class="built_in">source</span>SectionModal.cityNames objectAtIndex:<span class="built_in">source</span>IndexPath.row] retain];
-    [<span class="built_in">source</span>SectionModal.cityNames removeObject:city];
-    [SvTableViewDataModal replaceSectionAtIndex:<span class="built_in">source</span>IndexPath.section withSection:<span class="built_in">source</span>SectionModal];
-
-    SvSectionModal *desinationsSectionModal= [[SvTableViewDataModal sections] objectAtIndex:destinationIndexPath.section];
-    [desinationsSectionModal.cityNames insertObject:city atIndex:destinationIndexPath.row];
-    [SvTableViewDataModal replaceSectionAtIndex:destinationIndexPath.section withSection:desinationsSectionModal];
-
-    [city release];
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面代码中首先拿到源cell所处的section，然后从该section对应的数据中移除，然后拿到目标section的数据，然后将源cell的数据添加到目标section中，并更新回数据模型，如果我们没有正确更新数据模型的话，显示的内容将会出现异常。</p>
-<p><strong>五、Delete &amp; Insert</strong><br>　　cell的delete和insert操作大部分流程都是一样的，当进入编辑模式的时候具体的显示是delete<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819411122.png" alt="">还是insert<img src="http://pic002.cnblogs.com/images/2012/302680/2012062819440770.png" alt="">取决与该cell的editingStyle的值，editStyle的定义如下：<br>    typedef enum {<br>        UITableViewCellEditingStyleNone,<br>        UITableViewCellEditingStyleDelete,<br>        UITableViewCellEditingStyleInsert<br>    } UITableViewCellEditingStyle;<br>　　当tableView进入编辑模式以后，cell上面显示的delete还是insert除了跟cell的editStyle有关，还与 tableView的delegate的tableView:editingStyleForRowAtIndexPath:方法的返回值有关(在这里唠叨一句，其实delegate提供了很多改变cell属性的机会，如非必要，还是不要去实现这些方法，因为执行这些方法也造成一定的开销)。<br>　　delete和insert的流程如下苹果官方文档中给出的图所示：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819454344.png" alt=""><br>　　下面是我写的demo中删除和添加部分的代码：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    #pragma mark -</p>
-<pre><code>- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle <span class="keyword">for</span>RowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@<span class="string">"commit editStyle: %d"</span>, editingStyle);
-
-    <span class="keyword">if</span> (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSArray *sections = [SvTableViewDataModal sections];
-        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
-        [<span class="built_in">source</span>SectionModal.cityNames removeObjectAtIndex:indexPath.row];
-
-        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-    <span class="keyword">else</span> {
-        // <span class="keyword">do</span> something <span class="keyword">for</span> add it
-        NSArray *sections = [SvTableViewDataModal sections];
-        SvSectionModal *<span class="built_in">source</span>SectionModal = [sections objectAtIndex:indexPath.section];
-        [<span class="built_in">source</span>SectionModal.cityNames insertObject:@<span class="string">"new City"</span> atIndex:indexPath.row];
-        [SvTableViewDataModal replaceSectionAtIndex:indexPath.section withSection:<span class="built_in">source</span>SectionModal];
-
-        [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
-    }
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　代码中首先判断当前操作是delete操作还是insert操作，相应的更新数据，最后根据情况调用tableView的insertRowsAtIndexPaths:withRowAnimation:或者deleteRowsAtIndexPaths:withRowAnimation:方法，对tableView的视图进行更新。cell的删除和添加操作相对还是比较简单的。</p>
-<p><strong>六、Cell的Select操作</strong><br>　　当我们在tableView中点击一个cell的时候，将会调用tableView的delegate中的tableView:didSelectRowAtIndexPath:方法。<br>　　关于tableView的cell的选中，苹果官方有以下几个建议：<br> 　　1、不要使用selection来表明cell的选择状态，而应该使用accessaryView中的checkMark或者自定义accessaryView来显示选中状态。<br> 　　2、当选中一个cell的时候，你应该取消前一个cell的选中。<br> 　　3、如果cell选中的时候，进入下一级viewCOntroller，你应该在该级菜单从navigationStack上弹出的时候，取消该cell的选中。<br>　　这块儿再提一点，当一个cell的accessaryType为UITableViewCellAccessoryDisclosureIndicator的时候，点击该accessary区域通常会将消息继续向下传递，即跟点击cell的其他区域一样，将会掉delegate的tableView:didSelectRowAtIndexPath:方法，当时如果accessaryView为 UITableViewCellAccessoryDetailDisclosureButton的时候，点击accessaryView将会调用delegate的 tableView:accessoryButtonTappedForRowWithIndexPath:方法。</p>
-<p><strong>七、批量插入，删除，部分更新操作</strong><br>　　UITableView提供了一个批量操作的特性，这个功能在一次进行多个row或者scetion的删除，插入，获取更新多个cell内容的时候特别好用。所有的批量操作需要包含在beginUpdates和endUpdates块中，否则会出现异常。<br>　　下面请看我demo中的一个批量操作的例子：<br><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>    - (void)groupEdit:(UIBarButtonItem*)sender<br>    {<br>        [_tableView beginUpdates];</p>
-<pre><code>    <span class="comment">// first update the data modal</span>
-    [_tableView insertRowsAtIndexPaths:[<span class="built_in">NSArray</span> arrayWithObject:[<span class="built_in">NSIndexPath</span> indexPathForRow:<span class="number">0</span> inSection:<span class="number">0</span>]] withRowAnimation:UITableViewRowAnimationTop];
-
-    [_tableView deleteSections:[<span class="built_in">NSIndexSet</span> indexSetWithIndex:<span class="number">0</span>] withRowAnimation:UITableViewRowAnimationTop];
-
-    [SvTableViewDataModal deleteSectionAtIndex:<span class="number">0</span>];
-
-    SvSectionModal *section = [[SvTableViewDataModal sections] objectAtIndex:<span class="number">0</span>];
-    [section<span class="variable">.cityNames</span> insertObject:<span class="string">@"帝都"</span> atIndex:<span class="number">0</span>];
-    [SvTableViewDataModal replaceSectionAtIndex:<span class="number">0</span> withSection:section];
-
-    [_tableView endUpdates];
-}
-</code></pre><p><a href="&quot;复制代码&quot;"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>　　上面的例子中我们可以看到先往tableView的第0个section的第0行添加一个cell，然后将第0个section删掉。按照我们程序中写的顺序，那么新添加进去的“帝都”，将不在会显示，因为包含它的整个section都已经被删除了。<br>　　执行程序前后结果如下图：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062820003824.png" alt="">              <img src="http://pic002.cnblogs.com/images/2012/302680/2012062820012876.png" alt=""><br>　　demo中第0个section是陕西省的城市，第1个section是北京。左边是执行前的截图，右边是执行后的截图，观察发现结果并不像我们前面推测的那样。那是因为在批量操作时，不管代码中先写的添加操作还是删除操作，添加操作都会被推出执行，直到这个块中所有的删除操作都执行完以后，才会执行添加操作，这也就是上面苹果官方图片上要表达的意思。<br>　　苹果官方文档有一副图可以帮助我们更好的理解这一点：<br><img src="http://pic002.cnblogs.com/images/2012/302680/2012062819544595.png" alt=""><br>　　原图中操作是：首先删除section 0中的row 1，然后删除section 1，再向section 1中添加一行。执行完批量更新以后就得到右半边的结果。<br> 　　<br><strong>八、IndexList</strong><br>　　当我们tableView中section有很多，数据量比较大的时候我们可以引入indexList，来方便完成section的定位，例如系统的通讯录程序。我们可以通过设置tableView的sectionIndexMinimumDisplayRowCount属性来指定当tableView中多少行的时候开始显示IndexList，默认的设置是NSIntegerMax，即默认是不显示indexList的。<br>　　为了能够使用indexlist我们还需要实现dataSource中一下两个方法：</p>
-<pre><code><span class="pp">- <span class="params">(<span class="variable">NSArray</span> *)</span>sectionIndexTitlesForTableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView; - <span class="params">(<span class="variable">NSInteger</span>)</span>tableView:<span class="params">(<span class="variable">UITableView</span> *)</span>tableView sectionForSectionIndexTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title atIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index; </span>
-</code></pre><p>　　第一个方法返回用于显示在indexList中的内容的数组，通常为A，B，C…Z。第二个方法的主要作用是根据用户在indexList中点击的位置，返回相应的section的index值。这个例子可以在苹果官方给出的TableViewSuite中找到，实现起来还是很简单的。</p>
-<p><strong>九、其他</strong><br>　　<strong>1**</strong>、分割线<strong><br>　　我们可以通过设置tableView的separatorStyle属性来设置有无分割线以及分割线的风格，其中style定义如下：<br>    typedef enum {<br>        UITableViewCellSeparatorStyleNone,<br>        UITableViewCellSeparatorStyleSingleLine,<br>        UITableViewCellSeparatorStyleSingleLineEtched<br>    } UITableViewCellSeparatorStyle;<br>　　同时还可以通过tableView的separatorColor属性来设置分割线的颜色。
-　　</strong>2、如何提高tableView的性能**</p>
-<p>　　<strong>a、重用cell</strong><br>　　我们都知道申请内存是需要时间，特别是在一段时间内频繁的申请内存将会造成很大的开销，而且上tebleView中cell大部分情况下布局都是一样的，这个时候我们可以通过回收重用机制来提高性能。<br>　　<strong>b、避免content的重新布局</strong><br>　　尽量避免在重用cell时候，对cell的重新布局，一般情况在在创建cell的时候就将cell布局好。<br>　　<strong>c、使用不透明的subView</strong><br>　　在定制cell的时候，将要添加的subView设置成不透明的会大大减少多个view层叠加时渲染所需要的时间。<br>　　<strong>d、如果方便，直接重载subView的drawRect方法</strong><br><strong>　　</strong>如果定制cell的过程中需要多个小的元素的话，最好直接对要显示的多个项目进行绘制，而不是采用添加多个subView。<br>　　<strong>e、tableView的delegate的方法如非必要，尽量不要实现</strong><br>　　tableView的delegate中的很多函数提供了对cell属性的进一步控制，比如每个cell的高度，cell是否可以编辑，支持的edit风格等，如非必要最好不要实现这些方法因为快速的调用这些方法也会影响性能。<br>　　(以上5点建议，前三点来自苹果官方文档，后两点我自己加的，有什么不对的地方，欢迎指正)</p>
-<p><strong>小结：</strong>UITableView本身是很复杂的，本片博客只起到抛砖引玉的作用，欢迎大家补充。想用好UITableView，还是需要实际项目中的锻炼的。</p>
-<p>注：1、博客中的图片出了程序运行截图，其他的都来自苹果官方文档。<br>　　2、欢迎转载，转载请在显著位置添加原文链接地址和作者名称，谢谢！</p>
-
-      
-    </div>
-    <footer>
-      
-  
-  <div class="categories">
-    <a href="/categories/iOS应用开发之UITableViewCell/">iOS应用开发之UITableViewCell</a>
-  </div>
-
-      
-  
-  <div class="tags">
-    <a href="/tags/uitableviewcell/">uitableviewcell</a>, <a href="/tags/uitableview/">uitableview</a>
-  </div>
-
-      
-        
-          <div class="alignright share-box">
+<div class="archive-title" >
+  <h2 class="tag-icon">uitableviewcell</h2>
   
 </div>
-        
+<div id="main" class="archive-part clearfix">
+  <div id="archive-page">
+
+  <section class="post" itemscope itemprop="blogPost">
+  <article>
+    <h1 itemprop="name">
       
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+        <a href="/2014/06/04/UITableView&UITableViewCell/" title="UITableView&amp;UITableViewCell" itemprop="url">
+      
+        UITableView&amp;UITableViewCell
+      </a>
+    </h1>
+    
+    <p class="article-more-link">
+      <time datetime="2014-06-04T10:18:00.000Z" itemprop="datePublished">6月 4 2014</time>
+      
+          <a href="/2014/06/04/UITableView&UITableViewCell/">阅读更多&raquo;</a>
+      
+    </p>
+
+  </article>
+</section>
 
 
-
-  
-
-  <nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav>
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  
-    <form>
-      <input id="st-search-input" type="search" placeholder="Search">
-    </form>
-    <div id="st-results-container"></div>
-  
-</div>
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <div class="entry">
-    
-      <span><a href="/tags/2d/">2d<small>1</small></a></span>
-    
-      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
-    
-      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
-    
-      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
-    
-      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
-    
-      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
-    
-      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
-    
-      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
-    
-      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
-    
-      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
-    
-      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
-    
-      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
-    
-      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
-    
-      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
-    
-      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
-    
-      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
-    
-      <span><a href="/tags/api/">api<small>5</small></a></span>
-    
-      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
-    
-      <span><a href="/tags/block/">block<small>1</small></a></span>
-    
-      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
-    
-      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
-    
-      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
-    
-      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
-    
-      <span><a href="/tags/framework/">framework<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
-    
-      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
-    
-      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
-    
-      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
-    
-      <span><a href="/tags/ios/">ios<small>53</small></a></span>
-    
-      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
-    
-      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
-    
-      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
-    
-      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
-    
-      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
-    
-      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
-    
-      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
-    
-      <span><a href="/tags/svn/">svn<small>1</small></a></span>
-    
-      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
-    
-      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
-    
-      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
-    
-      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
-    
-      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
-    
-      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
-    
-      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
-    
-      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
-    
-      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
-    
-      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
-    
-      <span><a href="/tags/企业/">企业<small>1</small></a></span>
-    
-      <span><a href="/tags/动画/">动画<small>5</small></a></span>
-    
-      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
-    
-      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
-    
-      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
-    
-      <span><a href="/tags/存储/">存储<small>1</small></a></span>
-    
-      <span><a href="/tags/宏/">宏<small>1</small></a></span>
-    
-      <span><a href="/tags/导航/">导航<small>1</small></a></span>
-    
-      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
-    
-      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
-    
-      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
-    
-      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
-    
-      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
-    
-      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
-    
-      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
-    
-      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
-    
-      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
-    
   </div>
 </div>
 
+      </div>
+      <footer><div id="footer" >
 
-
-
-  <script type="text/javascript">
-    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
-
-    _st('install','6xH6jcZvsZxn2a9rcU4t');
-  </script>
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div id="foot-nav">
-  <ul class="social">
-    
-      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
-    
-      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
-    
-  </ul>
 </div>
-<div>
-  
-    &copy; 2014 尹现伟
-  
-</div>
-<div class="clearfix"></div></footer>
-  
+</footer>
+      <script src="/js/jquery-2.1.0.min.js"></script>
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 <script type="text/javascript">
-  function navbar() {
-    var top = $('#nav-top').innerHeight();
-    $('#header').css('min-height', top);
+$(document).ready(function(){ 
+  //back to top
+  function backToTop(){
+    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
+    buttonHTML.appendTo($("body"));
+    var buttonToTop = $("#back-top");
+    // hide #back-top first
+    buttonToTop.hide();
+
+    // fade in #back-top
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 200) {
+                buttonToTop.fadeIn();
+            } else {
+                buttonToTop.fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        buttonToTop.click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
   }
-  navbar();
-  $(window).resize(navbar);
-</script>
-<div id="totop" class="footer-btn">
-  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
-</div>
+  backToTop();
 
-<script type="text/javascript">
-  $(function(){ 
-	// When to show the scroll link
-	// higher number = scroll link appears further down the page   
-	var upperLimit = 800;
-	
-	// Our scroll link element
-	var scrollElem = $('#totop');
-   
-	// Scroll to top speed
-	var scrollSpeed = 500;
-   
-	// Show and hide the scroll to top link based on scroll position   
-	scrollElem.hide();
-	$(window).scroll(function () {            
-		var scrollTop = $(document).scrollTop();       
-		if ( scrollTop > upperLimit ) {
-		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
-		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
-		} else {
-		  $(scrollElem).stop().fadeTo(300, 0); // fade out
-	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-			
-		}
-	});
-
-	// Scroll to top animation on click
-	$(scrollElem).click(function(){
-	  $('html, body').animate({scrollTop:0}, scrollSpeed);
-	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
-	  return false;
-	});
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
   });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      ta = $('#toc.toc-aside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+        
+    }
+  });
+
+  var show = true;
+  c.click(function(){
+    if(show == true){
+        a.addClass('fadeOut').css('display', 'none');
+        ta.css('display', 'block').addClass('fadeIn');
+        m.addClass('moveMain');  
+    }else{
+        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
+        ta.css('display', 'none'); 
+        m.removeClass('moveMain');
+        $('#toc.toc-aside').css('display', 'none');
+    }
+    show = !show;
+  });
+});
 </script>
-</body>
-</html>
+
+
+
+
+
+
+
+    </body>
+   </html>
