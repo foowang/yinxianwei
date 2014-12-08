@@ -1,207 +1,526 @@
-
-  <!DOCTYPE HTML>
-<html lang="zh_CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>Tag: AFNetworking | 一枝红杏出墙来</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="尹现伟">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>AFNetworking | 一枝红杏出墙来</title>
+  <meta name="author" content="尹现伟">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	
-	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
-	
+  
+  <meta property="og:site_name" content="一枝红杏出墙来"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+  
+
 </head>
 
-    <body>
-      <header>
-        <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-                    <ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/atom.xml">订阅</a></li>
-					
-						<li><a href="/about">关于我</a></li>
-					
-					<li>
-					
-					</li>
-                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-				</ul>
-			</nav>	
-</div>
+<body>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>一枝红杏出墙来</h1>
+    <h2></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">AFNetworking</h2>
 
-      </header>
-      <div id="container" class="clearfix">
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-09-13T07:14:00.000Z"><a href="/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/">9月 13 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/">用 AFNetworking 通过 POST 方式发送数据</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
         
+        <p>AFNetworking进行POST请求中 发送json数据有些特别 。<br><strong>AFNetworking 版本为 2.0.2</strong><br>POST 发送数据有两种形式：<br>1、发送纯文本的内容<br>2、发送的 body 部分带有文件（图片，音频或者其他二进制数据）<br>对应的 Content-Type 有两种：<br>1、application/x-www-form-urlencoded<br>2、multipart/form-data<br>传统的使用 POST 的方式发送数据用于上传文件，AFNetworking 中提供了直接的接口：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> POST:post_url parameters:params</div><div class="line">constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">    <span class="comment">// 直接以 key value 的形式向 formData 中追加二进制数据</span></div><div class="line">    [formData appendPartWithFormData:[str dataUsingEncoding:NSUTF8StringEncoding] </div><div class="line">              name:<span class="string">@"key1"</span>];</div><div class="line">    [formData appendPartWithFileData:imgData name:<span class="string">@"imagefile"</span> </div><div class="line">              fileName:<span class="string">@"img.jpg"</span> mimeType:<span class="string">@"image/jpeg"</span>];</div><div class="line">    }</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div></pre></td></tr></table></figure>
 
-<div class="archive-title" >
-  <h2 class="tag-icon">AFNetworking</h2>
+<p>使用 POST 方式发送纯文本内容：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (NSMutableURLRequest *)postRequestWithURL:(<span class="built_in">NSString</span> *)url content:(<span class="built_in">NSString</span> *)text</div><div class="line">{</div><div class="line">    NSMutableURLRequest *request =</div><div class="line">        [[NSMutableURLRequest alloc] initWithURL:url];</div><div class="line">    [request setHTTPMethod:<span class="string">@"POST"</span>];</div><div class="line">    [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> </div><div class="line">             forHTTPHeaderField:<span class="string">@"Contsetent-Type"</span>];</div><div class="line">    [request setHTTPBody:<span class="number">1</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> request;</div><div class="line">}</div><div class="line"> </div><div class="line">NSOperation *operation =</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> HTTPRequestOperationWithRequest:request</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span><span class="variable">.operationQueue</span> addOperation:operation];</div></pre></td></tr></table></figure>
+
+
+<p>其中 self.manager 为 AFHTTPRequestOperationManager 实例。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">_manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];</div><div class="line"> </div><div class="line"><span class="comment">// 对于网站成功返回 JSON 格式的数据但是却在 failure 回调中显示的，</span></div><div class="line"><span class="comment">// 是因为服务器返回数据的网页中 content type 没有设置为 text/json</span></div><div class="line"><span class="comment">// 对于我们公司的服务器返回的 content type 为 text/html 所以我设置为如下这样，</span></div><div class="line"><span class="comment">// 对于不同的情况可以根据自己的情况设置合适的接受的 content type 的类型</span></div><div class="line">_manager<span class="variable">.responseSerializer</span><span class="variable">.acceptableContentTypes</span> = [<span class="built_in">NSSet</span> setWithObject:<span class="string">@"text/html"</span>];</div></pre></td></tr></table></figure>
+
+
+<p>本文转自：<a href="http://www.iliunian.com/2879.html" target="_blank" rel="external">http://www.iliunian.com/2879.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之网络通讯/">iOS应用开发之网络通讯</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/AFNetworking/">AFNetworking</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
   
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
       
-        <a href="/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/" title="用 AFNetworking 通过 POST 方式发送数据" itemprop="url">
       
-        用 AFNetworking 通过 POST 方式发送数据
-      </a>
-    </h1>
+        <div class="icon"></div>
+        <time datetime="2014-02-14T07:26:00.000Z"><a href="/2014/02/14/AFNetworking/">2月 14 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/14/AFNetworking/">AFNetworking</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>谷歌翻译</p>
+<p>AFNetworking是为iOS和Mac OS X。它是建立在之上的愉快的网络库<a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://developer.apple.com/library/mac/&amp;usg=ALkJrhiuvZMlMsRypqYF71FfZwK2ZOzkGg#documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html" target="_blank" rel="external">基金会的URL加载系统</a> ，延长内置到可可的功能强大的高级网络抽象。 它有一个模块化的架构，设计精良，功能丰富的API，是一个欢乐的使用。<br>也许，最重要的功能，但是，是谁使用，每天贡献AFNetworking开发商惊人的社群。 AFNetworking一些权力在iPhone，iPad和Mac的最流行和广受好评的应用程序。<br>选择AFNetworking你的下一个项目，或迁移在你现有的项目 -你很高兴你没有！<br><strong>如何开始</strong></p>
+<ul>
+<li><a href="https://github.com/AFNetworking/AFNetworking/archive/master.zip" target="_blank" rel="external">下载AFNetworking</a>并尝试了包括Mac和iPhone应用程序的例子</li>
+<li>阅读<a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking&amp;usg=ALkJrhga207v_1meSZiL2EcgdRYqKCHTtg" target="_blank" rel="external">“入门”指南</a> ， <a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-FAQ&amp;usg=ALkJrhjCmRFlSt9Zq1NWiZNz-BXgnfObzA" target="_blank" rel="external">常见问题</a> ，或<a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki&amp;usg=ALkJrhhwTRR2yWVbforsMlQ4ZfcyVCbukQ" target="_blank" rel="external">对维基的其他文章</a></li>
+<li>退房的<a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://cocoadocs.org/docsets/AFNetworking/2.0.0/&amp;usg=ALkJrhgaLywg4BOy7WoITC7XljNLm9P6Zw" target="_blank" rel="external">文档</a>进行全面审视所有的API提供AFNetworking</li>
+<li>有问题吗？ <a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://stackoverflow.com/questions/tagged/afnetworking&amp;usg=ALkJrhgdhdymQnvL2gqHd8oMQY_Ht1fuVg" target="_blank" rel="external">堆栈溢出</a>是找到答案的最佳场所</li>
+</ul>
+<p><strong>安装与**</strong>CocoaPods<strong><br><a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://cocoapods.org/&amp;usg=ALkJrhiBjkx5qeHG3VXjZ4XK0htUc76LWg" target="_blank" rel="external">CocoaPods</a>是一个依赖经理的Objective-C，它能够自动并简化使用像AFNetworking的第三方库在项目的进程。 请参阅<a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking&amp;usg=ALkJrhga207v_1meSZiL2EcgdRYqKCHTtg" target="_blank" rel="external">“入门”指南获取更多信息</a> 。
+</strong>Podfile<strong><br>  平台：IOS，’7 .0’<br> 荚“AFNetworking”，“～&gt; 2.0”
+</strong>2.0<strong><br>AFNetworking 2.0是一个重大更新的框架。 建设2年的发展，这个新版本引入了强大的新功能，同时提供了一个简单的升级路径，为现有的用户。
+</strong>阅读<strong>[</strong>AFNetworking<br> 2.0<strong>**迁移指南</strong>](<a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-2.0-Migration-Guide&amp;usg=ALkJrhgtuqdTdrxhouBTSdfN4JhiTtRiJg)**为建筑和****API****的变化的概述。**" target="_blank" rel="external">https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/AFNetworking/AFNetworking/wiki/AFNetworking-2.0-Migration-Guide&amp;usg=ALkJrhgtuqdTdrxhouBTSdfN4JhiTtRiJg)**为建筑和****API****的变化的概述。**</a><br><strong>最新消息</strong></p>
+<ul>
+<li>重构架构</li>
+<li>支持NSURLSession</li>
+<li>序列化模块</li>
+<li>扩大的UIKit扩展</li>
+<li>实时功能与<a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://rocket.github.io/&amp;usg=ALkJrhgx_MW9YPH6vUtxnPdqDLQgjADJ8g" target="_blank" rel="external">火箭</a></li>
+</ul>
+<p><strong>要求</strong><br>AFNetworking 2.0和更高要求的Xcode 5，确定目标的的iOS 6.0及以上版本，或Mac OS 10.8山狮（ <a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://developer.apple.com/library/mac/&amp;usg=ALkJrhgz1YE1BT4I-xQlHmYjVxid4WmTTA#documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtVersionsPlatforms.html" target="_blank" rel="external">64位与现代可可运行时</a> ）及以上。<br>对于与iOS 5或Mac OS X 10.7的兼容性，请使用<a href="https://github.com/AFNetworking/AFNetworking/tree/1.x" target="_blank" rel="external">最新的1.x的版本</a> 。<br>对于与iOS 4.3或Mac OS X 10.6的兼容性，请使用<a href="https://github.com/AFNetworking/AFNetworking/tree/0.10.x" target="_blank" rel="external">最新的0.10.x版本</a> 。<br><strong>建筑</strong><br><strong>NSURLConnection**</strong>的**</p>
+<ul>
+<li>AFURLConnectionOperation</li>
+<li>AFHTTPRequestOperation</li>
+<li>AFHTTPRequestOperationManager</li>
+</ul>
+<p><strong>NSURLSession**</strong>（<strong><strong>iOS</strong></strong>的<strong><strong>7 / Mac OS X</strong></strong>的<strong><strong>10.9</strong></strong>）**</p>
+<ul>
+<li>AFURLSessionManager</li>
+<li>AFHTTPSessionManager</li>
+</ul>
+<p><strong>序列化</strong></p>
+<ul>
+<li><afurlrequestserialization>- AFHTTPRequestSerializer</afurlrequestserialization></li>
+<li>AFJSONRequestSerializer</li>
+<li>AFPropertyListRequestSerializer</li>
+</ul>
+<ul>
+<li><afurlresponseserialization>- AFHTTPResponseSerializer</afurlresponseserialization></li>
+<li>AFJSONResponseSerializer</li>
+<li>AFXMLParserResponseSerializer</li>
+<li>AFXMLDocumentResponseSerializer （Mac OS X中）</li>
+<li>AFPropertyListResponseSerializer</li>
+<li>AFImageResponseSerializer</li>
+<li>AFCompoundResponseSerializer</li>
+</ul>
+<p><strong>附加功能</strong></p>
+<ul>
+<li>AFSecurityPolicy</li>
+<li>AFNetworkReachabilityManager</li>
+</ul>
+<p><strong>用法</strong><br><strong>HTTP**</strong>请求营运经理<strong><br>AFHTTPRequestOperationManager封装与Web应用程序进行通信通过HTTP，包括要求制作，响应序列化，网络可达性监控和安全性，以及要求经营管理的常见模式。
+</strong>GET<strong>**请求</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</div><div class="line">[manager GET:<span class="string">@"http://example.com/resources.json"</span> parameters:<span class="literal">nil</span> success:^(AFHTTPRequestOperation*operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"JSON: %@"</span>, responseObject);</div><div class="line">} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p><strong>POST**</strong>的<strong><strong>URL</strong></strong>格式编码的请求**</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</div><div class="line"><span class="built_in">NSDictionary</span> *parameters = @{<span class="string">@"foo"</span>:<span class="string">@"bar"</span>};</div><div class="line">[manager POST:<span class="string">@"http://example.com/resources.json"</span> parameters:parameters success:^(AFHTTPRequestOperation*operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"JSON: %@"</span>, responseObject);</div><div class="line">} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p><strong>POST**</strong>多部分请求**</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</div><div class="line"><span class="built_in">NSDictionary</span> *parameters = @{<span class="string">@"foo"</span>:<span class="string">@"bar"</span>};</div><div class="line"><span class="built_in">NSURL</span> *filePath = [<span class="built_in">NSURL</span> fileURLWithPath:<span class="string">@"file://path/to/image.png"</span>];</div><div class="line">[manager POST:<span class="string">@"http://example.com/resources.json"</span> parameters:parameters constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">    [formData appendPartWithFileURL:filePath name:<span class="string">@"image"</span> error:<span class="literal">nil</span>];</div><div class="line">} success:^(AFHTTPRequestOperation *operation,<span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Success: %@"</span>, responseObject);</div><div class="line">} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p><strong>AFURLSessionManager</strong><br>AFURLSessionManager创建和管理一个NSURLSession根据指定的对象NSURLSessionConfiguration对象，这符合<nsurlsessiontaskdelegate> ， <nsurlsessiondatadelegate> ， <nsurlsessiondownloaddelegate>和<nsurlsessiondelegate> 。<br><strong>创建下载任务</strong></nsurlsessiondelegate></nsurlsessiondownloaddelegate></nsurlsessiondatadelegate></nsurlsessiontaskdelegate></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];</div><div class="line">AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];</div><div class="line"></div><div class="line"><span class="built_in">NSURL</span> *URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://example.com/download.zip"</span>];</div><div class="line"><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:URL];</div><div class="line"></div><div class="line">NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:<span class="literal">nil</span> destination:^<span class="built_in">NSURL</span>*(<span class="built_in">NSURL</span> *targetPath, NSURLResponse *response) {</div><div class="line">    <span class="built_in">NSURL</span> *documentsDirectoryPath = [<span class="built_in">NSURL</span> fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,<span class="literal">YES</span>) firstObject]];</div><div class="line">    <span class="keyword">return</span> [documentsDirectoryPath URLByAppendingPathComponent:[response suggestedFilename]];</div><div class="line">} completionHandler:^(NSURLResponse *response, <span class="built_in">NSURL</span>*filePath, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"File downloaded to: %@"</span>, filePath);</div><div class="line">}];</div><div class="line">[downloadTask resume];</div></pre></td></tr></table></figure>
+
+<p><strong>创建上传任务</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];</div><div class="line">AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];</div><div class="line"></div><div class="line"><span class="built_in">NSURL</span> *URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://example.com/upload"</span>];</div><div class="line"><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:URL];</div><div class="line"></div><div class="line"><span class="built_in">NSURL</span> *filePath = [<span class="built_in">NSURL</span> fileURLWithPath:<span class="string">@"file://path/to/image.png"</span>];</div><div class="line">NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:<span class="literal">nil</span> completionHandler:^(NSURLResponse*response, <span class="keyword">id</span> responseObject, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="keyword">if</span> (error) {</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Success: %@ %@"</span>, response, responseObject);</div><div class="line">    }</div><div class="line">}];</div><div class="line">[uploadTask resume];</div></pre></td></tr></table></figure>
+
+<p><strong>创建上传任务的多部分请求，与进展</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:<span class="string">@"POST"</span> URLString:<span class="string">@"http://example.com/upload"</span> parameters:<span class="literal">nil</span> constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">        [formData appendPartWithFileURL:[<span class="built_in">NSURL</span> fileURLWithPath:<span class="string">@"file://path/to/image.jpg"</span>] name:<span class="string">@"file"</span> fileName:<span class="string">@"filename.jpg"</span> mimeType:<span class="string">@"image/jpeg"</span> error:<span class="literal">nil</span>];</div><div class="line">    } error:<span class="literal">nil</span>];</div><div class="line"></div><div class="line">    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];</div><div class="line">    NSProgress *progress = <span class="literal">nil</span>;</div><div class="line"></div><div class="line">    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse*response, <span class="keyword">id</span> responseObject, <span class="built_in">NSError</span>*error) {</div><div class="line">        <span class="keyword">if</span> (error) {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@ %@"</span>, response, responseObject);</div><div class="line">        }</div><div class="line">    }];</div><div class="line"></div><div class="line">    [uploadTask resume];</div></pre></td></tr></table></figure>
+
+<p><strong>创建数据任务</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];</div><div class="line">AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];</div><div class="line"></div><div class="line"><span class="built_in">NSURL</span> *URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://example.com/upload"</span>];</div><div class="line"><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:URL];</div><div class="line"></div><div class="line">NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse*response, <span class="keyword">id</span> responseObject, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="keyword">if</span> (error) {</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@ %@"</span>, response, responseObject);</div><div class="line">    }</div><div class="line">}];</div><div class="line">[dataTask resume];</div></pre></td></tr></table></figure>
+
+<p><strong>请求序列化</strong><br>请求序列化创建URL字符串，编码参数作为一个查询字符串或HTTP主体请求。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *URLString = <span class="string">@"http://example.com"</span>;</div><div class="line"><span class="built_in">NSDictionary</span> *parameters = @{<span class="string">@"foo"</span>:<span class="string">@"bar"</span>, <span class="string">@"baz"</span>: @[@<span class="number">1</span>,@<span class="number">2</span>, @<span class="number">3</span>]};</div></pre></td></tr></table></figure>
+
+<p><strong>查询字符串参数编码</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> [[AFHTTPRequestSerializer serializer] requestWithMethod:<span class="string">@"GET"</span> URLString:URLString parameters:parameters];</div><div class="line">GET http:<span class="comment">//example.com?foo=bar&baz[]=1&baz[]=2&baz[]=3</span></div></pre></td></tr></table></figure>
+
+<p><strong>URL**</strong>，表单参数编码**</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[[AFHTTPRequestSerializer serializer] requestWithMethod:<span class="string">@"POST"</span> URLString:URLString parameters:parameters];</div><div class="line"></div><div class="line">POST http:<span class="comment">//example.com/</span></div><div class="line">Content-Type: application/x-www-form-urlencoded</div><div class="line"></div><div class="line">foo=bar&baz[]=<span class="number">1</span>&baz[]=<span class="number">2</span>&baz[]=<span class="number">3</span></div></pre></td></tr></table></figure>
+
+<p><strong>JSON**</strong>编码参数**</p>
+<hr>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[[AFJSONRequestSerializer serializer] requestWithMethod:<span class="string">@"POST"</span> URLString:URLString parameters:parameters];</div><div class="line">POST http:<span class="comment">//example.com/</span></div><div class="line">Content-Type: application/json</div><div class="line"></div><div class="line">{<span class="string">"foo"</span>: <span class="string">"bar"</span>, <span class="string">"baz"</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]}</div></pre></td></tr></table></figure>
+
+<p><strong>网络可达性管理</strong><br>AFNetworkReachabilityManager监控领域的可达性，并为WWAN和WiFi网络接口的地址。<br><strong>共享网络可达性</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Reachability: %@"</span>, AFStringFromNetworkReachabilityStatus(status));</div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p><strong>与基本**</strong>URL<strong><strong>的</strong></strong>HTTP<strong>**经理</strong><br>当baseURL提供，网络可达性的作用范围是该基地URL的主机。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="built_in">NSURL</span> *baseURL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://example.com/"</span>];</div><div class="line">AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];</div><div class="line"></div><div class="line">NSOperationQueue *operationQueue = manager<span class="variable">.operationQueue</span>;</div><div class="line">[manager<span class="variable">.reachabilityManager</span> setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {</div><div class="line">    <span class="keyword">switch</span> (status) {</div><div class="line">        <span class="keyword">case</span> AFNetworkReachabilityStatusReachableViaWWAN:</div><div class="line">        <span class="keyword">case</span> AFNetworkReachabilityStatusReachableViaWiFi:</div><div class="line">            [operationQueue setSuspended:<span class="literal">NO</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> AFNetworkReachabilityStatusNotReachable:</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            [operationQueue setSuspended:<span class="literal">YES</span>];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">}];</div></pre></td></tr></table></figure>
+
+<p><strong>安全策略</strong><br>AFSecurityPolicy评估对固定X.509证书和通过安全连接的公共密钥服务器信任。<br>新增固定SSL证书到你的应用有助于防止人在这方面的中间人攻击和其他安全漏洞。 应用程序处理敏感的客户数据或财务信息我们强烈建议路线在使用SSL钉扎配置和启用HTTPS连接的所有通信。<br><strong>使无效的**</strong>SSL<strong>**证书</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</div><div class="line">manager<span class="variable">.securityPolicy</span><span class="variable">.allowInvalidCertificates</span> =<span class="literal">YES</span>; <span class="comment">// 不建议在生产</span></div></pre></td></tr></table></figure>
+
+<p><strong>AFHTTPRequestOperation</strong><br>AFHTTPRequestOperation是的一个子类AFURLConnectionOperation使用HTTP或HTTPS协议请求。 它封装的接受状态代码和内容类型，这决定了请求的成功或失败的概念。<br>虽然AFHTTPRequestOperationManager通常是去提出要求的最佳途径， AFHTTPRequestOperation可以单独使用。<br><strong>GET **</strong>with <strong>**AFHTTPRequestOperation</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> <span class="built_in">NSURL</span> *URL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://example.com/resources/123.json"</span>];</div><div class="line"><span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:URL];</div><div class="line">AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];</div><div class="line">op<span class="variable">.responseSerializer</span> = [AFJSONResponseSerializer serializer];</div><div class="line">[op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation*operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"JSON: %@"</span>, responseObject);</div><div class="line">} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span>*error) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Error: %@"</span>, error);</div><div class="line">}];</div><div class="line">[[NSOperationQueue mainQueue] addOperation:op];</div></pre></td></tr></table></figure>
+
+<p><strong>操作的批处理</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSMutableArray</span> *mutableOperations = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSURL</span> *fileURL <span class="keyword">in</span> filesToUpload) {</div><div class="line">    <span class="built_in">NSURLRequest</span> *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:<span class="string">@"POST"</span> URLString:<span class="string">@"http://example.com/upload"</span> parameters:<span class="literal">nil</span> constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">        [formData appendPartWithFileURL:fileURL name:<span class="string">@"images[]"</span> error:<span class="literal">nil</span>];</div><div class="line">    }];</div><div class="line"></div><div class="line">    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];</div><div class="line"></div><div class="line">    [mutableOperations addObject:operation];</div><div class="line">}</div><div class="line"></div><div class="line"><span class="built_in">NSArray</span> *operations = [AFURLConnectionOperation batchOfRequestOperations:@[...] progressBlock:^(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%lu of %lu complete"</span>, numberOfFinishedOperations, totalNumberOfOperations);</div><div class="line">} completionBlock:^(<span class="built_in">NSArray</span> *operations) {</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"All operations in batch complete"</span>);</div><div class="line">}];</div><div class="line">[[NSOperationQueue mainQueue] addOperations:operations waitUntilFinished:<span class="literal">NO</span>];</div></pre></td></tr></table></figure>
+
+<p><strong>单元测试</strong><br>AFNetworking包括一套内部的测试子目录中的单元测试。 为了运行单元测试，你必须通过CocoaPods安装测试的依赖关系：<br> $ cd Tests<br> $ pod install<br>一旦测试的依赖安装，你可以通过在Xcode的’的iOS测试“和”OS X的测试“计划，执行测试套件。<br><strong>使用**</strong>xctool**<br>测试也可以通过命令行或在一个持续集成环境中运行<a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=https://github.com/facebook/xctool&amp;usg=ALkJrhh4GfmYPHkGwnNuhhM4ZAaZUQimtA" target="_blank" rel="external">xctool</a> ，它可以安装<a href="http://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=zh-CN&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com.hk&amp;sl=en&amp;tl=zh-CN&amp;u=http://brew.sh/&amp;usg=ALkJrhgZ5Ck7uZtrBWPhQ0ujWkOqvbg1ZA" target="_blank" rel="external">自制软件</a> ：<br> $ brew update<br> $ brew install xctool —HEAD<br>一旦xctool安装，你可以通过执行该套件rake test 。</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之网络通讯/">iOS应用开发之网络通讯</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/AFNetworking/">AFNetworking</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  
+    <form>
+      <input id="st-search-input" type="search" placeholder="Search">
+    </form>
+    <div id="st-results-container"></div>
+  
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
     
-    <p class="article-more-link">
-      <time datetime="2014-09-13T07:14:00.000Z" itemprop="datePublished">9月 13 2014</time>
-      
-          <a href="/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/02/14/AFNetworking/" title="AFNetworking" itemprop="url">
-      
-        AFNetworking
-      </a>
-    </h1>
+      <span><a href="/tags/2d/">2d<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-02-14T07:26:00.000Z" itemprop="datePublished">2月 14 2014</time>
-      
-          <a href="/2014/02/14/AFNetworking/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-
+      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
+    
+      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
+    
+      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
+    
+      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
+    
+      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
+    
+      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
+    
+      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
+    
+      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
+    
+      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
+    
+      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
+    
+      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
+    
+      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
+    
+      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
+    
+      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
+    
+      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
+    
+      <span><a href="/tags/api/">api<small>5</small></a></span>
+    
+      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
+    
+      <span><a href="/tags/block/">block<small>1</small></a></span>
+    
+      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
+    
+      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
+    
+      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
+    
+      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/framework/">framework<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
+    
+      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
+    
+      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
+    
+      <span><a href="/tags/ios/">ios<small>53</small></a></span>
+    
+      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
+    
+      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
+    
+      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
+    
+      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
+    
+      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
+    
+      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
+    
+      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
+    
+      <span><a href="/tags/svn/">svn<small>1</small></a></span>
+    
+      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
+    
+      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
+    
+      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
+    
+      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
+    
+      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
+    
+      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
+    
+      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
+    
+      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
+    
+      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
+    
+      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
+    
+      <span><a href="/tags/企业/">企业<small>1</small></a></span>
+    
+      <span><a href="/tags/动画/">动画<small>5</small></a></span>
+    
+      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
+    
+      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
+    
+      <span><a href="/tags/存储/">存储<small>1</small></a></span>
+    
+      <span><a href="/tags/宏/">宏<small>1</small></a></span>
+    
+      <span><a href="/tags/导航/">导航<small>1</small></a></span>
+    
+      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
+    
+      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
+    
+      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
+    
+      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
+    
+      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
+    
+      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
+    
+      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
+    
+      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
+    
+      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
+    
   </div>
 </div>
 
-      </div>
-      <footer><div id="footer" >
 
+
+
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+    _st('install','6xH6jcZvsZxn2a9rcU4t');
+  </script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+  </ul>
 </div>
-</footer>
-      <script src="/js/jquery-2.1.0.min.js"></script>
+<div>
+  
+    &copy; 2014 尹现伟
+  
+</div>
+<div class="clearfix"></div></footer>
+  
 
-<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  //back to top
-  function backToTop(){
-    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
-    buttonHTML.appendTo($("body"));
-    var buttonToTop = $("#back-top");
-    // hide #back-top first
-    buttonToTop.hide();
-
-    // fade in #back-top
-    $(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                buttonToTop.fadeIn();
-            } else {
-                buttonToTop.fadeOut();
-            }
-        });
-        // scroll body to 0px on click
-        buttonToTop.click(function() {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
-  }
-  backToTop();
-
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      ta = $('#toc.toc-aside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-        
-    }
-  });
-
-  var show = true;
-  c.click(function(){
-    if(show == true){
-        a.addClass('fadeOut').css('display', 'none');
-        ta.css('display', 'block').addClass('fadeIn');
-        m.addClass('moveMain');  
-    }else{
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
-        ta.css('display', 'none'); 
-        m.removeClass('moveMain');
-        $('#toc.toc-aside').css('display', 'none');
-    }
-    show = !show;
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 
+<script type="text/javascript">
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
+</script>
+<div id="totop" class="footer-btn">
+  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
+</div>
 
+<script type="text/javascript">
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
 
-
-
-
-    </body>
-   </html>
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
+  });
+</script>
+</body>
+</html>

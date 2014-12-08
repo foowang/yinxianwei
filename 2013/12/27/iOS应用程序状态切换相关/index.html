@@ -1,94 +1,79 @@
-
- <!DOCTYPE HTML>
-<html lang="zh_CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>iOS应用程序状态切换相关 | 一枝红杏出墙来</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="尹现伟">
-    
-    <meta name="description" content="1.Not running:应用还没有启动，或者应用正在运行但是途中被系统停止。
+  <title>iOS应用程序状态切换相关 | 一枝红杏出墙来</title>
+  <meta name="author" content="尹现伟">
+  
+  <meta name="description" content="1.Not running:应用还没有启动，或者应用正在运行但是途中被系统停止。
 
 Inactive:当前应用正在前台运行，但是并不接收事件（当前或许正在执行其它代码）。一般每当应用要从一个状态切换到另一个不同的状态时，中途过渡会短暂停留在此状态。唯一在此状态停留时间比较长的情况是：当用户锁屏时，或">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	
-	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
-	
+  <meta property="og:title" content="iOS应用程序状态切换相关"/>
+  <meta property="og:site_name" content="一枝红杏出墙来"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+  
+
 </head>
 
-  <body>
+
+<body>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>一枝红杏出墙来</h1>
+    <h2></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
     <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-                    <ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/atom.xml">订阅</a></li>
-					
-						<li><a href="/about">关于我</a></li>
-					
-					<li>
-					
-					</li>
-                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-12-27T06:39:00.000Z"><a href="/2013/12/27/iOS应用程序状态切换相关/">12月 27 2013</a></time>
+      
+      
+  
+    <h1 class="title">iOS应用程序状态切换相关</h1>
+  
 
-				</ul>
-			</nav>	
-</div>
-
+      
     </header>
-    <div id="container" class="clearfix">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2013/12/27/iOS应用程序状态切换相关/" title="iOS应用程序状态切换相关" itemprop="url">iOS应用程序状态切换相关</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="/about" title="尹现伟">尹现伟</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2013-12-27T06:39:00.000Z" itemprop="datePublished">12月 27 2013</time>
-    更新日期:<time datetime="2014-10-30T10:46:28.000Z" itemprop="dateModified">10月 30 2014</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-		</div>
-		
-		<p>1.Not running:应用还没有启动，或者应用正在运行但是途中被系统停止。</p>
+    <div class="entry">
+      
+        
+          
+        
+        <p>1.Not running:应用还没有启动，或者应用正在运行但是途中被系统停止。</p>
 <ol>
 <li>Inactive:当前应用正在前台运行，但是并不接收事件（当前或许正在执行其它代码）。一般每当应用要从一个状态切换到另一个不同的状态时，中途过渡会短暂停留在此状态。唯一在此状态停留时间比较长的情况是：当用户锁屏时，或者系统提示用户去响应某些（诸如电话来电、有未读短信等）事件的时候。<br>3.Active:当前应用正在前台运行，并且接收事件。这是应用正在前台运行时所处的正常状态。<br>4.Background:应用处在后台，并且还在执行代码。大多数将要进入Suspended状态的应用，会先短暂进入此状态。然而，对于请求需要额外的执行时间的应用，会在此状态保持更长一段时间。另外，如果一个应用要求启动时直接进入后台运行，这样的应用会直接从Not running状态进入Background状态，中途不会经过Inactive状态。比如没有界面的应用。注此处并不特指没有界面的应用，其实也可以是有界面的应用，只是如果要直接进入background状态的话，该应用界面不会被显示。<br>5.Suspended:应用处在后台，并且已停止执行代码。系统自动的将应用移入此状态，且在此举之前不会对应用做任何通知。当处在此状态时，应用依然驻留内存但不执行任何程序代码。当系统发生低内存告警时，系统将会将处于Suspended状态的应用清除出内存以为正在前台运行的应用提供足够的内存。<br>如下图：<br><img src="http://hi.csdn.net/attachment/201112/25/0_13248255215kx7.gif" alt=""><br>注意：运行在iOS3.2或更早期版本操作系统之上的应用并不进入后background和suspended状态。另外，一些即使运行在iOS4或更新版本操作系统但是不支持多任务或后台执行的应用，也不会进入background和suspended状态。相应的这些应用在从前台运行状态离开时会直接被终止。<br>大多时候状态转换通过调用你的应用委托对象继承的Delegate方法来完成。开发人员可以在提供的这些继承方法中做任何事，以响应状态转换。相关继承的方法及介绍如下所示：<br>application:didFinishLaunchingWithOptions:   这是程序启动时调用的函数。可以在此方法中加入初始化相关的代码。<br>applicationDidBecomeActive:  应用在准备进入前台运行时执行的函数。（当应用从启动到前台，或从后台转入前台都会调用此方法）<br>applicationWillResignActive:   应用当前正要从前台运行状态离开时执行的函数。<br>applicationDidEnterBackground: 此时应用处在background状态，并且没有执行任何代码，未来将被挂起进入suspended状态。<br>applicationWillEnterForeground:  当前应用正从后台移入前台运行状态，但是当前还没有到Active状态时执行的函数。<br>applicationWillTerminate:  当前应用即将被终止，在终止前调用的函数。如果应用当前处在suspended，此方法不会被调用。</li>
 </ol>
@@ -100,367 +85,282 @@ Inactive:当前应用正在前台运行，但是并不接收事件（当前或�
 <p><strong>4. 返回前台foreground</strong><br>如果应用曾被移入后台，相应的任务被停止，则此时返回前台时可以重启任务继续执行。应用的applicationWillEnterForeground:方法应该恢复所有在applicationDidEnterBackground:方法所做的工作。同时，applicationDidBecomeActive:方法应该继续执行在应用启动时所做的同样的激活任务的操作。应用从后台切入前台的程序流程如下图所示：<br><img src="http://hi.csdn.net/attachment/201112/27/0_1324951983h90z.gif" alt=""><br>注：如果应用在默认的通知中心注册了UIApplicationWillEnterForegroudNotification通知，则当应用重新进入前台时，该通知也是可用的。<br>（1）在应用切向前台被唤醒时处理通知队列<br>被挂起的应用要时刻准备当恢复foreground或background状态时去处理所有的通知队列。因为应用被挂起时不能执行任何代码，因此没有办法处理那些和诸如方向改变、时间改变、偏好改变、以及其它的影响应用的外观的行为或状态等等。为了保证这些改变不丢失，系统将这些相关的通知入队列，并且当应用恢复foreground或background重新执行代码时，立即将这些通知发往应用。为了防止应用恢复时因为通知过多而过载，系统会合并事件并且仅传递一个能够反应自从应用被挂起有网络改变的单个通知。<br>具体通知合并规则如下表所示：<br><img src="http://hi.csdn.net/attachment/201112/27/0_1324953474pVqw.gif" alt=""><br>大部分通知直接传递给注册它作的observers，然而像方向改变这样的通知很明显是被系统框架解析的，这样的通知以另外的方式传递给应用。<br>通知队列典型的在任何触控事件和用户输入之前被投递向应用的主运行循环main run loop。大多数应用应该能够足够快的处理这些事件以致于不会造成应用恢复时有任何明显的滞后。然而，如果发现你的应用在从后台恢复时看起来明显呆滞，则可以使用Instruments去确定是否是通知处理代码正在运行而造成了延迟。一个应用在返回前台时也会接收所有自从上更新后被标记为dirty的视图的更新通知。处于后台background运行的应用也可以调用setNeedsDisplay或setNeedsDisplayInRect:方法去请求视图更新。然而，因为这时界面不可见，所以系统合并这些请求并且只有当应用恢复前台后才去更新视图。（2）从容的处理本地改变<br>当应用处于挂起suspended状态时，如果用户改变了当前语言设置，则当应用返回前台的时候可以使用NSCurrentLocalDidChaneNotification通知来强制任何包含本地敏感信息（像日期、时间、数字等等）的视图进行更新。当然，避免本地信息相关的事件处理的最好的方法还是以那种更容易更新视图的方式来写更新视图的代码。比如：<br>a.使用autoupdatingCurrentLocal类方法来检索NSLocal对象。此方法返回一个本地对象，该对象响应本地改变并且自动更新自已。所以，你不需要再去重新创建它。然后，当本地信息改变时，你的应用仍然需要去刷新那些包含本地信息的视图。<br>b.无论任何时候本地信息改变时都去重新创建缓存日期或者数字格式对象。<br>（3）响应应用设置改变<br>如果应用包含被Settings应用所管理的设置，则应用应该关注NSUserDefaultsDidChangeNotification通知。因为当你的应用处于后台或被挂起状态时，用户可以修改设置，所以你的应用中可以使用这个通知来响应任何重要的设置改变。某些情况下，响应此通知可以帮助关掉一些潜在的安全漏洞。例如，email程序应该响应用户帐户信息的改变，如果不能成功的监测这些改变将会造成一些隐私和安全方面的问题。比如，用户很有可能发送邮件时还是使用的是老用户帐户，即使那个帐户已经不再属于该用户，然而用户确丝毫不情以为用的就是新帐户。当应用接收到该通知时，应用应该重新加载所有和设置相关的东西并且适当的复位用户接口，如果必要的话。比如密码或其它的安全相关的信息改变时，应用应该隐藏任何先前显示的信息并且强制用户输入新密码。</p>
 <p><strong>5.应用终止</strong><br>尽管应用通常被切向后台或被挂起，但是如果有任何下面的情况发生时，应用将被终止并且清除出内存：<br>（1）应用依赖于 iOS4.0以前的版本OS<br>（2）应用部署在运行iOS4.0版本操作系统的设备上<br>（3）当前设备不支持多任务<br>（4）应用在Info.plist文件中包含UIApplicationExitOnSuspend key。<br>如果应用将被终止时正在前台或后台运行，系统将会调用应用代理的applicationWillTerminate:方法以使应用能做退出前的任何需要的回收处理。你可以使用此方法保存用户数据或应用状态信息，以供应用随后重新启动恢复状态时使用。该方法最长运行时限为5秒，过期应用即被kill掉并且移除内存。<br>注：应用当前被suspended时，不会调用 applicationWillTerminate:方法。<br>即使是使用iOS SDK4或更新的版本SDK开发应用，也应该考虑应用在没有任何通知时被kill掉的情况。用户可以使用多任务UI很明确的kill掉某个应用。除此之外，如果发生内存告警，系统也会从内存中移除应用以释放空间。处于suspended状态的应用被终止时不会有任何通知。但是如果应用当前正在后台background运行，则当应用要被终止时，系统会调用应用代理的applicationWillTerminate:方法。应用不可以在此方法中申请额外的后台执行时间。</p>
 <p><strong>6.主运行循环main run loop</strong><br>应用主运行循环负责处理所有用户相关的事件。UIApplication对象在应用启动时安装主运行循环并且使用此循环去处理事件和处理基于视图的界面更新。正如名字所表明的，该主运行循环是在应用的主线程app’s main thread中运行的。以此保证所有用户事件是按照它们被接收时的顺序串行的执行。<br>下图展示了主运行循环的结构以及用户事件如何导致了应用行为。当用户和应用交互时，和这些交互相关的事件由系统自动产生并且借助UIKit设定的特殊端口传递给应用。事件在应用内部以队列的形式存在并且一个一个的被分发到应用的主运行循环去执行。UIApplication对象是第一个接收事件的对象，并且决定需要如何处理事件。触控事件通常被分发到应用的主窗口对象，并且最终分发到发生该触控事件的视图上面。其它的事件传递也许会经过各种各样的应用对象而与触控事件传递稍微有所不同。<br><img src="http://hi.csdn.net/attachment/201112/27/0_13249677518leR.gif" alt=""><br>在iOS应用中可以传递很多类型的事件。最常见的事件列在下表中：<br><img src="http://hi.csdn.net/attachment/201112/27/0_1324967930QPqH.gif" alt=""><br><img src="http://hi.csdn.net/attachment/201112/27/0_1324967966FFmY.gif" alt=""><br>这些事件类型中的大部分通过应用的主运行循环进行传递，但是还有一些并不是的。例如：accelerometer事件直接被传递到应用指定的accelerometer代理对像。关于系统如何处理大多数类型事件，包括touch、remote control、motion、accelerometer，以及gyroscopic事件，详见Event Handling Guide for iOS.<br>一些像触控、远程控制类的事件，通常被应用的响应对象处理。响应对象存在于应用的任何地方。（UIApplication对象，view对象，view controller对象等等都是响应对象的例子）。大多数事件是以特定的响应对象为目标，但是也可以被传递给其它的响应对象（借助响应链），例如：一个不处理任何事件的view可以将事件传递给它的父view或传递给view controller。<br>发生在controls类的视图（例如button）上的事件的处理过程和发生在其它类型的views上的触控事件处理过程有些不一样。因为发生在control类的对象上面的交互行为只有非常有限的几种，因此这些交互重新打包进active message并且传递给合适的目标对象。  这种target-action的设计模式，使应用通过control类型的view对象去触发一段自定义代码的执行变得非常容易。</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/ios开发/">ios开发</a><a href="/tags/iphone开发/">iphone开发</a><a href="/tags/应用程序/">应用程序</a><a href="/tags/ios/">ios</a>
-  </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/iOS应用开发之触控/">iOS应用开发之触控</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="/about/2013/12/27/iOS应用程序状态切换相关/" data-title="iOS应用程序状态切换相关 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2013/12/30/iPhone之调用系统提示音教程/" title="iPhone之调用系统提示音教程">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  iPhone之调用系统提示音教程</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2013/12/27/IOS多线程编程系类/"  title="IOS多线程编程系类">
- <strong>NEXT:</strong><br/> 
- <span>IOS多线程编程系类
-</span>
-</a>
-</div>
-
-</nav>
-
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"yinxianwei"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
-</div>  
       
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  
-  </div>
-
-<div id="asidepart">
-<div id="authorInfo">
-	
-		<div class="author-logo"></div>		
-	
-	
-	<section class="author-info">
-		
-			<p> 尹现伟</p>
-		
-		
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
-		
-		
-	</div>
-</div>
-<aside class="clearfix">
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-			<li><a href="/categories/iOS之常用方法/" title="iOS之常用方法">iOS之常用方法<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS之应用发布/" title="iOS之应用发布">iOS之应用发布<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>9</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>16</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>9</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之iOS8/" title="iOS应用开发之iOS8">iOS应用开发之iOS8<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>7</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>27</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之开发证书/" title="iOS应用开发之开发证书">iOS应用开发之开发证书<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>8</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>5</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-  <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">2014 年 12 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">2014 年 11 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">2014 年 09 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">2014 年 08 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">2014 年 07 月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">2014 年 06 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">2014 年 05 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">2014 年 04 月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">2013 年 11 月</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">2013 年 10 月</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a><span class="archive-list-count">2</span></li></ul>
-  </div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
-		
-			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
-		
-			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
-		
-			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
-		
-			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
-		
-			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
-		
-			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
-		
-			<li><a href="/tags/URL-Scheme/" title="URL Scheme">URL Scheme<sup>1</sup></a></li>
-		
-			<li><a href="/tags/URL编码/" title="URL编码">URL编码<sup>1</sup></a></li>
-		
-			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
-		
-			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
-		
-			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
-		
-			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-</aside>
-</div>
     </div>
-    <footer><div id="footer" >
-
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-
-<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  //back to top
-  function backToTop(){
-    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
-    buttonHTML.appendTo($("body"));
-    var buttonToTop = $("#back-top");
-    // hide #back-top first
-    buttonToTop.hide();
-
-    // fade in #back-top
-    $(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                buttonToTop.fadeIn();
-            } else {
-                buttonToTop.fadeOut();
-            }
-        });
-        // scroll body to 0px on click
-        buttonToTop.click(function() {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
-  }
-  backToTop();
-
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      ta = $('#toc.toc-aside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
+    <footer>
       
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之触控/">iOS应用开发之触控</a>
+  </div>
 
-  var show = true;
-  c.click(function(){
-    if(show == true){
-        a.addClass('fadeOut').css('display', 'none');
-        ta.css('display', 'block').addClass('fadeIn');
-        m.addClass('moveMain');  
-    }else{
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
-        ta.css('display', 'none'); 
-        m.removeClass('moveMain');
-        $('#toc.toc-aside').css('display', 'none');
-    }
-    show = !show;
-  });
-});
+      
+  
+  <div class="tags">
+    <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/应用程序/">应用程序</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        <div class="alignright share-box">
+  
+</div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  
+    <form>
+      <input id="st-search-input" type="search" placeholder="Search">
+    </form>
+    <div id="st-results-container"></div>
+  
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
+    
+      <span><a href="/tags/2d/">2d<small>1</small></a></span>
+    
+      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
+    
+      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
+    
+      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
+    
+      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
+    
+      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
+    
+      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
+    
+      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
+    
+      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
+    
+      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
+    
+      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
+    
+      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
+    
+      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
+    
+      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
+    
+      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
+    
+      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
+    
+      <span><a href="/tags/api/">api<small>5</small></a></span>
+    
+      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
+    
+      <span><a href="/tags/block/">block<small>1</small></a></span>
+    
+      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
+    
+      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
+    
+      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
+    
+      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/framework/">framework<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
+    
+      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
+    
+      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
+    
+      <span><a href="/tags/ios/">ios<small>53</small></a></span>
+    
+      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
+    
+      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
+    
+      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
+    
+      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
+    
+      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
+    
+      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
+    
+      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
+    
+      <span><a href="/tags/svn/">svn<small>1</small></a></span>
+    
+      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
+    
+      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
+    
+      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
+    
+      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
+    
+      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
+    
+      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
+    
+      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
+    
+      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
+    
+      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
+    
+      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
+    
+      <span><a href="/tags/企业/">企业<small>1</small></a></span>
+    
+      <span><a href="/tags/动画/">动画<small>5</small></a></span>
+    
+      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
+    
+      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
+    
+      <span><a href="/tags/存储/">存储<small>1</small></a></span>
+    
+      <span><a href="/tags/宏/">宏<small>1</small></a></span>
+    
+      <span><a href="/tags/导航/">导航<small>1</small></a></span>
+    
+      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
+    
+      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
+    
+      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
+    
+      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
+    
+      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
+    
+      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
+    
+      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
+    
+      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
+    
+      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
+    
+  </div>
+</div>
+
+
+
+
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+    _st('install','6xH6jcZvsZxn2a9rcU4t');
+  </script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+  </ul>
+</div>
+<div>
+  
+    &copy; 2014 尹现伟
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
+
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,240-$(this).scrollTop()));
-    });
-  };
-});
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
 </script>
-
+<div id="totop" class="footer-btn">
+  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
+</div>
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
+
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
   });
-});     
 </script>
-
-
-
-
-
-
-  </body>
+</body>
 </html>

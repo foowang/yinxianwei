@@ -1,94 +1,79 @@
-
- <!DOCTYPE HTML>
-<html lang="zh_CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>iOS屏幕旋转，屏幕自适应方向变化 | 一枝红杏出墙来</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="尹现伟">
-    
-    <meta name="description" content="文章转自:http://moto0421.iteye.com/blog/1586791
+  <title>iOS屏幕旋转，屏幕自适应方向变化 | 一枝红杏出墙来</title>
+  <meta name="author" content="尹现伟">
+  
+  <meta name="description" content="文章转自:http://moto0421.iteye.com/blog/1586791
 
 iOS有四个方向的旋转，为了保证自己的代码能够支持旋转，我们必须首先处理一个函数：Objective-c代码  1. - (BOOL)shouldAutorotateToInterfaceOrientation">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	
-	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
-	
+  <meta property="og:title" content="iOS屏幕旋转，屏幕自适应方向变化"/>
+  <meta property="og:site_name" content="一枝红杏出墙来"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+  
+
 </head>
 
-  <body>
+
+<body>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>一枝红杏出墙来</h1>
+    <h2></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
     <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-                    <ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/atom.xml">订阅</a></li>
-					
-						<li><a href="/about">关于我</a></li>
-					
-					<li>
-					
-					</li>
-                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-21T01:57:00.000Z"><a href="/2014/01/21/iOS屏幕旋转，屏幕自适应方向变化/">1月 21 2014</a></time>
+      
+      
+  
+    <h1 class="title">iOS屏幕旋转，屏幕自适应方向变化</h1>
+  
 
-				</ul>
-			</nav>	
-</div>
-
+      
     </header>
-    <div id="container" class="clearfix">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2014/01/21/iOS屏幕旋转，屏幕自适应方向变化/" title="iOS屏幕旋转，屏幕自适应方向变化" itemprop="url">iOS屏幕旋转，屏幕自适应方向变化</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="/about" title="尹现伟">尹现伟</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2014-01-21T01:57:00.000Z" itemprop="datePublished">1月 21 2014</time>
-    更新日期:<time datetime="2014-11-20T04:06:23.000Z" itemprop="dateModified">11月 20 2014</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-		</div>
-		
-		<p>文章转自:<a href="http://moto0421.iteye.com/blog/1586791" target="_blank" rel="external">http://moto0421.iteye.com/blog/1586791</a></p>
+    <div class="entry">
+      
+        
+          
+        
+        <p>文章转自:<a href="http://moto0421.iteye.com/blog/1586791" target="_blank" rel="external">http://moto0421.iteye.com/blog/1586791</a></p>
 <ol>
 <li>iOS有四个方向的旋转，为了保证自己的代码能够支持旋转，我们必须首先处理一个函数：<br>Objective-c代码  <a href="&quot;收藏这段代码&quot;"><img src="http://moto0421.iteye.com/images/icon_star.png" alt="收藏代码"></a>1. - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {  </li>
 <li></li>
@@ -153,367 +138,282 @@ iOS有四个方向的旋转，为了保证自己的代码能够支持旋转，�
 
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
 
-  
-	</div>
-		<footer class="article-footer clearfix">
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/屏幕旋转/">屏幕旋转</a>
-  </div>
-
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
-</div>
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="/about/2014/01/21/iOS屏幕旋转，屏幕自适应方向变化/" data-title="iOS屏幕旋转，屏幕自适应方向变化 | 一枝红杏出墙来" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2014/01/21/关于UIView 的autoresizingMask属性，即UIViewAutoresizing/" title="关于UIView 的autoresizingMask属性，即UIViewAutoresizing">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  关于UIView 的autoresizingMask属性，即UIViewAutoresizing</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2014/01/15/iOS 7, 导航栏和状态栏自定义/"  title="iOS 7, 导航栏和状态栏自定义">
- <strong>NEXT:</strong><br/> 
- <span>iOS 7, 导航栏和状态栏自定义
-</span>
-</a>
-</div>
-
-</nav>
-
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"yinxianwei"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
-</div>  
       
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
-  
-  </div>
-
-<div id="asidepart">
-<div id="authorInfo">
-	
-		<div class="author-logo"></div>		
-	
-	
-	<section class="author-info">
-		
-			<p> 尹现伟</p>
-		
-		
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/2105746821" target="_blank" title="weibo"></a>
-		
-		
-		
-		<a href="https://github.com/yinxianwei" target="_blank" title="github"></a>
-		
-		
-	</div>
-</div>
-<aside class="clearfix">
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-			<li><a href="/categories/iOS之常用方法/" title="iOS之常用方法">iOS之常用方法<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS之应用发布/" title="iOS之应用发布">iOS之应用发布<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Drawing/" title="iOS应用开发之Drawing">iOS应用开发之Drawing<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之MDM资料/" title="iOS应用开发之MDM资料">iOS应用开发之MDM资料<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之SVN/" title="iOS应用开发之SVN">iOS应用开发之SVN<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Swift/" title="iOS应用开发之Swift">iOS应用开发之Swift<sup>9</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之UI/" title="iOS应用开发之UI">iOS应用开发之UI<sup>16</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之UITableViewCell/" title="iOS应用开发之UITableViewCell">iOS应用开发之UITableViewCell<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之Xcode配置/" title="iOS应用开发之Xcode配置">iOS应用开发之Xcode配置<sup>9</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之app上架/" title="iOS应用开发之app上架">iOS应用开发之app上架<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之iOS8/" title="iOS应用开发之iOS8">iOS应用开发之iOS8<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之内存管理/" title="iOS应用开发之内存管理">iOS应用开发之内存管理<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之动画/" title="iOS应用开发之动画">iOS应用开发之动画<sup>7</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之地图/" title="iOS应用开发之地图">iOS应用开发之地图<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之多线程/" title="iOS应用开发之多线程">iOS应用开发之多线程<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之学习资源/" title="iOS应用开发之学习资源">iOS应用开发之学习资源<sup>7</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之常用方法/" title="iOS应用开发之常用方法">iOS应用开发之常用方法<sup>27</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之开发证书/" title="iOS应用开发之开发证书">iOS应用开发之开发证书<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之数据库/" title="iOS应用开发之数据库">iOS应用开发之数据库<sup>2</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之社交分享/" title="iOS应用开发之社交分享">iOS应用开发之社交分享<sup>1</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之社交软件/" title="iOS应用开发之社交软件">iOS应用开发之社交软件<sup>4</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之第三方框架/" title="iOS应用开发之第三方框架">iOS应用开发之第三方框架<sup>6</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之网络通讯/" title="iOS应用开发之网络通讯">iOS应用开发之网络通讯<sup>8</sup></a></li>
-		
-			<li><a href="/categories/iOS应用开发之触控/" title="iOS应用开发之触控">iOS应用开发之触控<sup>3</sup></a></li>
-		
-			<li><a href="/categories/iOS游戏开发之基础学习/" title="iOS游戏开发之基础学习">iOS游戏开发之基础学习<sup>5</sup></a></li>
-		
-		</ul>
-</div>
-
-
-  
-  <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">2014 年 12 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">2014 年 11 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">2014 年 10 月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">2014 年 09 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">2014 年 08 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">2014 年 07 月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">2014 年 06 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">2014 年 05 月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">2014 年 04 月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">2014 年 03 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">2014 年 02 月</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">2014 年 01 月</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">2013 年 12 月</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">2013 年 11 月</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">2013 年 10 月</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">2013 年 09 月</a><span class="archive-list-count">33</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">2013 年 08 月</a><span class="archive-list-count">2</span></li></ul>
-  </div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/2d/" title="2d">2d<sup>1</sup></a></li>
-		
-			<li><a href="/tags/AFNetworking/" title="AFNetworking">AFNetworking<sup>2</sup></a></li>
-		
-			<li><a href="/tags/CoreData/" title="CoreData">CoreData<sup>2</sup></a></li>
-		
-			<li><a href="/tags/Drawing/" title="Drawing">Drawing<sup>1</sup></a></li>
-		
-			<li><a href="/tags/MagicalRecord/" title="MagicalRecord">MagicalRecord<sup>1</sup></a></li>
-		
-			<li><a href="/tags/NSDate/" title="NSDate">NSDate<sup>1</sup></a></li>
-		
-			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
-		
-			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UITabBarController/" title="UITabBarController">UITabBarController<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UITableViewControlle/" title="UITableViewControlle">UITableViewControlle<sup>1</sup></a></li>
-		
-			<li><a href="/tags/UIWebView/" title="UIWebView">UIWebView<sup>1</sup></a></li>
-		
-			<li><a href="/tags/URL-Scheme/" title="URL Scheme">URL Scheme<sup>1</sup></a></li>
-		
-			<li><a href="/tags/URL编码/" title="URL编码">URL编码<sup>1</sup></a></li>
-		
-			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
-		
-			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
-		
-			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
-		
-			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
-		
-			<li><a href="/tags/bytearray/" title="bytearray">bytearray<sup>1</sup></a></li>
-		
-		</ul>
-</div>
-
-
-</aside>
-</div>
     </div>
-    <footer><div id="footer" >
-
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-
-<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  //back to top
-  function backToTop(){
-    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
-    buttonHTML.appendTo($("body"));
-    var buttonToTop = $("#back-top");
-    // hide #back-top first
-    buttonToTop.hide();
-
-    // fade in #back-top
-    $(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                buttonToTop.fadeIn();
-            } else {
-                buttonToTop.fadeOut();
-            }
-        });
-        // scroll body to 0px on click
-        buttonToTop.click(function() {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
-  }
-  backToTop();
-
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      ta = $('#toc.toc-aside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
+    <footer>
       
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+  </div>
 
-  var show = true;
-  c.click(function(){
-    if(show == true){
-        a.addClass('fadeOut').css('display', 'none');
-        ta.css('display', 'block').addClass('fadeIn');
-        m.addClass('moveMain');  
-    }else{
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
-        ta.css('display', 'none'); 
-        m.removeClass('moveMain');
-        $('#toc.toc-aside').css('display', 'none');
-    }
-    show = !show;
-  });
-});
+      
+  
+  <div class="tags">
+    <a href="/tags/屏幕旋转/">屏幕旋转</a>
+  </div>
+
+      
+        <div class="alignright share-box">
+  
+</div>
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  
+    <form>
+      <input id="st-search-input" type="search" placeholder="Search">
+    </form>
+    <div id="st-results-container"></div>
+  
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
+    
+      <span><a href="/tags/2d/">2d<small>1</small></a></span>
+    
+      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
+    
+      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
+    
+      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
+    
+      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
+    
+      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
+    
+      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
+    
+      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
+    
+      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
+    
+      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
+    
+      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
+    
+      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
+    
+      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
+    
+      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
+    
+      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
+    
+      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
+    
+      <span><a href="/tags/api/">api<small>5</small></a></span>
+    
+      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
+    
+      <span><a href="/tags/block/">block<small>1</small></a></span>
+    
+      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
+    
+      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
+    
+      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
+    
+      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/framework/">framework<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
+    
+      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
+    
+      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
+    
+      <span><a href="/tags/ios/">ios<small>53</small></a></span>
+    
+      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
+    
+      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
+    
+      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
+    
+      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
+    
+      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
+    
+      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
+    
+      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
+    
+      <span><a href="/tags/svn/">svn<small>1</small></a></span>
+    
+      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
+    
+      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
+    
+      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
+    
+      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
+    
+      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
+    
+      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
+    
+      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
+    
+      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
+    
+      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
+    
+      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
+    
+      <span><a href="/tags/企业/">企业<small>1</small></a></span>
+    
+      <span><a href="/tags/动画/">动画<small>5</small></a></span>
+    
+      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
+    
+      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
+    
+      <span><a href="/tags/存储/">存储<small>1</small></a></span>
+    
+      <span><a href="/tags/宏/">宏<small>1</small></a></span>
+    
+      <span><a href="/tags/导航/">导航<small>1</small></a></span>
+    
+      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
+    
+      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
+    
+      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
+    
+      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
+    
+      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
+    
+      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
+    
+      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
+    
+      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
+    
+      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
+    
+  </div>
+</div>
+
+
+
+
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+    _st('install','6xH6jcZvsZxn2a9rcU4t');
+  </script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+  </ul>
+</div>
+<div>
+  
+    &copy; 2014 尹现伟
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
+
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,240-$(this).scrollTop()));
-    });
-  };
-});
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
 </script>
-
+<div id="totop" class="footer-btn">
+  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
+</div>
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
+
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
   });
-});     
 </script>
-
-
-
-
-
-
-  </body>
+</body>
 </html>

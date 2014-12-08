@@ -1,347 +1,881 @@
-
-  <!DOCTYPE HTML>
-<html lang="zh_CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>Category: iOS应用开发之Xcode配置 | 一枝红杏出墙来</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="尹现伟">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>iOS应用开发之Xcode配置 | 一枝红杏出墙来</title>
+  <meta name="author" content="尹现伟">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	
-	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
-	
+  
+  <meta property="og:site_name" content="一枝红杏出墙来"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+  
+
 </head>
 
-    <body>
-      <header>
-        <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-                    <ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/atom.xml">订阅</a></li>
-					
-						<li><a href="/about">关于我</a></li>
-					
-					<li>
-					
-					</li>
-                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-				</ul>
-			</nav>	
-</div>
+<body>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>一枝红杏出墙来</h1>
+    <h2></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">iOS应用开发之Xcode配置</h2>
 
-      </header>
-      <div id="container" class="clearfix">
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-08-11T09:26:00.000Z"><a href="/2014/08/11/Xcode5.1制作formework/">8月 11 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/08/11/Xcode5.1制作formework/">Xcode5.1制作formework</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
         
+        <ol>
+<li>新建一个工程，选择framework &amp; library - Cocoa Touch Static Library,命名为TestKit。<img src="http://img.blog.csdn.net/20140811170140857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>删除不必要的文件。TestKitTests 和TestKit target。<br><img src="http://img.blog.csdn.net/20140811170014011?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li>新建一个Bundle 。new-file-target；选择OS X目录下FrameWork&amp;Library中的Bundle,取名为TestiOSKit。<img src="http://img.blog.csdn.net/20140811165819234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+<li><p>删除TestiOSKit中TestiOSKit-Prefix.pch中的#import<cocoa cocoa.h="">。<img src="http://img.blog.csdn.net/20140811170026211?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></cocoa></p>
+</li>
+<li><p>修改target设置Build Settings选项卡：<br>Base SDK选择Latest iOS(iOS 7.1)<br>Build ActiveArchitecture Only选择NO<br>Dead Code Stripping选择NO<br>Mach-O Type选择Relocatable Object File</p>
+<pre><code>  <span class="keyword">Link</span> <span class="keyword">With</span> Standard Libraries选择NO
+</code></pre><p>Wrapper Extension修改为framework<br>Info选项卡：<br>Bundle OS Type code 修改为FMWK<br>Build Phases选项卡:<br>首先选择Editor-Add Build Phase-Add Copy Haeders Build Phase,在Build Phases下会多出一行Copy Headers;<img src="http://img.blog.csdn.net/20140811170030844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>点击右下角的Add Build Phases,选择AddCopy Headers. 添加头文件和源文件。<img src="http://img.blog.csdn.net/20140811165835281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>删除系统的Frameworks。(Remove References)</p>
+<pre><code>  ![](<span class="symbol">http:</span>/<span class="regexp">/img.blog.csdn.net/</span><span class="number">20140811170100328</span>?watermark/<span class="number">2</span>/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=<span class="regexp">/font/</span><span class="number">5</span>a6L5L2T/fontsize/<span class="number">400</span>/fill/<span class="constant">I0JBQkFCMA</span>==<span class="regexp">/dissolve/</span><span class="number">70</span>/gravity/<span class="constant">SouthEast</span>)
+</code></pre></li>
+<li><p>在TestKit.h和TestMarkKit.m里面写入你的函数声明和实现<br><img src="http://img.blog.csdn.net/20140811165840218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><img src="http://img.blog.csdn.net/20140811165845062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</li>
+</ol>
+<ol>
+<li>选择Run Scheme<br><img src="http://img.blog.csdn.net/20140811165849625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+</ol>
+<ol>
+<li>查看framework build路径<br>点击Xcode右上角Organizer,选择Projects选项卡如图，点击箭头可以进入bulid路径。<img src="http://img.blog.csdn.net/20140811170055570?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>或者选择iOS Device运行一下，然后在工程的Products-TestiOSKit.framework右键，show in finder。文件夹下en.lproj和Info.plist都可以直接删除。<br><img src="http://img.blog.csdn.net/20140811170603171?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
+</ol>
+<ol>
+<li><p>使用framework<br>只需要在新的工程导入并使用就行啦。<img src="http://img.blog.csdn.net/20140811170859077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</li>
+<li><p>但是我们会遇到一个问题，就是这个framework的包分两个，一个是模拟器，一个是真机，所以我们要把它合并成一个通用的包。</p>
+</li>
+</ol>
+<p>在finder下是这样的：<br><img src="http://img.blog.csdn.net/20140811170913218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>一个是真机，一个是模拟器，下面开始合并。<br>1.先把其中一个framework包放到桌面。<br>2.打开终端运行&gt; lipo -create/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphoneos/TestiOSKit.framework/TestiOSKit/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphonesimulator/TestiOSKit.framework/TestiOSKit-output /Users/Jerry/Desktop/TestiOSKit</p>
+<blockquote>
+<p><img src="http://img.blog.csdn.net/20140811172349714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+</blockquote>
+<pre><code>说明一下这段代码，红色为固有字段，黑色部分均为路径，前两个是模拟器路径和真机的路径，后面的为输出路径。
+3.把输出的文件TestiOSKit替换第一步放在桌面上的framework里的TestiOSKit，然后这个framework就是通用的了。
+</code></pre><p>此方法同样适用.a文件的合成。<br>              <img src="http://img.blog.csdn.net/20140811172415984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<ol>
+<li>我把常用的宏定义和类别做成的framework地址：<a href="https://code.csdn.net/yinxianwei88/utilitytools" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/utilitytools</a></li>
+<li>本贴参考：<br><a href="http://blog.csdn.net/smking/article/details/24434819" target="_blank" rel="external">http://blog.csdn.net/smking/article/details/24434819</a><br><a href="http://blog.csdn.net/mark_creative/article/details/9450887" target="_blank" rel="external">http://blog.csdn.net/mark_creative/article/details/9450887</a></li>
+</ol>
 
-<div class="archive-title" >
-  <h2 class="category-icon">iOS应用开发之Xcode配置</h2>
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/framework/">framework</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
   
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
       
-        <a href="/2014/08/11/Xcode5.1制作formework/" title="Xcode5.1制作formework" itemprop="url">
       
-        Xcode5.1制作formework
-      </a>
-    </h1>
+        <div class="icon"></div>
+        <time datetime="2014-04-30T01:39:00.000Z"><a href="/2014/04/30/IOS开发～web在线安装App/">4月 30 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/04/30/IOS开发～web在线安装App/">IOS开发～web在线安装App</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>经测试，在越狱设备上可以安装，如果设备不越狱也想安装，就要企业发布权限了，可惜我没有，所以不能测试了！</p>
+<p>1、创建ipa及plist文件：<br>XCode菜单栏-&gt;Product-&gt;Archive-&gt;Distribute-&gt;Save for Enterprise or Ad-Hod Deploymemnt<br>点击Next<br>选择你的Code signing Identity，我选的是Team profile<br>点击Next<br>选择Save for Enterprise Distribution，并且填写信息<br><img src="http://img.blog.csdn.net/20130812172507484?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl6aG9uZ2Z1MjAxMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>说明：Large Image URL 与 Small Image URL 对应你的App安装过程中的icon</p>
+<p>点击保存后，会生成ipa文件和plist文件。<br>plist文件如下：<br><img src="http://img.blog.csdn.net/20130812173125406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGl6aG9uZ2Z1MjAxMw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>2、创建web下载页面</p>
+<p><strong>[html]</strong> <a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="view plain" target="_blank" rel="external">view<br> plain</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="copy" target="_blank" rel="external">copy</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="print" target="_blank" rel="external">print</a><a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409#" title="?" target="_blank" rel="external">?</a>1. &lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a>  </p>
+<ol>
+<li><html xmlns="http://www.w3.org/1999/xhtml">  </html></li>
+<li><head>  </head></li>
+<li><meta http-equiv="Content-Type" content="text/html; charset=utf-8">  </li>
+<li>  </li>
+<li><body>  </body></li>
+<li><div align="center">  </div></li>
+<li><a href="itms-services://?action=download-manifest&url=http://yiwenxue.cn/game/game-demo.plist" target="_blank" rel="external">在线安装</a>  </li>
+<li><div>  </div></li>
+<li>  </li>
+<li>  </li>
+</ol>
+<p>3、部署与测试<br>将项目ipa文件、plist文件、Large Image、Small Image、第（2）部创建的web页面部署到服务器目录中，IOS设备输入<a href="http://yiwenxue.cn/game，然后点击安装，安装URL根据你实际情况而定。另，有想自己亲手测试一下的，可以把文件都发给我，我帮忙部署（如果和商业有关，那就免了）！仅限空闲时间！" target="_blank" rel="external">http://yiwenxue.cn/game，然后点击安装，安装URL根据你实际情况而定。另，有想自己亲手测试一下的，可以把文件都发给我，我帮忙部署（如果和商业有关，那就免了）！仅限空闲时间！</a></p>
+<p>转载出处:<a href="http://blog.csdn.net/lizhongfu2013/article/details/9930409" target="_blank" rel="external">http://blog.csdn.net/lizhongfu2013/article/details/9930409</a></p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iOS开发/">iOS开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-03-19T05:25:00.000Z"><a href="/2014/03/19/iOS – Xcode升级到5.1& iOS升级到iOS7.1问题/">3月 19 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/19/iOS – Xcode升级到5.1& iOS升级到iOS7.1问题/">iOS – Xcode升级到5.1&amp; iOS升级到iOS7.1问题</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <hr>
+<p>iOS7.1时XCode为5.0.2 无法真机调试.升级XCode到5.1.</p>
+<p>Xcode升级到5.1了，Apple默认让所有App都通过64位编译器编译。通过下面的3步可以关闭：<br>1.选中Targets—&gt;Build Settings—&gt;Architectures。<br>2.双击Architectures，选择other，删除$(ARCH_STANDARD)，然后增加armv7和armv7s。<br>3.clean一下再编译。</p>
+<p>Xcode 5.1， iOS SDK 7.1 后，TableView Cell clipsToBounds 属性默认都是NO，导致以前用的把cell的height设为0来隐藏某个cell的方法没用了,cell内容会叠起来。<br> 解决方法就是手动把clipsToBounds改YES，或者Storyboard里Clip Subview打勾。<br>本文转自：<a href="http://www.kaifazhe.com/mobile/388362.html" target="_blank" rel="external">http://www.kaifazhe.com/mobile/388362.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/Xcode5-1/">Xcode5.1</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-21T05:05:00.000Z"><a href="/2014/02/21/iOS模拟器未能安装此应用程序怎么解决/">2月 21 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/21/iOS模拟器未能安装此应用程序怎么解决/">iOS模拟器未能安装此应用程序怎么解决</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <ol>
+<li><p>一般情况下是因为工程的Targets-&gt;General-&gt;Build为空,设置为1.0</p>
+</li>
+<li><p>删除模拟器相同的应用或者直接还原模拟器.</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-18T05:07:00.000Z"><a href="/2014/02/18/检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL/">2月 18 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/18/检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL/">检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>本文链接:<a href="http://blog.csdn.net/zltianhen/article/details/6916579" target="_blank" rel="external">http://blog.csdn.net/zltianhen/article/details/6916579</a><br>[问题描述]<br>1:在程序B中检测手机中是否安装A程序.<br>2:在程序B中打开应用程序A.</p>
+<p>[解决办法]<br>步骤一:<br>首先在程序A的plist中添加url types</p>
+<p><key>CFBundleURLTypes</key></p>
+<array><br><dict><br><key>CFBundleURLName</key><br><string>AAAAA</string><br><key>CFBundleURLSchemes</key><br><array><br><string>testA</string><br></array><br></dict><br></array>
+
+<p>步骤二:<br>在程序B中调用A程序的地方添加代码</p>
+<p>NSURL * myURL_APP_A = [NSURL URLWithString:@”testA://AAAAA”];<br>if ([[UIApplication sharedApplication] canOpenURL:myURL_APP_A])<br> {<br>NSLog(@”canOpenURL”);<br>[[UIApplication sharedApplication] openURL:myURL_APP_A];<br>}</p>
+<p>注:<br>这里通过canOpenURL就可以通过URL检查机器是否安装有程序A</p>
+<p>通过openURL打开程序A</p>
+<p>在CFBundleURLSchemes的分隔符不要使用 _    比如 abc_ddd<br>要使用abc.ddd</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios开发/">ios开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-02-17T07:51:00.000Z"><a href="/2014/02/17/Xcode的Architectures和Valid Architectures的区别/">2月 17 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/02/17/Xcode的Architectures和Valid Architectures的区别/">Xcode的Architectures和Valid Architectures的区别</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>作者：shede333<br><a href="http://my.oschina.net/shede333" target="_blank" rel="external">主页：http://my.oschina.net/shede333</a><br>版权声明：原创文章，版权声明：自由转载-非商用-非衍生-保持署名 | <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank" rel="external">Creative<br> Commons BY-NC-ND 3.0</a></p>
+<h2 id="Xcode的Architectures和Valid_Architectures的区别">Xcode的Architectures和Valid Architectures的区别</h2>
+<h3 id="Architectures">Architectures</h3>
+<p>这代表，在这个项目里你想要Xcode编译的目标设备列表。</p>
+<h3 id="Valid_Architectures">Valid Architectures</h3>
+<p>还不是太明确这个设置的意图，但是一般来说是不需要更改的。<br>在Xcode5.0里的Valid Architectures 设置里，有2个选项：</p>
+<ol>
+<li>默认为<code>standard
+architectures (including 64-bit)(armv7,armv7s,arm64)</code>，这样设置，你的Deployment target最低只能设置为 6.0,(在Xcode5.0.1 之后,最低能够兼容IOS 5.1.1);</li>
+<li><code>standard
+architectures (armv7,armv7s)</code>，这样设置，你的Deployment target最低能设置为 4.3；</li>
+</ol>
+<h2 id="原因解释如下：">原因解释如下：</h2>
+<p>使用standard architectures (including 64-bit)(armv7,armv7s,arm64)参数，<br>则打的包里面有32位、64位两份代码，<br>在iPhone5s（<code>iPhone5s的cpu是64位的</code>）下，会首选运行64位代码包，<br>其余的iPhone（<code>其余iPhone都是32位的,iPhone5c也是32位</code>），<br>只能运行32位包，<br>但是包含两种架构的代码包，只有运行在ios6，ios7系统上。<br>这也就是说，这种打包方式，对手机几乎没啥要求，但是对系统有要求，即ios6以上。<br>而使用standard architectures (armv7,armv7s)参数，<br>则打的包里只有32位代码，<br>iPhone5s的cpu是64位，但是可以兼容32位代码，即可以运行32位代码。但是这会降低iPhone5s的性能，原因下面的参考有解释。<br>其余的iPhone对32位代码包更没问题，<br>而32位代码包，对系统也几乎也没什么限制。<br>所以总结如下：<br>要发挥iPhone5s的64位性能，就要包含64位包，那么系统最低要求为ios6。<br>如果要兼容ios5以及更低的系统，只能打32位的包，系统都能通用，但是会丧失iPhone5s的性能。</p>
+<h2 id="参考1：">参考1：</h2>
+<p><a href="http://en.wikipedia.org/wiki/List_of_iOS_devices" target="_blank" rel="external">所有IOS设备详情列表<br> List of iOS devices - Wikipedia, the free encyclopedia</a></p>
+<blockquote>
+<p>armv6：iPhone 2G/3G，iPod 1G/2G<br>armv7：iPhone 3GS/4/4s，iPod 3G/4G，iPad 1G/2G/3G<br>armv7s：iPhone5</p>
+<h2 id="参考2：">参考2：</h2>
+<p><a href="http://blog.csdn.net/keyboardota/article/details/11993883" target="_blank" rel="external">iOS<br> 7: 如何为iPhone 5S编译64位应用。</a><br>Xcode 5编译的iOS 7程序包含了32位和64位两套二进制代码，在32位的iOS系统上会调用32位的二进制代码，在64位系统上会调用64位的二进制代码，以此来解决向后兼容的问题。<br>同时，考虑到很多32位的程序可能在没有重新编译的情况下部署到64位系统上，64位的iOS系统中带有两套FrameWork，一套是32位的，一套是64位的。<br>当64位的iOS系统运行原来的32位程序时，系统会调用32位的FrameWork作为底层支撑，当系统运行64位程序时，系统会调用64位的FrameWork作为底层支撑。<br>也就是说，当一个iPhone 5S上同时运行32位程序和64位程序时，系统同时将32位和64位两套FrameWork载入了内存中，所以消耗的内存也比较多。<br>如果一台64位的iOS设备上运行的所有程序都是为64位系统编译过的，iOS系统将只载入64位的FrameWork，这将节省好多内存。所以，如果大家都可以快速将程序传换成64位的，iOS将跑得更快。真的是“大家好才是真的好”。</p>
+<h2 id="参考3：">参考3：</h2>
+<ol>
+<li><a href="http://stackoverflow.com/questions/12701188/whats-the-difference-between-architectures-and-valid-architectures-in-xcode" target="_blank" rel="external">What’s<br>the difference between “Architectures” and “Valid Architectures” in Xcode Build Settings?</a></li>
+<li><a href="http://stackoverflow.com/questions/18913906/xcode-5-and-ios-7-architecture-and-valid-architectures" target="_blank" rel="external">Xcode<br>5 and iOS 7: Architecture and Valid architectures</a></li>
+<li><a href="https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-SW51" target="_blank" rel="external">Xcode<br>Build Setting Reference (苹果官方文档)</a></li>
+<li><a href="https://developer.apple.com/library/iOS/documentation/General/Conceptual/CocoaTouch64BitGuide/Introduction/Introduction.html" target="_blank" rel="external">64-Bit<br>transition Guide for Cocoa Touch (苹果官方文档)</a></li>
+</ol>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/xcode/">xcode</a>, <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-08T02:29:00.000Z"><a href="/2014/01/08/IOS应用如何配置iTunes文件共享/">1月 8 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/01/08/IOS应用如何配置iTunes文件共享/">IOS应用如何配置iTunes文件共享</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>info.plist里设置UIFileSharingEnabled = YES;</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>, <a href="/tags/itunes/">itunes</a>, <a href="/tags/应用程序/">应用程序</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-30T04:47:00.000Z"><a href="/2013/11/30/那些不能错过的Xcode插件/">11月 30 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/30/那些不能错过的Xcode插件/">那些不能错过的Xcode插件</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p><a href="http://www.cocoachina.com/applenews/devnews/2013/0918/7022.html" target="_blank" rel="external">那些不能错过的Xcode插件</a><br><a href="http://www.cocoachina.com/newbie/basic/2014/0417/8187.html" target="_blank" rel="external">http://www.cocoachina.com/newbie/basic/2014/0417/8187.html</a></p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/ios开发/">ios开发</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-11-27T03:50:00.000Z"><a href="/2013/11/27/解决Xcode4删除文件后missing file警告/">11月 27 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/11/27/解决Xcode4删除文件后missing file警告/">解决Xcode4删除文件后missing file警告</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>在用xcode4开发的时候，删除不用的文件后， 编译的时候会有missing file的警告，原因是由于SVN或git造成的。<br>有几种方法可以解决。<br>1.命令行进入missing file目录，然后运行</p>
+<ol>
+<li>svn delete nameOfMissingFile  </li>
+</ol>
+<p>或</p>
+<ol>
+<li>git rm nameOfMissingFile  </li>
+</ol>
+<p>2.删除隐藏的.svn文件<br>命令行运行<br>    defaults write com.apple.finder AppleShowAllFiles TRUE</p>
+<p>开启显示隐藏文件，然后到工程目录下删除.svn文件，然后再恢复<br>    defaults write com.apple.finder AppleShowAllFiles FALSE    </p>
+<p>3.进入工程目录，运行下面命令删除隐藏文件<br>    find . -name .svn -exec rm -rf { } \;  </p>
+<p>报警是因为，先在文件夹中删除工程中引用的文件，工程引用的路径还存在，删掉也还会报错，怀疑是bug</p>
+<p>以上都不管用，找到报警信息，找到相应文件夹，和相应文件名称，新建一个同名文件，拖入到工程内，不要选择copy，clean后，在工程中删除此文件，一切都清净了。</p>
+<p>注意：删除资源文件一定要从工程中删，否则后或自负。</p>
+<p>Targets中<br>copy Bundle Resource  中的链接一定是惟一的，否则会报错，这个错误最好解决，直接输入重复的文件名，保留一个，其他删除</p>
+<p>copy Bundle Resource  中一定不要包含info.plist  否则会报错<br>[WARN]Warning: The Copy Bundle Resources build phase contains this target’s Info.plist file ‘cocoa2dMVCDemo/Resources/Info.plist’.<br>这个错误也容易解决，删掉链接即可  ，方法有两种，（加深理解）<br>1.copy Bundle Resource 中输入  info.plist  删除<br>2.左边视窗找到info.plist文件，点击，右边属性视窗    TargetMemberShip  勾选取消掉    一切OK了</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之Xcode配置/">iOS应用开发之Xcode配置</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  
+    <form>
+      <input id="st-search-input" type="search" placeholder="Search">
+    </form>
+    <div id="st-results-container"></div>
+  
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
     
-    <p class="article-more-link">
-      <time datetime="2014-08-11T09:26:00.000Z" itemprop="datePublished">8月 11 2014</time>
-      
-          <a href="/2014/08/11/Xcode5.1制作formework/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/04/30/IOS开发～web在线安装App/" title="IOS开发～web在线安装App" itemprop="url">
-      
-        IOS开发～web在线安装App
-      </a>
-    </h1>
+      <span><a href="/tags/2d/">2d<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-04-30T01:39:00.000Z" itemprop="datePublished">4月 30 2014</time>
-      
-          <a href="/2014/04/30/IOS开发～web在线安装App/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/03/19/iOS – Xcode升级到5.1& iOS升级到iOS7.1问题/" title="iOS – Xcode升级到5.1&amp; iOS升级到iOS7.1问题" itemprop="url">
-      
-        iOS – Xcode升级到5.1&amp; iOS升级到iOS7.1问题
-      </a>
-    </h1>
+      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-03-19T05:25:00.000Z" itemprop="datePublished">3月 19 2014</time>
-      
-          <a href="/2014/03/19/iOS – Xcode升级到5.1& iOS升级到iOS7.1问题/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/02/21/iOS模拟器未能安装此应用程序怎么解决/" title="iOS模拟器未能安装此应用程序怎么解决" itemprop="url">
-      
-        iOS模拟器未能安装此应用程序怎么解决
-      </a>
-    </h1>
+      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-02-21T05:05:00.000Z" itemprop="datePublished">2月 21 2014</time>
-      
-          <a href="/2014/02/21/iOS模拟器未能安装此应用程序怎么解决/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/02/18/检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL/" title="检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL" itemprop="url">
-      
-        检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL
-      </a>
-    </h1>
+      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-02-18T05:07:00.000Z" itemprop="datePublished">2月 18 2014</time>
-      
-          <a href="/2014/02/18/检测iphone是否安装有某个程序,或者打开某个程序openURL CanOpenURL/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/02/17/Xcode的Architectures和Valid Architectures的区别/" title="Xcode的Architectures和Valid Architectures的区别" itemprop="url">
-      
-        Xcode的Architectures和Valid Architectures的区别
-      </a>
-    </h1>
+      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-02-17T07:51:00.000Z" itemprop="datePublished">2月 17 2014</time>
-      
-          <a href="/2014/02/17/Xcode的Architectures和Valid Architectures的区别/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2014/01/08/IOS应用如何配置iTunes文件共享/" title="IOS应用如何配置iTunes文件共享" itemprop="url">
-      
-        IOS应用如何配置iTunes文件共享
-      </a>
-    </h1>
+      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2014-01-08T02:29:00.000Z" itemprop="datePublished">1月 8 2014</time>
-      
-          <a href="/2014/01/08/IOS应用如何配置iTunes文件共享/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/11/30/那些不能错过的Xcode插件/" title="那些不能错过的Xcode插件" itemprop="url">
-      
-        那些不能错过的Xcode插件
-      </a>
-    </h1>
+      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-11-30T04:47:00.000Z" itemprop="datePublished">11月 30 2013</time>
-      
-          <a href="/2013/11/30/那些不能错过的Xcode插件/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/11/27/解决Xcode4删除文件后missing file警告/" title="解决Xcode4删除文件后missing file警告" itemprop="url">
-      
-        解决Xcode4删除文件后missing file警告
-      </a>
-    </h1>
+      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-11-27T03:50:00.000Z" itemprop="datePublished">11月 27 2013</time>
-      
-          <a href="/2013/11/27/解决Xcode4删除文件后missing file警告/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-
+      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
+    
+      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
+    
+      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
+    
+      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
+    
+      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
+    
+      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
+    
+      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
+    
+      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
+    
+      <span><a href="/tags/api/">api<small>5</small></a></span>
+    
+      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
+    
+      <span><a href="/tags/block/">block<small>1</small></a></span>
+    
+      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
+    
+      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
+    
+      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
+    
+      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/framework/">framework<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
+    
+      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
+    
+      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
+    
+      <span><a href="/tags/ios/">ios<small>53</small></a></span>
+    
+      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
+    
+      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
+    
+      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
+    
+      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
+    
+      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
+    
+      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
+    
+      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
+    
+      <span><a href="/tags/svn/">svn<small>1</small></a></span>
+    
+      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
+    
+      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
+    
+      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
+    
+      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
+    
+      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
+    
+      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
+    
+      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
+    
+      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
+    
+      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
+    
+      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
+    
+      <span><a href="/tags/企业/">企业<small>1</small></a></span>
+    
+      <span><a href="/tags/动画/">动画<small>5</small></a></span>
+    
+      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
+    
+      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
+    
+      <span><a href="/tags/存储/">存储<small>1</small></a></span>
+    
+      <span><a href="/tags/宏/">宏<small>1</small></a></span>
+    
+      <span><a href="/tags/导航/">导航<small>1</small></a></span>
+    
+      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
+    
+      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
+    
+      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
+    
+      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
+    
+      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
+    
+      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
+    
+      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
+    
+      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
+    
+      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
+    
   </div>
 </div>
 
-      </div>
-      <footer><div id="footer" >
 
+
+
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+    _st('install','6xH6jcZvsZxn2a9rcU4t');
+  </script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+  </ul>
 </div>
-</footer>
-      <script src="/js/jquery-2.1.0.min.js"></script>
+<div>
+  
+    &copy; 2014 尹现伟
+  
+</div>
+<div class="clearfix"></div></footer>
+  
 
-<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  //back to top
-  function backToTop(){
-    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
-    buttonHTML.appendTo($("body"));
-    var buttonToTop = $("#back-top");
-    // hide #back-top first
-    buttonToTop.hide();
-
-    // fade in #back-top
-    $(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                buttonToTop.fadeIn();
-            } else {
-                buttonToTop.fadeOut();
-            }
-        });
-        // scroll body to 0px on click
-        buttonToTop.click(function() {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
-  }
-  backToTop();
-
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      ta = $('#toc.toc-aside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-        
-    }
-  });
-
-  var show = true;
-  c.click(function(){
-    if(show == true){
-        a.addClass('fadeOut').css('display', 'none');
-        ta.css('display', 'block').addClass('fadeIn');
-        m.addClass('moveMain');  
-    }else{
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
-        ta.css('display', 'none'); 
-        m.removeClass('moveMain');
-        $('#toc.toc-aside').css('display', 'none');
-    }
-    show = !show;
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 
+<script type="text/javascript">
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
+</script>
+<div id="totop" class="footer-btn">
+  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
+</div>
 
+<script type="text/javascript">
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
 
-
-
-
-    </body>
-   </html>
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
+  });
+</script>
+</body>
+</html>

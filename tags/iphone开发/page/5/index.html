@@ -1,371 +1,1275 @@
-
-  <!DOCTYPE HTML>
-<html lang="zh_CN">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   
-    <title>Tag: iphone开发 | 一枝红杏出墙来</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="尹现伟">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/Tinny.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/Tinny.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <title>Page 5 | iphone开发 | 一枝红杏出墙来</title>
+  <meta name="author" content="尹现伟">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	
-	<link href="http://cdn.bootcss.com/highlight.js/8.2/styles/railscasts.min.css" rel="stylesheet">
-	
+  
+  <meta property="og:site_name" content="一枝红杏出墙来"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="一枝红杏出墙来" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+  
+
 </head>
 
-    <body>
-      <header>
-        <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="一枝红杏出墙来">一枝红杏出墙来</a></h1>
-				<h2 class="blog-motto"></h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-                    <ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/atom.xml">订阅</a></li>
-					
-						<li><a href="/about">关于我</a></li>
-					
-					<li>
-					
-					</li>
-                <li><div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div></li>
 
-				</ul>
-			</nav>	
-</div>
+<body>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>一枝红杏出墙来</h1>
+    <h2></h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">iphone开发</h2>
 
-      </header>
-      <div id="container" class="clearfix">
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:12:00.000Z"><a href="/2013/09/05/内存管理基础/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/内存管理基础/">内存管理基础</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
         
+        <p>7.24<br>内存管理</p>
+<p>1.引用计数</p>
+<p>//引用计数相当于每个调用它的都会retain一份</p>
+<ol>
+<li>内存的释放</li>
+</ol>
+<p>//局部变量alloc的时候用过直接release,全局变量在dealloc方法里release<br>3.计数为0的时候调用delloc方法<br>//dealloc 是当当前类ViewController即将消失的时候就会调用这个方法</p>
+<p>4.延迟释放方法</p>
+<p>//autorelease 自动释放,也可以说延迟释放,把当前对象放到自动释放池,等下次刷新的时候由系统自动清理内存.</p>
+<p>5.成员变量的赋值和释放<br>//利用系统的@property方法retain对象(先释放指针指向的对象)然后返回</p>
+<p>//retain,copy ,assign</p>
+<p>/<em><br>补充:定义成员变量的时候加_  以便于在.m文件中更好的识别<br>但在@synthesize中出现矛盾,所以@synthesize array = _array;
+</em>/</p>
+<p>//三件套:</p>
+<pre><code>NSArray <span class="keyword">*</span>_array;
+</code></pre><p>//1<br>@property (nonatomic,retain)  NSArray *array;<br>//2<br>@synthesize array = _array;<br>//3</p>
+<ul>
+<li>(void)dealloc<br>{<br>  [_array release];<br>  [super dealloc];<br>}</li>
+</ul>
+<p>//retain<br>//- (void)setArray:(NSArray *)array<br>//{<br>//    if (_array != array)<br>//    {<br>//        [_array release];<br>//        _array = [array retain];<br>//    }<br>//}<br>//if判断是否为指向同一对象地址</p>
+<p>6.XIB中关联的指针必须在- (void)dealloc  中释放一次</p>
 
-<div class="archive-title" >
-  <h2 class="tag-icon">iphone开发</h2>
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之内存管理/">iOS应用开发之内存管理</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
   
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
       
-        <a href="/2013/09/05/内存管理基础/" title="内存管理基础" itemprop="url">
       
-        内存管理基础
-      </a>
-    </h1>
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:12:00.000Z"><a href="/2013/09/05/UIPickerView--UIDatePicker--UITableView/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/UIPickerView--UIDatePicker--UITableView/">UIPickerView--UIDatePicker--UITableView</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>7.25<br>1&gt;UIPickerView   拾取器<br>1.创建UIPickerView </p>
+<p>UIPickerView *picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];<br>    picker.delegate = self;<br>    picker.dataSource = self;<br>    picker.showsSelectionIndicator = YES;<br>    [self.view addSubview:picker];<br>    [picker release];<br>2.设置picker的列行.</p>
+<p>//有几列</p>
+<ul>
+<li>(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView<br>{<br>  //NSLog(@”numberOfComponentsInPickerView”);<br>  return 2;<br>}</li>
+</ul>
+<p>//每一列有多少行</p>
+<ul>
+<li><p>(NSInteger):(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component<br>{<br>  //NSLog(@”numberOfRowsInComponent  %d”,component);<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="keyword">return</span> [_provinceArray <span class="built_in">count</span>];
+</code></pre><p>  }<br>  else if(component == 1)<br>  {</p>
+<pre><code>  <span class="keyword">int</span> selectedProvinceRow = [pickerView selectedRowInComponent:<span class="number">0</span>];
+
+  <span class="keyword">return</span> [[_cityArray objectAtIndex:selectedProvinceRow] <span class="keyword">count</span>];
+</code></pre><p>  }</p>
+<p>  return 0;<br>}<br>3.调用picker的协议方法<br>4.设置picker的行列显示的内容</p>
+</li>
+<li><p>(NSString <em>)pickerView:(UIPickerView </em>)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component<br>{<br>  NSLog(@”titleForRow  %d   component  %d”,row ,component);<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="keyword">return</span> [_provinceArray objectAtIndex:row];
+</code></pre><p>  }<br>  else if(component == 1)<br>  {</p>
+<pre><code>  <span class="keyword">int</span> selectedProvinceRow = [pickerView selectedRowInComponent:<span class="number">0</span>];
+  <span class="keyword">return</span> [[_cityArray objectAtIndex:selectedProvinceRow] objectAtIndex:row];
+</code></pre><p>  }<br>  return @””;<br>}<br>5.当列和行发生改变时刷新行列</p>
+</li>
+<li><p>(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component<br>{<br>  NSLog(@”row    %d    component   %d”,row,component);<br>  //第0列变化的时候，需要更新第1列的值<br>  if (component == 0)<br>  {</p>
+<pre><code>  <span class="attr_selector">[pickerView reloadComponent:1]</span>;
+  <span class="comment">//手动的制定选择某一列，某一行</span>
+  <span class="attr_selector">[pickerView selectRow:0 inComponent:1 animated:YES]</span>;
+  <span class="comment">//[pickerView reloadAllComponents];</span>
+</code></pre><p>  }<br>}</p>
+</li>
+</ul>
+<p>2&gt;UIDatePicker      时间拾取器</p>
+<p>//1.创建UIDatePicker及绑定方法<br>    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];<br>    [datePicker addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventValueChanged];</p>
+<p>//2.获取自定义格式的UIDatePicker的时间<br>    NSDate *now = datePicker.date;</p>
+<pre><code><span class="comment">//日期格式器</span>
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+<span class="comment">//设置日期格式器的样式</span>
+<span class="comment">//yyyy 年  yy 两位数的年   year</span>
+<span class="comment">//MM 月  month</span>
+<span class="comment">//dd  日  day</span>
+<span class="comment">//HH 24小时制  ，hh 12小时制，hour</span>
+<span class="comment">//mm  分 ，minute</span>
+<span class="comment">//ss 秒   second</span>
+<span class="comment">//a 上午，下午</span>
+
+[dateFormatter setDateFormat:<span class="string">@"yyyy年MM月dd日 hh:mm:ss a  eeee"</span>];
+[dateFormatter setAMSymbol:<span class="string">@"上午"</span>];
+[dateFormatter setPMSymbol:<span class="string">@"下午"</span>];
+[dateFormatter setWeekdaySymbols:[<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"星期日"</span>,<span class="string">@"星期一"</span>,<span class="string">@"星期二"</span>,<span class="string">@"星期三"</span>,<span class="string">@"星期四"</span>,<span class="string">@"星期五"</span>,<span class="string">@"星期六"</span>,<span class="literal">nil</span>]];
+<span class="comment">//按照设定的样式来格式化日期，返回格式化后的字符串</span>
+<span class="built_in">NSString</span> *dateString = [dateFormatter stringFromDate:now];
+</code></pre><p>3&gt;UITableView        </p>
+<pre><code><span class="comment">//1.UITableView的创建和基本设置</span>
+
+<span class="built_in">UITableView</span> *tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">300</span>) style:UITableViewStyleGrouped];
+<span class="comment">//tableView.separatorColor = [UIColor redColor];</span>
+<span class="comment">//设置分割线风格</span>
+tableView<span class="variable">.separatorStyle</span> = UITableViewCellSeparatorStyleNone;
+tableView<span class="variable">.dataSource</span> = <span class="keyword">self</span>;
+tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;
+<span class="comment">//设置全局每行高度</span>
+tableView<span class="variable">.rowHeight</span> = <span class="number">80</span>;
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:tableView];
+[tableView release];
+</code></pre><p>//2.UITableView的 dataSource和delegate协议方法</p>
+<p>//返回表中有多少个“区”，默认为一个，此方法不是必须的，不实现默认为一个区</p>
+<ul>
+<li>(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView<br>{<br>  return 2;<br>}</li>
+</ul>
+<p>//返回表中每个“区”的行数</p>
+<ul>
+<li>(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section<br>{<br>  return 10;<br>}</li>
+</ul>
+<p>//返回每一行的内容  indexPath  返回行和列,  row   section</p>
+<ul>
+<li><p>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>{<br>  static NSString </em>cellIdentifier = @”CellIdentifier”;</p>
+<p>  //queue 队列 Reusable 可重用的<br>  //从tableview当中取得一个可以重用的cell，如果取不到可以重用的cell。该方法返回空nil<br>  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];</p>
+<p>  //如果没有就创建<br>  if (!cell)<br>  {</p>
+<pre><code>  cell = [[[<span class="built_in">UITableViewCell</span> alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+  <span class="built_in">NSLog</span>(<span class="string">@"创建新的cell"</span>);
+
+  <span class="built_in">UILabel</span> *label = [[<span class="built_in">UILabel</span> alloc] init];
+  label<span class="variable">.text</span> = <span class="string">@"sdfsdf"</span>;
+  label<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> clearColor];
+  label<span class="variable">.frame</span> = CGRectMake(<span class="number">200</span>, <span class="number">0</span>, <span class="number">50</span>, <span class="number">40</span>);
+  [cell addSubview:label];
+  [label release];
+
+  <span class="comment">//系统分割线被隐藏,so,需要手动添加一个分割线</span>
+  <span class="built_in">UIView</span> *separatorView = [[<span class="built_in">UIView</span> alloc] initWithFrame:CGRectMake(<span class="number">0</span>, <span class="number">79</span>, <span class="number">320</span>, <span class="number">1</span>)];
+  separatorView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];
+  [cell addSubview:separatorView];
+  [separatorView release];
+  <span class="comment">//设置选中状态颜色,默认为蓝色</span>
+  cell<span class="variable">.selectionStyle</span> = UITableViewCellSelectionStyleNone;
+
+  cell<span class="variable">.imageView</span><span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"fleet8.png"</span>];
+  <span class="comment">//设置右边显示内容,btn或..</span>
+  cell<span class="variable">.accessoryType</span> = UITableViewCellAccessoryCheckmark;
+</code></pre><p>  }</p>
+<p>  //配置cell上的文字,配置cell上可变的内容<br>  cell.textLabel.text = [NSString stringWithFormat:@”%d”,indexPath.row];</p>
+<p>  //cell.detailTextLabel.text = @”sdfsdfsdf”;</p>
+<p>  return cell;<br>}</p>
+</li>
+</ul>
+<p>//只有当每一行的高度不一样的时候，才使用代理方法设置行高，如果每一行的高度都一样，最好使用tableview.rowHeight属性来统一的设置行高<br>//- (CGFloat)tableView:(UITableView <em>)tableView heightForRowAtIndexPath:(NSIndexPath </em>)indexPath<br>//{<br>//    NSLog(@”dddddd”);<br>//    return indexPath.row * 2 + 10;<br>//}</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:10:00.000Z"><a href="/2013/09/05/UIScrollView--UIPageControl/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/UIScrollView--UIPageControl/">UIScrollView--UIPageControl</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>7.23委托</p>
+<p>1.UIScrollView<br>//1.创建一个UIScrollView<br>UIScrollView <em>scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(50, 100, 200, 200)];<br>//2.向Scroll添加对象及属性设置<br>for (int i = 1; i&lt;=4; i++) {<br>        NSString </em>str = [NSString stringWithFormat:@”image%d.jpg”,i];<br>        UIImageView <em>image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:str]];<br>        image.frame=CGRectMake(200</em>(i-1), 0, 200, 200);<br>        [scroll addSubview:image];<br>        scroll.delegate=self;<br>        scroll.contentSize=CGSizeMake(200*4, 200);</p>
+<pre><code>    <span class="comment">//是否实现翻页</span>
+    scroll<span class="variable">.pagingEnabled</span>=<span class="literal">YES</span>;
+
+    <span class="comment">//隐藏滚动条</span>
+    scroll<span class="variable">.showsHorizontalScrollIndicator</span>=<span class="literal">NO</span>;
+}
+</code></pre><p>//让滚动条短暂显示.<br>[_scrollView flashScrollIndicators];</p>
+<p>2.UIPageControl<br>//1.新建一个UIPageControl </p>
+<pre><code>    page=[[<span class="constant">UIPageControl</span> alloc] <span class="symbol">initWithFrame:</span><span class="constant">CGRectMake</span>(<span class="number">50</span>, <span class="number">250</span>, <span class="number">200</span>, <span class="number">50</span>)];
+    <span class="regexp">//</span>绑定方法和绑定状态
+    [page <span class="symbol">addTarget:</span><span class="keyword">self</span> <span class="symbol">action:</span><span class="variable">@selector</span>(<span class="symbol">pageClick:</span>) <span class="symbol">forControlEvents:</span><span class="constant">UIControlEventValueChanged</span>];
+
+    [<span class="keyword">self</span>.view <span class="symbol">addSubview:</span>page];
+    <span class="regexp">//</span>白点个数
+    page.numberOfPages=<span class="number">4</span>;
+</code></pre><p>2.//获取page的值,第一个为0<br>    int a = sender.currentPage;<br>//移动<br>[scroll setContentOffset:CGPointMake(200*a, 0) animated:YES];</p>
+<p>//scrollView.contentOffset.x获得Scroll的x坐标<br>int p = scrollView.contentOffset.x/200;<br>    NSLog(@”====%d”,p);<br>    page.currentPage = p;</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:10:00.000Z"><a href="/2013/09/05/UINavigationController/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/UINavigationController/">UINavigationController</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>7.21<br>导航控制器<br>入口类:<br>1.导航的创建</p>
+<p>UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];</p>
+<p>2.导航栏隐藏</p>
+<p>navController.navigationBar.hidden = YES;</p>
+<p>3.导航栏添加到界面</p>
+<p> [self.window addSubview:navController.view];</p>
+<p>4.导航栏Button的创建</p>
+<p>//initWithBarButtonSystemItem使用系统图标绑定方法<br>UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(btnClick)];<br>    self.navigationItem.rightBarButtonItem=btn;</p>
+<p>UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@”进入” style:UIBarButtonItemStyleBordered target:self action:@selector(btnClick)];<br>    self.navigationItem.rightBarButtonItem=btn;</p>
+<p>UIController<br>1.导航的title命名</p>
+<p>//设置导航的标题，title是viewcontroller的属性，<br>    self.title = @”登录”;<br>//更改默认的titleview，默认情况下，只能改title的文字，如果想要更灵活的控制title，可以这样做<br>    //UILabel *titleLabel = [[UILabel alloc] init];<br>//    titleLabel.frame = CGRectMake(0, 0, 100, 30);<br>//    titleLabel.textColor = [UIColor yellowColor];<br>//    titleLabel.text = @”登陆”;<br>//    self.navigationItem.titleView = titleLabel;</p>
+<p>2.导航颜色的设置</p>
+<p>//设置导航条的颜色，因为导航条是公共的，所以需要先找到导航控制器，然后再通过导航控制器找到它的导航条，然后设置颜色<br>    self.navigationController.navigationBar.tintColor = [UIColor redColor];</p>
+<p>3.导航栏的返回创建</p>
+<p>UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@”返回上一级” style:UIBarButtonItemStyleDone target:nil action:nil];<br>    self.navigationItem.backBarButtonItem = backButton;</p>
+<p>4.导航的传值</p>
+<p>在第一个UIControoler上写一个传值方法,在加载之前获取,传到第二个UIControoler上的属性<br>返回传值<br>//重写父类的方法<br>//viewcontroller将要显示到屏幕上的时候调用此方法</p>
+<ul>
+<li><p>(void)viewWillAppear:(BOOL)animated<br>{<br>  NSLog(@”viewWillAppearviewWillAppear”);<br>  field1.text = content2;<br>}</p>
+</li>
+<li><p>(void)viewDidAppear:(BOOL)animated<br>{<br>  NSLog(@”viewDidAppearviewDidAppear”);<br>}</p>
+</li>
+<li><p>(void)viewWillDisappear:(BOOL)animated<br>{<br>  NSLog(@”viewWillDisappear”);<br>}</p>
+</li>
+<li><p>(void)viewDidDisappear:(BOOL)animated<br>{<br>  NSLog(@”viewDidDisappear”);<br>}</p>
+</li>
+</ul>
+<p>6.导航栏视图的切换</p>
+<p>//创建第二个视图控制器<br>    SecondViewController *viewController = [[SecondViewController alloc] init];<br>/把第二个视图控制器添加到导航控制器中<br>    [self.navigationController pushViewController:viewController animated:YES];<br>返回上一个导航栏</p>
+<p>//可以通过先找到入口类，然后再找到第一个视图控制器，但是不够通用<br>//得到所有导航控制器当中所有的viewcontroller<br>    NSArray <em>viewcontrollers = self.navigationController.viewControllers;<br>//找到倒数第二个视图控制器。最后控制器的索引是 count - 1，倒数第二个就是count - 2<br>    FirstViewController </em>viewController = [viewcontrollers objectAtIndex:[viewcontrollers count] - 2];<br>//返回上一级(把当前的viewcontroller从导航控制器中弹出)<br>    [self.navigationController popViewControllerAnimated:YES];</p>
+<p>7.导航栏按钮的优先级</p>
+<p> /<strong>**</strong><br>    navigationbar 按钮的优先级<br>    1.设置viewcontroller 的leftBarButtonItem<br>    2.上一级设置  backBarButtonItem<br>    3.使用上一级的标题<br>    4.系统默认为back<br>     <strong><em>**</em></strong>/</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:08:00.000Z"><a href="/2013/09/05/UITouch/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/UITouch/">UITouch</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <pre><code>-(<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(UIEvent *)event;
+
+-(<span class="keyword">void</span>)touchesMoved:(<span class="built_in">NSSet</span> *)touches withEvent:(UIEvent *)event;
+
+-(<span class="keyword">void</span>)touchesEnded:(<span class="built_in">NSSet</span> *)touches withEvent:(UIEvent *)event;
+
+-(<span class="keyword">void</span>)touchesCancelled:(<span class="built_in">NSSet</span> *)touches withEvent:(UIEvent *)event;
+
+当手指接触屏幕时，就会调用touchesBegan:withEvent方法；
+
+当手指在屏幕上移时，动就会调用touchesMoved:withEvent方法；
+
+当手指离开屏幕时，就会调用touchesEnded:withEvent方法；
+
+当触摸被取消（比如触摸过程中被来电打断），就会调用touchesCancelled:withEvent方法。而这几个方法被调用时，正好对应了UITouch类中phase属性的<span class="number">4</span>个枚举值。
+
+
+<span class="comment">//手指在屏幕上移动时</span>
+   <span class="comment">//首先定义</span>
+UITouch *touch = [touches anyObject];
+<span class="comment">//然后判断是否在view上</span>
+<span class="keyword">if</span>([<span class="keyword">self</span><span class="variable">.view</span> pointInside:[touch locationInView:<span class="keyword">self</span><span class="variable">.view</span>] withEvent:<span class="literal">nil</span>])
+{
+    <span class="comment">//用locationInView:返回触摸点的xy坐标.返回类型为CGPoint </span>
+    <span class="built_in">CGPoint</span> currentLocation = [touch locationInView:<span class="keyword">self</span><span class="variable">.view</span>];
+
+    <span class="comment">//获取子view的坐标</span>
+    <span class="built_in">CGRect</span> frame = rollView<span class="variable">.frame</span>;
+    <span class="comment">//移动时为中心</span>
+    frame<span class="variable">.origin</span><span class="variable">.x</span>=currentLocation<span class="variable">.x</span>-frame<span class="variable">.size</span><span class="variable">.width</span>/<span class="number">2</span>;
+    frame<span class="variable">.origin</span><span class="variable">.y</span>=currentLocation<span class="variable">.y</span>-frame<span class="variable">.size</span><span class="variable">.height</span>/<span class="number">2</span>;
+    rollView<span class="variable">.frame</span> = frame;
+}
+</code></pre>
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之触控/">iOS应用开发之触控</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:07:00.000Z"><a href="/2013/09/05/进程和线程.View椭圆运动/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/进程和线程.View椭圆运动/">进程和线程.View椭圆运动</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>7.19<br>进程和线程.<br>//进程：一个运行中的应用程序，就一个进程，他是资源分配的单位，譬如地址空间,系统自动生成主线程</p>
+<p>//线程：是cpu分配的基本单位，一个进程运行后系统自动分配一个主线程，你可以手动生成子线程，多个子线程运行在进程的地址空间中，一个线程必须依附于一个进程，多线程的好处，可以防止主界面卡死，还可以同时处理多个事情。</p>
+<p>1.通过路径获取图片<br>//NSBundle应用程序束，其实就是一个目录，存放的是导入资源<br>//每个应用程序有一个主应用程序束，可以通过[NSBundle mainBundle]获取<br>NSBundle* bundle = [NSBundle mainBundle];</p>
+<p>//通过应用程序束获取资源的路径<br>NSString* path = [bundle pathForResource:@”b2” ofType:@”png”];<br>NSLog(@”%@”,path);</p>
+<p>//通过路径，获取UIImage<br>UIImage* image = [UIImage imageWithContentsOfFile:path];</p>
+<p>//通过[UIImage imageNamed]会缓存图片而通过路径不会缓存<br>UIImageView* bombImgView = [[UIImageView alloc]initWithImage:image];</p>
+<p>============================================================================================================</p>
+<p>2.线程和进程</p>
+<ul>
+<li><p>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  UIButton* button1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];<br>  [button1 setTitle:@”复杂运算” forState:UIControlStateNormal];<br>  button1.frame = CGRectMake(10, 30, 60, 39);</p>
+<p>  [button1 addTarget:self action:@selector(bigCalucate) forControlEvents:UIControlEventTouchUpInside];<br>  [self.view addSubview:button1];</p>
+</li>
+</ul>
+<pre><code><span class="built_in">UIButton</span>* button2 = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];
+[button2 setTitle:<span class="string">@"normal"</span> forState:UIControlStateNormal];
+button2<span class="variable">.frame</span> = CGRectMake(<span class="number">10</span>, <span class="number">100</span>, <span class="number">60</span>, <span class="number">40</span>);
+[button2 addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(normalButtonClick) forControlEvents:UIControlEventTouchUpInside];
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button2];
+</code></pre><p>}</p>
+<p>//进程：一个运行中的应用程序，就一个进程，他是资源分配的单位，譬如地址空间,系统自动生成主线程</p>
+<p>//线程：是cpu分配的基本单位，一个进程运行后系统自动分配一个主线程，你可以手动生成子线程，多个子线程运行在进程的地址空间中，一个线程必须依附于一个进程，多线程的好处，可以防止主界面卡死，还可以同时处理多个事情。</p>
+<p>-(void)bigCalucate<br>{<br>    //while (1) {<br>//        NSLog(@”fff”);<br>//    }<br>    //Thread 线程<br>    //通过 NSThread detachNewThreadSelector 生成一个线程<br>    //线程函数：就是线程启动后运行的函数，这里就是caluateInThread<br>    //detach 分离 New Thread<br>    [NSThread detachNewThreadSelector:@selector(caluateInThread:) toTarget:self withObject:@”abc”];<br>}</p>
+<p>-(void)normalButtonClick<br>{<br>    NSLog(@”我要cpu，让我执行”);<br>}</p>
+<p>-(void)caluateInThread:(id)parameter<br>{<br>    NSLog(@”%@”,parameter);<br>    while (1) {<br>        //NSLog(@”大数据量运算”);<br>    }</p>
+<h1 id="}">}</h1>
+<p>3.线程实现椭圆运动,界面更新一般在主线程,在子线程里会发生未知情况</p>
+<ul>
+<li><p>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  movedImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@”b2.png”]];<br>  movedImageView.frame = CGRectMake(0,0,IMG_WIDHT,IMG_HEIGHT);<br>  [self.view addSubview:movedImageView];</p>
+<p>  //NSThread* thread = [[NSThread alloc]initWithTarget:self selector:@selector(onThread) object:nil];<br>//    [thread start];</p>
+<p>  TestObject* test = [[TestObject alloc]initWithName:@”小强”];</p>
+<p>  //withObject 出入一个对象，可以是数组，改对象可以在子线程中获取<br>  [NSThread detachNewThreadSelector:@selector(onThread:) toTarget:self withObject:test];</p>
+<p>  //sleepForTimeInterval 让线程睡眠5秒<br>  //NSLog(@”before——————-“);<br>//    [NSThread sleepForTimeInterval:5];<br>//    NSLog(@”after——————“);<br>}</p>
+</li>
+</ul>
+<p>-(void)onThread:(id)parameter<br>{<br>    TestObject<em> test = (TestObject</em>)parameter;<br>    NSLog(@”%@”,test.strName);</p>
+<pre><code><span class="keyword">while</span> (<span class="number">1</span>) {
+    angle += <span class="number">5</span>;
+    xPos = CENTER_X + LONG_AXIS*cos(ANGLE2RADIO(angle));
+    yPos = CENTER_Y + SHORT_AXIS*sin(ANGLE2RADIO(angle));
+    <span class="built_in">NSLog</span>(<span class="string">@"(%d,%d)"</span>,xPos,yPos);
+
+    <span class="comment">//更改界面的操作要放到主线程中</span>
+    <span class="comment">//perform 执行</span>
+    <span class="comment">//selector 方法</span>
+    <span class="comment">//OnMainThread 在主线程</span>
+    <span class="comment">//waitUntilDone 是否等到主线程中的操作执行完毕，即UpdateUI执行完毕</span>
+    [<span class="keyword">self</span> performSelectorOnMainThread:<span class="keyword">@selector</span>(updateUI) withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">YES</span>];
+
+    <span class="comment">//movedImageView.center = CGPointMake(xPos, yPos);</span>
+
+    <span class="comment">//让当前线程睡眠0.2秒</span>
+    [<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">0.2</span>];
+}
+</code></pre><p>}<br>-(void)updateUI<br>{<br>    movedImageView.center = CGPointMake(xPos, yPos);</p>
+<h1 id="}-1">}</h1>
+<p>4.利用计时器实现View的椭圆运动</p>
+<h1 id="define_IMG_WIDTH_50">define IMG_WIDTH  50</h1>
+<h1 id="define_IMG_HEIGHT_50">define IMG_HEIGHT 50</h1>
+<h1 id="define_CENTER_X_160">define CENTER_X   160</h1>
+<h1 id="define_CENTER_Y_230">define CENTER_Y   230</h1>
+<h1 id="define_LONG_AXIS_(160-25)">define LONG_AXIS  (160-25)</h1>
+<h1 id="define_SHORT_AXIS_80">define SHORT_AXIS  80</h1>
+<h1 id="define_ANGLE2RADIO(x)_(x*M_PI/180)">define ANGLE2RADIO(x) (x*M_PI/180)</h1>
+<p>movedImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@”b2.png”]];<br>    movedImgView.frame = CGRectMake(0, 0, IMG_WIDTH, IMG_HEIGHT);<br>    [self.view addSubview:movedImgView];</p>
+<pre><code><span class="comment">//定时器需要等0.2秒后才触发</span>
+[NSTimer scheduledTimerWithTimeInterval:<span class="number">0.2</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(onTimer) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];
+
+<span class="comment">//使用fire 马上触发定时器</span>
+<span class="comment">//NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];</span>
+<span class="comment">//[timer fire];</span>
+</code></pre><p>-(void)onTimer<br>{<br>    angle += 5;<br>    int xPos = CENTER_X + LONG_AXIS<em>cos(ANGLE2RADIO(angle));<br>    int yPos = CENTER_Y + SHORT_AXIS</em>sin(ANGLE2RADIO(angle));</p>
+<pre><code>移动的X坐标等于   中心x坐标+  横轴/2- W/2 <span class="keyword">*</span>cos(移动坐标<span class="keyword">*</span>M_PI/180);
+移动的Y坐标等于   中心Y坐标+  竖轴/2- H/2<span class="keyword">*</span>sin(移动坐标<span class="keyword">*</span>M_PI/180);
+movedImgView.center = CGPointMake(xPos, yPos);
+</code></pre><p>}</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之多线程/">iOS应用开发之多线程</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/ios/">ios</a>, <a href="/tags/iphone开发/">iphone开发</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:07:00.000Z"><a href="/2013/09/05/矩形打印和碰撞/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/矩形打印和碰撞/">矩形打印和碰撞</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>导入头文件<br>//消除顶部状态栏<br>application.statusBarHidden = YES;</p>
+<p>//是否允许用户交互<br>button.userInteractionEnabled=NO;</p>
+<p>//打印坐标<br>NSLog(@”%@”,NSStringFromCGRect());</p>
+<p>1.重写系统方法<br>首先继承系统类,添加属性或者方法,</p>
+<p>2.矩形碰撞判断和原理<br>//碰撞检测的条件<br>//假设有2个矩形，<br>//x1,y1,w1,h1   矩形1的rect<br>//x2,y2,w2,h2   矩形2的rect<br>//如果让这两个矩形发生碰撞，需要满足的条件<br>//x2+w2&gt;x1&amp;&amp;x1+w1&gt;x2&amp;&amp;y2+h2&gt;y1&amp;&amp;y1+h1&gt;y2<br>//Intersect 相交的<br>if(CGRectIntersectsRect(frame1, frame2))<br>{<br>//两个矩形碰撞为YES<br>}</p>
+<p>3.CGRect 的定义和折中对frame的赋值.</p>
+<p>4.//以下这几个方法可以方便的把坐标值打出来，方便调试<br>//NSLog(@”%@”,NSStringFromCGRect(&lt;#CGRect rect#&gt;))<br>//NSLog(@”%@”,NSStringFromCGPoint(&lt;#CGPoint point#&gt;)))l;<br>//NSLog(@”%@”,NSStringFromCGSize(&lt;#CGSize size#&gt;)));</p>
+<p>5.利用静态变量增加NSTimer的触发间隔时间<br>       static </p>
+<p>6.<br>//获取UIImageView 图片的的大小（size）的方法<br>            //UIImage* image =  enemyPlane.image;<br>            //            float width = image.size.width;<br>            //            float height = image.size.height;</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之UI/">iOS应用开发之UI</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:06:00.000Z"><a href="/2013/09/05/View旋转动画/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/View旋转动画/">View旋转动画</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>首先导入头文件#import <quartzcore quartzcore.h=""><br>layer<br>动画基于layer进行<br>旋转动画和复杂动画主要在layer实现</quartzcore></p>
+<p>//重置view的位置<br>View.transform=CGAffineTransformIdentity;</p>
+<p>//View的旋转中心点   从左上角(0, 0)到右下角(1.0, 1.0)<br>View.layer.anchorPoint=CGPointMake(1.0, 1.0);</p>
+<p>//旋转默认为顺时针旋转，角度为弧度，(角度<em>M_PI/180)得到旋转角度<br>View.transform=CGAffineTransformMakeRotation(-60</em>M_PI/180);</p>
+<p>//动画实现<br>[UIView beginAnimations:@”score” context:(void<em>)imageView];<br>//动画返回名字为animationDidStop:score  对象为 imageView<br>            [UIView setAnimationDuration:1];<br>            [UIView setAnimationDelegate:self];<br>            [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];<br>//系统默认动画结束后调用animationDidStop:finished:context:方法。<br>            [UIView commitAnimations];<br>-(void)animationDidStop:(NSString </em>)animationID finished:(NSNumber <em>)finished context:(void </em>)context<br>{</p>
+<pre><code><span class="comment">//传回context 为动画对象 animationID 为动画名字</span>
+</code></pre><p>}</p>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之动画/">iOS应用开发之动画</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:04:00.000Z"><a href="/2013/09/05/动画和NSTimer/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/动画和NSTimer/">动画和NSTimer</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>UIViewController只是容器不能显示，内有view可供调用</p>
+<p>【导入头文件】</p>
+<p>/Implement 实现<br>//additional 额外的<br>//setup   设置<br>//loading 加载<br>//typically 典型的</p>
+<p>//视图被加载后调用方法</p>
+<ol>
+<li>UIViewController的执行</li>
+</ol>
+<ul>
+<li>(void)viewDidLoad {<br>  [super viewDidLoad];<br>  //这里可以继续设置view的属性，或布局view，譬如背景色等<br>}</li>
+</ul>
+<p>2.view的切换和获得<br>    //这种方式是生成了一个新的window，不符合要求<br>    //UIWindow* window = [[UIWindow alloc]init];</p>
+<pre><code><span class="comment">//我们要找的是AppDelegate的window，要找到AppDelegate的window需要有一个AppDelegate的对象。</span>
+<span class="comment">//要获取AppDelegate的对象，只要获取UIApplication的对象通过打点调用就可以获取AppDelegate的对象</span>
+<span class="comment">//通过调用[UIApplication sharedApplication]可以获取UIApplication的对象</span>
+
+<span class="comment">//share共享的</span>
+入口类方法名* delegate =[<span class="built_in">UIApplication</span> sharedApplication]<span class="variable">.delegate</span>;
+<span class="comment">//此时window指向AppDelegate的window  //然后就可以为所欲为了</span>
+<span class="built_in">UIWindow</span>* window = delegate<span class="variable">.window</span>;
+
+<span class="comment">//懒加载（延迟加载视图），生成对象的时候不会把视图加载进来，只有在添加到视图层次体系中时，才真正的把视图加载进来</span>
+<span class="comment">// 把即将加进来来的UIViewController初始化</span>
+新的<span class="built_in">UIViewController</span>* rvc = [[新的<span class="built_in">UIViewController</span> alloc]init];
+</code></pre><p>3.动画的实现<br>    [UIView beginAnimations:nil context:nil];<br>    [UIView setAnimationDuration:1];<br>    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:window cache:YES];</p>
+<pre><code><span class="comment">//对于基本动画，譬如frame，bounds，center</span>
+
+ <span class="comment">//alpha这些要放到动画里面  </span>
+
+<span class="attr_selector">[UIView commitAnimations]</span>;
+
+<span class="comment">//对于视图切换的动画，一般放到动画块外面</span>
+<span class="comment">//移除当前view    </span>
+<span class="attr_selector">[self.view removeFromSuperview]</span>;
+ <span class="comment">//向获得的window添加view</span>
+<span class="attr_selector">[window addSubview:rvc.view]</span>;
+</code></pre><ol>
+<li><p>// 获取屏幕的大小返回frame<br> [[UIScreen mainScreen] bounds];</p>
+<p> //隐藏状态栏<br> [[UIApplication sharedApplication] setStatusBarHidden:YES];</p>
+<p> //[[UIScreen mainScreen] applicationFrame] 获取不算上状态栏的位置，如果状态栏显示，y坐标从20开始，如果态栏隐藏，y坐标从0开始<br> NSLog(@”%@”,NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));</p>
+<p> //手动创建一个UIWindow<br> self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];<br> // Override point for customization after application launch.</p>
+<p> //通过xib创建ViewController，init会默认调用initWithNibName<br> //NibName默认是和类名称一致，不带后缀<br> self.viewController = [[[ViewController alloc] initWithNibName:@”ViewController” bundle:nil] autorelease];</p>
+<p> //相当与先把原来的remove，然后再addSubView，系统内部帮你做<br> self.window.rootViewController = self.viewController;<br>5.setAnimationCurve<br> setAnimationCurve:动画的运动曲线属性</p>
+<p> //UIViewAnimationCurveEaseInOut 动画开始和结束的时候慢，中间快<br> //UIViewAnimationCurveEaseIn 动画开始慢，逐渐加速<br> //UIViewAnimationCurveEaseOut 开始快，结束时慢<br> //UIViewAnimationCurveLinear  匀速</p>
+</li>
+</ol>
+<p>6.计时器<br>    //不得不提计时器<br>    [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(执行方法) userInfo:nil repeats:YES];</p>
+<pre><code>//用c的%<span class="number">02</span>d占位符来填充图片名字后缀<span class="number">01</span>，<span class="number">02</span>前的<span class="number">0</span>   
+NSString* <span class="variable">strImageName =</span> [NSString stringWithFormat:@<span class="string">"campFire%02d.gif"</span>,count];
+UIImage* <span class="variable">image =</span> [UIImage imageNamed:strImageName];
+imageView.<span class="variable">image =</span> image;
+<span class="keyword">if</span>(<span class="variable">count =</span>= <span class="number">17</span>)
+{
+
+    <span class="variable">count =</span> <span class="number">0</span>;
+}
+</code></pre><p>7.九宫格的实现<br>    //首先宏定义大小</p>
+<pre><code><span class="preprocessor">#define BTN_WIDTH  70</span>
+<span class="preprocessor">#define BTN_HEIGHT 70</span>
+-(<span class="keyword">void</span>)layoutMouse
+{
+    <span class="comment">//计算得出坐标</span>
+    <span class="keyword">float</span> xSpace = (<span class="number">320</span>-BTN_WIDTH*<span class="number">3</span>)/<span class="number">4</span>;
+    <span class="keyword">float</span> ySpace = (<span class="number">480</span>-BTN_HEIGHT*<span class="number">3</span>)/<span class="number">4</span>;
+
+    <span class="keyword">int</span> count = <span class="number">1</span>;
+    <span class="comment">//双层嵌套，先做行，再做列</span>
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) 
+        {
+            <span class="keyword">float</span> xPos = (j+<span class="number">1</span>)*xSpace+j*BTN_WIDTH;
+            <span class="keyword">float</span> yPos = (i+<span class="number">1</span>)*ySpace+i*BTN_HEIGHT;
+            <span class="comment">//</span>
+            <span class="built_in">UIButton</span>* button = [<span class="built_in">UIButton</span> buttonWithType:UIButtonTypeRoundedRect];
+            <span class="comment">//button的tag值从1开始</span>
+            button<span class="variable">.tag</span> = count;
+            count++;
+
+            button<span class="variable">.frame</span> = CGRectMake(xPos, yPos, BTN_WIDTH, BTN_HEIGHT);
+            <span class="comment">//关联事件hitMouse</span>
+            [button addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span> (hitMouse:)forControlEvents:UIControlEventTouchUpInside];
+
+            [<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
+        }
+    }
+}
+</code></pre><ol>
+<li>UIImageView的动画实现<br> //1首先定义一个成员变量UIImageView <em>view;并初始化获取frame值<br> view=[[UIImageView alloc]initWithFrame:self.view.frame];<br> //在界面上显示view<br> [self.view addSubview:view];<br> //定义一个可变数组，初始化为20个存储单位<br> NSMutableArray</em>image=[[NSMutableArray alloc] initWithCapacity:20];<br> //用for循环(c%02d占位符)向数组添加UIImage 对象的名字<br> for(int i=1;i&lt;=17;i++)<br> {  <pre><code> <span class="built_in">NSString</span>*name=[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"campFire%02d.gif"</span>,i];
+ <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);
+ [image addObject:[<span class="built_in">UIImage</span> imageNamed:name]];
+</code></pre> }<br> //数组添加<br> view.animationImages=image;<br> //每次遍历时间<br> view.animationDuration=5;<br> //动画遍历次数，0为无限循环<br> view.animationRepeatCount=0;<br> //动画开始  stopAnimating结束 isAnimating 正在动画<br> [view startAnimating];</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之动画/">iOS应用开发之动画</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+      
+        <div class="icon"></div>
+        <time datetime="2013-09-05T05:04:00.000Z"><a href="/2013/09/05/NSTimer动画/">9月 5 2013</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2013/09/05/NSTimer动画/">NSTimer动画</a></h1>
+  
+
+      
+    </header>
+    <div class="entry">
+      
+        
+        <p>h.雪花飘落动画制作</p>
+<p>[[UIApplication sharedApplication] setStatusBarHidden:YES];//移除顶部任务栏</p>
+<p>1.给window一个背景<br>    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@”background.jpg”]];<br>2.添加一个雪花<br>UIImageView* imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@”flake.png”]];<br>    imgView.frame = CGRectMake(xStartPosition, -SNOW_HEIGHT, SNOW_WIDTH, SNOW_HEIGHT);</p>
+<pre><code><span class="comment">//先把雪花的frame 获取</span>
+<span class="built_in">CGRect</span> rect = imgView<span class="variable">.frame</span>;
+
+[<span class="keyword">self</span><span class="variable">.window</span> addSubview:imgView];
+</code></pre><p>3.用计时器引发雪花飘落事件<br>[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];</p>
+<p>4.产生随机数给雪花坐标赋值<br>int xStartPosition = arc4random()%(321-SNOW_WIDTH);<br>    //NSLog(@”xPos is %d”,xStartPos);<br>    int xStopPosition = arc4random()%(321-SNOW_WIDTH);</p>
+<p>5.落下消失用动画默认调用函数获取产生的对象<br>    UIImageView<em> imgView = (UIImageView</em>)context;</p>
+<pre><code><span class="comment">//把imgView 从父视图上去除</span>
+</code></pre><p>6.移除对象</p>
+<pre><code><span class="title">[imgView removeFromSuperview]</span><span class="comment">;</span>
+</code></pre><p>======================================================================================================================================================================================<br>7.雪花飘落的实现：</p>
+<ul>
+<li><p>(BOOL)application:(UIApplication <em>)application didFinishLaunchingWithOptions:(NSDictionary </em>)launchOptions {    </p>
+<p>  // Override point for customization after application launch.</p>
+<p>  [self.window makeKeyAndVisible];<br>  //去掉window的顶部任务栏<br>  [[UIApplication sharedApplication] setStatusBarHidden:YES];<br>  //用图片填充window的背景 colorWithPatternImage:<br>  window.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@”background.jpg”]];<br>  [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(flakeShow) userInfo:nil repeats:YES];<br>  return YES;<br>}<br>-(void)flakeShow<br>{<br>  int x=arc4random()%321;//随机一个雪花的x初始值<br>  int xEnd=arc4random()%521;//随机一个雪花结束的x值<br>  int h=arc4random()%16+10;//随机一个雪花长度，因为雪花为正方形，所以都要用h<br>  //初始化一个雪花<br>  UIImageView *flake=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@”flake”]];<br>  //雪花大小位置取值<br>  flake.frame=CGRectMake(x, -30, h, h);<br>  //保存雪花的地址<br>  CGRect flakeWz=flake.frame;<br>  [self.window addSubview:flake];</p>
+<p>  //开始动画，beginAnimations  动画名字<br>  //context:环境参数，当设置这个值的时候，会在动画结束函数中再次回送<br>  [UIView beginAnimations:@”down” context:flake];<br>  [UIView setAnimationDuration:4];<br>  [UIView setAnimationDelegate:self];<br>  //动画结束坐标<br>  flakeWz.origin.y=500;<br>  flakeWz.origin.x=xEnd-100;<br>  //把坐标重新赋值frame<br>  flake.frame=flakeWz;<br>  [UIView commitAnimations];</p>
+</li>
+</ul>
+<p>}<br>-(void)animationDidStop:(NSString <em>)animationID finished:(NSNumber </em>)finished context:(void <em>)context<br>{<br>    //context会保存一个参数，强制转换为UIImageView类型获取动画的对象<br>    UIImageView </em>flake=(UIImageView *)context;<br>    //判断动画名字<br>    if ([animationID isEqualToString:@”down”]) {<br>        //创建一个动画 名字为up<br>        [UIView beginAnimations:@”up” context:flake];<br>        [UIView setAnimationDuration:1];<br>        [UIView setAnimationDelegate:self];<br>        //透明度 alpha<br>        flake.alpha=0;</p>
+<pre><code>    [<span class="built_in">UIView</span> commitAnimations];
+}
+<span class="keyword">if</span> ([animationID isEqualToString:<span class="string">@"up"</span>]) {
+    <span class="comment">//移除flake对象</span>
+    [flake removeFromSuperview];
+}
+</code></pre><p>}</p>
+<p>======================================================================================================================================================================================<br>8).数组NSArray<br>    //NSArray 不可变数组<br>    NSArray* array = [[NSArray alloc] initWithObjects:@”A”,@”B”,@”C”,nil];</p>
+<pre><code><span class="comment">//从0 到 99 执行100次</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> x= <span class="number">0</span>; x &lt; <span class="number">100</span>; x++) {
+    <span class="built_in">NSLog</span>(<span class="string">@"aaaa"</span>);
+}
+<span class="comment">//普通遍历</span>
+<span class="keyword">for</span>(<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; [array count];index++)
+{
+    <span class="built_in">NSString</span>* str = [array objectAtIndex:index];
+        <span class="comment">//获取数组第index个对象</span>
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,str);
+}
+
+
+
+<span class="built_in">NSLog</span>(<span class="string">@"泛型遍历开始"</span>);
+<span class="comment">//泛型遍历</span>
+<span class="keyword">for</span> (<span class="built_in">NSString</span>* str <span class="keyword">in</span> array) {
+    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,str);
+}
+
+<span class="comment">//可变数组</span>
+<span class="comment">//initWithCapacity 使用一个容量来初始化可变数组</span>
+<span class="built_in">NSMutableArray</span>* mutableArray = [[<span class="built_in">NSMutableArray</span> alloc]initWithCapacity:<span class="number">0</span>];
+<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10</span>; i++)
+{
+    <span class="comment">//addObject只能添加对象，所以把i转成NSNumber对象</span>
+    [mutableArray addObject:[[<span class="built_in">NSNumber</span> alloc]initWithInt:i]];
+}
+<span class="built_in">NSLog</span>(<span class="string">@"可变数组开始泛型遍历"</span>);
+<span class="keyword">for</span> (<span class="built_in">NSNumber</span>* number <span class="keyword">in</span> mutableArray) {
+    <span class="comment">//把NSNumber对象转成int</span>
+    <span class="keyword">int</span> x = [number intValue];
+    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,x);
+}
+</code></pre>
+      
+    </div>
+    <footer>
+      
+  
+  <div class="categories">
+    <a href="/categories/iOS应用开发之动画/">iOS应用开发之动画</a>
+  </div>
+
+      
+  
+  <div class="tags">
+    <a href="/tags/iphone开发/">iphone开发</a>, <a href="/tags/ios/">ios</a>
+  </div>
+
+      
+        
+          <div class="alignright share-box">
+  
+</div>
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/tags/iphone开发/page/4/" class="alignleft prev">Prev</a>
+  
+  
+    <a href="/tags/iphone开发/page/6/" class="alignright next">Next</a>
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  
+    <form>
+      <input id="st-search-input" type="search" placeholder="Search">
+    </form>
+    <div id="st-results-container"></div>
+  
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <div class="entry">
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:12:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/内存管理基础/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/UIPickerView--UIDatePicker--UITableView/" title="UIPickerView--UIDatePicker--UITableView" itemprop="url">
-      
-        UIPickerView--UIDatePicker--UITableView
-      </a>
-    </h1>
+      <span><a href="/tags/2d/">2d<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:12:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/UIPickerView--UIDatePicker--UITableView/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/UIScrollView--UIPageControl/" title="UIScrollView--UIPageControl" itemprop="url">
-      
-        UIScrollView--UIPageControl
-      </a>
-    </h1>
+      <span><a href="/tags/AFNetworking/">AFNetworking<small>2</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:10:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/UIScrollView--UIPageControl/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/UINavigationController/" title="UINavigationController" itemprop="url">
-      
-        UINavigationController
-      </a>
-    </h1>
+      <span><a href="/tags/CoreData/">CoreData<small>2</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:10:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/UINavigationController/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/UITouch/" title="UITouch" itemprop="url">
-      
-        UITouch
-      </a>
-    </h1>
+      <span><a href="/tags/Drawing/">Drawing<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:08:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/UITouch/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/进程和线程.View椭圆运动/" title="进程和线程.View椭圆运动" itemprop="url">
-      
-        进程和线程.View椭圆运动
-      </a>
-    </h1>
+      <span><a href="/tags/MagicalRecord/">MagicalRecord<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:07:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/进程和线程.View椭圆运动/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/矩形打印和碰撞/" title="矩形打印和碰撞" itemprop="url">
-      
-        矩形打印和碰撞
-      </a>
-    </h1>
+      <span><a href="/tags/NSDate/">NSDate<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:07:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/矩形打印和碰撞/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/View旋转动画/" title="View旋转动画" itemprop="url">
-      
-        View旋转动画
-      </a>
-    </h1>
+      <span><a href="/tags/NSString/">NSString<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:06:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/View旋转动画/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/动画和NSTimer/" title="动画和NSTimer" itemprop="url">
-      
-        动画和NSTimer
-      </a>
-    </h1>
+      <span><a href="/tags/Swift/">Swift<small>9</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:04:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/动画和NSTimer/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  <article>
-    <h1 itemprop="name">
-      
-        <a href="/2013/09/05/NSTimer动画/" title="NSTimer动画" itemprop="url">
-      
-        NSTimer动画
-      </a>
-    </h1>
+      <span><a href="/tags/UIAlertView/">UIAlertView<small>1</small></a></span>
     
-    <p class="article-more-link">
-      <time datetime="2013-09-05T05:04:00.000Z" itemprop="datePublished">9月 5 2013</time>
-      
-          <a href="/2013/09/05/NSTimer动画/">阅读更多&raquo;</a>
-      
-    </p>
-
-  </article>
-</section>
-
-
-  <nav id="page-nav" class="clearfix archive-nav">
-    <a class="extend prev" rel="prev" href="/tags/iphone开发/page/4/">&laquo; Prev</a><a class="page-number" href="/tags/iphone开发/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/iphone开发/page/3/">3</a><a class="page-number" href="/tags/iphone开发/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/tags/iphone开发/page/6/">6</a><a class="extend next" rel="next" href="/tags/iphone开发/page/6/">Next &raquo;</a>
-  </nav>
-
+      <span><a href="/tags/UITabBarController/">UITabBarController<small>1</small></a></span>
+    
+      <span><a href="/tags/UITableViewControlle/">UITableViewControlle<small>1</small></a></span>
+    
+      <span><a href="/tags/UIWebView/">UIWebView<small>1</small></a></span>
+    
+      <span><a href="/tags/URL-Scheme/">URL Scheme<small>1</small></a></span>
+    
+      <span><a href="/tags/URL编码/">URL编码<small>1</small></a></span>
+    
+      <span><a href="/tags/XMPP/">XMPP<small>3</small></a></span>
+    
+      <span><a href="/tags/Xcode5-1/">Xcode5.1<small>1</small></a></span>
+    
+      <span><a href="/tags/api/">api<small>5</small></a></span>
+    
+      <span><a href="/tags/appStore审核/">appStore审核<small>1</small></a></span>
+    
+      <span><a href="/tags/block/">block<small>1</small></a></span>
+    
+      <span><a href="/tags/bytearray/">bytearray<small>1</small></a></span>
+    
+      <span><a href="/tags/cell自适应高度/">cell自适应高度<small>1</small></a></span>
+    
+      <span><a href="/tags/cocos2d/">cocos2d<small>3</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发font/">fontfontiPhone开发font<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontiPhone开发fontfont/">fontfontiPhone开发fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/fontfontios的fontfont/">fontfontios的fontfont<small>2</small></a></span>
+    
+      <span><a href="/tags/fontfont动画fontfont/">fontfont动画fontfont<small>1</small></a></span>
+    
+      <span><a href="/tags/framework/">framework<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8/">iOS8<small>2</small></a></span>
+    
+      <span><a href="/tags/iOS8-1-1/">iOS8.1.1<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS8定位/">iOS8定位<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS国际化/">iOS国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之app上架/">iOS应用开发之app上架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS应用开发之第三方框架/">iOS应用开发之第三方框架<small>1</small></a></span>
+    
+      <span><a href="/tags/iOS开发/">iOS开发<small>5</small></a></span>
+    
+      <span><a href="/tags/iOS自定义Tabbar/">iOS自定义Tabbar<small>1</small></a></span>
+    
+      <span><a href="/tags/ios/">ios<small>53</small></a></span>
+    
+      <span><a href="/tags/ios7/">ios7<small>1</small></a></span>
+    
+      <span><a href="/tags/ios7适配/">ios7适配<small>1</small></a></span>
+    
+      <span><a href="/tags/ios国际化/">ios国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/ios开发/">ios开发<small>27</small></a></span>
+    
+      <span><a href="/tags/iphone/">iphone<small>4</small></a></span>
+    
+      <span><a href="/tags/iphone开发/">iphone开发<small>59</small></a></span>
+    
+      <span><a href="/tags/itunes/">itunes<small>1</small></a></span>
+    
+      <span><a href="/tags/objective-c/">objective-c<small>1</small></a></span>
+    
+      <span><a href="/tags/svn/">svn<small>1</small></a></span>
+    
+      <span><a href="/tags/uiimage/">uiimage<small>2</small></a></span>
+    
+      <span><a href="/tags/uitableview/">uitableview<small>1</small></a></span>
+    
+      <span><a href="/tags/uitableviewcell/">uitableviewcell<small>1</small></a></span>
+    
+      <span><a href="/tags/uitextfield/">uitextfield<small>1</small></a></span>
+    
+      <span><a href="/tags/uiview/">uiview<small>3</small></a></span>
+    
+      <span><a href="/tags/uiviewcontroller/">uiviewcontroller<small>1</small></a></span>
+    
+      <span><a href="/tags/uiwebview/">uiwebview<small>1</small></a></span>
+    
+      <span><a href="/tags/xcode/">xcode<small>2</small></a></span>
+    
+      <span><a href="/tags/xmpp/">xmpp<small>1</small></a></span>
+    
+      <span><a href="/tags/二维码/">二维码<small>1</small></a></span>
+    
+      <span><a href="/tags/企业/">企业<small>1</small></a></span>
+    
+      <span><a href="/tags/动画/">动画<small>5</small></a></span>
+    
+      <span><a href="/tags/国际化/">国际化<small>1</small></a></span>
+    
+      <span><a href="/tags/在线工具/">在线工具<small>1</small></a></span>
+    
+      <span><a href="/tags/多线程/">多线程<small>1</small></a></span>
+    
+      <span><a href="/tags/存储/">存储<small>1</small></a></span>
+    
+      <span><a href="/tags/宏/">宏<small>1</small></a></span>
+    
+      <span><a href="/tags/导航/">导航<small>1</small></a></span>
+    
+      <span><a href="/tags/屏幕旋转/">屏幕旋转<small>2</small></a></span>
+    
+      <span><a href="/tags/应用程序/">应用程序<small>2</small></a></span>
+    
+      <span><a href="/tags/微信开放平台ios/">微信开放平台ios<small>1</small></a></span>
+    
+      <span><a href="/tags/打开AppStore/">打开AppStore<small>1</small></a></span>
+    
+      <span><a href="/tags/数据库/">数据库<small>1</small></a></span>
+    
+      <span><a href="/tags/缓存/">缓存<small>1</small></a></span>
+    
+      <span><a href="/tags/聊天/">聊天<small>1</small></a></span>
+    
+      <span><a href="/tags/苹果应用商店/">苹果应用商店<small>1</small></a></span>
+    
+      <span><a href="/tags/获取iP地址/">获取iP地址<small>1</small></a></span>
+    
   </div>
 </div>
 
-      </div>
-      <footer><div id="footer" >
 
+
+
+  <script type="text/javascript">
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+      (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+      e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+    _st('install','6xH6jcZvsZxn2a9rcU4t');
+  </script>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+  </ul>
 </div>
-</footer>
-      <script src="/js/jquery-2.1.0.min.js"></script>
+<div>
+  
+    &copy; 2014 尹现伟
+  
+</div>
+<div class="clearfix"></div></footer>
+  
 
-<script src="http://cdn.bootcss.com/highlight.js/8.2/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-  //back to top
-  function backToTop(){
-    var buttonHTML = $("<a href=\"#top\" id=\"back-top\">" + "<span>Back to Top</span></a>");
-    buttonHTML.appendTo($("body"));
-    var buttonToTop = $("#back-top");
-    // hide #back-top first
-    buttonToTop.hide();
-
-    // fade in #back-top
-    $(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 200) {
-                buttonToTop.fadeIn();
-            } else {
-                buttonToTop.fadeOut();
-            }
-        });
-        // scroll body to 0px on click
-        buttonToTop.click(function() {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-            return false;
-        });
-    });
-  }
-  backToTop();
-
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      ta = $('#toc.toc-aside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-        
-    }
-  });
-
-  var show = true;
-  c.click(function(){
-    if(show == true){
-        a.addClass('fadeOut').css('display', 'none');
-        ta.css('display', 'block').addClass('fadeIn');
-        m.addClass('moveMain');  
-    }else{
-        a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');     
-        ta.css('display', 'none'); 
-        m.removeClass('moveMain');
-        $('#toc.toc-aside').css('display', 'none');
-    }
-    show = !show;
-  });
-});
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 
+<script type="text/javascript">
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
+</script>
+<div id="totop" class="footer-btn">
+  <a title="Return to Top"><img src="/img/scrollup.png"/></a>
+</div>
 
+<script type="text/javascript">
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "50px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
 
-
-
-
-    </body>
-   </html>
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
+  });
+</script>
+</body>
+</html>
