@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.yinxianwei.cn/"/>
-  <updated>2014-12-12T06:35:41.760Z</updated>
+  <updated>2014-12-29T08:42:43.606Z</updated>
   <id>http://blog.yinxianwei.cn/</id>
   
   <author>
@@ -13,6 +13,199 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[iOS开发的一些奇技淫巧二]]></title>
+    <link href="http://blog.yinxianwei.cn/2014/12/29/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7%E4%BA%8C/"/>
+    <id>http://blog.yinxianwei.cn/2014/12/29/iOS开发的一些奇技淫巧二/</id>
+    <published>2014-12-29T08:34:46.000Z</published>
+    <updated>2014-12-29T08:41:22.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iOS的一些小技巧">iOS的一些小技巧</h1>
+<p>本文转自：<a href="http://www.jianshu.com/p/08f194e9904c" target="_blank" rel="external">http://www.jianshu.com/p/08f194e9904c</a>转载请注明出处。</p>
+<h2 id="能不能只用一个pan手势来代替UISwipegesture的各个方向?">能不能只用一个pan手势来代替UISwipegesture的各个方向?</h2>
+<pre><code>- (<span class="keyword">void</span>)pan:(UIPanGestureRecognizer *)sender
+{
+<span class="keyword">typedef</span> NS_ENUM(NSUInteger, UIPanGestureRecognizerDirection) {
+UIPanGestureRecognizerDirectionUndefined,
+UIPanGestureRecognizerDirectionUp,
+UIPanGestureRecognizerDirectionDown,
+UIPanGestureRecognizerDirectionLeft,
+UIPanGestureRecognizerDirectionRight
+};
+
+<span class="keyword">static</span> UIPanGestureRecognizerDirection direction = UIPanGestureRecognizerDirectionUndefined;
+
+<span class="keyword">switch</span> (sender<span class="variable">.state</span>) {
+
+<span class="keyword">case</span> UIGestureRecognizerStateBegan: {
+
+    <span class="keyword">if</span> (direction == UIPanGestureRecognizerDirectionUndefined) {
+
+        <span class="built_in">CGPoint</span> velocity = [sender velocityInView:recognizer<span class="variable">.view</span>];
+
+        <span class="built_in">BOOL</span> isVerticalGesture = fabs(velocity<span class="variable">.y</span>) &gt; fabs(velocity<span class="variable">.x</span>);
+
+        <span class="keyword">if</span> (isVerticalGesture) {
+            <span class="keyword">if</span> (velocity<span class="variable">.y</span> &gt; <span class="number">0</span>) {
+                direction = UIPanGestureRecognizerDirectionDown;
+            } <span class="keyword">else</span> {
+                direction = UIPanGestureRecognizerDirectionUp;
+            }
+        }
+
+        <span class="keyword">else</span> {
+            <span class="keyword">if</span> (velocity<span class="variable">.x</span> &gt; <span class="number">0</span>) {
+                direction = UIPanGestureRecognizerDirectionRight;
+            } <span class="keyword">else</span> {
+                direction = UIPanGestureRecognizerDirectionLeft;
+            }
+        }
+    }
+
+    <span class="keyword">break</span>;
+}
+
+<span class="keyword">case</span> UIGestureRecognizerStateChanged: {
+    <span class="keyword">switch</span> (direction) {
+        <span class="keyword">case</span> UIPanGestureRecognizerDirectionUp: {
+            [<span class="keyword">self</span> handleUpwardsGesture:sender];
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">case</span> UIPanGestureRecognizerDirectionDown: {
+            [<span class="keyword">self</span> handleDownwardsGesture:sender];
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">case</span> UIPanGestureRecognizerDirectionLeft: {
+            [<span class="keyword">self</span> handleLeftGesture:sender];
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">case</span> UIPanGestureRecognizerDirectionRight: {
+            [<span class="keyword">self</span> handleRightGesture:sender];
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">default</span>: {
+            <span class="keyword">break</span>;
+        }
+    }
+    <span class="keyword">break</span>;
+}
+
+<span class="keyword">case</span> UIGestureRecognizerStateEnded: {
+    direction = UIPanGestureRecognizerDirectionUndefined;   
+    <span class="keyword">break</span>;
+}
+
+<span class="keyword">default</span>:
+    <span class="keyword">break</span>;
+ }
+ }
+</code></pre><h2 id="拉伸图片的时候怎么才能让图片不变形？">拉伸图片的时候怎么才能让图片不变形？</h2>
+<ol>
+<li><p>UIImage *image = [[UIImage imageNamed:@”xxx”] stretchableImageWithLeftCapWidth:10 topCapHeight:10];<br>(刚才有人提醒这个已经deprecated了哈,现在的方法叫resizableImageWithCapInsets).</p>
+</li>
+<li><p><img src="http://m3.img.srcdd.com/farm5/d/2014/1228/12/647444DE2635CA3F2A9951440C592A2A_ORIG_662_757.gif" alt=""></p>
+</li>
+</ol>
+<h2 id="怎么播放GIF的时候这么卡，有没有好点的库？">怎么播放GIF的时候这么卡，有没有好点的库？</h2>
+<p>FlipBoard出品的太适合你了。<a href="https://github.com/Flipboard/FLAnimatedImage" target="_blank" rel="external">https://github.com/Flipboard/FLAnimatedImage</a></p>
+<h2 id="怎么一句话添加上拉刷新？">怎么一句话添加上拉刷新？</h2>
+<p><a href="https://github.com/samvermette/SVPullToRefresh" target="_blank" rel="external">https://github.com/samvermette/SVPullToRefresh</a></p>
+<pre><code>[tableView addPullToRefreshWithActionHandler:^{
+// prepend data to dataSource, <span class="operator"><span class="keyword">insert</span> cells <span class="keyword">at</span> top <span class="keyword">of</span> <span class="keyword">table</span> <span class="keyword">view</span>
+// <span class="keyword">call</span> [tableView.pullToRefreshView stopAnimating] <span class="keyword">when</span> done
+} <span class="keyword">position</span>:SVPullToRefreshPositionBottom];</span>
+</code></pre><h2 id="怎么把tableview里cell的小对勾的颜色改成别的颜色？">怎么把tableview里cell的小对勾的颜色改成别的颜色？</h2>
+<p><code>_mTableView.tintColor = [UIColor redColor];</code><br><img src="http://m3.img.srcdd.com/farm4/d/2014/1228/12/85E2955C50F62956F9158276B071925C_B1280_1280_754_98.png" alt="http://m3.img.srcdd.com/farm4/d/2014/1228/12/85E2955C50F62956F9158276B071925C_B1280_1280_754_98.png"></p>
+<h2 id="本来我的statusbar是lightcontent的，结果用UIImagePickerController会导致我的statusbar的样式变成黑色，怎么办？">本来我的statusbar是lightcontent的，结果用UIImagePickerController会导致我的statusbar的样式变成黑色，怎么办？</h2>
+<pre><code>- (<span class="keyword">void</span>)navigationController:(<span class="built_in">UINavigationController</span> *)navigationController willShowViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated
+{
+    [[<span class="built_in">UIApplication</span> sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+   }
+</code></pre><h2 id="怎么把我的navigationbar弄成透明的而不是带模糊的效果？">怎么把我的navigationbar弄成透明的而不是带模糊的效果？</h2>
+<pre><code>[<span class="keyword">self</span><span class="variable">.navigationBar</span> setBackgroundImage:[<span class="built_in">UIImage</span> new]
+                     forBarMetrics:UIBarMetricsDefault];
+<span class="keyword">self</span><span class="variable">.navigationBar</span><span class="variable">.shadowImage</span> = [<span class="built_in">UIImage</span> new];
+<span class="keyword">self</span><span class="variable">.navigationBar</span><span class="variable">.translucent</span> = <span class="literal">YES</span>;
+</code></pre><h2 id="怎么改变uitextfield_placeholder的颜色和位置？">怎么改变uitextfield placeholder的颜色和位置？</h2>
+<p>继承uitextfield，重写这个方法</p>
+<pre><code>- (<span class="keyword">void</span>) drawPlaceholderInRect:(<span class="built_in">CGRect</span>)rect {
+[[<span class="built_in">UIColor</span> blueColor] setFill];
+[<span class="keyword">self</span><span class="variable">.placeholder</span> drawInRect:rect withFont:<span class="keyword">self</span><span class="variable">.font</span> lineBreakMode:UILineBreakModeTailTruncation alignment:<span class="keyword">self</span><span class="variable">.textAlignment</span>];
+</code></pre><p>}</p>
+<h2 id="你为什么知道这么多奇怪的花招？">你为什么知道这么多奇怪的花招？</h2>
+<p>去stackoverflow刷问题啊，少年！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[iOS开发的一些小技巧]]>
+    
+    </summary>
+    
+      <category term="奇技淫巧" scheme="http://blog.yinxianwei.cn/tags/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS开发的一些奇技淫巧]]></title>
+    <link href="http://blog.yinxianwei.cn/2014/12/29/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
+    <id>http://blog.yinxianwei.cn/2014/12/29/iOS开发的一些奇技淫巧/</id>
+    <published>2014-12-29T08:21:20.000Z</published>
+    <updated>2014-12-29T08:33:21.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iOS的一些小技巧">iOS的一些小技巧</h1>
+<p>本文转自：<a href="http://www.jianshu.com/p/50b63a221f09" target="_blank" rel="external">http://www.jianshu.com/p/50b63a221f09</a>转载请注明出处。</p>
+<h2 id="TableView不显示没内容的Cell怎么办?">TableView不显示没内容的Cell怎么办?</h2>
+<p>类似这种,我不想让下面那些空的显示.</p>
+<p><img src="http://m1.img.srcdd.com/farm5/d/2014/1227/11/E3974A9B9936EF6252619A62A8981C3F_B1280_1280_380_692.png" alt=""></p>
+<p>很简单.</p>
+<p><code>self.tableView.tableFooterView = [[UIView alloc] init];</code></p>
+<p>试过的都说好.</p>
+<p>加完这句之后就变成了这样.</p>
+<h2 id="自定义了leftBarbuttonItem左滑返回手势失效了怎么办?">自定义了leftBarbuttonItem左滑返回手势失效了怎么办?</h2>
+<pre><code>    <span class="keyword">self</span><span class="variable">.navigationItem</span><span class="variable">.leftBarButtonItem</span> = [[<span class="built_in">UIBarButtonItem</span> alloc]
+                                     initWithImage:img
+                                     style:UIBarButtonItemStylePlain
+                                     target:<span class="keyword">self</span>
+                                     action:<span class="keyword">@selector</span>(onBack:)];
+                                    <span class="keyword">self</span><span class="variable">.navigationController</span><span class="variable">.interactivePopGestureRecognizer</span><span class="variable">.delegate</span> = (<span class="keyword">id</span>&lt;UIGestureRecognizerDelegate&gt;)<span class="keyword">self</span>;
+</code></pre><h2 id="ScrollView莫名其妙不能在viewController划到顶怎么办?">ScrollView莫名其妙不能在viewController划到顶怎么办?</h2>
+<pre><code><span class="keyword">self</span><span class="variable">.automaticallyAdjustsScrollViewInsets</span> = <span class="literal">NO</span>;
+</code></pre><h2 id="键盘事件写的好烦躁,都想摔键盘了,怎么办?">键盘事件写的好烦躁,都想摔键盘了,怎么办?</h2>
+<ol>
+<li>买个结实的键盘.</li>
+<li>使用IQKeyboardManager(github上可搜索),用完之后腰也不疼了,腿也不酸了.</li>
+</ol>
+<h2 id="为什么我的app老是不流畅,到底哪里出了问题?">为什么我的app老是不流畅,到底哪里出了问题?</h2>
+<p>如图</p>
+<p><img src="http://m3.img.srcdd.com/farm5/d/2014/1227/11/D4EADD8715EF7B9B813F15052FA7E51C_ORIG_385_681.gif" alt=""></p>
+<p>这个神器叫做:KMCGeigerCounter</p>
+<p>快去github搬运吧.</p>
+<h2 id="怎么在不新建一个Cell的情况下调整separaLine的位置?">怎么在不新建一个Cell的情况下调整separaLine的位置?</h2>
+<p><code>_myTableView.separatorInset = UIEdgeInsetsMake(0, 100, 0, 0);</code></p>
+<h2 id="怎么点击self-view就让键盘收起,需要添加一个tapGestures么?">怎么点击self.view就让键盘收起,需要添加一个tapGestures么?</h2>
+<pre><code><span class="pp">- <span class="params">(void)</span>touchesBegan:<span class="params">(<span class="variable">NSSet</span> *)</span>touches withEvent:<span class="params">(<span class="variable">UIEvent</span> *)</span>event{
+[self</span>.view <span class="keyword">end</span><span class="variable">Editing</span>:<span class="variable">YES</span>];
+}
+</code></pre><h2 id="怎么给每个ViewController设定默认的背景图片?">怎么给每个ViewController设定默认的背景图片?</h2>
+<p>使用基类啊,少年.</p>
+<h2 id="想在代码里改在xib里添加的layoutAttributes,但是怎么用代码找啊?">想在代码里改在xib里添加的layoutAttributes,但是怎么用代码找啊?</h2>
+<p>像拉button一样的拉你的约束.nslayoutattribute也是可以拉线的.</p>
+<h2 id="怎么像safari一样滑动的时候隐藏navigationbar?">怎么像safari一样滑动的时候隐藏navigationbar?</h2>
+<p><code>navigationController.hidesBarsOnSwipe = Yes</code></p>
+<h2 id="导航条返回键带的title太讨厌了,怎么让它消失!">导航条返回键带的title太讨厌了,怎么让它消失!</h2>
+<pre><code><span class="attr_selector">[[UIBarButtonItem appearance]</span> <span class="tag">setBackButtonTitlePositionAdjustment</span><span class="pseudo">:UIOffsetMake(0</span>, <span class="tag">-60</span>)
+                                                 <span class="tag">forBarMetrics</span><span class="pseudo">:UIBarMetricsDefault</span>];
+</code></pre><h2 id="CoreData用起来好烦,语法又臭又长,怎么办?">CoreData用起来好烦,语法又臭又长,怎么办?</h2>
+<p>MagicalRecord</p>
+<h2 id="CollectionView_怎么实现tableview那种悬停的header?">CollectionView 怎么实现tableview那种悬停的header?</h2>
+<p>CSStickyHeaderFlowLayout</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[iOS的一些小技巧]]>
+    
+    </summary>
+    
+      <category term="奇巧淫技" scheme="http://blog.yinxianwei.cn/tags/%E5%A5%87%E5%B7%A7%E6%B7%AB%E6%8A%80/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[CoreData实体的DeleteRule属性]]></title>
@@ -764,43 +957,6 @@
       <category term="framework" scheme="http://blog.yinxianwei.cn/tags/framework/"/>
     
       <category term="iOS应用开发之Xcode配置" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BXcode%E9%85%8D%E7%BD%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[实现简单的糗百，以下是连接：]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/07/21/%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E7%B3%97%E7%99%BE%EF%BC%8C%E4%BB%A5%E4%B8%8B%E6%98%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A/"/>
-    <id>http://blog.yinxianwei.cn/2014/07/21/实现简单的糗百，以下是连接：/</id>
-    <published>2014-07-21T07:57:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><a href="https://code.csdn.net/yinxianwei88/swift_qiubai/tree/master" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/s]]>
-    </summary>
-    
-      <category term="Swift" scheme="http://blog.yinxianwei.cn/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Swift_8_扩展&类别]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/07/21/Swift_8_%E6%89%A9%E5%B1%95&%E7%B1%BB%E5%88%AB/"/>
-    <id>http://blog.yinxianwei.cn/2014/07/21/Swift_8_扩展&类别/</id>
-    <published>2014-07-21T07:45:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">class People{</div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">}</div><div class="line"><span class="comment">//方法扩展</span></div><div class="line">extension People{</div><div class="line">    func test() -&gt; String{</div><div class="line">        <span class="keyword">return</span> <span class="string">"abc"</span></div><div class="line"></div><div class="line">    }</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">let p = People();</div><div class="line"></div><div class="line">var v1 = p<span class="variable">.test</span>();</div><div class="line"></div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="Swift" scheme="http://blog.yinxianwei.cn/tags/Swift/"/>
-    
-      <category term="iOS应用开发之Swift" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BSwift/"/>
     
   </entry>
   
