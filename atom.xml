@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.yinxianwei.cn/"/>
-  <updated>2014-12-31T13:43:32.971Z</updated>
+  <updated>2015-01-01T14:24:05.894Z</updated>
   <id>http://blog.yinxianwei.cn/</id>
   
   <author>
@@ -15,21 +15,39 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[个人博客搞定了]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/12/31/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
-    <id>http://blog.yinxianwei.cn/2014/12/31/个人博客搞定了/</id>
-    <published>2014-12-31T12:44:54.000Z</published>
-    <updated>2014-10-29T08:48:32.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
-</blockquote>
-]]></content>
+    <title><![CDATA[was mutated while being enumerated.]]></title>
+    <link href="http://blog.yinxianwei.cn/2015/01/01/was%20mutated%20while%20being%20enumerated/"/>
+    <id>http://blog.yinxianwei.cn/2015/01/01/was mutated while being enumerated/</id>
+    <published>2015-01-01T14:09:19.000Z</published>
+    <updated>2015-01-01T14:18:17.000Z</updated>
+    <content type="html"><![CDATA[<p>错误示例：</p>
+<pre><code><span class="built_in">NSMutableArray</span> * arrayTemp = create;
+
+<span class="keyword">for</span> (<span class="built_in">NSDictionary</span> * dic <span class="keyword">in</span> arrayTemp) {
+   <span class="keyword">if</span> (condition){
+  [arrayTemp removeObject:dic];
+   }
+}
+</code></pre><p>解决办法：<br>    用block进行操作，如下：</p>
+<pre><code><span class="built_in">NSMutableArray</span> *tempArray = [[<span class="built_in">NSMutableArray</span> alloc]initWithObjects:<span class="string">@"1"</span>,<span class="string">@"2"</span>,<span class="string">@"3"</span>,<span class="string">@"4"</span>,<span class="string">@"5"</span>, <span class="literal">nil</span>];
+[tempArray enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, NSUInteger idx, <span class="built_in">BOOL</span> *stop) {
+<span class="keyword">if</span> ([obj isEqualToString:<span class="string">@"2"</span>]) { 
+    *stop = <span class="literal">YES</span>;
+<span class="keyword">if</span> (*stop == <span class="literal">YES</span>) {
+    [tempArray removeObject:obj]; 
+    }
+}
+<span class="keyword">if</span> (*stop) {
+    <span class="built_in">NSLog</span>(<span class="string">@"array ：%@"</span>,tempArray);
+    }
+}];
+</code></pre>]]></content>
     <summary type="html">
-    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
-<blockquote>
-<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
+    <![CDATA[for遍历数组时，对数组对象进行操作会报错的解决办法。]]>
+    
     </summary>
+    
+      <category term="NSMutableArray" scheme="http://blog.yinxianwei.cn/tags/NSMutableArray/"/>
     
   </entry>
   
@@ -342,6 +360,25 @@ UIPanGestureRecognizerDirectionRight
       <category term="屏幕旋转" scheme="http://blog.yinxianwei.cn/tags/%E5%B1%8F%E5%B9%95%E6%97%8B%E8%BD%AC/"/>
     
       <category term="iOS应用开发之常用方法" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[个人博客搞定了]]></title>
+    <link href="http://blog.yinxianwei.cn/2014/11/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
+    <id>http://blog.yinxianwei.cn/2014/11/19/个人博客搞定了/</id>
+    <published>2014-11-19T08:33:00.000Z</published>
+    <updated>2015-01-01T14:12:06.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
+<blockquote>
+<p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="exte]]>
+    </summary>
     
   </entry>
   
@@ -902,61 +939,6 @@ UIPanGestureRecognizerDirectionRight
       <category term="AFNetworking" scheme="http://blog.yinxianwei.cn/tags/AFNetworking/"/>
     
       <category term="iOS应用开发之网络通讯" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Xcode5.1制作formework]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/08/11/Xcode5.1%E5%88%B6%E4%BD%9Cformework/"/>
-    <id>http://blog.yinxianwei.cn/2014/08/11/Xcode5.1制作formework/</id>
-    <published>2014-08-11T09:26:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<ol>
-<li>新建一个工程，选择framework &amp; library - Cocoa Touch Static Library,命名为TestKit。<img src="http://img.blog.csdn.net/20140811170140857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
-<li>删除不必要的文件。TestKitTests 和TestKit target。<br><img src="http://img.blog.csdn.net/20140811170014011?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
-<li>新建一个Bundle 。new-file-target；选择OS X目录下FrameWork&amp;Library中的Bundle,取名为TestiOSKit。<img src="http://img.blog.csdn.net/20140811165819234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
-<li><p>删除TestiOSKit中TestiOSKit-Prefix.pch中的#import<cocoa cocoa.h="">。<img src="http://img.blog.csdn.net/20140811170026211?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></cocoa></p>
-</li>
-<li><p>修改target设置Build Settings选项卡：<br>Base SDK选择Latest iOS(iOS 7.1)<br>Build ActiveArchitecture Only选择NO<br>Dead Code Stripping选择NO<br>Mach-O Type选择Relocatable Object File</p>
-<pre><code>  <span class="keyword">Link</span> <span class="keyword">With</span> Standard Libraries选择NO
-</code></pre><p>Wrapper Extension修改为framework<br>Info选项卡：<br>Bundle OS Type code 修改为FMWK<br>Build Phases选项卡:<br>首先选择Editor-Add Build Phase-Add Copy Haeders Build Phase,在Build Phases下会多出一行Copy Headers;<img src="http://img.blog.csdn.net/20140811170030844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>点击右下角的Add Build Phases,选择AddCopy Headers. 添加头文件和源文件。<img src="http://img.blog.csdn.net/20140811165835281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>删除系统的Frameworks。(Remove References)</p>
-<pre><code>  ![](<span class="symbol">http:</span>/<span class="regexp">/img.blog.csdn.net/</span><span class="number">20140811170100328</span>?watermark/<span class="number">2</span>/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=<span class="regexp">/font/</span><span class="number">5</span>a6L5L2T/fontsize/<span class="number">400</span>/fill/<span class="constant">I0JBQkFCMA</span>==<span class="regexp">/dissolve/</span><span class="number">70</span>/gravity/<span class="constant">SouthEast</span>)
-</code></pre></li>
-<li><p>在TestKit.h和TestMarkKit.m里面写入你的函数声明和实现<br><img src="http://img.blog.csdn.net/20140811165840218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><img src="http://img.blog.csdn.net/20140811165845062?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-</li>
-</ol>
-<ol>
-<li>选择Run Scheme<br><img src="http://img.blog.csdn.net/20140811165849625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
-</ol>
-<ol>
-<li>查看framework build路径<br>点击Xcode右上角Organizer,选择Projects选项卡如图，点击箭头可以进入bulid路径。<img src="http://img.blog.csdn.net/20140811170055570?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>或者选择iOS Device运行一下，然后在工程的Products-TestiOSKit.framework右键，show in finder。文件夹下en.lproj和Info.plist都可以直接删除。<br><img src="http://img.blog.csdn.net/20140811170603171?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></li>
-</ol>
-<ol>
-<li><p>使用framework<br>只需要在新的工程导入并使用就行啦。<img src="http://img.blog.csdn.net/20140811170859077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-</li>
-<li><p>但是我们会遇到一个问题，就是这个framework的包分两个，一个是模拟器，一个是真机，所以我们要把它合并成一个通用的包。</p>
-</li>
-</ol>
-<p>在finder下是这样的：<br><img src="http://img.blog.csdn.net/20140811170913218?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>一个是真机，一个是模拟器，下面开始合并。<br>1.先把其中一个framework包放到桌面。<br>2.打开终端运行&gt; lipo -create/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphoneos/TestiOSKit.framework/TestiOSKit/Users/Jerry/Library/Developer/Xcode/DerivedData/TestKit-dmdcaxednjyebxgulialinjfjzho/Build/Products/Debug-iphonesimulator/TestiOSKit.framework/TestiOSKit-output /Users/Jerry/Desktop/TestiOSKit</p>
-<blockquote>
-<p><img src="http://img.blog.csdn.net/20140811172349714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-</blockquote>
-<pre><code>说明一下这段代码，红色为固有字段，黑色部分均为路径，前两个是模拟器路径和真机的路径，后面的为输出路径。
-3.把输出的文件TestiOSKit替换第一步放在桌面上的framework里的TestiOSKit，然后这个framework就是通用的了。
-</code></pre><p>此方法同样适用.a文件的合成。<br>              <img src="http://img.blog.csdn.net/20140811172415984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWluX3hpYW53ZWk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-<ol>
-<li>我把常用的宏定义和类别做成的framework地址：<a href="https://code.csdn.net/yinxianwei88/utilitytools" target="_blank" rel="external">https://code.csdn.net/yinxianwei88/utilitytools</a></li>
-<li>本贴参考：<br><a href="http://blog.csdn.net/smking/article/details/24434819" target="_blank" rel="external">http://blog.csdn.net/smking/article/details/24434819</a><br><a href="http://blog.csdn.net/mark_creative/article/details/9450887" target="_blank" rel="external">http://blog.csdn.net/mark_creative/article/details/9450887</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<ol>
-<li>新建一个工程，选择framework &amp; library - Cocoa Touch Static Library,命名为TestKit。<img src="http://img.blog.csdn.net/20140811170140857?water]]>
-    </summary>
-    
-      <category term="framework" scheme="http://blog.yinxianwei.cn/tags/framework/"/>
-    
-      <category term="iOS应用开发之Xcode配置" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8BXcode%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
