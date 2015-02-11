@@ -3,7 +3,7 @@
   
   <url>
     <loc>http://blog.yinxianwei.cn/2015/02/11/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A5%87%E5%B7%A7%E6%B7%AB%E6%8A%80%E4%B8%89/</loc>
-    <lastmod>2015-02-11T15:05:08.000Z</lastmod>
+    <lastmod>2015-02-11T15:08:25.000Z</lastmod>
   </url>
   
   <url>
@@ -237,12 +237,12 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/18/iOS%E5%BC%80%E5%8F%91-%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E6%96%87%E7%AB%A0%E5%92%8C%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/02/19/stretchableImageWithLeftCapWidth/</loc>
     <lastmod>2014-10-30T10:47:22.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/19/stretchableImageWithLeftCapWidth/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/02/18/iOS%E5%BC%80%E5%8F%91-%E6%AF%94%E8%BE%83%E5%A5%BD%E7%9A%84%E6%96%87%E7%AB%A0%E5%92%8C%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5/</loc>
     <lastmod>2014-10-30T10:47:22.000Z</lastmod>
   </url>
   
@@ -257,7 +257,12 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/20/%E5%9B%BD%E4%BA%BA%E5%BD%93%E8%87%AA%E5%BC%BA%EF%BC%9A%E4%B8%A4%E5%B2%B8%E4%B8%89%E5%9C%B0%E5%9C%A8%E7%BA%BF%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99%E5%A4%A7%E6%90%9C%E7%BD%97/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/02/24/objective-c%E5%AE%8F%E5%AE%9A%E4%B9%89/</loc>
+    <lastmod>2014-10-30T10:47:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.yinxianwei.cn/2014/02/24/iOS7%E5%BA%94%E7%94%A8%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
     <lastmod>2014-10-30T10:47:20.000Z</lastmod>
   </url>
   
@@ -267,7 +272,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/24/objective-c%E5%AE%8F%E5%AE%9A%E4%B9%89/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/02/20/%E5%9B%BD%E4%BA%BA%E5%BD%93%E8%87%AA%E5%BC%BA%EF%BC%9A%E4%B8%A4%E5%B2%B8%E4%B8%89%E5%9C%B0%E5%9C%A8%E7%BA%BF%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99%E5%A4%A7%E6%90%9C%E7%BD%97/</loc>
     <lastmod>2014-10-30T10:47:20.000Z</lastmod>
   </url>
   
@@ -277,8 +282,13 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/24/iOS7%E5%BA%94%E7%94%A8%E5%9B%BD%E9%99%85%E5%8C%96/</loc>
-    <lastmod>2014-10-30T10:47:20.000Z</lastmod>
+    <loc>http://blog.yinxianwei.cn/2014/02/26/%E5%A6%82%E4%BD%95%E6%94%B9%E8%BF%9BiOS%20App%E7%9A%84%E7%A6%BB%E7%BA%BF%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</loc>
+    <lastmod>2014-10-30T10:47:18.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.yinxianwei.cn/2014/03/03/boundingRectWithSizeoptionsattributescontext%E8%AE%A1%E7%AE%97%E5%B0%BA%E5%AF%B8%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2014-10-30T10:47:18.000Z</lastmod>
   </url>
   
   <url>
@@ -292,17 +302,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/03/03/boundingRectWithSizeoptionsattributescontext%E8%AE%A1%E7%AE%97%E5%B0%BA%E5%AF%B8%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
-    <lastmod>2014-10-30T10:47:18.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.yinxianwei.cn/2014/02/26/%E5%A6%82%E4%BD%95%E6%94%B9%E8%BF%9BiOS%20App%E7%9A%84%E7%A6%BB%E7%BA%BF%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C/</loc>
-    <lastmod>2014-10-30T10:47:18.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.yinxianwei.cn/2014/04/14/iOS%20%E5%85%B3%E4%BA%8E%E6%9E%9A%E4%B8%BE%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/03/28/iOS%E8%87%AA%E5%AE%9A%E4%B9%89UITabBar/</loc>
     <lastmod>2014-10-30T10:47:16.000Z</lastmod>
   </url>
   
@@ -312,7 +312,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/03/19/iOS%20%E2%80%93%20Xcode%E5%8D%87%E7%BA%A7%E5%88%B05.1&%20iOS%E5%8D%87%E7%BA%A7%E5%88%B0iOS7.1%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/03/07/iOS%E7%9A%84Drawing/</loc>
     <lastmod>2014-10-30T10:47:16.000Z</lastmod>
   </url>
   
@@ -322,22 +322,22 @@
   </url>
   
   <url>
+    <loc>http://blog.yinxianwei.cn/2014/03/19/iOS%20%E2%80%93%20Xcode%E5%8D%87%E7%BA%A7%E5%88%B05.1&%20iOS%E5%8D%87%E7%BA%A7%E5%88%B0iOS7.1%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2014-10-30T10:47:16.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.yinxianwei.cn/2014/05/04/iOS6%E6%96%B0%E7%89%B9%E5%BE%81%EF%BC%9AUIRefreshControl%5B%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%5D%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/</loc>
     <lastmod>2014-10-30T10:47:16.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/03/07/iOS%E7%9A%84Drawing/</loc>
-    <lastmod>2014-10-30T10:47:16.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.yinxianwei.cn/2014/03/28/iOS%E8%87%AA%E5%AE%9A%E4%B9%89UITabBar/</loc>
-    <lastmod>2014-10-30T10:47:16.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.yinxianwei.cn/2014/04/16/NSDate%E7%9A%84%E5%B8%B8%E7%94%A8%E7%94%A8%E6%B3%95/</loc>
+    <lastmod>2014-10-30T10:47:16.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.yinxianwei.cn/2014/04/14/iOS%20%E5%85%B3%E4%BA%8E%E6%9E%9A%E4%B8%BE%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2014-10-30T10:47:16.000Z</lastmod>
   </url>
   
@@ -367,7 +367,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/07/21/%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E7%B3%97%E7%99%BE%EF%BC%8C%E4%BB%A5%E4%B8%8B%E6%98%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/09/13/%E7%94%A8%20AFNetworking%20%E9%80%9A%E8%BF%87%20POST%20%E6%96%B9%E5%BC%8F%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2014-10-30T10:47:14.000Z</lastmod>
   </url>
   
@@ -382,7 +382,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2014/09/13/%E7%94%A8%20AFNetworking%20%E9%80%9A%E8%BF%87%20POST%20%E6%96%B9%E5%BC%8F%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/</loc>
+    <loc>http://blog.yinxianwei.cn/2014/07/21/%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E7%B3%97%E7%99%BE%EF%BC%8C%E4%BB%A5%E4%B8%8B%E6%98%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A/</loc>
     <lastmod>2014-10-30T10:47:14.000Z</lastmod>
   </url>
   
@@ -442,12 +442,12 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/11/25/%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E3%80%81%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/</loc>
+    <loc>http://blog.yinxianwei.cn/2013/11/25/%E5%BE%AA%E7%8E%AF%E6%BB%9A%E5%8A%A8UIScrollView(%E6%9C%89%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86)/</loc>
     <lastmod>2014-10-30T10:46:32.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/11/25/%E5%BE%AA%E7%8E%AF%E6%BB%9A%E5%8A%A8UIScrollView(%E6%9C%89%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86)/</loc>
+    <loc>http://blog.yinxianwei.cn/2013/11/25/%E5%AD%A6%E4%B9%A0%E7%B3%BB%E5%88%97%E3%80%81%E4%BB%A3%E7%A0%81%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2014-10-30T10:46:32.000Z</lastmod>
   </url>
   
@@ -467,11 +467,6 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/11/28/UIWebView%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0pdf%E3%80%81doc%E7%AD%89%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2014-10-30T10:46:30.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.yinxianwei.cn/2013/11/30/ios%E8%8E%B7%E5%8F%96%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%97%E8%A1%A8/</loc>
     <lastmod>2014-10-30T10:46:30.000Z</lastmod>
   </url>
@@ -482,7 +477,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/12/11/SVN%E7%8A%B6%E6%80%81%E6%A0%87%E8%AE%B0%E7%9A%84%E6%84%8F%E6%80%9D/</loc>
+    <loc>http://blog.yinxianwei.cn/2013/11/28/UIWebView%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0pdf%E3%80%81doc%E7%AD%89%E6%96%87%E4%BB%B6/</loc>
     <lastmod>2014-10-30T10:46:30.000Z</lastmod>
   </url>
   
@@ -492,12 +487,17 @@
   </url>
   
   <url>
+    <loc>http://blog.yinxianwei.cn/2013/11/29/NSString%E5%8E%BB%E6%8E%89%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6/</loc>
+    <lastmod>2014-10-30T10:46:30.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.yinxianwei.cn/2013/11/30/%E9%82%A3%E4%BA%9B%E4%B8%8D%E8%83%BD%E9%94%99%E8%BF%87%E7%9A%84Xcode%E6%8F%92%E4%BB%B6/</loc>
     <lastmod>2014-10-30T10:46:30.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/11/29/NSString%E5%8E%BB%E6%8E%89%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6/</loc>
+    <loc>http://blog.yinxianwei.cn/2013/12/11/SVN%E7%8A%B6%E6%80%81%E6%A0%87%E8%AE%B0%E7%9A%84%E6%84%8F%E6%80%9D/</loc>
     <lastmod>2014-10-30T10:46:30.000Z</lastmod>
   </url>
   
@@ -597,17 +597,22 @@
   </url>
   
   <url>
-    <loc>http://blog.yinxianwei.cn/2013/09/02/%E7%B1%BB%E5%88%AB/</loc>
-    <lastmod>2014-10-30T10:46:02.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.yinxianwei.cn/2013/09/05/ios%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2014-10-30T10:46:02.000Z</lastmod>
   </url>
   
   <url>
+    <loc>http://blog.yinxianwei.cn/2013/09/02/%E7%B1%BB%E5%88%AB/</loc>
+    <lastmod>2014-10-30T10:46:02.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.yinxianwei.cn/2013/09/05/set%20get%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2014-10-30T10:46:02.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.yinxianwei.cn/2013/09/05/iOS%20%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E7%9F%A5%E7%9A%84%2075%20%E4%B8%AA%E5%B7%A5%E5%85%B7%EF%BC%88%E8%AF%91%E6%96%87%EF%BC%89/</loc>
     <lastmod>2014-10-30T10:46:02.000Z</lastmod>
   </url>
   
@@ -618,11 +623,6 @@
   
   <url>
     <loc>http://blog.yinxianwei.cn/2013/09/05/%E5%85%B3%E4%BA%8EUITextField/</loc>
-    <lastmod>2014-10-30T10:46:02.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.yinxianwei.cn/2013/09/05/iOS%20%E5%BC%80%E5%8F%91%E8%80%85%E5%BF%85%E7%9F%A5%E7%9A%84%2075%20%E4%B8%AA%E5%B7%A5%E5%85%B7%EF%BC%88%E8%AF%91%E6%96%87%EF%BC%89/</loc>
     <lastmod>2014-10-30T10:46:02.000Z</lastmod>
   </url>
   
