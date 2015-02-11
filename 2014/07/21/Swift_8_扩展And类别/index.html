@@ -7,12 +7,12 @@
   <meta name="360-site-verification" content="67fbcc5a67f4c65c057315b28fa0b2c8" />
 <meta name="google-site-verification" content="2GzxQ0VtXwTSUdmGm6DzcmhTzM_I9QmzCb_pzpMzD88" />
   
-    <title>was mutated while being enumerated. | 一枝红杏出墙来</title>
+    <title>Swift_8_扩展And类别 | 一枝红杏出墙来</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="尹现伟">
     
-    <meta name="description" itemprop="description" content="for遍历数组时，对数组对象进行操作会报错的解决办法。">
+    <meta name="description" content="1234567891011121314151617181920212223import Foundationprintln(&quot;Hello, World!&quot;)class People{    var name:String?    }//方法扩展extension People{    func te">
     
     
     
@@ -79,15 +79,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/01/was mutated while being enumerated/" title="was mutated while being enumerated." itemprop="url">was mutated while being enumerated.</a>
+      <a href="/2014/07/21/Swift_8_扩展And类别/" title="Swift_8_扩展And类别" itemprop="url">Swift_8_扩展And类别</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://blog.yinxianwei.cn" title="尹现伟">尹现伟</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-01-01T14:09:19.000Z" itemprop="datePublished">1月 1 2015</time>
-    更新日期:<time datetime="2015-01-01T14:18:17.000Z" itemprop="dateModified">1月 1 2015</time>
+    <time datetime="2014-07-21T07:45:00.000Z" itemprop="datePublished">7月 21 2014</time>
+    更新日期:<time datetime="2015-01-07T03:24:52.000Z" itemprop="dateModified">1月 7 2015</time>
     
   </p>
 </header>
@@ -99,42 +99,28 @@
 		
 		</div>
 		
-		<p>错误示例：</p>
-<pre><code><span class="built_in">NSMutableArray</span> * arrayTemp = create;
+		<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">import Foundation</div><div class="line"></div><div class="line">println(<span class="string">"Hello, World!"</span>)</div><div class="line"></div><div class="line">class People{</div><div class="line">    var name:String?</div><div class="line">    </div><div class="line">}</div><div class="line"><span class="comment">//方法扩展</span></div><div class="line">extension People{</div><div class="line">    func test() -&gt; String{</div><div class="line">        <span class="keyword">return</span> <span class="string">"abc"</span></div><div class="line"></div><div class="line">    }</div><div class="line">    </div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">let p = People();</div><div class="line"></div><div class="line">var v1 = p<span class="variable">.test</span>();</div><div class="line"></div><div class="line">println(<span class="string">"v1 is \(v1)"</span>)</div></pre></td></tr></table></figure>
 
-<span class="keyword">for</span> (<span class="built_in">NSDictionary</span> * dic <span class="keyword">in</span> arrayTemp) {
-   <span class="keyword">if</span> (condition){
-  [arrayTemp removeObject:dic];
-   }
-}
-</code></pre><p>解决办法：<br>    用block进行操作，如下：</p>
-<pre><code><span class="built_in">NSMutableArray</span> *tempArray = [[<span class="built_in">NSMutableArray</span> alloc]initWithObjects:<span class="string">@"1"</span>,<span class="string">@"2"</span>,<span class="string">@"3"</span>,<span class="string">@"4"</span>,<span class="string">@"5"</span>, <span class="literal">nil</span>];
-[tempArray enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, NSUInteger idx, <span class="built_in">BOOL</span> *stop) {
-<span class="keyword">if</span> ([obj isEqualToString:<span class="string">@"2"</span>]) { 
-    *stop = <span class="literal">YES</span>;
-<span class="keyword">if</span> (*stop == <span class="literal">YES</span>) {
-    [tempArray removeObject:obj]; 
-    }
-}
-<span class="keyword">if</span> (*stop) {
-    <span class="built_in">NSLog</span>(<span class="string">@"array ：%@"</span>,tempArray);
-    }
-}];
-</code></pre>  
+  
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/NSMutableArray/">NSMutableArray</a>
+  <span></span> <a href="/tags/Swift/">Swift</a>
   </div>
 
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/iOS应用开发之Swift/">iOS应用开发之Swift</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://blog.yinxianwei.cn/2015/01/01/was mutated while being enumerated/" data-title="was mutated while being enumerated. | 一枝红杏出墙来" data-tsina="2105746821" class="share clearfix">
+  <div data-url="http://blog.yinxianwei.cn/2014/07/21/Swift_8_扩展And类别/" data-title="Swift_8_扩展And类别 | 一枝红杏出墙来" data-tsina="2105746821" class="share clearfix">
   </div>
 
 </div>
@@ -143,11 +129,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/07/21/Swift_8_扩展&类别/" title="Swift_8_扩展&amp;类别">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Swift_8_扩展&amp;类别</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2014/12/29/iOS开发的一些奇技淫巧二/"  title="iOS开发的一些奇技淫巧二">
+<a href="/2014/07/21/Swift_7_继承/"  title="Swift_7_继承">
  <strong>NEXT:</strong><br/> 
- <span>iOS开发的一些奇技淫巧二
+ <span>Swift_7_继承
 </span>
 </a>
 </div>
@@ -208,7 +202,9 @@
 		
 			<li><a href="/tags/NSString/" title="NSString">NSString<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Swift/" title="Swift">Swift<sup>9</sup></a></li>
+			<li><a href="/tags/SVN/" title="SVN">SVN<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Swift/" title="Swift">Swift<sup>10</sup></a></li>
 		
 			<li><a href="/tags/UIAlertView/" title="UIAlertView">UIAlertView<sup>1</sup></a></li>
 		
@@ -224,13 +220,11 @@
 		
 			<li><a href="/tags/XMPP/" title="XMPP">XMPP<sup>3</sup></a></li>
 		
-			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>1</sup></a></li>
+			<li><a href="/tags/Xcode5-1/" title="Xcode5.1">Xcode5.1<sup>2</sup></a></li>
 		
 			<li><a href="/tags/api/" title="api">api<sup>5</sup></a></li>
 		
 			<li><a href="/tags/appStore审核/" title="appStore审核">appStore审核<sup>1</sup></a></li>
-		
-			<li><a href="/tags/block/" title="block">block<sup>1</sup></a></li>
 		
 		</ul>
 </div>

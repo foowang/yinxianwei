@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.yinxianwei.cn/"/>
-  <updated>2015-01-01T14:24:05.894Z</updated>
+  <updated>2015-02-11T15:05:51.269Z</updated>
   <id>http://blog.yinxianwei.cn/</id>
   
   <author>
@@ -15,31 +15,126 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[iOS开发的一些奇巧淫技三]]></title>
+    <link href="http://blog.yinxianwei.cn/2015/02/11/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A5%87%E5%B7%A7%E6%B7%AB%E6%8A%80%E4%B8%89/"/>
+    <id>http://blog.yinxianwei.cn/2015/02/11/iOS开发的一些奇巧淫技三/</id>
+    <published>2015-02-11T15:02:36.000Z</published>
+    <updated>2015-02-11T15:05:08.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iOS的一些小技巧">iOS的一些小技巧</h1>
+<p><br><br><br><br><br><br>本文转自：<a href="http://www.jianshu.com/p/f547eb0368c4" target="_blank" rel="external">http://www.jianshu.com/p/f547eb0368c4</a>转载请注明出处。</p>
+<h2 id="CGfloat和float的区别?">CGfloat和float的区别?</h2>
+<p>现在上架的app都要求支持64位系统,那么CGFloat和float的区别就在这里.command+左键点击CGFloat.</p>
+<pre><code><span class="keyword">typedef</span> CGFLOAT_TYPE <span class="built_in">CGFloat</span>;
+</code></pre><p>这里可以看到CGFloat是CGFLOAT_TYPE的宏定义,那么这个又是什么?</p>
+<pre><code><span class="preprocessor">#<span class="keyword">if</span> defined(__LP64__) &amp;&amp; __LP64__</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_TYPE double</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_IS_DOUBLE 1</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_MIN DBL_MIN</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_MAX DBL_MAX</span>
+<span class="preprocessor">#<span class="keyword">else</span></span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_TYPE float</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_IS_DOUBLE 0</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_MIN FLT_MIN</span>
+<span class="preprocessor"># <span class="keyword">define</span> CGFLOAT_MAX FLT_MAX</span>
+<span class="preprocessor">#<span class="keyword">endif</span></span>
+</code></pre><p>这段话的意思就是,64位系统下,CGFLOAT是double类型,32位系统下是float类型.CGFloat能够保证你的代码在64位系统下也不容易出错,所以你的代码应该尽量使用CGFloat.尽管他可能造成一些多余的消耗.不过能保证安全.</p>
+<h2 id="应该使用FOUNDATION_EXPORT还是#define来定义常量?">应该使用FOUNDATION_EXPORT还是#define来定义常量?</h2>
+<p>一般iOS我们定义常量的方法有两种,来看下面例子</p>
+<p>我的.h文件</p>
+<pre><code>FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> kMyConstantString;  
+FOUNDATION_EXPORT <span class="built_in">NSString</span> * <span class="keyword">const</span> kMyConstantString2;
+</code></pre><p>.m文件是这样定义的</p>
+<pre><code><span class="built_in">NSString</span> * <span class="keyword">const</span> kMyConstantString = <span class="string">@"Hello"</span>;
+<span class="built_in">NSString</span> * <span class="keyword">const</span> kMyConstantString2 = <span class="string">@"World"</span>;
+</code></pre><p>还有一种是常用的#define方法了</p>
+<p>#define kMyConstantString @”Hello”</p>
+<p>有什么区别呢?<br>使用第一种方法在检测字符串的值是否相等的时候更快.对于第一种你可以直接使用<code>(stringInstance == MyFirstConstant)</code>来比较,而define则使用的是这种.<code>([stringInstance isEqualToString:MyFirstConstant])</code><br>哪个效率高,显而易见了.第一种直接比较的是指针地址,而第二个则是一一比较字符串的每一个字符是否相等.</p>
+<h2 id="static_inline_function是干嘛的?">static inline function是干嘛的?</h2>
+<p>如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.</p>
+<p>类似这种简单函数他肯定是乐意的.</p>
+<pre><code><span class="keyword">static</span> <span class="keyword">inline</span> <span class="built_in">CGRect</span> ScaleRect(<span class="built_in">CGRect</span> rect, <span class="keyword">float</span> n)
+</code></pre><p>这到底是什么鬼?static void *CapturingStillImageContext = &CapturingStillImageContext;</p>
+<p>这种声明方式常用于kvo,用来当做contenxt的key来添加.例如</p>
+<pre><code>[<span class="keyword">self</span> <span class="symbol">addObserver:</span><span class="keyword">self</span> <span class="symbol">forKeyPath:</span>@<span class="string">"stillImageOutput.capturingStillImage"</span> <span class="symbol">options:</span>(<span class="constant">NSKeyValueObservingOptionOld</span> | <span class="constant">NSKeyValueObservingOptionNew</span>) <span class="symbol">context:</span><span class="constant">CapturingStillImageContext</span>];
+</code></pre><p>这种声明方式可以导致\<mark>a method to create a unique pointer at compile time.</mark>在编译的时候创建一个唯一的指针.因为kvo的时候context如果不小心重复了,会发生奇怪的事情.用这种方式可以避免.</p>
+<h2 id="如何快速定位crash的位置?">如何快速定位crash的位置?</h2>
+<p><img src="http://m2.img.srcdd.com/farm5/d/2015/0209/13/A6CB8DC4D75605DCF9D1F7503831B5E1_B1280_1280_320_153.png" alt=""></p>
+<p><img src="http://m1.img.srcdd.com/farm5/d/2015/0209/13/ED2098DC3D3F5BABA8B32340DEA6B6A7_B1280_1280_490_91.png" alt=""></p>
+<p>这样如果你的app再crash就会自动定位到那句话.</p>
+<h2 id="最快速的提升流畅度的方法?">最快速的提升流畅度的方法?</h2>
+<p>用instrument找出所有不需要透明但是透明的view,layer.全部弄成不透明的.</p>
+<p><img src="http://m3.img.srcdd.com/farm4/d/2015/0209/13/CDB838DCE182D8FF866028C74E7903D3_B1280_1280_209_330.png" alt=""></p>
+<p><img src="http://m2.img.srcdd.com/farm4/d/2015/0209/13/65FABFCD208E238EAF149E7943BE7335_B1280_1280_750_433.png" alt=""><br><img src="http://m2.img.srcdd.com/farm5/d/2015/0209/13/AEAE236B4BB3AC1AC9FCEE5A652467E1_B1280_1280_249_278.png" alt=""><br><img src="http://m1.img.srcdd.com/farm4/d/2015/0209/13/1486EFAAFD3D116D9AE60D2AF49FD536_B1280_1280_373_78.png" alt=""></p>
+<p>然后你会看见这些东西.</p>
+<p><img src="http://m3.img.srcdd.com/farm5/d/2015/0209/13/F2B2EBA00399D5B58FDF65A184BE2F2F_B800_2400_720_960.jpeg" alt=""></p>
+<p><img src="http://m3.img.srcdd.com/farm5/d/2015/0209/13/EA881797CFCEBB31C7EA3D0F25D6F4F4_B800_2400_720_960.jpeg" alt=""></p>
+<p><img src="http://m2.img.srcdd.com/farm5/d/2015/0209/13/8D13B5DE31FE249721BF965A588EDA96_B800_2400_720_960.jpeg" alt=""></p>
+<p>红色或者深红色的就是透明的层和view,他们就是拖慢你fps的罪魁祸首,如果不需要透明的就改掉.</p>
+<h2 id="一个神奇的工具,Accessorizer-">一个神奇的工具,Accessorizer.</h2>
+<p>到底叼不叼,看图就知道了.</p>
+<p><img src="http://m1.img.srcdd.com/farm5/d/2015/0209/13/37BFD4775C9091931B1C3D3277DD5CF5_ORIG_750_720.gif" alt=""></p>
+<h2 id="我安装的软件">我安装的软件</h2>
+<p><img src="http://m2.img.srcdd.com/farm4/d/2015/0209/14/D3701504E896BF73825EB22744B42864_B1280_1280_1280_687.png" alt=""><br><img src="http://m1.img.srcdd.com/farm5/d/2015/0209/14/141CD5EAF181AB7C0B13CA7B84793D53_B1280_1280_1280_720.png" alt=""><br><img src="http://m2.img.srcdd.com/farm4/d/2015/0209/14/226499E656007F91A5653381AE6BA772_B1280_1280_1280_763.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[iOS开发的一些小技巧]]>
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Mac上本地新建SVN步骤]]></title>
+    <link href="http://blog.yinxianwei.cn/2015/01/09/Mac%E4%B8%8A%E6%9C%AC%E5%9C%B0%E6%96%B0%E5%BB%BASVN%E6%AD%A5%E9%AA%A4/"/>
+    <id>http://blog.yinxianwei.cn/2015/01/09/Mac上本地新建SVN步骤/</id>
+    <published>2015-01-09T09:27:28.000Z</published>
+    <updated>2015-01-09T09:39:26.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7teblm.com1.z0.glb.clouddn.com/1.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/2.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/3.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/4.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/5.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/6.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/7.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/8.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/9.png" alt=""><br><img src="http://7teblm.com1.z0.glb.clouddn.com/10.png" alt=""></p>
+<ol>
+<li><p>启动SVN服务<br>svnserve -d -r  /Users/pengfeishi/Desktop/svn<br>特别注意，路径一定是SVN的目录，不是其中一个版本库的目录，不然，能正常启动，就是访问有问题<br>没有任何输出，则启动成功</p>
+</li>
+<li><p>关闭 killall -9 svnserve</p>
+</li>
+<li><p>连接  svn://127.0.0.1/res</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[Mac上本地新建SVN步骤]]>
+    
+    </summary>
+    
+      <category term="SVN" scheme="http://blog.yinxianwei.cn/tags/SVN/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[was mutated while being enumerated.]]></title>
-    <link href="http://blog.yinxianwei.cn/2015/01/01/was%20mutated%20while%20being%20enumerated/"/>
-    <id>http://blog.yinxianwei.cn/2015/01/01/was mutated while being enumerated/</id>
-    <published>2015-01-01T14:09:19.000Z</published>
-    <updated>2015-01-01T14:18:17.000Z</updated>
+    <link href="http://blog.yinxianwei.cn/2015/01/01/was%20mutated%20while%20being%20enumerated./"/>
+    <id>http://blog.yinxianwei.cn/2015/01/01/was mutated while being enumerated./</id>
+    <published>2015-01-01T05:04:00.000Z</published>
+    <updated>2015-01-07T03:08:52.000Z</updated>
     <content type="html"><![CDATA[<p>错误示例：</p>
 <pre><code><span class="built_in">NSMutableArray</span> * arrayTemp = create;
 
 <span class="keyword">for</span> (<span class="built_in">NSDictionary</span> * dic <span class="keyword">in</span> arrayTemp) {
-   <span class="keyword">if</span> (condition){
-  [arrayTemp removeObject:dic];
-   }
+<span class="keyword">if</span> (condition){
+    [arrayTemp removeObject:dic];
+  }
 }
-</code></pre><p>解决办法：<br>    用block进行操作，如下：</p>
+</code></pre><p>解决办法：</p>
+<p>用block进行操作，如下：    </p>
 <pre><code><span class="built_in">NSMutableArray</span> *tempArray = [[<span class="built_in">NSMutableArray</span> alloc]initWithObjects:<span class="string">@"1"</span>,<span class="string">@"2"</span>,<span class="string">@"3"</span>,<span class="string">@"4"</span>,<span class="string">@"5"</span>, <span class="literal">nil</span>];
 [tempArray enumerateObjectsUsingBlock:^(<span class="keyword">id</span> obj, NSUInteger idx, <span class="built_in">BOOL</span> *stop) {
 <span class="keyword">if</span> ([obj isEqualToString:<span class="string">@"2"</span>]) { 
-    *stop = <span class="literal">YES</span>;
+*stop = <span class="literal">YES</span>;
 <span class="keyword">if</span> (*stop == <span class="literal">YES</span>) {
     [tempArray removeObject:obj]; 
-    }
+  }
 }
 <span class="keyword">if</span> (*stop) {
     <span class="built_in">NSLog</span>(<span class="string">@"array ：%@"</span>,tempArray);
-    }
+  }
 }];
 </code></pre>]]></content>
     <summary type="html">
@@ -186,7 +281,7 @@ UIPanGestureRecognizerDirectionRight
     <link href="http://blog.yinxianwei.cn/2014/12/29/iOS%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
     <id>http://blog.yinxianwei.cn/2014/12/29/iOS开发的一些奇技淫巧/</id>
     <published>2014-12-29T08:21:20.000Z</published>
-    <updated>2014-12-29T08:33:21.000Z</updated>
+    <updated>2015-01-07T05:17:17.000Z</updated>
     <content type="html"><![CDATA[<h1 id="iOS的一些小技巧">iOS的一些小技巧</h1>
 <p>本文转自：<a href="http://www.jianshu.com/p/50b63a221f09" target="_blank" rel="external">http://www.jianshu.com/p/50b63a221f09</a>转载请注明出处。</p>
 <h2 id="TableView不显示没内容的Cell怎么办?">TableView不显示没内容的Cell怎么办?</h2>
@@ -240,7 +335,7 @@ UIPanGestureRecognizerDirectionRight
     
     </summary>
     
-      <category term="奇巧淫技" scheme="http://blog.yinxianwei.cn/tags/%E5%A5%87%E5%B7%A7%E6%B7%AB%E6%8A%80/"/>
+      <category term="奇技淫巧" scheme="http://blog.yinxianwei.cn/tags/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/"/>
     
   </entry>
   
@@ -368,7 +463,7 @@ UIPanGestureRecognizerDirectionRight
     <link href="http://blog.yinxianwei.cn/2014/11/19/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%9E%E5%AE%9A%E4%BA%86/"/>
     <id>http://blog.yinxianwei.cn/2014/11/19/个人博客搞定了/</id>
     <published>2014-11-19T08:33:00.000Z</published>
-    <updated>2015-01-01T14:12:06.000Z</updated>
+    <updated>2015-01-07T03:02:31.000Z</updated>
     <content type="html"><![CDATA[<h2 id="在此感谢:">在此感谢:</h2>
 <blockquote>
 <p><a href="http://blog.csdn.net/poem_of_sunshine/article/details/29369785" target="_blank" rel="external">http://blog.csdn.net/poem_of_sunshine/article/details/29369785</a></p>
@@ -387,7 +482,7 @@ UIPanGestureRecognizerDirectionRight
     <link href="http://blog.yinxianwei.cn/2014/11/12/CocoaPods%E5%88%B6%E4%BD%9C%E7%AF%87/"/>
     <id>http://blog.yinxianwei.cn/2014/11/12/CocoaPods制作篇/</id>
     <published>2014-11-12T14:29:59.000Z</published>
-    <updated>2014-12-08T06:20:55.000Z</updated>
+    <updated>2015-01-08T06:45:10.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>作者：wangzz<br>原文地址：<a href="http://blog.csdn.net/wzzvictory/article/details/20067595" target="_blank" rel="external">http://blog.csdn.net/wzzvictory/article/details/20067595</a><br>转载请注明出处<br>如果觉得文章对你有所帮助，请通过留言或关注微信公众帐号wangzzstrive来支持我，谢谢!</p>
 </blockquote>
@@ -474,7 +569,7 @@ UIPanGestureRecognizerDirectionRight
 <p> 成功以后就能在github上自己fork的Specs仓库中看到刚上传的文件了。        </p>
 </li>
 <li>将在自己fork的Specs上做的修改pull给CocoaPods官方的Specs仓库<br> 进入到自己fork的Specs仓库中，会看到屏幕左上角有一个绿色按钮:<img src="http://www.it165.net/uploadfile/files/2014/0304/20140304200450398.jpg" alt=""><br> 该按钮点进去以后会有如下图所示的界面：<br> <img src="http://www.it165.net/uploadfile/files/2014/0304/20140304200451400.jpg" alt=""><br> 点击图中的绿色Create Pull Request按钮，即可将我们fork的Specs上做的修改pull给CocoaPods官方的Specs仓库。<br> 到这一步后，剩下的工作就只有等了，等待CocoaPods的维护人员审核并将我们pull上去的修改合并到官方的Specs仓库中，这个过程通常会有一天左右的等待时间。如果有任何消息，比如审核不通过，或者审核通过了，CocoaPods官方都会发邮件通知的。 等到审核通过的时候，我们就能在官方的Specs仓库中看到自己上传的文件夹了。</li>
-<li>查看审核进度<br> 当然我们也能查看审核进度，打开这个链接：<a href="https://github.com/CocoaPods/Specs/pulls，这里能看到所有的Specs仓库pull请求，如下图：" target="_blank" rel="external">https://github.com/CocoaPods/Specs/pulls，这里能看到所有的Specs仓库pull请求，如下图：</a>         <img src="http://www.it165.net/uploadfile/files/2014/0304/20140304200451402.jpg" alt=""><br> 红圈标识的就是我刚才pull上来的请求，点进去以后就能看到对应的审核进度。</li>
+<li>查看审核进度<br> 当然我们也能查看审核进度，打开这个链接：<a href="https://github.com/CocoaPods/Specs/pulls" target="_blank" rel="external">https://github.com/CocoaPods/Specs/pulls</a> ，这里能看到所有的Specs仓库pull请求，如下图：         <img src="http://www.it165.net/uploadfile/files/2014/0304/20140304200451402.jpg" alt=""><br> 红圈标识的就是我刚才pull上来的请求，点进去以后就能看到对应的审核进度。</li>
 </ol>
 <h1 id="六、查看我们自己创建的Pods依赖库">六、查看我们自己创建的Pods依赖库</h1>
 <p>如果收到了CocoaPods官方发过来的审核通过邮件以后，你可能很着急的想在自己的电脑上执行pod search命令，看看能不能搜索到自己创建的Pods依赖库。不过你肯定会失望的，因为还需要执行一条命令才能在我们的本地电脑上使用search命令搜索到我们的依赖库：        </p>
@@ -486,6 +581,9 @@ UIPanGestureRecognizerDirectionRight
 <p>$ pod search WZMarqueeView    </p>
 </blockquote>
 <p>就能显示出对应的介绍信息了！</p>
+<blockquote>
+<p><a href="http://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="external">http://guides.cocoapods.org/making/getting-setup-with-trunk.html</a><br>First you need to register for trunk:<br>$ pod trunk register orta@cocoapods.org ‘Orta Therox’ —description=’macbook air’<br>Then you should be able to do:<br>$ pod trunk push name.podspec            </p>
+</blockquote>
 ]]></content>
     <summary type="html">
     <![CDATA[<blockquote>
@@ -889,56 +987,6 @@ UIPanGestureRecognizerDirectionRight
       <category term="UIAlertView" scheme="http://blog.yinxianwei.cn/tags/UIAlertView/"/>
     
       <category term="iOS应用开发之常用方法" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS 向服务器提交Byte数组格式图片]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/10/09/iOS%20%E5%90%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8F%90%E4%BA%A4Byte%E6%95%B0%E7%BB%84%E6%A0%BC%E5%BC%8F%E5%9B%BE%E7%89%87/"/>
-    <id>http://blog.yinxianwei.cn/2014/10/09/iOS 向服务器提交Byte数组格式图片/</id>
-    <published>2014-10-09T09:37:00.000Z</published>
-    <updated>2014-10-30T10:47:12.000Z</updated>
-    <content type="html"><![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"image.png"</span>];</div><div class="line"> NSData *data = UIImagePNGRepresentation(image);</div><div class="line"> <span class="built_in">NSString</span> *byteArray = [data base64Encoding];</div></pre></td></tr></table></figure>
-
-]]></content>
-    <summary type="html">
-    <![CDATA[<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div]]>
-    </summary>
-    
-      <category term="uiimage" scheme="http://blog.yinxianwei.cn/tags/uiimage/"/>
-    
-      <category term="bytearray" scheme="http://blog.yinxianwei.cn/tags/bytearray/"/>
-    
-      <category term="iOS应用开发之网络通讯" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[用 AFNetworking 通过 POST 方式发送数据]]></title>
-    <link href="http://blog.yinxianwei.cn/2014/09/13/%E7%94%A8%20AFNetworking%20%E9%80%9A%E8%BF%87%20POST%20%E6%96%B9%E5%BC%8F%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE/"/>
-    <id>http://blog.yinxianwei.cn/2014/09/13/用 AFNetworking 通过 POST 方式发送数据/</id>
-    <published>2014-09-13T07:14:00.000Z</published>
-    <updated>2014-10-30T10:47:14.000Z</updated>
-    <content type="html"><![CDATA[<p>AFNetworking进行POST请求中 发送json数据有些特别 。<br><strong>AFNetworking 版本为 2.0.2</strong><br>POST 发送数据有两种形式：<br>1、发送纯文本的内容<br>2、发送的 body 部分带有文件（图片，音频或者其他二进制数据）<br>对应的 Content-Type 有两种：<br>1、application/x-www-form-urlencoded<br>2、multipart/form-data<br>传统的使用 POST 的方式发送数据用于上传文件，AFNetworking 中提供了直接的接口：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> POST:post_url parameters:params</div><div class="line">constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {</div><div class="line">    <span class="comment">// 直接以 key value 的形式向 formData 中追加二进制数据</span></div><div class="line">    [formData appendPartWithFormData:[str dataUsingEncoding:NSUTF8StringEncoding] </div><div class="line">              name:<span class="string">@"key1"</span>];</div><div class="line">    [formData appendPartWithFileData:imgData name:<span class="string">@"imagefile"</span> </div><div class="line">              fileName:<span class="string">@"img.jpg"</span> mimeType:<span class="string">@"image/jpeg"</span>];</div><div class="line">    }</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div></pre></td></tr></table></figure>
-
-<p>使用 POST 方式发送纯文本内容：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (NSMutableURLRequest *)postRequestWithURL:(<span class="built_in">NSString</span> *)url content:(<span class="built_in">NSString</span> *)text</div><div class="line">{</div><div class="line">    NSMutableURLRequest *request =</div><div class="line">        [[NSMutableURLRequest alloc] initWithURL:url];</div><div class="line">    [request setHTTPMethod:<span class="string">@"POST"</span>];</div><div class="line">    [request setValue:<span class="string">@"application/x-www-form-urlencoded"</span> </div><div class="line">             forHTTPHeaderField:<span class="string">@"Contsetent-Type"</span>];</div><div class="line">    [request setHTTPBody:<span class="number">1</span>];</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> request;</div><div class="line">}</div><div class="line"> </div><div class="line">NSOperation *operation =</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span> HTTPRequestOperationWithRequest:request</div><div class="line">success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {</div><div class="line">    <span class="comment">// 成功后的处理</span></div><div class="line">}</div><div class="line">failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {</div><div class="line">    <span class="comment">// 失败后的处理</span></div><div class="line">}];</div><div class="line">[<span class="keyword">self</span><span class="variable">.manager</span><span class="variable">.operationQueue</span> addOperation:operation];</div></pre></td></tr></table></figure>
-
-
-<p>其中 self.manager 为 AFHTTPRequestOperationManager 实例。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">_manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];</div><div class="line"> </div><div class="line"><span class="comment">// 对于网站成功返回 JSON 格式的数据但是却在 failure 回调中显示的，</span></div><div class="line"><span class="comment">// 是因为服务器返回数据的网页中 content type 没有设置为 text/json</span></div><div class="line"><span class="comment">// 对于我们公司的服务器返回的 content type 为 text/html 所以我设置为如下这样，</span></div><div class="line"><span class="comment">// 对于不同的情况可以根据自己的情况设置合适的接受的 content type 的类型</span></div><div class="line">_manager<span class="variable">.responseSerializer</span><span class="variable">.acceptableContentTypes</span> = [<span class="built_in">NSSet</span> setWithObject:<span class="string">@"text/html"</span>];</div></pre></td></tr></table></figure>
-
-
-<p>本文转自：<a href="http://www.iliunian.com/2879.html" target="_blank" rel="external">http://www.iliunian.com/2879.html</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>AFNetworking进行POST请求中 发送json数据有些特别 。<br><strong>AFNetworking 版本为 2.0.2</strong><br>POST 发送数据有两种形式：<br>1、发送纯文本的内容<br>2、发送的 body 部分带有文件（图片，]]>
-    </summary>
-    
-      <category term="AFNetworking" scheme="http://blog.yinxianwei.cn/tags/AFNetworking/"/>
-    
-      <category term="iOS应用开发之网络通讯" scheme="http://blog.yinxianwei.cn/categories/iOS%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B9%8B%E7%BD%91%E7%BB%9C%E9%80%9A%E8%AE%AF/"/>
     
   </entry>
   
